@@ -5,6 +5,9 @@ source ~/.vim_runtime/vimrcs/filetypes.vim
 source ~/.vim_runtime/vimrcs/plugins_config.vim
 source ~/.vim_runtime/vimrcs/extended.vim
 
+" For YCM
+let g:ycm_server_python_interpreter = '/usr/bin/python2'
+
 " Set color of Vim
 colorscheme peaksea
 syntax enable

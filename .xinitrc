@@ -48,9 +48,8 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-~/.screenlayout/default.sh
-wal -i "$(< "${HOME}/.cache/wal/wal")"
+~/.screenlayout/default.sh &
+~/.wal/wal -i "$(< "${HOME}/.cache/wal/wal")" &
 discord &
 dropbox &
-sxhkd &
 exec bspwm
