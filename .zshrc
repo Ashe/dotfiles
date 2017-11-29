@@ -96,3 +96,6 @@ export LANG=en_GB.UTF-8
 # Colorschemes
 alias wal="~/.wal/wal"
 (wal -r &)
+
+# Display a random quote
+fortune
