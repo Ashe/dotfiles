@@ -9,7 +9,8 @@ source ~/.vim_runtime/vimrcs/extended.vim
 let g:ycm_server_python_interpreter = '/usr/bin/python2'
 
 " Set color of Vim
-colorscheme peaksea
+let ayucolor="dark"
+colorscheme ayu
 syntax enable
 
 " Indent depending on filetype (eg. py)

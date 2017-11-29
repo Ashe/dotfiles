@@ -48,8 +48,18 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
+# Turn on numlock
+numlockx &
+
+# Load xrandr customisation
 ~/.screenlayout/default.sh &
+
+# Set background and colour themes
 ~/.wal/wal -i "$(< "${HOME}/.cache/wal/wal")" &
+
+# Open additional programs
 discord &
 dropbox &
+
+# Start window manager (sxhkd is started there)
 exec bspwm

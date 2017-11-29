@@ -10,8 +10,12 @@ super + Return
 super + @space
 	rofi -show run
 
-# make sxhkd reload its configuration files:
+# lock the screen
 super + Escape
+    xscreensaver-command -lock
+
+# make sxhkd reload its configuration files:
+super + alt + Delete
 	pkill -USR1 -x sxhkd
 
 #
