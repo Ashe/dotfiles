@@ -52,10 +52,10 @@ fi
 numlockx &
 
 # Load xrandr customisation
-~/.screenlayout/default.sh &
+$HOME/.screenlayout/default.sh &
 
 # Set background and colour themes
-~/.wal/wal -i "$(< "${HOME}/.cache/wal/wal")" &
+$HOME/.wal/wal -i "$(< "${HOME}/.cache/wal/wal")" &
 
 # Open additional programs
 discord &
