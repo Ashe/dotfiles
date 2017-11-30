@@ -57,6 +57,9 @@ $HOME/.screenlayout/default.sh &
 # Set background and colour themes
 $HOME/.wal/wal -i "$(< "${HOME}/.cache/wal/wal")" &
 
+# Start screensaver program
+xscreensaver &
+
 # Open additional programs
 discord &
 dropbox &
