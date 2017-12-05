@@ -95,7 +95,7 @@ export LANG=en_GB.UTF-8
 
 # Colorschemes
 alias wal="~/.wal/wal"
-(wal -r &)
+(wal -r -t &)
 
 # Display a random quote
 fortune
