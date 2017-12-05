@@ -2,10 +2,10 @@
 
 sxhkd &
 
-bspc monitor -d I II III IV V VI VII VIII IX X
-bspc monitor -d I II III IV
-bspc monitor -d V VI VII
-bspc monitor -d VIII IX X
+#bspc monitor -d I II III IV V VI VII VIII IX X
+bspc monitor HDMI-0 -d I II III IV
+bspc monitor DP-2 -d V VI VII
+bspc monitor DP-5 -d VIII IX X
 
 bspc config border_width         2
 bspc config window_gap           24
