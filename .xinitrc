@@ -60,6 +60,9 @@ $HOME/.wal/wal -i "$(< "${HOME}/.cache/wal/wal")" &
 # Start screensaver program
 xscreensaver &
 
+# Open compositor
+compton &
+
 # Open additional programs
 discord &
 dropbox &
