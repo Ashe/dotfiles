@@ -21,3 +21,4 @@ bspc config click_to_focus button1
 bspc rule -a Nautilus state=floating
 bspc rule -a discord desktop='^1'
 bspc rule -a google-chrome desktop='^8'
+bspc rule -a gpmdp desktop='^9'

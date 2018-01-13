@@ -65,6 +65,7 @@ compton &
 
 # Open additional programs
 discord &
+gpmdp &
 dropbox &
 
 # Start window manager (sxhkd is started there)
