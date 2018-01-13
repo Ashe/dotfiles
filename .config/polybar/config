@@ -40,6 +40,11 @@ scroll-down = bspwm-deskprev
 [module/bspwm]
 type = internal/bspwm
 
+; change icon depending on whats in the workspace
+fuzzy-match = true
+
+; ws-icon-[0-9]+ = label;icon
+; Note that the label needs to correspond with the bspwm workspace name
 ws-icon-0 = web;
 ws-icon-1 = term;
 ws-icon-2 = chat;
@@ -47,22 +52,27 @@ ws-icon-3 = code;
 ws-icon-4 = music;
 ws-icon-default = 
 
+; Available tags:
+;   <label-monitor>
+;   <label-state> - gets replaced with <label-(focused|urgent|occupied|empty)>
+;   <label-mode> - gets replaced with <label-(monocle|tiled|fullscreen|floating|locked|sticky|private)>
+; Default: <label-state>
 format = <label-state> <label-mode>
 
 label-focused = %icon%
 label-focused-background = #88000000
 label-focused-underline= #ddd
-label-focused-padding = 4
+label-focused-padding = 3
 
 label-occupied = %icon%
-label-occupied-padding = 4
+label-occupied-padding = 3
 
 label-urgent = %icon%
 label-urgent-padding = 4
 
 label-empty = %icon%
 label-empty-foreground = #44ffffff
-label-empty-padding = 4
+label-empty-padding = 1
 
 [module/xwindow]
 type = internal/xwindow
