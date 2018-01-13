@@ -1,6 +1,7 @@
 #! /bin/sh
 
 sxhkd &
+$HOME/.config/polybar/launch.sh
 
 #bspc monitor -d I II III IV V VI VII VIII IX X
 bspc monitor HDMI-0 -d I II III IV
