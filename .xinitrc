@@ -54,6 +54,9 @@ numlockx &
 # Load xrandr customisation
 $HOME/.screenlayout/default.sh &
 
+# Set wallpaper
+~/.fehbg &
+
 # Start screensaver program
 xscreensaver &
 
