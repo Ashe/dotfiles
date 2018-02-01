@@ -93,9 +93,5 @@ export LANG=en_GB.UTF-8
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Colorschemes
-alias wal="~/.wal/wal"
-(wal -r -t &)
-
 # Display a random quote
 fortune

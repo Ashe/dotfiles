@@ -54,9 +54,6 @@ numlockx &
 # Load xrandr customisation
 $HOME/.screenlayout/default.sh &
 
-# Set background and colour themes
-$HOME/.wal/wal -i "$(< "${HOME}/.cache/wal/wal")" &
-
 # Start screensaver program
 xscreensaver &
 
@@ -65,8 +62,9 @@ compton &
 
 # Open additional programs
 discord &
-gpmdp &
 dropbox &
+docky &
+vala-panel &
 
 # Start window manager (sxhkd is started there)
 exec bspwm

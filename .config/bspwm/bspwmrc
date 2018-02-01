@@ -4,12 +4,12 @@ sxhkd &
 $HOME/.config/polybar/launch.sh
 
 #bspc monitor -d I II III IV V VI VII VIII IX X
-bspc monitor DP-5 -d chat term 3
-bspc monitor DP-2 -d term term code 7
-bspc monitor HDMI-0 -d web music 10
+bspc monitor DP-5 -d left1 left2
+bspc monitor DP-2 -d mid1 mid2
+bspc monitor HDMI-0 -d right1 right2
 
 bspc config border_width         2
-bspc config window_gap           37
+bspc config window_gap           60
 
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
@@ -20,5 +20,5 @@ bspc config click_to_focus button1
 
 bspc rule -a Nautilus state=floating
 bspc rule -a discord desktop='^1'
-bspc rule -a google-chrome desktop='^8'
-bspc rule -a gpmdp desktop='^9'
+bspc rule -a google-chrome desktop='^5'
+bspc rule -a gpmdp desktop='^6'
