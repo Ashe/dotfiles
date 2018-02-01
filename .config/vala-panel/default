@@ -1,5 +1,5 @@
 [core-version-1]
-units=['0f5d175e-d5f4-4fd0-9968-dc557955d0da', 'b793a60a-416a-4032-8f59-42a043099ccb', '3aced8f2-48b8-41cd-931c-e09ccabbbade', '7189bc73-0243-4b53-9c93-87748f36c157', '28d00974-d26b-44d3-967d-18d1bbb11685', '08f4adb7-fab1-4bfd-bad4-37570e2b4553', '39d35403-b0ec-4ef4-95f1-639885022953', 'clock', '0f1f4eee-4888-4187-b626-2667b8cc9a1f', '52dae594-9841-4ed4-abcb-d2bd2d475788', '893a3c0e-b44b-40b4-9049-b565ddcfc67a', '51c5a30c-49a7-45aa-9bec-86a007a3803a', '18ca6665-7c8d-45cf-b209-32f0fa7cfe29', '577f46e4-4229-41a8-93ef-3dd181d4d16f', 'xembed', '7d5144ea-9b8f-41a6-a37e-082c12e5afe3', 'toplevel1']
+units=['0f5d175e-d5f4-4fd0-9968-dc557955d0da', 'b793a60a-416a-4032-8f59-42a043099ccb', '3aced8f2-48b8-41cd-931c-e09ccabbbade', '9fabd1bc-8f00-4396-a341-92cd5dbf942e', '7189bc73-0243-4b53-9c93-87748f36c157', '28d00974-d26b-44d3-967d-18d1bbb11685', '08f4adb7-fab1-4bfd-bad4-37570e2b4553', 'clock', '39d35403-b0ec-4ef4-95f1-639885022953', '42271e33-cf1c-40d8-88fc-cd70e06fca54', '0f1f4eee-4888-4187-b626-2667b8cc9a1f', '52dae594-9841-4ed4-abcb-d2bd2d475788', '893a3c0e-b44b-40b4-9049-b565ddcfc67a', '51c5a30c-49a7-45aa-9bec-86a007a3803a', '18ca6665-7c8d-45cf-b209-32f0fa7cfe29', '577f46e4-4229-41a8-93ef-3dd181d4d16f', '7df7f0d5-6854-4fd1-aea0-6bfe6d67576a', 'xembed', '7d5144ea-9b8f-41a6-a37e-082c12e5afe3', 'c17b0bd3-812e-480e-be9d-09c743d75e49', 'toplevel1', '27233554-bf95-45de-9f48-01947bd0d4f6']
 
 [global]
 is-dark=true
@@ -216,6 +216,39 @@ position=2
 object-type='applet'
 plugin-type='separator'
 toplevel-id='08f4adb7-fab1-4bfd-bad4-37570e2b4553'
+position=3
+size=10
+show-separator=false
+
+[7df7f0d5-6854-4fd1-aea0-6bfe6d67576a]
+object-type='toplevel'
+monitor=0
+panel-gravity='north-left'
+
+[27233554-bf95-45de-9f48-01947bd0d4f6]
+object-type='applet'
+plugin-type='appmenu'
+toplevel-id='7df7f0d5-6854-4fd1-aea0-6bfe6d67576a'
+position=0
+
+[42271e33-cf1c-40d8-88fc-cd70e06fca54]
+object-type='applet'
+plugin-type='separator'
+toplevel-id='7df7f0d5-6854-4fd1-aea0-6bfe6d67576a'
+position=1
+is-expanded=true
+show-separator=false
+
+[c17b0bd3-812e-480e-be9d-09c743d75e49]
+object-type='applet'
+plugin-type='clock'
+toplevel-id='7df7f0d5-6854-4fd1-aea0-6bfe6d67576a'
+position=2
+
+[9fabd1bc-8f00-4396-a341-92cd5dbf942e]
+object-type='applet'
+plugin-type='separator'
+toplevel-id='7df7f0d5-6854-4fd1-aea0-6bfe6d67576a'
 position=3
 size=10
 show-separator=false
