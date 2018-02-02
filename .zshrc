@@ -94,4 +94,4 @@ export LANG=en_GB.UTF-8
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Display a random quote
-fortune
+fortune | cowsay -f turkey
