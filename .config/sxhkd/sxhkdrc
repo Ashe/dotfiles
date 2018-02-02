@@ -12,7 +12,7 @@ super + @space
 
 # lock the screen
 super + Escape
-    xscreensaver-command -lock
+    slock
 
 # make sxhkd reload its configuration files:
 super + alt + Delete

@@ -55,10 +55,7 @@ numlockx &
 $HOME/.screenlayout/default.sh &
 
 # Set wallpaper
-~/.fehbg &
-
-# Start screensaver program
-xscreensaver &
+$HOME/.fehbg &
 
 # Open compositor
 compton &
