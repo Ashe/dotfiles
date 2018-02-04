@@ -10,8 +10,8 @@ if has('nvim')
         " Code completion plugin
         Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
 
-        " Haskell plugin
-        Plug 'parsonmatt/intero-neovim'
+        " Haskell tools
+        Plug 'parsonsmatt/intero-neovim'
 
 " Vim specific
 else
@@ -71,9 +71,6 @@ set lazyredraw
 set showmatch
 
 " Start autocompleting using tab to cycle
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup=1
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-
-" Haskell, hindent config
-g:hindent_indent_size = 2
