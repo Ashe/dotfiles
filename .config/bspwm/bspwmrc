@@ -4,9 +4,17 @@ sxhkd &
 $HOME/.config/polybar/launch.sh
 
 #bspc monitor -d I II III IV V VI VII VIII IX X
-bspc monitor DP-5 -d left1 left2
-bspc monitor DP-2 -d mid1 mid2
-bspc monitor HDMI-0 -d right1 right2
+
+numberOfScreens=6
+
+i=0
+n=`bspc query -M | wc -l`  # count number of lines in bspwm's monitor list
+per=$(( numberOfScreens / n ))          # number of desktops per monitor
+for monitor in `bspc query -M`; do
+    bspc monitor $monitor -d `seq $i $(( i + per - 1 ))` 
+    # seq is end-inclusive; `seq 1 $((1+2))` returns "1 2 3"
+    i=$(( i + per ))
+done
 
 bspc config border_width         2
 bspc config window_gap           60
