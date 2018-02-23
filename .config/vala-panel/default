@@ -26,6 +26,8 @@ background-color='rgb(53,95,128)'
 round-corners-size=0
 dock=true
 
+autohide=false
+
 [sep1]
 
 
@@ -192,6 +194,8 @@ monitor=2
 panel-gravity='north-left'
 strut=true
 
+autohide=false
+
 [39d35403-b0ec-4ef4-95f1-639885022953]
 object-type='applet'
 plugin-type='appmenu'
@@ -221,9 +225,8 @@ size=10
 show-separator=false
 
 [7df7f0d5-6854-4fd1-aea0-6bfe6d67576a]
-object-type='toplevel'
-monitor=0
-panel-gravity='north-left'
+
+object-type='applet'
 
 [27233554-bf95-45de-9f48-01947bd0d4f6]
 object-type='applet'
