@@ -48,6 +48,9 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
+# Wait a moment
+sleep 5
+
 # Turn on numlock
 numlockx &
 
