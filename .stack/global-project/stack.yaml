@@ -7,5 +7,4 @@
 # http://docs.haskellstack.org/en/stable/yaml_configuration/
 #
 packages: []
-resolver: lts-9.14
-ghc-build: nopie
+resolver: lts-10.7

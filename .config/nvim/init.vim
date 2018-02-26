@@ -4,21 +4,21 @@ call plug#begin('~/.config/nvim/plugged')
 " Neovim specific
 if has('nvim')
 
-        " Enable mouse control
-        set mouse=a
+  " Enable mouse control
+  set mouse=a
 
-        " Code completion plugin
-        Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
+  " Code completion plugin
+  Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
 
-        " Haskell tools
-        Plug 'parsonsmatt/intero-neovim'
+  " Haskell tools
+  Plug 'parsonsmatt/intero-neovim'
 
 " Vim specific
 else
-        " Code completion plugins
-        Plug 'Shougo/deoplete.nvim'
-        Plug 'roxma/nvim-yarp'
-        Plug 'roxma/vim-hug-neovim-rpc'
+  " Code completion plugins
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
 " Fuzzy search
@@ -51,6 +51,21 @@ syntax on
 " Indent depending on plugins and filetype
 filetype plugin indent on
 
+" Set leader key to space
+:let mapleader = " "
+
+" Copy to clipboard
+set clipboard+=unnamedplus
+vnoremap  <leader>y  "+y
+nnoremap  <leader>Y  "+yg_
+nnoremap  <leader>y  "+y
+
+" Paste from clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
+
 " Tabs are 4 spaces
 set tabstop=2
 set shiftwidth=2
@@ -74,3 +89,26 @@ set showmatch
 let g:deoplete#enable_at_startup=1
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+
+" Intero for Haskell
+augroup haskell
+  if has('nvim')
+    au!
+    " Background process and window management
+    au FileType haskell nnoremap <silent> <leader>s :InteroStart<CR>
+    au FileType haskell nnoremap <silent> <leader>S :InteroKill<CR>
+    au FileType haskell nnoremap <silent> <leader>o :InteroOpen<CR>
+    au FileType haskell nnoremap <silent> <leader>O :InteroHide<CR>
+    au FileType haskell nnoremap <silent> <leader>r :InteroReload<CR>
+    au FileType haskell nnoremap <silent> <leader>f :InteroGoToDef<CR>
+    au FileType haskell nnoremap <silent> <leader>c :InteroLoadCurrentFile<CR>
+    au FileType haskell nnoremap <silent> <leader>C :InteroLoadCurrentModule<CR>
+    au FileType haskell map <silent> <leader>t <Plug>InteroGenericType
+    au FileType haskell map <silent> <leader>T <Plug>InteroType
+  endif
+augroup END
+
+" Change linters for ALE
+ let g:ale_linters = {
+ \ 'haskell': ['stack-ghc-mod', 'hlint']
+ \}

@@ -129,10 +129,17 @@ super + {Left,Down,Up,Right}
 #
 
 XF86AudioRaiseVolume
-    pulseaudio-ctl up
+  pulseaudio-ctl up
 
 XF86AudioLowerVolume
-    pulseaudio-ctl down
+  pulseaudio-ctl down
 
 XF86AudioMute
-    pulseaudio-ctl mute
+  pulseaudio-ctl mute
+
+#
+# printscreen
+#
+
+Print
+  deepin-screenshot
