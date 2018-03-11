@@ -7,3 +7,5 @@
     ]
   "exception-reporting":
     userId: "ce51853d-cfa7-4d25-afb7-c3525da6c6d2"
+  welcome:
+    showOnStartup: false
