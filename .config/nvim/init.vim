@@ -48,6 +48,12 @@ let g:airline_theme='deus'
 " Enable syntax detection
 syntax on
 
+" Spellchecking
+set spelllang=en
+
+" Make terminal title same as the file you're editing
+set title
+
 " Indent depending on plugins and filetype
 filetype plugin indent on
 
