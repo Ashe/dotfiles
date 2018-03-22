@@ -52,13 +52,16 @@ syntax on
 filetype plugin indent on
 
 " Set leader key to space
-:let mapleader = " "
+let mapleader = " "
+
+" Save file with leader-w
+nnoremap <leader>w  :w<CR>
 
 " Copy to clipboard
 set clipboard+=unnamedplus
-vnoremap  <leader>y  "+y
-nnoremap  <leader>Y  "+yg_
-nnoremap  <leader>y  "+y
+vnoremap  <leader>y "+y
+nnoremap  <leader>Y "+yg_
+nnoremap  <leader>y "+y
 
 " Paste from clipboard
 nnoremap <leader>p "+p
@@ -112,3 +115,8 @@ augroup END
  let g:ale_linters = {
  \ 'haskell': ['stack-ghc-mod', 'hlint']
  \}
+
+" Compile C# programs with the Unity engine DLL file on Mac.
+let g:ale_cs_mcsc_assemblies = [
+\'/opt/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.dll'
+\]
