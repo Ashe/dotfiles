@@ -124,5 +124,6 @@ augroup END
 
 " Compile C# programs with the Unity engine DLL file on Mac.
 let g:ale_cs_mcsc_assemblies = [
+\'/opt/Unity/Editor/Data/Managed/UnityEngine.dll',
 \'/opt/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.dll'
 \]
