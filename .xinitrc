@@ -68,6 +68,7 @@ compton &
 # Open additional programs
 discord &
 dropbox &
+conky &
 docky &
 vala-panel &
 
