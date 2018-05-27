@@ -18,16 +18,16 @@ background = #433B67
 foreground = ${colors.foreground}
 padding-left = 8
 padding-right = 8
-module-margin-left = 4
-module-margin-right = 4
-font-0 = NotoSans-Regular:size=8
+module-margin-left = 1
+module-margin-right = 1
+font-0 = TamzenForPowerline:size=13
 font-1 = FontAwesome:pixelsize=8
 ;tray-position = right
 ;tray-padding = 2
 ;tray-background = ${colors.background}
 wm-restack = bspwm
-modules-left = menu-apps bspwm
-modules-center = xwindow
+modules-left = menu-apps mpd bspwm
+modules-center = xwindow 
 modules-right = cpu memory temperature filesystem wlan backlight volume date
 
 
@@ -99,11 +99,16 @@ label = %title:0:100:...%
 [module/mpd]
 
 type = internal/mpd
+host = 127.0.0.1
+port = 6600
+password = 
+
+
 ;format-online = <icon-prev>  <label-time>  <label-song>  <icon-next>
-format-online = <toggle>  <label-song>
+format-online = <toggle>  <label-song> <bar-progress>
 ;format-online = <label-time>  <label-song>
-;icon-prev = 
-;icon-next = 
+icon-prev = 
+icon-next = 
 icon-play = 
 icon-pause = 
 ;icon-prev-foreground = ${colors.accent}
@@ -111,6 +116,12 @@ icon-pause = 
 icon-pause-foreground = ${colors.accent}
 label-song-maxlen = 45
 label-song-ellipsis = true
+
+; Only applies if <bar-progress> is used
+bar-progress-width = 45
+bar-progress-indicator = |
+bar-progress-fill = ─
+bar-progress-empty = ─
 
 
 [module/wlan]
