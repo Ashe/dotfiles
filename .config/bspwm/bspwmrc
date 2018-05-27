@@ -1,5 +1,9 @@
 #! /bin/sh
 
+## Environment
+export PATH=${PATH}:$HOME/.scripts
+export PATH=${PATH}:$HOME/.config/bspwm
+
 sxhkd &
 
 #bspc monitor -d I II III IV V VI VII VIII IX X
