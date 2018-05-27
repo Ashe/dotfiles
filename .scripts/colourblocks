@@ -2,7 +2,6 @@
 
 # Show the terminal colourscheme as blocks
 # Inspired by u/dkeg
-# Cheers! Addy
 
 f=3 b=4
 for j in f b; do

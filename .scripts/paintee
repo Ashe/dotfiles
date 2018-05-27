@@ -2,8 +2,7 @@
 
 # Paintee
 # A script to get colours from xrdb & deploy it to cache
-# Then refresh URxvt colour on the fly
-# Cheers! Addy
+# Then refresh terminal colour on the fly
 
 getcolors () {
 	FOREGROUND="$(xrdb -query | grep 'foreground:'| awk '{print $NF}')"

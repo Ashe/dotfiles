@@ -2,7 +2,6 @@
 
 # A helper script to setup Git, originally written by Erik Dubois
 # Change the email & username if You want to use this
-# Cheers! Addy
 
 # Installing git if not installed for specific distro
 if ! location="$(type -p "git")" || [ -z "git" ]; then
