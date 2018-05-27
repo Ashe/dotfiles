@@ -1,4 +1,8 @@
 # Add any programs that should start just before bspwm here
-discord &
+$HOME/.fehbg &
+numlockx &
+ckb &
 dropbox &
+compton &
 conky &
+discord &

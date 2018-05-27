@@ -51,22 +51,14 @@ fi
 # Wait a moment
 sleep 6
 
-# Turn on numlock
-numlockx &
-
 # Load xrandr customisation
 $HOME/.screenlayout/default.sh &
 
+# Another pause
 sleep 6
 
-# Set wallpaper
-$HOME/.fehbg &
-
-# Open compositor
-compton &
-
-# Open additional programs
-$HOME/.scripts/startup
+# Run additional programs
+$HOME/.scripts/startup &
 
 # Start window manager (sxhkd is started there)
 exec bspwm
