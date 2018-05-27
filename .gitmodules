@@ -1,3 +1,6 @@
 [submodule "/home/ashe/.wal"]
 	path = /home/ashe/.wal
 	url = https://github.com/dylanaraps/wal
+[submodule ".fonts/bdf-tewi-git"]
+	path = .fonts/bdf-tewi-git
+	url = https://aur.archlinux.org/bdf-tewi-git.git

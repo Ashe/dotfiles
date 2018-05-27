@@ -45,39 +45,39 @@ filter_unmatched_urls = true
 [colors]
 
 # special
-foreground      = #f0f0f0
-foreground_bold = #ffffff
-cursor          = #9ea7a6
-background      = #253035
+foreground      = #dee3e0
+foreground_bold = #dee3e0
+cursor          = #dee3e0
+background      = #343c48
 
 # black
-color0  = #232c31
-color8  = #3f4944
+color0  = #525d70
+color8  = #59657a
 
 # red
-color1  = #2a5491
-color9  = #2a5491
+color1  = #ba5e50
+color9  = #c46455
 
 # green
-color2  = #237986
-color10 = #237986
+color2  = #7cb342
+color10 = #8bc34a
 
 # yellow
-color3  = #a03b1e
-color11 = #a03b1e
+color3  = #ffb74d
+color11 = #ffc55a
 
 # blue
-color4  = #484d79
-color12 = #484d79
+color4  = #528580
+color12 = #5a918c
 
 # magenta
-color5  = #c59820
-color13 = #c59820
+color5  = #b39ddb
+color13 = #bca5e6
 
 # cyan
-color6  = #3a8044
-color14 = #48a142
+color6  = #90caf9
+color14 = #93d1ff
 
 # white
-color7  = #9ea7a6
-color15 = #f0f0f0
+color7  = #bdbdbd
+color15 = #e0e0e0

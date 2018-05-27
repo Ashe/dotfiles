@@ -7,4 +7,4 @@
 mkdir -p ~/Pictures/screenshots
 sleep 0.2
 scrot -s 'screenshot_%y.%m.%d_%H.%M.%S.png' \
--e 'mv $f ~/Pictures/screenshots/ ; feh ~/Pictures/screenshots/$f ; xclip -selection c -t image/png -i ~/Pictures/screenshots/$f'
+-e 'mv $f ~/Pictures/screenshots/ ; xclip -selection c -t image/png -i ~/Pictures/screenshots/$f ; feh ~/Pictures/screenshots/$f'
