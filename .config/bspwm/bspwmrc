@@ -49,7 +49,7 @@ getcolors () {
 }
 xrdb ~/.Xresources
 ## xrdb -merge $(shuf -n1 -e ~/.colours/*)
-xrdb -merge $(~/.colours/violla)
+xrdb -merge ~/.colours/violla
 paintee
 # Only use the function above if the cache of paintee couldn't be found
 if [ -e ~/.cache/paintee ]; then
@@ -57,3 +57,12 @@ if [ -e ~/.cache/paintee ]; then
 	else
 	getcolors
 fi
+
+# Notification system
+dunst \
+-lb "$BACKGROUND" -lf "$FOREGROUND" -lfr "$GREEN" \
+-nb "$BACKGROUND" -nf "$FOREGROUND" -nfr "$BLUE" \
+-cb "$BACKGROUND" -cf "$FOREGROUND" -cfr "$RED" &
+
+# Everything is ready, send notification
+notify-send "Notification" "Bspwmrc Loaded"
