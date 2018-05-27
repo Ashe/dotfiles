@@ -66,11 +66,7 @@ $HOME/.fehbg &
 compton &
 
 # Open additional programs
-discord &
-dropbox &
-conky &
-docky &
-vala-panel &
+$HOME/.scripts/startup
 
 # Start window manager (sxhkd is started there)
 exec bspwm

@@ -1,0 +1,4 @@
+# Add any programs that should start just before bspwm here
+discord &
+dropbox &
+conky &
