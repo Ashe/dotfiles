@@ -23,7 +23,7 @@ if [ -e ~/.cache/paintee ]; then
 fi
 
 # Launch rofi with custom configuration
-rofi -show drun -sidebar-mode \
+rofi -show run -sidebar-mode \
 -modi run,drun,window \
 -hide-scrollbar true \
 -bw 2 \
@@ -31,8 +31,8 @@ rofi -show drun -sidebar-mode \
 -padding 24 \
 -width 60 \
 -location 0 \
--columns 3 \
--font "Noto Sans 8" \
+-columns 4 \
+-font "Noto Sans 10" \
 -color-enabled true \
 -color-window "$BACKGROUND,$BLACK,$BACKGROUND" \
 -color-normal "$BACKGROUND,$FOREGROUND,$BACKGROUND,$BACKGROUND,$BLUE" \
