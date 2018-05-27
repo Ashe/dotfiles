@@ -4,11 +4,31 @@
 export PATH=${PATH}:$HOME/.scripts
 export PATH=${PATH}:$HOME/.config/bspwm
 
-sxhkd &
+## Colours
+getcolors () {
+	FOREGROUND=$(xrdb -query | grep 'foreground:'| awk '{print $NF}')
+	BACKGROUND=$(xrdb -query | grep 'background:'| awk '{print $NF}')
+	BLACK=$(xrdb -query | grep 'color0:'| awk '{print $NF}')
+	RED=$(xrdb -query | grep 'color1:'| awk '{print $NF}')
+	GREEN=$(xrdb -query | grep 'color2:'| awk '{print $NF}')
+	YELLOW=$(xrdb -query | grep 'color3:'| awk '{print $NF}')
+	BLUE=$(xrdb -query | grep 'color4:'| awk '{print $NF}')
+	MAGENTA=$(xrdb -query | grep 'color5:'| awk '{print $NF}')
+	CYAN=$(xrdb -query | grep 'color6:'| awk '{print $NF}')
+	WHITE=$(xrdb -query | grep 'color7:'| awk '{print $NF}')
+}
+xrdb ~/.Xresources
+xrdb -merge $(shuf -n1 -e ~/.colors/*)
+paintee
+# Only use the function above if the cache of paintee couldn't be found
+if [ -e ~/.cache/paintee ]; then
+	. ~/.cache/paintee
+	else
+	getcolors
+fi
 
-#bspc monitor -d I II III IV V VI VII VIII IX X
-
-numberOfScreens=6
+## Monitor setup
+numberOfScreens=12
 
 i=0
 n=`bspc query -M | wc -l`  # count number of lines in bspwm's monitor list
@@ -19,6 +39,7 @@ for monitor in `bspc query -M`; do
     i=$(( i + per ))
 done
 
+## Rules
 bspc config border_width         2
 bspc config window_gap           60
 
@@ -32,5 +53,6 @@ bspc config click_to_focus button1
 bspc rule -a Nautilus state=floating
 bspc rule -a feh state=floating
 bspc rule -a discord desktop='^1'
-bspc rule -a google-chrome desktop='^5'
-bspc rule -a gpmdp desktop='^6'
+
+## Execute keybindings
+sxhkd &

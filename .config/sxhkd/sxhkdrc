@@ -14,20 +14,16 @@ super + @space
 super + Escape
   slock
 
-# make sxhkd reload its configuration files:
-super + shift + BackSpace
-	pkill -USR1 -x sxhkd
-
 #
 # bspwm hotkeys
 #
 
-# quit bspwm normally
-super + alt + Escape
-	bspwmrc
+# reload bspwm and sxhkd configuration
+super + shift + BackSpace
+	bspwmrc ; pkill -USR1 -x sxhkd
 
 # close and kill
-super + {_,shift + }c
+super + {_,shift + }w
 	bspc node -{c,k}
 
 # alternate between the tiled and monocle layout
@@ -72,6 +68,10 @@ alt + {_,shift + }Tab
 
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+# window gap via mouse wheel
+super + shift + button{4,5}
 	bspc desktop -f {prev,next}.local
 
 # focus the last node/desktop
@@ -123,6 +123,10 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# window gap via mouse wheel
+super + button{4,5}
+    bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 5))
 
 #
 # volume
