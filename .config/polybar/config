@@ -284,7 +284,7 @@ ramp-free-7 = █
 [module/filesystem]
 type = internal/fs
 
-label-mounted = %mountpoint%: %percentage_free%% of %total%
+label-mounted = %mountpoint%: %percentage_used%%
 
 ; Mountpoints to display
 mount-0 = /
