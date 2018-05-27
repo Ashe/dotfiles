@@ -71,7 +71,7 @@ super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
 
 # window gap via mouse wheel
-super + shift + button{4,5}
+super + control + button{4,5}
 	bspc desktop -f {next,prev}.local
 
 # focus the last node/desktop
@@ -145,6 +145,10 @@ XF86AudioPrev
 
 XF86AudioNext
   mpc next
+
+# window gap via mouse wheel
+super + shift + button{4,5}
+	mpc volume {+,-}2
 
 #
 # printscreen
