@@ -105,8 +105,7 @@ password =
 
 
 ;format-online = <icon-prev>  <label-time>  <label-song>  <icon-next>
-format-online = <toggle>  <label-song> <bar-progress>
-;format-online = <label-time>  <label-song>
+format-online = <toggle> <label-song>
 icon-prev = 
 icon-next = 
 icon-play = 
