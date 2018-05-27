@@ -14,21 +14,63 @@ monitor = ${env:MONITOR:}
 width = 100%
 height = 18
 fixed-center = true
-background = ${colors.background}
+background = #433B67
 foreground = ${colors.foreground}
 padding-left = 8
 padding-right = 8
-module-margin-left = 2
-module-margin-right = 2
+module-margin-left = 4
+module-margin-right = 4
 font-0 = NotoSans-Regular:size=8
 font-1 = FontAwesome:pixelsize=8
 ;tray-position = right
 ;tray-padding = 2
 ;tray-background = ${colors.background}
 wm-restack = bspwm
-modules-left = bspwm
+modules-left = menu-apps bspwm
 modules-center = xwindow
-modules-right = wlan volume date
+modules-right = cpu memory temperature filesystem wlan backlight volume date
+
+
+[module/menu-apps]
+type = custom/menu
+
+label-open = Apps
+label-close = x
+label-separator = "  |  "
+
+; If true, <label-toggle> will be to the left of the menu items (default).
+; If false, it will be on the right of all the items.
+expand-right = true
+
+; "menu-LEVEL-N" has the same properties as "label-NAME" with
+; the additional "exec" property
+;
+; Available exec commands:
+;   menu-open-LEVEL
+;   menu-close
+; Other commands will be executed using "/usr/bin/env sh -c $COMMAND"
+
+menu-0-0 = Browsers
+menu-0-0-exec = menu-open-1
+menu-0-1 = Utilities
+menu-0-1-exec = menu-open-2
+menu-0-2 = Exit
+menu-0-2-exec = menu-open-3
+
+menu-1-0 = Chrome
+menu-1-0-exec = google-chrome-stable &
+
+menu-2-0 = Nautilus
+menu-2-0-exec = nautilus &
+menu-2-1 = Scrot
+menu-2-1-exec = scrot &
+menu-2-2 = CKB
+menu-2-2-exec = ckb &
+
+menu-3-0 = Reboot
+menu-3-0-exec = reboot &
+menu-3-1 = Shutdown
+menu-3-1-exec = shutdown &
 
 
 [module/bspwm]
@@ -137,3 +179,152 @@ date = %A %d %B
 time = %I:%M %Z
 format-prefix = 
 format-prefix-foreground = ${colors.accent}
+
+
+[module/backlight]
+type = internal/backlight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+card = intel_backlight
+
+; Available tokens:
+;   %percentage% (default)
+label = %percentage%%
+
+
+[module/cpu]
+type = internal/cpu
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 0.5
+
+; Available tags:
+;   <label> (default)
+;   <bar-load>
+;   <ramp-load>
+;   <ramp-coreload>
+format = <label>
+
+; Available tokens:
+;   %percentage% (default) - total cpu load
+;   %percentage-cores% - load percentage for each core
+;   %percentage-core[1-9]% - load percentage for specific core
+label = CPU: %percentage%%
+
+
+[module/memory]
+type = internal/memory
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 3
+
+; Available tags:
+;   <label> (default)
+;   <bar-used>
+;   <bar-free>
+;   <ramp-used>
+;   <ramp-free>
+format = <label>
+
+; Available tokens:
+;   %percentage_used% (default)
+;   %percentage_free%
+;   %gb_used%
+;   %gb_free%
+;   %gb_total%
+;   %mb_used%
+;   %mb_free%
+;   %mb_total%
+;   %percentage_swap_used%
+;   %percentage_swap_free%
+;   %mb_swap_total%
+;   %mb_swap_free%
+;   %mb_swap_used%
+;   %gb_swap_total%
+;   %gb_swap_free%
+;   %gb_swap_used%
+
+label = RAM: %gb_used%/%gb_free%
+
+; Only applies if <bar-used> is used
+bar-used-indicator =
+bar-used-width = 50
+bar-used-foreground-0 = #55aa55
+bar-used-foreground-1 = #557755
+bar-used-foreground-2 = #f5a70a
+bar-used-foreground-3 = #ff5555
+bar-used-fill = ▐
+bar-used-empty = ▐
+bar-used-empty-foreground = #444444
+
+; Only applies if <ramp-used> is used
+ramp-used-0 = ▁
+ramp-used-1 = ▂
+ramp-used-2 = ▃
+ramp-used-3 = ▄
+ramp-used-4 = ▅
+ramp-used-5 = ▆
+ramp-used-6 = ▇
+ramp-used-7 = █
+
+; Only applies if <ramp-free> is used
+ramp-free-0 = ▁
+ramp-free-1 = ▂
+ramp-free-2 = ▃
+ramp-free-3 = ▄
+ramp-free-4 = ▅
+ramp-free-5 = ▆
+ramp-free-6 = ▇
+ramp-free-7 = █
+
+
+[module/filesystem]
+type = internal/fs
+
+label-mounted = %mountpoint%: %percentage_free%% of %total%
+
+; Mountpoints to display
+mount-0 = /
+mount-1 = /home
+
+; Seconds to sleep between updates
+; Default: 30
+interval = 10
+
+; Display fixed precision values
+; Default: false
+fixed-values = true
+
+; Spacing between entries
+; Default: 2
+spacing = 4
+
+
+[module/temperature]
+type = internal/temperature
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 0.5
+
+; Thermal zone to use
+; To list all the zone types, run 
+; $ for i in /sys/class/thermal/thermal_zone*; do echo "$i: $(<$i/type)"; done
+; Default: 0
+thermal-zone = 0
+
+; Full path of temperature sysfs path
+; Use `sensors` to find preferred temperature source, then run
+; $ for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*})) $(readlink -f $i)"; done
+; to find path to desired file
+; Default reverts to thermal zone setting
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
+
+; Threshold temperature to display warning label (in degrees celsius)
+; Default: 80
+warn-temperature = 60
+
+label = TEMP: %temperature%
