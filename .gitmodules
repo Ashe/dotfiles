@@ -1,3 +1,5 @@
 [submodule ".fonts/tamzen-font-git"]
 	path = .fonts/tamzen-font-git
 	url = https://aur.archlinux.org/packages/tamzen-font-git/
+[submodule "tamzen-font-git"]
+	ignore = untracked
