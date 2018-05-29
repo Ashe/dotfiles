@@ -186,7 +186,7 @@ type = internal/date
 interval = 30
 label = " %date%   %time%"
 date = %A %d %B
-time = %I:%M %Z
+time = %I:%M %p  %Z
 format-prefix = 
 format-prefix-foreground = ${colors.accent}
 
