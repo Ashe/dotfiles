@@ -70,8 +70,14 @@ alt + {_,shift + }Tab
 super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
 
-# window gap via mouse wheel
-super + control + button{4,5}
+# move node to the next/previous desktop in current monitor
+super + shift + bracket{left,right}
+  DIR={prev,next}; \
+  bspc node -d "$DIR"; \
+  bspc desktop -f "$DIR"
+
+# focus the next/previous desktop using scroll wheel
+super + shift + button{4,5}
 	bspc desktop -f {next,prev}.local
 
 # focus the last node/desktop
@@ -147,7 +153,7 @@ XF86AudioNext
   mpc next
 
 # window gap via mouse wheel
-super + shift + button{4,5}
+super + control + button{4,5}
 	mpc volume {+,-}2
 
 #
