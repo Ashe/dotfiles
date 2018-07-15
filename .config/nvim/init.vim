@@ -119,7 +119,8 @@ augroup END
 
 " Change linters for ALE
  let g:ale_linters = {
- \ 'haskell': ['stack-ghc-mod', 'hlint']
+ \ 'haskell': ['stack-ghc-mod', 'hlint'],
+ \ 'cpp' : ['gcc', 'flawfinder']
  \}
 
 " Compile C# programs with the Unity engine DLL file on Mac.
