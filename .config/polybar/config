@@ -57,15 +57,19 @@ menu-0-1-exec = menu-open-2
 menu-0-2 = Exit
 menu-0-2-exec = menu-open-3
 
-menu-1-0 = Chrome
-menu-1-0-exec = google-chrome-stable &
+menu-1-0 = Brave
+menu-1-0-exec = brave &
+menu-1-1 = Chrome
+menu-1-1-exec = google-chrome-stable &
 
-menu-2-0 = Nautilus
-menu-2-0-exec = nautilus &
-menu-2-1 = Scrot
-menu-2-1-exec = scrot &
-menu-2-2 = CKB
-menu-2-2-exec = ckb &
+menu-2-0 = Terminal
+menu-2-0-exec = termite &
+menu-2-1 = Nautilus
+menu-2-1-exec = nautilus &
+menu-2-2 = Scrot
+menu-2-2-exec = scrot &
+menu-2-3 = CKB
+menu-2-3-exec = ckb &
 
 menu-3-0 = Reboot
 menu-3-0-exec = reboot &
