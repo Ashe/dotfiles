@@ -29,7 +29,6 @@ Plug 'w0rp/ale'
 
 " Haskell plugins
 Plug 'neovimhaskell/haskell-vim'
-Plug 'alx741/vim-hindent'
 
 " Show git additions in gutter
 Plug 'airblade/vim-gitgutter'
