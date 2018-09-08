@@ -57,8 +57,8 @@ menu-0-1-exec = menu-open-2
 menu-0-2 = Exit
 menu-0-2-exec = menu-open-3
 
-menu-1-0 = Brave
-menu-1-0-exec = brave &
+menu-1-0 = Firefox
+menu-1-0-exec = firefox &
 menu-1-1 = Chrome
 menu-1-1-exec = google-chrome-stable &
 

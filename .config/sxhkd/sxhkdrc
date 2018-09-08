@@ -169,4 +169,4 @@ Print
 
 # Open quick access programs
 super + {1,2}
-	{nautilus, brave}
+	{nautilus, firefox}
