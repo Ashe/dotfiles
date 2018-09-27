@@ -1,11 +1,11 @@
 [colors]
 
-background = #2f343f
-background-alt = #4f545f
-foreground = #d8dee8
-foreground-alt = #787e68
-accent = #81a1c1
-alert = #ebcb8b
+background = {{ colors.polybar.background }}
+background-alt = {{ colors.polybar.background_alt }}
+foreground = {{ colors.polybar.foreground }}
+foreground-alt = {{ colors.polybar.foreground_alt }}
+accent = {{ colors.polybar.accent }}
+alert = {{ colors.polybar.alert }}
 
 
 [bar/bar]
@@ -20,8 +20,8 @@ padding-left = 8
 padding-right = 8
 module-margin-left = 1
 module-margin-right = 1
-font-0 = TamzenForPowerline:size=13
-font-1 = FontAwesome:pixelsize=8
+font-0 = {{ polybarfont }}:size={{ polybarfontsize }}
+font-1 = {{ fontawesome }}:pixelsize={{ fontawesomesize }}
 ;tray-position = right
 ;tray-padding = 2
 ;tray-background = ${colors.background}

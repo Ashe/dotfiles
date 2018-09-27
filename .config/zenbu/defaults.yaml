@@ -1,0 +1,55 @@
+defaultfont: "TamzenForPowerline"
+defaultfontsize: 12
+
+polybarfont: "TamzenForPowerline"
+polybarfontsize: 13
+
+fontawesome: "FontAwesome"
+fontawesomesize: 8
+
+colors:
+  foreground       : "#dee3e0"
+  foreground_bold  : "#dee3e0"
+  cursor           : "#dee3e0"
+  background       : "#343c48"
+
+  polybar:
+    background     : "#2f343f"
+    background_alt : "#4f545f"
+    foreground     : "#d8dee8"
+    foreground_alt : "#787e68"
+    accent         : "#81a1c1"
+    alert          : "#ebcb8b"
+
+  black:
+    normal : "#525d70"
+    bold   : "#59657a"
+
+  red:
+    normal : "#ba5e50"
+    bold   : "#c46455"
+
+  green:
+    normal : "#7cb342"
+    bold   : "#8bc34a"
+
+  yellow:
+    normal : "#ffb74d"
+    bold   : "#ffc55a"
+
+  blue:
+    normal : "#528580"
+    bold   : "#5a918c"
+
+  magenta:
+    normal : "#b39ddb"
+    bold   : "#bca5e6"
+
+  cyan:
+    normal : "#90caf9"
+    bold   : "#93d1ff"
+
+  white:
+    normal : "#bdbdbd"
+    bold   : "#e0e0e0"
+

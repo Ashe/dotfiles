@@ -7,7 +7,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = TamzenForPowerline 12
+font = {{ defaultfont }} {{ defaultfontsize }}
 scrollback_lines = 10000
 search_wrap = true
 icon_name = terminal
@@ -45,39 +45,39 @@ filter_unmatched_urls = true
 [colors]
 
 # special
-foreground      = #dee3e0
-foreground_bold = #dee3e0
-cursor          = #dee3e0
-background      = #343c48
+foreground      = {{ colors.foreground }}
+foreground_bold = {{ colors.foreground_bold }}
+cursor          = {{ colors.cursor }}
+background      = {{ colors.background }}
 
 # black
-color0  = #525d70
-color8  = #59657a
+color0  = {{ colors.black.normal }}
+color8  = {{ colors.black.bold }}
 
 # red
-color1  = #ba5e50
-color9  = #c46455
+color1  = {{ colors.red.normal }}
+color9  = {{ colors.red.bold }}
 
 # green
-color2  = #7cb342
-color10 = #8bc34a
+color2  = {{ colors.green.normal }}
+color10 = {{ colors.green.bold }}
 
 # yellow
-color3  = #ffb74d
-color11 = #ffc55a
+color3  = {{ colors.yellow.normal }}
+color11 = {{ colors.yellow.bold }}
 
 # blue
-color4  = #528580
-color12 = #5a918c
+color4  = {{ colors.blue.normal }}
+color12 = {{ colors.blue.bold }}
 
 # magenta
-color5  = #b39ddb
-color13 = #bca5e6
+color5  = {{ colors.magenta.normal }}
+color13 = {{ colors.magenta.bold }}
 
 # cyan
-color6  = #90caf9
-color14 = #93d1ff
+color6  = {{ colors.cyan.normal }}
+color14 = {{ colors.cyan.bold }}
 
 # white
-color7  = #bdbdbd
-color15 = #e0e0e0
+color7  = {{ colors.white.normal }}
+color15 = {{ colors.white.bold }}
