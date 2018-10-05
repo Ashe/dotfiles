@@ -6,4 +6,4 @@ youtube-dl $1\
 	--extract-audio --audio-format mp3 --audio-quality 0 --prefer-ffmpeg \
 	--youtube-skip-dash-manifest --ignore-errors --restrict-filenames \
 	--verbose $f
-notify-send "Youtube" "Check Download"
+notify-send "YouTube" "Download complete."
