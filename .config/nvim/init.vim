@@ -27,6 +27,9 @@ Plug 'kien/ctrlp.vim'
 " Linting plugin
 Plug 'w0rp/ale'
 
+" GDScript plugin
+Plug 'calviken/vim-gdscript3'
+
 " Haskell plugins
 Plug 'neovimhaskell/haskell-vim'
 
