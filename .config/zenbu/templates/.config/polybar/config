@@ -108,7 +108,7 @@ port = 6600
 password = 
 
 
-format-online = <toggle>  <label-time>  <icon-prev>  <label-song>  <icon-next>
+format-online = <toggle> <icon-prev>  <label-time>  <icon-next>  <label-song>
 icon-prev = 
 icon-next = 
 icon-play = 
