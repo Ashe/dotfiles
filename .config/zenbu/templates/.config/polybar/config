@@ -109,7 +109,6 @@ password =
 
 
 format-online = <toggle>  <label-time>  <icon-prev>  <label-song>  <icon-next>
-;format-online = <toggle> <label-song>
 icon-prev = 
 icon-next = 
 icon-play = 
@@ -117,7 +116,8 @@ icon-pause = 
 ;icon-prev-foreground = ${colors.accent}
 ;icon-next-foreground = ${colors.accent}
 icon-pause-foreground = ${colors.accent}
-label-song-maxlen = 45
+label-song = %title% - %artist%
+label-song-maxlen = 35
 label-song-ellipsis = true
 
 ; Only applies if <bar-progress> is used

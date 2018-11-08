@@ -17,4 +17,4 @@ else
 fi
 
 echo "Bars launched..."
-notify-send "Notification" "Polybar loaded"
+notify-send -u low "Notification" "Polybar loaded"

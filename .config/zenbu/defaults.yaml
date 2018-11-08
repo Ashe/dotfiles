@@ -1,6 +1,9 @@
 defaultfont: "TamzenForPowerline"
 defaultfontsize: 12
 
+notificationfont: "Noto Sans"
+notificationfontsize: 11
+
 polybarfont: "TamzenForPowerline"
 polybarfontsize: 13
 

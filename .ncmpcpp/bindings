@@ -580,7 +580,3 @@ def_key "l"
 # Lyrics
 def_key "L"
   show_lyrics
-
-def_key "ctrl-l"
-  toggle_lyrics_fetcher
-

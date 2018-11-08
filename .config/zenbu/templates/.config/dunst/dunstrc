@@ -1,19 +1,18 @@
 [global]
 monitor = 0
 follow = mouse
-geometry = "250x50-30+58"
+geometry = "300x50-30+58"
 indicate_hidden = yes
 shrink = no
-separator_height = 0
 padding = 16
 horizontal_padding = 24
 frame_width = 2
 sort = no
 idle_threshold = 120
-font = {{ defaultfont }} {{ defaultfontsize }}
+font = {{ notificationfont }} {{ notificationfontsize }}
 line_height = 4
 markup = full
-format = "<b>%s</b>\n%b"
+format = "<b>%s</b> %p\n%b"
 alignment = left
 show_age_threshold = 60
 word_wrap = yes
@@ -21,25 +20,35 @@ ignore_newline = no
 stack_duplicates = false
 hide_duplicate_count = yes
 show_indicators = no
-icon_position = off
 sticky_history = yes
 history_length = 20
-browser = /usr/bin/firefox -new-tab
 always_run_script = true
 title = Dunst
 class = Dunst
 
+separator_color = frame
+separator_height = 0
+
+icon_position = right
+max_icon_size = 80
+
+browser = /usr/bin/firefox -new-tab
+
 [shortcuts]
+frame_color = "#3B7C87"
 close = ctrl+space
 close_all = ctrl+shift+space
 history = ctrl+grave
 context = ctrl+shift+period
 
 [urgency_low]
+frame_color = "#3B7C87"
 timeout = 4
 
 [urgency_normal]
+frame_color = "#5B8234"
 timeout = 8
 
 [urgency_critical]
+frame_color = "#B7472A"
 timeout = 0

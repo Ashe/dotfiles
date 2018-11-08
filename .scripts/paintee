@@ -83,7 +83,6 @@ main () {
 	getcolors
 	echocolors
 	echo "$cache" > ~/.cache/paintee
-	sendescape
 }
 
 main

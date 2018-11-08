@@ -1,6 +1,7 @@
 #! /bin/sh
 
 ## Environment
+export PATH=${PATH}:$HOME/.local/bin
 export PATH=${PATH}:$HOME/.scripts
 export PATH=${PATH}:$HOME/.config/bspwm
 
@@ -34,35 +35,8 @@ bspc rule -a Nautilus state=floating
 bspc rule -a feh state=floating
 bspc rule -a discord desktop='^1'
 
-## Colours
-getcolors () {
-	FOREGROUND=$(xrdb -query | grep 'foreground:'| awk '{print $NF}')
-	BACKGROUND=$(xrdb -query | grep 'background:'| awk '{print $NF}')
-	BLACK=$(xrdb -query | grep 'color0:'| awk '{print $NF}')
-	RED=$(xrdb -query | grep 'color1:'| awk '{print $NF}')
-	GREEN=$(xrdb -query | grep 'color2:'| awk '{print $NF}')
-	YELLOW=$(xrdb -query | grep 'color3:'| awk '{print $NF}')
-	BLUE=$(xrdb -query | grep 'color4:'| awk '{print $NF}')
-	MAGENTA=$(xrdb -query | grep 'color5:'| awk '{print $NF}')
-	CYAN=$(xrdb -query | grep 'color6:'| awk '{print $NF}')
-	WHITE=$(xrdb -query | grep 'color7:'| awk '{print $NF}')
-}
-xrdb ~/.Xresources
-## xrdb -merge $(shuf -n1 -e ~/.colours/*)
-xrdb -merge ~/.colours/violla
-paintee
-# Only use the function above if the cache of paintee couldn't be found
-if [ -e ~/.cache/paintee ]; then
-	. ~/.cache/paintee
-	else
-	getcolors
-fi
-
-# Notification system
-dunst \
--lb "$BACKGROUND" -lf "$FOREGROUND" -lfr "$GREEN" \
--nb "$BACKGROUND" -nf "$FOREGROUND" -nfr "$BLUE" \
--cb "$BACKGROUND" -cf "$FOREGROUND" -cfr "$RED" &
+# Start notification system
+popups
 
 # Everything is ready, send notification
-notify-send "Notification" "Bspwmrc Loaded"
+notify-send -u low "BSPWM" "Hello $USER, Your computer is ready to use."
