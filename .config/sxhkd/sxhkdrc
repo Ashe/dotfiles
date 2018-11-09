@@ -168,5 +168,5 @@ Print
 #
 
 # Open quick access programs
-super + {1,2}
-	{nautilus, firefox}
+super + {1,2,3}
+	{nautilus, firefox, musicterm}

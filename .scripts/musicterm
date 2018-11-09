@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Open a terminal floating
+bspc rule -a \* -o state=floating && termite -e ncmpcpp
