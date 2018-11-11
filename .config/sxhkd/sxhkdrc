@@ -1,6 +1,6 @@
-#
-# wm independent hotkeys
-#
+##########################
+# wm independent hotkeys #
+##########################
 
 # terminal emulator
 super + Return
@@ -14,9 +14,9 @@ super + @space
 super + Escape
   slock
 
-#
-# bspwm hotkeys
-#
+#################
+# bspwm hotkeys #
+#################
 
 # reload bspwm and sxhkd configuration
 super + shift + BackSpace
@@ -38,9 +38,9 @@ super + y
 super + g
 	bspc node -s biggest
 
-#
-# state/flags
-#
+###############
+# state/flags #
+###############
 
 # set the window state
 super + {t,shift + t,s,shift + f}
@@ -50,9 +50,9 @@ super + {t,shift + t,s,shift + f}
 super + ctrl + {x,y,z}
 	bspc node -g {locked,sticky,private}
 
-#
-# focus/swap
-#
+##############
+# focus/swap #
+##############
 
 # focus the node in the given direction
 super + {_,shift + }{h,j,k,l}
@@ -90,9 +90,9 @@ super + {o,i}
 	bspc node {older,newer} -f; \
 	bspc wm -h on
 
-#
-# preselect
-#
+#############
+# preselect #
+#############
 
 # preselect the direction
 super + ctrl + {h,j,k,l}
@@ -110,9 +110,9 @@ super + ctrl + space
 super + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
-#
-# move/resize
-#
+###############
+# move/resize #
+###############
 
 # expand a window by moving one of its side outward
 super + alt + {h,j,k,l}
@@ -130,9 +130,9 @@ super + {Left,Down,Up,Right}
 super + button{4,5}
     bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 5))
 
-#
-# media and volume
-#
+####################
+# media and volume #
+####################
 
 XF86AudioRaiseVolume
   pulseaudio-ctl up
@@ -156,17 +156,32 @@ XF86AudioNext
 super + control + button{4,5}
 	mpc volume {+,-}2
 
-#
-# printscreen
-#
+###############
+# printscreen #
+###############
 
 Print
   screenshot
 
-#
-# shortcuts
-#
+#############
+# shortcuts #
+#############
 
 # Open quick access programs
 super + {1,2,3}
-	{nautilus, firefox, musicterm}
+	{ termite -e ranger \
+  , firefox \
+  , termite -e ncmpcpp \
+  }
+
+super + shift + {1,2,3}
+	{ bspwmfloat termite -e ranger \
+  , bspwmfloat firefox \
+  , bspwmfloat termite -e ncmpcpp \
+  }
+
+super + ctrl + shift + {1,2,3}
+	{ nautilus \
+  , firefox --private-window \
+  , gpmdp \
+  }
