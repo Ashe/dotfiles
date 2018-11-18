@@ -1,25 +1,33 @@
 #!/bin/bash
 set -e
 
+# Settings that are applied regardless
 common() {
   # Force tablet to resize to primary monitor (hardcoded)
-  xsetwacom set 18 MapToOutput 2560x1440+1920+0
+  local output="2560x1440+1920+0"
+  xsetwacom set 18 MapToOutput ${output}
+  echo "Tablet mapped to ${output}."
 }
 
+# Default config
 standard_mode() {
-  echo "Standard mode."
+  echo "Tablet set to Standard mode."
+
+  # Reset tablet area to full size
   xsetwacom set 18 ResetArea
 }
 
+# Osu only config
 osu_mode() {
-  echo "Osu mode."
+  echo "Tablet set to Osu mode."
+
   # Set area corners from (0,2287) to (5590,6509)
   xsetwacom set 18 Area 0 2287 5590 6509
 }
 
+# Change tablet mode depending on argument
 case $1 in
-  osu) osu_mode ;;
-  *) standard_mode ;;
+  osu)  osu_mode ;;
+  *)    standard_mode ;;
 esac
 common
-
