@@ -1,7 +1,7 @@
 [global]
 monitor = 0
 follow = mouse
-geometry = "300x50-30+58"
+geometry = "325x50-30+30"
 indicate_hidden = yes
 shrink = no
 padding = 16
@@ -40,6 +40,11 @@ close = ctrl+space
 close_all = ctrl+shift+space
 history = ctrl+grave
 context = ctrl+shift+period
+
+[irc]
+appname = "weechat"
+format  = "%s: %b"
+urgency = low
 
 [urgency_low]
 frame_color = "#3B7C87"
