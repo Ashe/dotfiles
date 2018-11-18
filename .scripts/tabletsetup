@@ -1,0 +1,25 @@
+#!/bin/bash
+set -e
+
+common() {
+  # Force tablet to resize to primary monitor (hardcoded)
+  xsetwacom set 18 MapToOutput 2560x1440+1920+0
+}
+
+standard_mode() {
+  echo "Standard mode."
+  xsetwacom set 18 ResetArea
+}
+
+osu_mode() {
+  echo "Osu mode."
+  # Set area corners from (0,2287) to (5590,6509)
+  xsetwacom set 18 Area 0 2287 5590 6509
+}
+
+case $1 in
+  osu) osu_mode ;;
+  *) standard_mode ;;
+esac
+common
+
