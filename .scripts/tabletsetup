@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e
 
+# Spit out important info
+broadcast() {
+  echo $1
+  notify-send -u low "Tablet setup" "$1"
+}
+
 # Settings that are applied regardless
 common() {
   # Force tablet to resize to primary monitor (hardcoded)
@@ -11,7 +17,7 @@ common() {
 
 # Default config
 standard_mode() {
-  echo "Tablet set to Standard mode."
+  broadcast "Tablet set to Standard mode."
 
   # Reset tablet area to full size
   xsetwacom set 18 ResetArea
@@ -19,7 +25,7 @@ standard_mode() {
 
 # Osu only config
 osu_mode() {
-  echo "Tablet set to Osu mode."
+  broadcast "Tablet set to Osu mode."
 
   # Set area corners from (0,2287) to (5590,6509)
   xsetwacom set 18 Area 0 2287 5590 6509
