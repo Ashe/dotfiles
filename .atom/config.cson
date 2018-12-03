@@ -8,5 +8,16 @@
   editor: {}
   "exception-reporting":
     userId: "ce51853d-cfa7-4d25-afb7-c3525da6c6d2"
+  "spell-check":
+    grammars: [
+      "source.asciidoc"
+      "source.gfm"
+      "text.git-commit"
+      "text.plain"
+      "text.plain.null-grammar"
+      "source.rst"
+      "text.restructuredtext"
+      "text.tex.latex"
+    ]
   welcome:
     showOnStartup: false
