@@ -1,6 +1,5 @@
 #!/bin/bash
 killall -q dunst
-killall -q mpd-notify
 
 ## Colours
 getcolors () {
@@ -33,4 +32,4 @@ dunst \
 -cb "$BACKGROUND" -cf "$FOREGROUND" -cfr "$RED" &
 
 notify-send -u low "Notification" "Notifications enabled."
-mpd-notify --library "~/Music/" &
+mpd-notification -m ${HOME}/Music &
