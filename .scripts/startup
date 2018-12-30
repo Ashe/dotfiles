@@ -2,6 +2,7 @@
 # Add any programs that should start just before bspwm here
 $HOME/.fehbg &
 zenbu &
+mpd-notification -m ${HOME}/Music &
 popups &
 numlockx &
 ckb &

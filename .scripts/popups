@@ -32,4 +32,3 @@ dunst \
 -cb "$BACKGROUND" -cf "$FOREGROUND" -cfr "$RED" &
 
 notify-send -u low "Notification" "Notifications enabled."
-mpd-notification -m ${HOME}/Music &
