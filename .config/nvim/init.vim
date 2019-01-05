@@ -50,6 +50,9 @@ let g:airline_theme='deus'
 " Enable syntax detection
 syntax on
 
+" Light theme because it looks better
+set bg=light
+
 " Spellchecking
 set spelllang=en
 
