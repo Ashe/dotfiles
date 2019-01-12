@@ -1,7 +1,7 @@
 [colors]
 
-background = ${xrdb:background}
-background-alt = ${xrdb:color8}
+background = ${xrdb:color8}
+background-alt = ${xrdb:background}
 foreground = ${xrdb:color1}
 foreground-alt = ${xrdb:color1}
 accent = ${xrdb:color1}
