@@ -1,13 +1,19 @@
 #!/bin/bash
-# Add any programs that should start just before bspwm here
+
+# Add any programs that should start before BSPWM here
 $HOME/.fehbg &
-mpd-notification -m ${HOME}/Music &
-popups &
+mpd &
 numlockx &
-ckb &
 dropbox &
 compton &
-mpd &
-poly &
 conky &
+popups &
+ckb &
+
+# These programs should load just as BSPWM is loading
+sleep 2
+killall ckb
 discord &
+popups &
+mpd-notification -m ${HOME}/Music &
+

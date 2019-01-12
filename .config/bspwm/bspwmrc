@@ -1,12 +1,10 @@
 #! /bin/sh
 
-## Environment
-export PATH=${PATH}:$HOME/.local/bin
-export PATH=${PATH}:$HOME/.scripts
-export PATH=${PATH}:$HOME/.config/bspwm
-
 ## Allow keyboard shortcuts
 sxhkd &
+
+## Show polybar
+poly &
 
 ## Monitor setup
 numberOfScreens=12
@@ -37,9 +35,6 @@ bspc config click_to_focus button1
 
 bspc rule -a Nautilus state=floating
 bspc rule -a feh state=floating
-
-# Start notification system
-popups
 
 # Everything is ready, send notification
 notify-send -u low "BSPWM" "Hello $USER, Your computer is ready to use."
