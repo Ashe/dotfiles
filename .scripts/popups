@@ -15,7 +15,6 @@ getcolors () {
 	WHITE=$(xrdb -query | grep 'color7:'| awk '{print $NF}')
 }
 xrdb ~/.Xresources
-xrdb -merge ~/.colours/violla
 paintee
 
 # Only use the function above if the cache of paintee couldn't be found

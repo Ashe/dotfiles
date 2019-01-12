@@ -1,0 +1,36 @@
+!Terminal
+URxvt.scrollBar: false
+URxvt.font:xft:TamzenForPowerline:size=12:antialias=true
+URxvt.letterSpace: -0.5
+
+! Colours
+#define S_bg #111c3e
+ 
+#define S_one   #0d1335
+#define S_two   #c83f4e
+#define S_three #544b6e
+#define S_four  #95364d
+#define S_five  #2e466f
+#define S_six   #d93e54
+#define S_seven #774d89
+#define S_eight #f6bab2
+ 
+*background:  #111c3e
+*foreground:  #f6bab2
+ 
+*color0:  S_bg
+*color1:  S_two
+*color2:  S_three
+*color3:  S_four
+*color4:  S_five
+*color5:  S_six
+*color6:  S_seven
+*color7:  S_eight
+*color8:  S_one
+*color9:  S_two
+*color10: S_three
+*color11: S_four
+*color12: S_five
+*color13: S_six
+*color14: S_seven
+*color15: S_eight

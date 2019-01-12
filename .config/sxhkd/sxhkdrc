@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-	termite
+	urxvt
 
 # program launcher
 super + @space
@@ -169,15 +169,15 @@ Print
 
 # Open quick access programs
 super + {1,2,3}
-	{ termite -e ranger \
+	{ urxvt -e ranger \
   , firefox \
-  , termite -e ncmpcpp \
+  , urxvt -e ncmpcpp \
   }
 
 super + shift + {1,2,3}
-	{ bspwmfloat termite -e ranger \
+	{ bspwmfloat urxvt -e ranger \
   , bspwmfloat firefox \
-  , bspwmfloat termite -e ncmpcpp \
+  , bspwmfloat urxvt -e ncmpcpp \
   }
 
 super + ctrl + shift + {1,2,3}
