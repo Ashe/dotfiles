@@ -9,17 +9,7 @@ broadcast() {
 
 # Reset back to normal
 reset() {
-
-  # We could use setxkbmap, but
-  # we don't know whether we want
-  # US or UK bindings
-
-  # Undo OSRS changes
-  xmodmap -e "keycode 10 = 1"
-  xmodmap -e "keycode 11 = 2"
-  xmodmap -e "keycode 12 = 3"
-  xmodmap -e "keycode 13 = 4"
-  xmodmap -e "keycode 14 = 5"
+  setxkbmap -layout us
 }
 
 # Default config
