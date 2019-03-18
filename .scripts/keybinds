@@ -31,6 +31,13 @@ osrs_mode() {
   xmodmap -e "keycode 12 = F3"
   xmodmap -e "keycode 13 = F4"
   xmodmap -e "keycode 14 = F5"
+
+  # Map function keys to nums
+  xmodmap -e "keycode 67 = 1"
+  xmodmap -e "keycode 68 = 2"
+  xmodmap -e "keycode 69 = 3"
+  xmodmap -e "keycode 70 = 4"
+  xmodmap -e "keycode 71 = 5"
 }
 
 # Change keybindings
