@@ -4,7 +4,7 @@
 sxhkd &
 
 ## Show polybar
-poly &
+startpoly &
 
 ## Monitor setup
 numberOfScreens=12
