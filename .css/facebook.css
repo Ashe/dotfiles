@@ -1,0 +1,258 @@
+@namespace url(http://www.w3.org/1999/xhtml);
+*,._5vb_ .home_right_column .fbFeedTicker .ticker_container:before
+{    text-shadow:none!important;    box-shadow:none!important;    border-radius:0px!important;    text-decoration:none!important;}
+@font-face
+{font-family: 'Roboto';font-style: normal;font-weight: 300;}
+* {font-family: 'Roboto' !important;}
+
+body,._5861 ._586f, ._5861 ._586i, ._5861 ._1frb,._53ad,._3m75 .sideNavItem.sideNavItem.sideNavItem.sideNavItem ._5afe,._5vb_, ._5vb_ #contentCol,._5vsj._5vsj._5vsj,._4fzb ._5pco, ._4fzb ._5pco p,.fbFeedTicker .tickerStoryClickable a, .fbFeedTicker .tickerStoryClickable .passiveName, .fbFeedTicker .tickerStoryClickable .token, .fbFeedTicker .tickerStoryClickable ._58cl, .fbFeedTicker .tickerStoryClickable ._58cn, .fbFeedTicker .tickerStoryClickable ._58cm,.fbNubButton,._5iwm ._58al,input._58al,.fbNub._50mz .titlebar .titlebarText, .fbNub._50mz.highlightTab .fbNubButton .name, .fbNub._50mz.highlightTab .fbNubButton, .fbNub._50mz.focusedTab .fbNubButton .name,input.inputtext.textInput,.uiTypeaheadView li,._55ln,._9jo li.navSubmenu a,.uiHeader h3, .uiHeader h4,._33e,._n27,._n22,._5qtn ._5qtp,._5108 .addFriendText, ._5108 .FollowLink,._5pwr:hover ._5pws, ._47__ ._5pws,._1bil,.fcb,._57ex,._c24,.uiSideNav .item, .uiSideNav .subitem,._2ezy,._3f-h,._4_zu ._4_zv.fcb,.uiMenuItem .itemAnchor,._4bwc,._3nm ._3q9,._5vx7 ._45hd a, ._5vwz a,._7ty,._3j4r,._15na,._41yq,._3z4x, ._3z4x a, ._3z4x a:hover, ._3z4v,._9dh, ._9dh a, ._9dh a:hover,._4je1,._50f9,._6nw ._3nm ._5a_, ._3nm ._5a_m,._6nw ._3nm ._5a_, ._3nm ._5a_,._6nw ._3nm ._5a_, ._3nm ._5a_,._4qd h3,._4w6,._fwx, ._fwx a,.selectedFolder ._1n,._l1,._1rv,._260,._4a_i,.__6l,.__6m,._1ekr ._29ey,._364g,._3q35,._3q34,._4b6,._2r80, ._559e,._5p0b, ._5p0b a, ._5p0b span,._aqu, ._aqu a,._2qgs,._4127, ._4127 a,._5pco,._2jyf,._1skd, ._yk1,._xsj, ._xsk, ._xsj label,input, textarea, keygen, select, button,._21jk,._1861,._1032,._569t ._54nc,._2yaa,._75e, ._2fb2,._5rai,._1p1t,._3652,.fcg,._45mq,._4x9_, ._a7s ._524d a, ._a7s ._50u4, ._1ysv,._3m75 .sideNavItem.sideNavItem.sideNavItem ._2jgb,._5v3q ._5pcp, ._5v3q ._5pcp a.uiLinkSubtle, ._5v3q ._5ptz, ._5v3q a._5pcq,._ipn._ipn a,._ipm._ipm,._g3i,._2wmb,._5v3q ._5pbw .fcg,a.uiLinkSubtle,._6m3 ._6mb, ._6m3 ._59tj ._6mb a,._50f8,.UFIAddComment .UFIAddCommentInput._1osc,._5w-6,._510g,._55oc,._568-,._53ab, ._57q5,._4cwo,._3zsi,._3zsi a,._40jz,._iyd,._3v6c ._5u7u,._3v6c span._38my,._3v6c span._38my,._3v6c ._5u7u,a._39g5,._47_c,._pac, ._pac a,._55y4 .homeSideNav .navHeader, ._55y4 .homeSideNav .navHeader a,._fwy, ._fwy .fsm, ._fwy .fsm a,._5aeq, ._5aeq:hover, ._5aeq a, ._5aeq a:hover,._22qy,._5778 ._51cp,._5778 ._577b,._4jzt,._vmt,._3yjt,._3rgw,span.uiIconText _3tn _y30,._5kyp .action a,._5vl5 ._5xhk a, ._5vl5 a._5xhk, ._5vl5 ._5xhk,._3enj ._3eni,.uiHeader h5, .uiHeader h6,._4128, ._4128 a,._580h,._37p8 ._37p9,._37p8 ._37pa,._270y,._270z,._4x0h,._5v1m,._5xhp, ._5xhp span, ._5xhp a,._5y4-,._3enj ._3enh,._3enj:hover, ._3enj:hover ._3eni, ._3enj:hover ._3enh,._5h55 ._1ui7,._5rd,._5rc,._3m75 .sectionDragHandle,._3m75 .sectionDragHandle,._1nd3 a,span.alternate_name,._1nd3,._53aa, ._53ab, ._57q5,._b2z ._b30, ._b2z ._b31,label,._42bz, ._42b-,._5kx5,.am_24k, ._64f, ._64f a,._3t0c,span._1n0,._17mw,._1n3,._44pl,div._x92,._3dq0,._6lh ._8yb, ._6lh ._8yb a,.uiButtonText, .uiButton input,span._5p7e._50f7,div._vyo._4bl9,div._c0o,div._c0p,a._3mb5,._l0,._1n,._1n:hover,._211 span._6q-,._35,._4_ci ._4_cj, ._18s4 ._4_cj._5h55 ._1ui6,a._51iz,._8cr,._1f6t a,._5vsj .fcg,._3csb._3csb a,._4g25,._4g26,._3sco,._ds- a,._ds- a:hover,._gs6,._70n,._1sdi,._1y2l .preview, ._1y2l a.messagesContent:hover .preview,._33g,._41y6,._2kmn, ._2kmn a, ._2kmn a:hover,._2vxa._3-95,._5x_o,._75k, ._2fb3,._5po3,div._5x_j._5po3,._5ky,._kdk.fbTimelineSection,._4lmi ._2cuy,._2yug,._5rzs .uiHeaderTop .uiHeaderTitle, ._5rzs .uiHeader.uiSideHeader, ._5rzs .uiHeader.uiSideHeader a, ._5rzs .uiHeader.uiSideHeader h6, #rightCol ._5rzs .uiHeader.uiSideHeader .adsCategoryTitleLink, ._5rzs ._9qc ._38my,._5bv4,._5bv3,html ._55r1,.uiHeader h2 a,._3vso,.fbNub._50mz .titlebar .titlebarTextWrapper,._1-jb.fcg,._5na_,.fbSettingsList .fbSettingsListItemLabel,.uiInfoTable .label,._yvz a,._4745,._5v3q ._5g-l,._5v3q ._5paw ._3e_2,._5paw a,._iyc,._fwz, ._fwz a,._40jr,._15py, ._5lcm,.__wu ._539-.roundedBox .uiSearchInput .inputtext, .__wu ._539-.roundedBox .uiSearchInput.reDesignedInput .inputtext,._sm0 ._15pz,._1zv1,._8_l,._5cgi,._5599,._8_o a,._8_l a,._8_o,.__tw,.UFILivePinnedCommentLabel,._iqq,._1s54,._5i_d .__6l,._2v6o,._1lj0,._1htf,._1ht7,._497p,._5ewi ._5mtx .uiHeaderTitle,._5ewi .ci_design_compact .subfooter,._5ewi .ci_design_compact .uiHeaderTitle,._5ewi ._5mtw ._5mty,._5wvt ._5lz7, ._5wvt ._578f,._5wvt ._5lzb, ._5wvt ._5c4d,._5wvt ._5cl4._5wvt ._578g,._5wvt ._578g._5wvt ._4tdg ._5m3_,._5xmz._5wcf,._1sdi:hover,._31q_,._31rf,._g3i span._38my,._p6f,._2pxf,._4dyr,._jqu,._1giw,div._4tvz,._5esr,._5ess,._5fddf,._5fdd,._2eu_ ._36zg,._3ja_,._3jb0,._3jb3,._7lu ._50hf, ._7lu .pageByline,._e8t,._19bs,._2yep, ._2yep a,._2xjg, ._2xjg a,._50hf,._1m-h,._2m80,._5z74,._5z7c,._2n67,._4n9s,._4g7f,.uiInputLabelLegacy label,._5mce,._1am-,._4yup ._4sg9,._3eus, ._5uh,._av1,._1y2l a.messagesContent,._3wkw,._30n_,._10c5 ._5a4z, ._10c5 ._5a4-, ._5va2 ._5a4z, ._5va2 ._5a4-,._33gp ._38my, ._5dw9 ._38my,._3aee,._3084,._lie>a, ._fip, ._62xw,._2ye3, ._2ye4,._5_6e,.fbSearchCompactUFI ._ipn._ipn a,._35i9,._2u0y .highlightNode,._5w1r,._2-gz>span,._1z7g>span,._3v_j>i>span,._sa_,._2ms2,._37uu ._610i ._4x9_, ._37uu ._610i._a7s ._524d a, ._37uu ._610i._a7s ._50u4, ._37uu ._610i ._1ysv,._60mc a,._3-v_,._47od,div._599p,div._599q,._15wh,._j1x,._50f4,._2v-2,._63oo,._63op,._ifw,._4g6e,._iy9 ._1hmp,._o9h, ._o9h a,._2gp_,._7u2,._7tw,._16du,._354k,._5jkw._10lf,._2ru- ._2gmk,._2le4,._5l08, ._5l08 a,._5gnb,._4dml, ._4dml a, ._30n-, ._30n_,._5uvs,._5wcf ._5znp,._5r5l,._5r5m,._5raj,._4lh7,._53ii ._47lu._47lv,._26z1,._lny ._3smp,._1pfy>a, ._1pfx,._611r,._5ugf,._3xwv, ._3xwv:hover,._213d, ._213d:hover,._19s_,._63_q,._2d39,._bez.uiTypeaheadView .page,._3e00,._13wn,._beq,._4k_u p,._27ue,._27ub,._r-k,a._12bj ._12bi,._3zlc,._26eb,._1cda,._1isq,._1isr,._4w9v,._4f2e,._4f2f,._3sbc,._4lly,._tdl,._4llv,._2fet,._5eke,a._39g3,._4un6,html ._5rz ._4psd,._3d0,._8r9, ._8ra,._8r7, ._7sr, ._7ss,._3bid ._58p5,._24u0,._5rgt,._4b44 ._15kk,._2eo-._4b44,._3qet .fcg,._52j9,._z-z, .touchable._z-v,._3bg5 ._52x1,._3bg5 ._52x2,._27vp,html ._499_,._5dwa ._38my._cdn,._14-4,._1vhd,._1vhc,._3k8d,._5l2f, ._5l2f a,._5tur, ._5tus,._33vd,._5ail,a._21t8,._3qb_,._2zkn,._b3x, ._b3x a, ._5unn, ._1aoa,._svg, ._39la,._svf,._1a_0 ._1a_7,._asu,._4dv_._58al,._57ey,._79s,._5y4o span,._ubn,._1a_b,._5xvr,._kdk,._2v5c a, ._2v5c a:hover,._5kn3,._5591,._xny,._2dmm,._26jg,._3oq0,._5npl,._5lt6,._53px,._5eje,._5hpx ._5hq1,._5c6j ._3smp,._5nw7,._1uie,._1uih,._rrv,._1_iq ._1_iu,._1_iq,._2v69,div._34pg,._5cmf,._28nm,._2l2z,body ._5nwq,body ._5nwp,._5baw,._5p0a,._1qdf,._4ox_,._60rh ._61ce ._60rj,a._zcj,._4vpc,._36zg,._1n-e,._2w9_,._1rg-,._b3n .UFIShareLink,._4bsb,._5v3q .w_fc9rfsjj3,._5v3q .e_fc9rfss68 .l_fc9rf-39y,._-iw,._4d3w._2nw8 ._4g9v .count,._6z- ._554b, ._6z- .navLessLink,._56u1,._54ne ._kj8,._1jpj,._62lk,._24ed div._6mb ._n5n,._5yb1,._5z7d,._tzi,._tzj,._1e07,._1e06,._1-jc,._2b2i,._2er9 ._45hd ._45hd._45hc, ._2er9 ._4jq5,._4-ay,.SurveyRadioCheckbox:hover label,._5v3q .d_1khqkwhbw- .l_1khqkwaa1i,._21qx,._4zbr,._5qg4,._5qfy,._2p4n,._5v3q .f_1khqkwh993,.d_1khqkwhbw- a, .d_1khqkwhbw-.q_1khqkwbe1- a, .d_1khqkwhbw-.d_1khqkwcuzs a,._41kd,._204p,._204q, ._62bz,._4syn, ._4iki,._57uu ._5jkw,._6590 ._5dwa ._38my, ._u9q ._5dwa ._38my,._4d3w .fbPhotosImplicitLocLink, ._4d3w .fbPhotosAppLink,._35ch,._204p,._204q, ._62bz,._4syn, ._4iki,._4bl7, ._4bl9,._1c-2,._1m1x,._j1y,._1itw,._4u_q,._4u_t,._65m1,._31_d,._r3j,._3cgc, ._3cgb,._j-g, ._j-h,._31yn,label._4b7j._4b7n._53rs._642b._62td,label._4b7j._53rs._642b,._1t3m,._mxc,._h7t,._r3l,._5v3q ._14f3._5pbw._5pbw .fcg, ._5v3q ._14f3._1qbu._5pbw .fcg,._5v3q ._5pcp._2jyu, ._5v3q ._5pcp._2jyu a.uiLinkSubtle, ._5v3q ._2jyu ._5ptz, ._5v3q ._2jyu a._5pcq,.UFICommentActions .UFISutroCommentTimestamp, .UFICommentActions .UFISutroLikeCount,input._4b7k._4b7k_media-manager._53rs,._6623,._5pwa, ._5pw6,._3ho0 ._3ho1,._1l97 a:link,._60b- ._31l9,._60c4 ._31l9,div._3gs6,._1x1r ._4x1j,._3gs6, ._3gs7,._4iny,div._3-95,div._3-8x,._1rbs,._3ptg,._318f,._37e5,._-l0 ._4uhz a,._-l0 ._4uhy div:last-child,._60at,._588p,._-vj,._-vm a,._5y0d,._5z1j,._5v3q ._5g-l._t98, ._1s31._t98 ._5g-l,._538r,._380z,._6nl, ._6nm,span.timestampContent,._372g ._13db, ._372g ._44bh,._44bj,._4lv8, ._4lv8 a,._69d ._69h,._3eqz ._6m3 ._6m7._6m7, ._3eqz ._6m3 ._6m7._6m7 .fsm, ._3eqz ._6m3 ._6m7._6m7 .fwn, ._3eqz ._6m3 ._6m7._6m7 .fcg, ._3eqz ._6m3 ._20l4._20l4, ._3eqz ._6m3 ._20l4._20l4 .fsm, ._3eqz ._6m3 ._20l4._20l4 .fwn, ._3eqz ._6m3 ._20l4._20l4 .fcg,._htz,._3eqz ._6m3 ._6m7._6m7, ._3eqz ._6m3 ._6m7._6m7 .fsm, ._3eqz ._6m3 ._6m7._6m7 .fwn, ._3eqz ._6m3 ._6m7._6m7 .fcg, ._3eqz ._6m3 ._20l4._20l4, ._3eqz ._6m3 ._20l4._20l4 .fsm, ._3eqz ._6m3 ._20l4._20l4 .fwn, ._3eqz ._6m3 ._20l4._20l4 .fcg,._2iev,button._271k._271m._1qjd,.e_fc9rfss68.z_fc9rfubcb a, .e_fc9rfss68.j_fc9rf_1-a.z_fc9rfubcb a, .e_fc9rfss68.u_fc9rfxx5o.z_fc9rfubcb a
+{   color: #f6bab2;}
+span[style*="color: gray"],
+span[style*="#808080"] 
+{ color: #f6bab2 !important; }
+span.fwb[style*="color: #808080"],
+span.fwb[style*="#808080"] 
+{ color: #f6bab2 !important; }
+font[style*="color: rgba(20, 24, 35, 1)"],
+font[style*="#141823"] 
+{ color: #f6bab2 !important; }
+span[style*="color: #90949c"],
+span[style*="#90949c"]
+{ color: #f6bab2 !important; }
+input::-webkit-input-placeholder
+{ color: #f6bab2 !important;}
+input:-moz-placeholder { 
+color: #f6bab2 !important;  
+}
+ 
+input::-moz-placeholder {  
+color: #f6bab2 !important;  
+}
+ input:-ms-input-placeholder,.uiTypeaheadView .selected, .uiTypeaheadView .selected a, .uiTypeaheadView .selected div, .uiTypeaheadView .selected span,div._661w,._661w,div._4o01,input._4b7k._4b7k_big._53rs,div._3-8x,div._3-8z,span._3-9a,span._2ztj._m_6._4i1f,span._2ztj._m_6,input._4b7k._4b7k_media-manager._53rs,div._5xdl._5wrl,._4o07, ._4o01, ._4o01>span, ._4o01>a,div._19j9,div._19j9 > h4
+{  
+color: #f6bab2 !important;  
+}
+
+._5wd4{color: #48d060;}._4yng{background:#000;}
+
+   .faceliftWelcomeBox .fbxWelcomeBoxProfilePic,._5pat ._5sq7,._ry,._5pat ._5sq7,._2r84 ._2r87,._bth,#fbTimelineHeadline .profilePic,#fbTimelineHeadline .profilePicThumb,._4jhq,._2l02,._54ru,img._s0.img,._55lt img,._4tdt ._4tdw img,.uiTypeaheadView .compact .splitpics, .uiTypeaheadView .compact img,._2qgu._2qgu,._1fwb
+{border-radius: 50% !important;}
+
+._6806,button._271k._271m._1qjd,._bv_,._3b4y,._1jih,._3ds9,._3eqz ._3ekx,._63eo,._3eqz._5cwb ._3ekx,._3eqz ._3ekx,._1pvx._5hl6 ._5hk_ ._5hl0,._1pvo,._n3w,._3dnm,._3dnn,._3-a6 ._3-e2 ._4yjk,._3-a6 ._3-e2 ._4yjk:last-child,._2b-j,._29xu,._3-a6 ._3-f8,._3-a6 ._2rn3,th._5wrf,.UFICommentReactionsBling ._3emk,._3l4b ._3l4c,._57uu ._5jkw,._1klk ,._1ho1,._5v3q .f_1khqkwh993,._4ic_,._5qxm._620g ~ ._63qh, ._5qxm._620g ~ ._63tb,.fbMapCalloutMain,._2er9,._3o5o,._3u-1:before,._64dw,._2rd3 ._5vsj,._64nv,table._5esl, ._5esl,._6z- .uiSideNav .selectedItem>.item, ._6z- .uiSideNav .selectedItem>.subitem,._2o49,.w_fc9rfsjj3,._bne:nth-child(2),._3ucj, ._36ic, ._5742, ._3aco, ._gli, ._5und._gli, ._5hpq, ._5c6g, ._611j, ._611k, ._4zoq, ._7sr, ._8r7, ._-0d, ._32-_, ._3stw, ._9zl, ._36b8,._21m- ._3bhz,.uiPagerTopBorder,.uiHeaderSection, .uiSideHeader,._pu-,._2yaq,._1-e0,._5nzo,body ._5nwo,._5hgv,._b1f,._5fez,._5nw8,._5fez,._46cs,._58do,._3yq-,._2l03,._5ybo,._57e6,._14vf ._33v2, ._14vf ._2x3m,._3i2n,._2-97,._4dyr, ._2v5c,.uiHeaderBottomBorder,._ir5, ._4nw6, ._4nwh, ._27ve,._27v4 ._-er ._27ve,._ir5, ._4nw6, ._4nwh, ._27ve,._3to6,.touch ._400s,._52x6,._3bg5 ._52x1,._1e8h,._z-w,._13e_,._15n_,._52ge:hover,.UFIContainer .UFICommentLiveVideoAnnouncement.UFIComment,._3upl .UFIRow.UFICommentLiveVideoAnnouncement,html ._5k35 ._5k3a,._3-e2,._4thn,._f1n,._5875,._2k20,._3d_2,._2d38,._63_q,._4ciy ._bui .sideNavItem,._3ucj,._1fwb,._7lt ._7lw,.uiMediaThumb,._2l1h, ._2l1j > div,._4lh2,._2ru-::before,._10lc,._7tw,._3if7,._1wc-,._1r7y[dir='ltr'] ._1wc- div+div,._4xbk ._40jq+._40jq,._34xx,._ifk,._63ok,._5vl5::before,._286m,._3-v_,._1tm3,._4-u2>._4-u3,._p6f,._4xdg,._5po3,._s39,.fbChatTypeahead ._3rhb,._5vb_ ._5pr2 .fbSidebarGripper, .fbCalendar ._5pr2 .fbSidebarGripper, ._1t4w ._5pr2 .fbSidebarGripper, .timelineLayout ._5pr2 .fbSidebarGripper,._3m75 .sideNavItem ._5afe:active::after,.fbRemindersContent .fbRemindersContentHeader,.uiTypeahead .wrap,._4-i0,._3y6_,.fbNub._50mz .chatAttachmentShelf,._33c,._fyy,.__tw div.jewelHeader,._3nzl ._3nzk .hasPYMK, ._3nzl ._3nzk .friendConfirmedNotifsUnitDisaggregated, ._3nzl ._3nzk .friendConfirmedNotifsUnitAggregated,._5tlx,._4mq3 .fbNubButton,._2yq._2ltu ._4-u2:before,._5vsj .UFIShareRow, ._5vsj .UFILikeSentence, ._5vsj ._48pi,._3o_h::after, ._2yaa ._2yau::after,._1qp6 .fbProfileBrowserListContainer .fbProfileBrowserListItem, html ._262m ._698 ,._5rsw,._4ks>li,._3cz,._4kt>li,._4ms4,._6-6,._6_7,._5ra,._5a5j,._22jv,._5v3q ._5g-l,._5g-l,._5i_t,._558b ._54ak,._a7s, ._fgm ._1t6k+._37uu ._610i._a7s._20h6, ._22jw._37uu ._610i._a7s._20h6, ._s_6._37uu ._610i._a7s._20h6, .uiCollapsedList ._20h6._a7s._610i._a7s._610i,._3m75 .sideNavItem ._5afe::after,._5vsj ._48pi,._5v3q ._5mxv,._4_dr._20h5,._16ve,._585-,._3zsi,._3m75 .selectedItem ._5afe::after, ._3m75 .sideNavItem:hover ._5afe::after,._4-u2,._57d8,._4jy1,._517h, ._59pe:focus, ._59pe:hover,._1cx1 ._ei_,._5vsj .UFIRow._4204,._5vsj .UFIAddComment .UFIAddCommentInput,._4fzb,._5va1,._558b ._54nc,._558b ._54ne ._54nc,.uiTypeahead,._5vsj .UFIAddComment .ReactLegacyMentionsInput .uiTypeahead, ._5vsj .UFIAddComment .ReactLegacyMentionsInput .uiTypeahead .wrap,._5pr2.fbChatSidebar,._5vb_ ._5pr2.fbChatSidebar .fbFeedTicker .fbFeedTickerStory:hover,._1sk6,.uiTypeaheadView ul,.uiTypeaheadView li,.uiToken,._21x_ ._1dc8,.__tw .jewelFooter a,.__tw .jewelFooter a:hover, .__tw .jewelFooter a:active, .__tw .jewelFooter a:focus,._1y2l .jewelContent a.messagesContent,.uiMorePagerLight .uiMorePagerPrimary:hover,._yv-,html ._55r1,._n20,._4mq3 .fbNubFlyoutBody,._4mq3 .fbChatTypeahead,._2dck,html ._6-d .fbTimelineSection,._4-h8,._4-h8::after,#fbTimelineHeadline .profilePic, #fbTimelineHeadline .newProfilePic,._5ewg ._5m65,._30d,html ._4__g,._70l,._52c6,.fbTimelineStickyHeader .back,._2w3>._30f,._1zo,._qa1,._5lc6,._1g_n,._g3h,._5kxd,._1ceo,._4zsl,._2x8p,div.uiTypeaheadView li.calltoactionV2,._15kw ._1hzo, ._15kw ._2rr4:hover,._15kw ._2rr4,._bui ._5afe,.uiSideNav .item,.hasLeftCol #contentCol,.hasLeftCol #mainContainer,._5pr2.fbChatSidebar .fbFeedTickerStory .fbFeedTickerBorder,.fbFeedTicker .fbFeedTickerStory,._44xa,._1jyf,._53lb,._3obn,._g9z._20m3 div,._qr_,._1lor,._1lot,._4za_,._14b9 ._r95, ._14b9 ._gx6,._3t3,._3t3:hover,._1_cb,._52bu ._3ow-,._5vg,._517h:active, ._517h._42fs,div._9rv ._54ng,._569t ._54ng,._9c6._9c6,._3y89,.uiButtonGroup,.uiButton, .uiButtonSuppressed:active, .uiButtonSuppressed:focus, .uiButtonSuppressed:hover,.uiSelector .uiMenu,.uiMenuItem .itemAnchor,.uiBoxGray, ._3nm,._3nj ._gl, ._3ni ._gl._498,.uiBoxLightblue,._2yq ._4-u2,._2yq ._4-u2::before,.uiMorePagerLight .uiMorePagerPrimary, .uiMorePagerLight .uiMorePagerLoader,._4oab,._2r84 ._2r87,._5hzi,._6lm,._4xhu ._5vsj,._3upg .UFIAddComment .UFIAddCommentInput,._5yk1, .uiBoxWhite, ._5mac, ._38na,._4w2s,._3z4s,._3z4t, ._3jte,._1b6y,._wza,._3651,._5suw,._3-g8,._1f8,.uiGrid tr ._4741,._2h00,._4qa._4lt::after,._juy,._3hvt:after,._38vo:after,._3z2,._ksg,._3b,._k-,ul._281,._kv:hover, ._kv,.uiSearchInput span,._2pt,.wmMasterView::after,._4-ij,._5pr2.fbChatSidebar .fbFeedTicker .fbFeedTickerStory:hover, .timelineLayout ._5pr2.fbChatSidebar .fbFeedTicker .fbFeedTickerStory:hover, ._5pr2.fbChatSidebar .fbFeedTicker .tickerStoryActive, .timelineLayout ._5pr2.fbChatSidebar .fbFeedTicker .tickerStoryActive,._61y,.fbEventsDashboardSection+.fbEventsDashboardSection>.fbEventsDashboardSection>._4ag3, .fbEventsDashboardSection+.fbEventsDashboardSection>._4ag3, ._4cbb+._4ag3,._5w40.fbEventHeader,._5vl5 ._3slj,._270u:before, ._37p5:before, ._580d:before, ._2qgs:before,._412b+._4lxk, ._412b+._412b,._2qgs .text_exposed_link,._2qgs .text_exposed_link:hover,._4z-w,.fbCalendarGridRoot .fbCalendarBox,.fbCalendarGrid .fbCalendarGridCellEmpty .fbCalendarDayItem:hover,.fbCalendarGrid .fbCalendarDayItem:hover, .fbCalendarGrid .fbCalendarGridToday .fbCalendarDayItem:hover,._4dn9,.fbNubFlyoutHeader, .fbNubFlyoutBody, .fbNubFlyoutFooter, .fbNubFlyoutAttachments,.fbNub._50mz .fbNubFlyoutFooter:before,._4-u2,.jewelItemNew ._33e,._rzn,._18--,.fbNub._50mz .fbNubButton,._5lnf,._4-9q,._27nv,._1ug,._13:first-child,._13, ._14,._569t ._54nc,._2yaa:hover::after, ._2yap._2yaa::after, ._2yap ._2yaa::after,._4v9u,._55lq:after,._5v9k .UFIAddComment .UFIImageBlockImage:after, ._5v9k .UFIComment .UFIImageBlockImage:after,._1k67 ._2s25:after,._2l5f>.uiSearchInput,._2qh,._kt,._2kml,._55r3,._dut,._3ubp,._sg1,._57et>li,._iw3,._kj3,._z6j,._40pu,._3vqv,._9fj,._p6e,._1j27,._33v2,._2ysc .UFIRow.UFILikeSentence,._1ta1,._1zuq,._4i2a,._5esn,._3jb5,._2yer,._3m75 .sideNavItem ._5afe::after,._3a9j::before,._1xml,._2qo2,._1amv,.UFIContainer .UFILivePinnedComment.UFIComment,._3m31:nth-of-type(3n+2),._3m31:nth-of-type(3n+1),._3m31:nth-of-type(3n+3),._2-0o,html ._5v3q>._3yll,._fmi,._3x-2 ._5r69._1hvl,._2wtx,._1jf6,._46ye,._4ljw._4ljw._4ljw.tickerDialogFooter,#contentCurve,._3etu, ._3etw,._307z, ._5uvt,._3m__,._3_gi .uiSearchInput::after, ._3_gi .uiTypeahead::after, ._3_gi ._58ak::after,._36nj::before,._5v3q ._4-eo::after,._1nc7 ._3e7u ._1ekr,._1nc6 ._3e7u ._1ekr,._5-9o,._5t_y ._1dsp,.uiHeaderTopAndBottomBorder,._5ewi ._5mtx,._j1x,._2v-2,._1c-2,._1c-4,div._xco,._1w9c,._5lbp,._5r86,._37wv,._5r8e,._37wu,._4f2f,._15ny::after,._129-,.jewel .flyout,.jewel ._3wjp,.jewel ._usq,.mRequestMoreItem,._44qk,._5ail,._alk,._53px,._3yjv,._5mub,._5mt-,._30d ._646,._29xp,._55v2,._3-a6._1blz ._6lh,._4o-5,._638s,._1vi5,._1lil
+{
+border-bottom: 0px solid red !important;    
+border: 0px solid red !important;    
+border-top: 0px solid red !important;    
+border-color: transparent !important;    
+border-width: 0px !important;
+}
+._jlw,._3m75 .selectedItem ._55yu>a, ._3m75 .sideNavItem:hover ._55yu>a, ._3m75 .selectedItem .uiSideNavEditButton a, ._3m75 .sideNavItem:hover .uiSideNavEditButton a,._3to9 ._5gh8,._1a_0,.uiHeaderNav,._kj3 .uiSearchInput,._1cbc
+{border-color: transparent !important;}
+._k01._1itt, ._k01:hover{outline:0px;}
+
+._fmi,._5wpt,._5pcm,._585-,._3_gi .uiSearchInput::after, ._3_gi .uiTypeahead::after, ._3_gi ._58ak::after,._5vsj.UFIContainer .UFIReplyList ._4oep,._5vsj.UFIContainer .UFIReplyList ._4oep._2o9m:after, ._5vsj.UFIContainer .UFIReplyList ._4oep._4204:after,._1ss6,._1h50,._79q
+{	border-left: 2px solid #f7e667 !important;}
+._513x
+{border-bottom: 2px solid #f7e667 !important;}
+._3ucj,._36ic,._5742,._3aco,._gli, ._5und._gli,._5hpq,._5c6g,._611j, ._611k,._4zoq,._7sr,._8r7,._-0d,._32-_,._3stw,._9zl,._36b8,._569t ._54ak,._320_,._yvr,._4jd_,._cjr,._1ho1,._1xk6,._2s1x ._2s1y,._31l1 ._60c2,._2nza,._3qe8,._dpk,._b2z
+{    border-bottom: 1px solid rgba(250,250,250,0.1)!important;}
+._1q5-,._4_j5,._3g6f,._47at,._5j35::after,._3to7 + ._3to7,._33v4,._2utd,._5k49,._5-2t,._3xop,._eos
+{    border-left: 1px solid rgba(250,250,250,0.1)!important;}
+._7si,._10uf,._553h ._333r,._7si, ._10uf, ._553h ._333r,._5esl td._5esm:first-child,._1b72 ._1b73._2jlw,.SurveyRadioCheckbox .InputBackground,._eos
+{    border-right: 1px solid rgba(250,250,250,0.1)!important;}
+._4rv3,._1li-,._5pr2 ._4oes,.fbChatSidebar .scrollableOrderedList,.fbChatSidebar ._51x_,._5pr2 .fbSidebarGripper,._avo,._35n5,._11c1._4204 ._3scp,._3-z, ._30d ._3-z~._3-z,._5p7d,._3upg,._5wcf,._5r8e,._4f2f,._62lo,._1cp6+._1cp7,.__1d,.fbEventsDashboardSection+.fbEventsDashboardSection>._4cbb, ._4cbb+._4cbb,._21m- ._1ore,._1rh0 ._1rg_ .UFIRow,._1gtx,._62yd,._1l97,._1rbq,._5uzu,._4hxu,._4d3w._u77 .fbPhotosSnowboxFeedbackInput,._1rg_,._371r,._4lvz,._3-a6._65_9._5vsj .UFIRow, ._3-a6._65_9._5vsj.UFIContainer .UFIReplyList .UFIRow, ._3-a6._65_9._5vsj._5vsj._5vsj, ._o0o ._3-a6._65_9._5vsj .UFIRow, ._o0o ._3-a6._65_9._5vsj.UFIContainer .UFIReplyList .UFIRow, ._o0o ._3-a6._65_9._5vsj._5vsj._5vsj,._1k_0::before, ._4z-m::before
+{    border-top: 1px solid rgba(250,250,250,0.1) !important;}
+._35i9,.__tw,.inputtext,._2apd, ._2ape,._2q1a,._27ul,._15wh._riu,._vyr,._5k_u,html ._5k35 ._5k3a,.touch ._52t1,._w0s,._42fu, ._42gx:focus, ._42gx:hover,._2s60 ._357t,._2ky,._3viq,.SurveyRadioCheckbox,.SurveyRadioCheckbox:hover,._3-a6._1blz ._2lhm,._3-a6._1blz ._pb2 ._2r3x ._3ekx,._5mtz,._538q,._2bx7,._1mv9 ._3el6,ul#js_0,._4xit ._4hwo,._4yng,._3v2n ._104r,._69d,._4e36
+{    border: 1px solid rgba(250,250,250,0.1) !important;}
+.acw,._5c6j ._3smp,._3za8,.SurveyRadioCheckbox:hover .InputBackground,.UFICommentPhotoAttachedPreview._4soo,._3m3s,label._4b7j._4b7n._53rs._642b._62td,label._4b7j._53rs._642b,ul#js_1 >li,td._4kfz._4o07,._5pw9,._4jy2,._4jy2:active, ._4jy2._42fs,._4jy2:hover
+{    border-color: rgba(250,250,250,0.1) !important;}
+
+._5vb_, ._5vb_ #contentCol,body,#contentCol,body._5txy,._2tk,.hasLeftCol #pageFooter,body,body._131._6nw, body._131._5vb_,.timelineLayout,._4hs6,._3-2s,html ._4lh, ._4lh .fbTimelineTimePeriod, ._4lh .fbTimelineSectionExpandPager .uiMorePagerLoader, ._4lh .fbTimelineCapsule li.anchorUnit:last-child, ._4lh .fbTimelineSectionLoading .loadingIndicator, ._4lh .timelineTourStarted ._2xgb, ._4lh .timelineTourStarted ._2xgc, ._4lh .lifeEventAddPhoto:hover,._4-u5
+{
+    background: url('https://k61.kn3.net/C/0/7/C/E/3/A95.png') center center  no-repeat fixed!important;
+    background: transparent none repeat scroll 0% 0%;
+    background-size: cover !important;
+
+    background-color: #0d1335 !important;
+}
+
+._513x,.fbNubButton,._1y2l li a.messagesContent:focus, ._1y2l li a.messagesContent:hover,html ._55r1,._2dh4,._5hpq,._6z- .uiHeaderNav
+{	background-image: none !important;}
+
+._3lji:hover,._1ndf:hover,._5t_y ._1dsp,._55d0,.fbNub._50mz:active .fbNubFlyoutTitlebar, .fbNub._50mz.focusedTab .fbNubFlyoutTitlebar, .fbNub._50mz .menuOpened .fbNubFlyoutTitlebar, .fbNub._50mz .menuOpened .fbNubFlyoutTitlebar:hover,._1nc7 ._5w1r,._3_gi .uiSearchInput::after, ._3_gi .uiTypeahead::after, ._3_gi ._58ak::after,._35i9,._4f3b:hover, ._4f3b:focus,._1u6r:hover, ._1u6r:focus,._rqg,._3etu, ._3etw,.uiMorePager .uiMorePagerPrimary:hover,._41nt,._55ln:focus, ._55ln:hover, li.selected ._55ln,._4sp8,html ._55r1,._1y2l li a.messagesContent:focus, ._1y2l li a.messagesContent:hover,.__tw .jewelFooter a,._33c:hover ._33e, ._33c ._33e:focus,a._33e _1_0e:hover,._1y2l li.jewelItemNew a.messagesContent,.fbNub._50mz .fbNubFlyoutTitlebar:hover, .fbNub._50mz .fbNubButton:hover, .fbNub._50mz.highlightTitle .fbNubButton, .fbNub._50mz.highlightTab.highlightTitle .fbNubButton,.uiTokenizer,._4mq3 .uiScrollableArea,.fbNub._50mz .fbNubFlyoutFooter,._fyy,._517h:hover,._3t3:hover,._5f_8:focus, ._5f_8:hover,._1jf6,._585-,._m_1,._57d8,._4jy1, ._59pe:focus,._1cx1 ._ei_,._558b ._54ne ._54nc,._558b ._54nd._54ne ._54nc,._1_cb,.uiBoxLightblue,.fbCalendarGrid .fbCalendarGridCell.fbCalendarGridToday .fbCalendarDayItem,.fbNub._50mz .fbNubFlyoutTitlebar,._1uhm,._1amv,.__tw li.jewelItemResponded,.fbTimelineStickyHeader .back,._15kw ._2u8i,.uiBoxGray,._1r7y ._1wc- button,._1z0-,._juy,._t,._1yw,.fbChatTypeahead ._4p-s,._kj3,._2h4b,._5u_6._5wcf, ._5voi._5wcf, ._5xmz._5wcf,._3ad-,._jlw,._5gmv,.fbNubButton,._3q73,._2qo2,._5hto,._1l1t,._3o_h::after, ._2yaa ._2yau::after,._11c1 ._3sct,._5a5j,._585- ._4w98._4w97, ._585- ._4w98._4w97:hover,._585- ._4w98,._585- ._4w98:hover,._3m75 .sideNavItem ._5afe:active::after,._4z-w:hover,._47od,._4sym:hover, ._4ikh:hover,._2ru-:hover,._5kyi, ._1asl,._5z7e ._i8w:hover,._5z7e ._i8w:focus,._5r8a._5r8b,._3ohu:hover,._63_q,._bes,._5-rl, ._b4q,._46z8,._9mu,._52ge:hover,._5hue > a:hover,._5id1, ._oan,li._3wxb, li._3wxb:hover, li._1hgw, li._1a_0:hover, li._1a_0._4vb9,._57e6:hover,._2v5c:hover,._58do ._58dq,._5k4a,._5-2t:hover,._585r,._5hgn,._g_v,.timelineLayout ._5pr2 .fbFeedTicker .tickerStoryClickable:hover,._42fu, ._42gx:focus, ._42gx:hover,._5mwd,._2c0w,._270u:hover, ._580d:hover,._tzi,._2le1:hover,.SurveyRadioCheckbox,.SurveyRadioCheckbox:hover .InputBackground,._4ic_,._eos,#FriendRequestMorePager ._5cz:hover,._1l9_,._1l69._1l6g,._1l99:hover,ul#js_1,._3-a6._65_9 .UFICommentActorAndBody, ._o0o ._3-a6._65_9 .UFICommentActorAndBody,._64lx ._517h, ._64lx ._59pe:focus, ._64lx ._59pe:hover,._4o-5,button._271k._271m._1qjd
+{	background-color: #0d1335; }
+._5vb_ ._5pr2 .fbFeedTicker .tickerStoryClickable:hover, ._5vb_ ._5pr2 .fbFeedTicker .tickerStoryActive, ._5vb_ ._5pr2 .fbFeedTicker .tickerStoryClickable:hover,._1m03 .uiMorePager .uiMorePagerPrimary:hover,._5pr2 .fbFeedTicker .tickerStoryActive, ._5pr2 .fbFeedTicker .tickerStoryClickable:hover,td._4kfz._4o07,th._5wrf,._3dnn,._d9-,._-l0 ._4uhy div:last-child,._450p,._4jy2,._4jy2:active, ._4jy2._42fs,._4jy2:hover
+{background-color: #0d1335 !important;  }
+
+label._4b7j._4b7n._53rs._642b._62td,label._4b7j._53rs._642b,._4t2a,._1nc6 ._5w1r,._1nc6 ._d97,._53ij,._558b ._54ng,._3y6_,.jewelItemNew ._33e,.fbNub._50mz .chatAttachmentShelf,ul._599r,._4-i0,._5r5f,._3rh0 ._26ly,._4lh2,._3rh0,._3l9n,._2l1h,._5hpq,.uiTypeaheadView ul,._1sk6,._4o-g:hover,._4yjk,._328i,._27ce,.UFIContainer .UFICommentLiveVideoAnnouncement.UFIComment,._2v9s,body.touch.x1._fzu._50-3._2v9s.portrait,._15n_,._52z5,.jewel ._4l9b,.acw,._z-w,._5-lw,._3bg5 ._52x1,._55wm,._ubn:nth-child(2n+1),._5y4p,._5-lm,._1rh0 ._1rg_ .UFIRow,._5esx ._58ak,._5esl td._5esm:first-child,._4xqv,._64pf,._m_1._3x6w._21bf,._3-a6._1blz ._pb2 ._2r3x ._3ekx,._3-a6._1blz ._6lh,._k01._1itt, ._k01:hover,._4rtl,._638s,._1vi5,._3qnx,._5v3q ._3-a6._1blz ._2lhm ._1dwg,._2gc1,._2gbw:hover, ._2gbx:hover, ._2gby:hover,._3dnn:hover,._59s7 div._3pi7,._31l1 ._60c2,._83k,._1np4 ._3qu9, ._1np9 ._3qu9, ._1npa ._nur, ._1npc ._nurF,._37e1,._37e2,._446w,._1_et,._3qe8,._4ap3,._dpk,._1rx8,._6864,._4ly8,._6859,._3d0s,._1nc6 ._1aa6,._1pek ._1sex:hover,._1pek,._69ad ._fmi
+{	background-color: #0d1335; opacity: 1 !important;}
+
+.uiBoxWhite,.fbSearchCompactUFI ._1g5v+._4arz,._307z, ._5uvt,._nd_ ._hh7:active,._hh7:active,._hh7,._nd_ ._hh7,._5iwm ._58al,a.fbNubButton,._4oes,.fbNub._50mz .fbNubFlyoutFooter,.fbChatSidebar,._4mq3 .fbNubFlyoutTitlebar,.fbNub._50mz .fbNubFlyoutFooter:before
+,._4cd8>.titlebar.titlebar.titlebar,._3zsi,._yv-,._n20,._6m2,._4fzb,._5va1,.fbReminders .fbRemindersStory:hover,._5va0 ._44b2:hover,._21x_ ._1dc8,._5itl:hover, ._5itl:focus,._6-7:hover,._6-6:hover, ._9rx.openToggler, ._9ry:hover, html ._9rw._54ne ._54nc,._30d,.escapeHatchMinimal,._70l,._2i-0:hover,._2w3>._30f,._3cz,._5y02:hover,._4d3w._u77 .fbPhotosSnowboxFeedbackInput,._4d3w._u77 .fbPhotosSnowboxFeedbackInput .UFIRow,div._5ss8,._1zq,._1zo,._5lc6,._1g_n,._g3h,._1fa6 ._3fbq,._1fa6 ._3fbp,._30a8 ._54j2,._53hi ._54j3, ._30a8 ._54j3, ._1e2l ._54j3, ._28ez ._54j3,._54j4,._2xdn,.uiHeaderSection,.uiSideHeader,.fbTimelineFeedbackActions,.fbTimelineUFI,._20h0,.__wu .roundedBox .uiTypeahead,.__wu ._539-.roundedBox .uiSearchInput.reDesignedInput button,._5mac,._5kxd,._5kxe,.uiSideNav .item:hover, .uiSideNav .item:active, .uiSideNav .item:focus, .uiSideNav .subitem:hover, .uiSideNav .subitem:active, .uiSideNav .subitem:focus, .uiSideNav .highlighted .item:hover, .uiSideNav ul .highlighted .subitem:hover,.uiSideNav .selectedItem .item, .uiSideNav .selectedItem .item:hover, .uiSideNav ul .selectedItem .subitem, .uiSideNav ul .selectedItem .subitem:hover,.fbSettingsList a.fbSettingsListLink:hover,._2axn ._2s0_,form.async_saving ._4jy1, a.async_saving._4jy1, ._4jy1._42fr,._qr_,._1lot,._3t3,._517h:active, ._517h._42fs,._38nc,._4bwd,._3nm,._3nj ._gl, ._3ni ._gl._498,._3c40,._4oab,._3upg,._3upg .UFIRow,._3z4s,._1b71,._1b6y,._wza,._1f9,._2h00,._3z2,._ksg,._3j5,.uiSearchInput,._1rs,._2ak,textarea,._1rw,._2pt,.wmMasterView::after,._4-ij,._49or,._1nc7 ._3e7u ._1ekr,._4ag3,._5w40.fbEventHeader,.fbCalendarGridRoot .fbCalendarBox,table,html .uiTypeahead .uiSearchInput,._rzn,.fbNubFlyoutHeader,._4-9q,._1uh,._59s7 ._5rq-,._1fa6,.UFIRow,._18su ._18c4,._1a8t,._5vwy ._13xf,select,.uiButton, .uiButtonSuppressed:active, .uiButtonSuppressed:focus, .uiButtonSuppressed:hover,._30_7,._2kml,._39k2,._4lmi,._39k5,._1gtx,._55r3,.fbCalendar.fbGroupCalendar,.fbCalendar .fbCalendarHeader,._dut,._iw3,._1g5v+._4arz,._5vsj .UFIRow,._5vsj ._1g5v+._4arz,._5yk1,._ipo,.UFIAddComment .UFIAddCommentInput._1osc,._5vsj.UFIContainer .UFIReplyList .UFIRow,.uiTypeahead,div.fbTimelineSection.fbTimelineTopSection,._5i-7,._43-i,._1djo,._1lor,._4za_,._5vf h3.uiHeaderTitle, ._5vf .uiHeaderActions,._517h,._2qgs .text_exposed_link,._4z-w,.fbCalendarGrid .fbCalendarGridRow,._27nv,._5h8b ._5dwa,._2yix,._1jyk,._5i7d,._3ubp,._sg3._sg1,._sg1,._517h._42fr,._2eg_,div.uiTypeaheadView .selected,._8-b ._26y1,._26y3,.UFIReplyList,.UFIReplyList .UFIRow,._1sdi,.uiButtonOverlay,.uiButtonGroup,.uiMenu,div._5a8u,._p6e,._33v2, ._4vb8,._4dyr,._2v5c,._33c,._2ysc .UFIRow,._2ysc .UFIList,._31qy,._16ve,._4na3,._4yupg,._5m5q,html ._5v3q>._3yll,._2yau:hover,div._4d6h _4p1p _4-u3  _57d8,._4d6h._4p1p,.fbNubButton,._4mq3 .fbNubButton,.fbNubButton:focus, .fbNubButton:hover,._4mq3 .fbNubButton:hover,._3wvs,._2apd,._59_m,._15wh._riu,._1iyu,._57uu ._4p6i,._5jkw._10lf,._4sym, ._4ikh,._4661 > li._465-:hover,._3x6b,._5z7e ._i8w,._4-u8,._611j, ._611k,._3d_e,._2d38,._bet,._3d_2,._bep,._5-rl a:hover,._4k_u,._4vgr,._4llw:hover,._31u6,._3w-8,._4vb8._4vba,._3uy4,._14vf ._33v2, ._14vf ._2x3m,._58do,._46cs,._5fez,._5nw8,._5nw7,._5nwc,._5fez,._5fez,._2dmn,body ._5nwo,._5nzo,._1-e0,._2yaq,._9zl,._pu-,._pu_:hover,._364n ._grm,._2s60 ._357t,._36b8,._6z- .uiSideNav .selectedItem>.item, ._6z- .uiSideNav .selectedItem>.subitem,._6z- .uiSideNav .selectedItem>.item:hover, ._6z- .uiSideNav .selectedItem>.subitem:hover,._6z- .uiSideNav .item:hover, ._6z- .uiSideNav .subitem:hover,._2o49,.fbTimelineSection,._6z- .uiSideNav .selectedItem>.item, ._6z- .uiSideNav .selectedItem>.subitem,._5yb1,._64dw,._4p6i._10le,._2er9,._1oma,._1ho1,._3-a6._1blz._5vsj .UFIRow, ._3-a6._1blz._5vsj.UFIContainer .UFIReplyList .UFIRow, ._3-a6._1blz._5vsj._5vsj._5vsj,._3-a6._1blz .UFICommentActorAndBody, ._o0o ._3-a6._1blz .UFICommentActorAndBody,._4d3w._u77 .fbPhotosSnowboxFeedbackInput ._2r5f .UFIRow,.UFICommentPhotoAttachedPreview._4soo,._3-a6._1blz ._2lhm,._2tk ._30d ._5cz,._2b-j,._29xu,._4mq3 ._55ln,._3-a6._65_9._5vsj .UFIRow, ._3-a6._65_9._5vsj.UFIContainer .UFIReplyList .UFIRow, ._3-a6._65_9._5vsj._5vsj._5vsj, ._o0o ._3-a6._65_9._5vsj .UFIRow, ._o0o ._3-a6._65_9._5vsj.UFIContainer .UFIReplyList .UFIRow, ._o0o ._3-a6._65_9._5vsj._5vsj._5vsj,._63eo,._3-a6._65_9._5vsj .UFIRow, ._3-a6._65_9._5vsj.UFIContainer .UFIReplyList .UFIRow, ._3-a6._65_9._5vsj._5vsj._5vsj, ._o0o ._3-a6._65_9._5vsj .UFIRow, ._o0o ._3-a6._65_9._5vsj.UFIContainer .UFIReplyList .UFIRow, ._o0o ._3-a6._65_9._5vsj._5vsj._5vsj,._3-a6._65_9 .UFICommentActorAndBody, ._o0o ._3-a6._65_9 .UFICommentActorAndBody,._64lx ._3z2,._bv_,._hij,._1i6a
+{background-color: #111c3e;}
+._3m75 .sideNavItem ._5afe::after:hover,._42oy,._2gbv,._4z-m:hover,._4l8r:hover
+{background-color: #111c3e; opacity: 1;}
+._3m75 .sideNavItem ._5afe::after,._1cx1 ._5g_r:hover ._m_1, ._1cx1 ._m_1:hover,._202.selected,._5k47,._eos::after
+{background: #111c3e; }
+div._2-gy,input,._57uu ._5jkw,div._4nqn,div._57p3._3mmj,div._1l64
+{background-color: #111c3e !important;}
+
+.fbNub._50mz .fbNubFlyoutBody,._50c9,._5vsj._5vsj._5vsj,._4d3w._u77 ._3t09,._4d3w .rhc,._2s1x ._2s1y,.__tw div.jewelHeader,.fbDockChatTabFlyout ._2v5j,.__tw,div._4-i2,._569t ._54ng,._23ce,._u0z,._55wo,._59te.popoverOpen, ._59te.isActive,.jewel .flyout,._59e9,.jewel .flyout .more,._13e_,._53_-,._3bg5 ._53_-,._320_,._3o5o,._3-a6._1blz._5vsj ._1g5v+._4arz,button#js_2hr._271k._271m._1qjd._483s,._255y ._3ho0,._59s7 div._3pi9,ul#js_0,._3grz,._4i-m,._mog,._18rk,._4yup,._6853,._3l-q,._3-a6._5vsj ._1g5v+._4arz, ._3-a6._65_9._5vsj ._1g5v+._4arz
+{background-color: #111c3e;opacity: 1!important;}
+
+._5pw9,label._4b7j._53rs._642b,hr,._7lt ._7lw,._3uch:before,._1_1h,._5vb_ ._dcs .__c_, ._5vb_ ._6l-,.UFILikeSentence ._4ar- ._3emk,.UFICommentReactionsBling ._3emk,._1eds,._52bu ._3ow-,.uiSearchInput button,._24k, ._64f, ._64f a,._1tm3 ._4-h7:hover,._4lh ._2-d1,._40pv,._fmi,._221x,._3m75 .selectedItem ._55yu>a, ._3m75 .sideNavItem:hover ._55yu>a, ._3m75 .selectedItem .uiSideNavEditButton a, ._3m75 .sideNavItem:hover .uiSideNavEditButton a,._4ar- ._3emk,._307z:after,._4ou3::before,._5inf,._eb3:before,._5r8l .uiScrollableArea.contentAfter:after,.uiScrollableAreaWithTopShadow.contentBefore:before, .uiScrollableAreaWithShadow.contentAfter:after,.uiMediaThumb i,html .fbSettingsNavigation .divider,._4b44._2ip_ ._2zh4::before, ._4b44._2ip_ ._15kk::before, ._4b44._2ip_ ._15kk+._4u3j::before,._1g05,._z6j,#pagelet_timeline_recent .fbTimelineCompactSection,div.fbTimelineSection._1y_n,._1rg_
+{    background-color: transparent;}
+.fbNubFlyoutHeader, .fbNubFlyoutBody, .fbNubFlyoutAttachments,input#u_ps_fetchstream_11_0_x._530-
+{    background-color: transparent !important;}
+._4m78,._6ll,._4kny ._585-,.uiMediaThumb,hr._-0i,._5esl td._5esw,._3-a6._1blz .UFILikeSentence ._4ar- ._3emk, ._3-a6._1blz .UFICommentReactionsBling ._3emk,._3-a6 ._10la ._10lo,._1e2l ._54j,._2-fm,._jz-:before,._6444,._3-a6 .UFILikeSentence ._4ar- ._3emk, ._3-a6 .UFICommentReactionsBling ._3emk, ._3-a6._65_9._65_9 .UFILikeSentence ._4ar- ._3emk, ._3-a6._65_9._65_9 .UFICommentReactionsBling ._3emk,.fbSearchCompactUFI ._1g5v+._4arz, ._5-g_ ._5vsj ._1g5v+._4arz, ._o0o ._3-a6._65_9._5vsj ._1g5v+._4arz,._3-a6 .UFILikeSentence ._4ar- ._3emk, ._3-a6 .UFICommentReactionsBling ._3emk, ._3-a6._65_9._65_9 .UFILikeSentence ._4ar- ._3emk, ._3-a6._65_9._65_9 .UFICommentReactionsBling ._3emk,._4gd0
+{    background: transparent;}
+._3s6x
+{    background:  linear-gradient(to bottom, rgba(20,20,20,0.4), rgba(20,20,20,0.9));}
+
+._2tfe a,._62ql,._5z1f:hover ._5z1h,._5y0e a,._5z1h,._5y0c,._1pvx._5hl6 ._5hk_,._2g1s,._4jy1, ._4jy2,._37e1 ._37e6, ._37e1 ._37e6 a,._2nz9,._3pte,._4l0x,._-ua h4, ._-ua div,._efz, ._1fw3,._j-d,._j-h a,._3miz,._14-h,._65m0,._3ziq,._3dqo,._5wd4 ._59gp,._35cf,._35ci,._2ild,._4d3w._2nw8 ._4g9v .count a,._57uu ._5jkx._23fn, ._57uu ._5jkz._23fn,._dta, ._dta a,._4j1s .uiInputLabelLabel,._1rgw,._3bhy,._275y,._4zbp,._5qg7, ._5qg7 a,._487k,._3yjw,._2jye,._2er9 ._1hqh ._4jq5,._5946 ._45yr,._v-3:hover ._2qo9,._2qo9,._19s-,._24el a,._6z- .uiSideNav .item, ._6z- .uiSideNav .subitem,._6m2:hover ._275z,._3jq3 a,._601h ._h1k a, ._601i ._h1l a, ._1db2 ._3t0s a,._6234,._llq,._364o ._1ore a,._60rh ._61ce ._60ri a ,._grm ._grr,._42fu,._23e_,._r-j,._1qdf a,._5cmf:hover, ._5cmg,._2v66,._5nw6,._3op_,._5fe_,._5fe_:hover, ._5fev:hover ._5fez,._3qk-,._5xvn,._1nao,._5y4o,._2ava,._-7c,._3uy4 a,._v7t,._ipn,.touch a.sub,._3bg5 ._29z_,.touch ._3bg5 ._53_- ._5lut, .touch ._3bg5 ._53_- ._53__,.blueName,.touch a,.jewel .flyout .messages-flyout-item .thread-title,.fcl,._5pxa ._5pxc a,._5rgt a, .touch .storyStream ._5rgr ._5rgt a,._52jb,._52ja,._5j35,._3bid ._58p4,._4un7 a,._6nw ._52gg, ._52gg ._52gh, ._52gg ._52gd, ._52gg ._52ga, ._52gg ._52gb,._52ge a,._6mt, ._6mt a,._7sr,._4zp1,._2feu,._4f2c,._4f2d,._4w9s,._3zl8:not(._3zl9), ._3zla ,._r-g,._r-f, ._r-f.fcg,._27uc,._5-rl a, ._b4q a,._5-rl a:hover,._ber,._13wb,._13wm,._3d_z,._1pfv .fwb, ._1pfv .profileLink, ._1pfv>a, ._1pfw,._1nc6 ._5w1r a,._nd_ ._hh7 a,._5pw_,._2ru- ._5-cw a,._4660,._57uu ._4p6i ,._57uu ._5jkx, ._57uu ._5jkz,._o9g a,._vyr,._4g6h,._l58,._63om,._15wh a,._1ba9,._4ovj ,._4ovi,._3087,._1u6r,._1k3u,._2ye1, ._2ye2,._1_1w .fwb, ._1_1w .profileLink, ._1_1w>a, ._vwp,._3acn a, ._3acn a:hover,._30n- a,._hh7 a,._1ht3 ._1htf,._5vaf,._50f3,._11c1 ._3scp a,._2wma,._3f-h._3f-i,._bui ._5afe, ._bui .subitem,._4mq3 .fbNubButton .label .count,._5dw9 ._38my,._yxc,._5vf h3.uiHeaderTitle, ._5vf .uiHeaderActions a,._4-lu,._5l2d,._3c3-,._266w a,._yvq,._r7, ._r7 a,.__6k,._225b,.litestandClassicWelcomeBox.fbxWelcomeBox a, .litestandClassicWelcomeBox.fbxWelcomeBoxSmall a,._4b6._4b7,._32fv, ._32fv a,._57_- ._38my._5803,._580i,.fbNub._50mz .fbChatTab .name,._21jh,._4dmk, ._4dmk a, ._5va2 ._4dmk._5v9z, ._5va2 ._4dmk._5v9-,._2yap ._2yav,._4cwn,._2yiu,._2yiu,._6-7,._5re,._5rf,._5rg,._ajw a, ._ajw a:hover,._b37, ._b37:link, ._b37:hover, ._b37:active, ._b37:visited,._24ok,._4f3a,._42bz a,._23f2,._2oqs a,._17mz,._1wva,._2otg,div._ohe.lfloat,div._ohf.rfloat,a._3g75,._2gbs,._5hug,._3scn,._1sdd:hover, ._1sdd,._5402,._1c00._1c01,._14-3,._3c_:hover ._3sz, ._3s- ._3sz, ._33hy ._554b:hover, ._4o52:hover ._3sz, ._3c- a,._4lmk,a.weakReference,._dus,.__d ._5a > ._gc,._m_1 ._2aha,._517h, ._59pe:focus, ._59pe:hover,a,._558b ._54nc,.fbTimelineUFI .UIActionLinks_bottom a, .fbTimelineUFI .fbTimelineFeedbackActions input, .fbTimelineUFI .UIActionLinks .uiLinkButton, .fbTimelineUFI .UIActionLinks .uiLinkButton input, .fbTimelineUFI div.fbTimelineFeedbackActions input:hover, .fbTimelineUFI .fbTimelineFeedbackActions button.as_link,._4-i0 ._52c9, ._5vwy a, ._42by a,._xkg,._xkg a,._4129, ._4129 a,._412d a,._4-i0 ._52c9, ._5vwy a,.fbReminders .fbRemindersStory .fbRemindersTitle,h1, h2, h3, h4, h5, h6,._gll a,.uiHeader h2,._ajw,._8cs a,._6m3 ._59tj ._6mb ._2iv2,._2yiv,a._30_7,._58cn ._58cl,span#u_y_1n,._3652 a,._1cwg,._5x_r,._g6u,._5r-_.homeWiderContent #rightCol .uiSideHeader a,._duq,._duz,.groupsAlbumTabPlutoniumRedesign .photoText .photoTextTitle,._sg1,._2jly,._5j0e a,._5bbv .fcb a,._1y2l .author, ._1y2l a.messagesContent:hover .author, ._1y2l a.messagesContent:hover .author span, ._1y2l .subject, ._1y2l a.messagesContent:hover .subject,html ._zho,.__d ._g,._4744 a,._6m6 a,._5h55 ._1ui6,a._39g6,._5a5j ._5a4-,div._9rv ._9rw ._54nc,._5t-9,.uiTypeaheadView .search.updatedSuggestionRows .text, .uiTypeaheadView .search .text,._15px,._qnj ._503q,._4-i0,._qnk,._5598,._1zv1 a,._3r4o a,._6z- .uiSideNav .item,html ._4lh ._2-d1 ._3rrn > a,._5vb_ ._c51 a,._5i_d .__6k,._5i_d .__6m,._17w2,._3szq,._1ht6,._5wvt ._4tdg ._5dg3,._5vwz:hover a,._19sz a,._5xd->a,._4288 a,._3z8d,._3sts,._35sm ._4-lu,._2yez,._2_s5 > a,._5gmx,._2_k_,._14az,._57ne,._4n9u,._498i,._4na1,._5mcd,._2qo7, ._y8y,._1amz,._6lh._8yd ._6lp a,._2f2w,._2fvv,._5z73 ._5z74,._1y4a,._1i81 ._1y4a,._h24,._50nd ._50nc, ._50ne ._50nc,._7yi,._1l9d,._1l9d:hover,._mx9.verbose ._mxb,._h7t a,._3dnn ._3dnr,._5v3q .w_fc9rfsjj3.t_fc9rfxhwq, ._1s31.t_fc9rfxhwq .w_fc9rfsjj3,._370r,._4lu-,._2xui,._4ly5,._rzx,._hil, ._hil a, ._hil a:hover
+{color: #c83f4e;}
+a._4zp1,._4zp1,._3427,._2ztj._1_mq, ._2ztj._4i1f,._m_6,._1f,._5wrf, ._5wrl, ._5wrf a,div._3gs7 > div > a
+{color: #c83f4e!important;}
+._5vsj .UFIRow.UFIUnseenItem:after
+{background-color: #c83f4e!important;}
+
+div#pagelet_ego_pane.pagelet-group.pagelet,div#pagelet_ego_pane,div.ego_column,div#pagelet_trending_tags_and_topics,div#friend_list_sidecol,a._54dd,div._5mym,div#pagelet_games_rhc,div#pagelet_canvas_nav_content
+{	display: none !important;	}
+.ego_column { display: none !important; }
+div[data-ft*=",\"ei\":"] { display: none !important; }
+iframe.fbEmuTracking  { display: none !important; }
+div[data-xt-vimpr="1"] { display: none !important; }
+
+.sp_V53xxlprDHX.sx_25e0aa
+{background-position: 0px -22px!important;}
+#feed_jewel ._59tf
+{background-position: 0 2px!important;}
+#bookmarks_jewel ._59tf
+{background-position: 0 -90px!important;}
+#search_jewel ._59tf
+{background-position: 0 -180px!important;}
+#notifications_jewel ._59tf
+{background-position: 0 -628px!important;}
+#requests_jewel ._59tf
+{background-position: 0 -721px!important;}
+#messages_jewel ._59tf
+{background-position: 0 -358px!important;}
+._sa_._37uu ._610i ._5f9b::before, ._sa_ ._37uu ._610i ._5f9b::before, ._4d3w._2nw8 ._29qf ._610i ._5f9b::before
+{background-image: url(https://www.facebook.com/rsrc.php/v3/yf/r/kcY7ODSljfi.png)!important;background-position: 0 -381px!important;}
+._4mq3 .newGCF._1-4-
+{background-image: url(https://www.facebook.com/rsrc.php/v3/yQ/r/sxpYHk2lPM0.png)!important;background-position: -16px -426px !important;}
+._37uu ._610i ._4x9_._48-k::before, ._sa_ ._37uu ._610i ._48-k::before, ._sa_._37uu ._610i ._48-k::before
+{background-image: url(https://www.facebook.com/rsrc.php/v3/yf/r/kcY7ODSljfi.png)!important;background-position: 0 -209px !important;}
+._sa_ ._37uu ._610i ._5yxe::before, ._sa_ ._37uu ._610i ._1ysv::before, ._sa_._37uu ._610i ._5yxe::before, ._sa_._37uu ._610i ._1ysv::before
+{background-image: url(https://www.facebook.com/rsrc.php/v3/yf/r/kcY7ODSljfi.png)!important;background-position: 0 -134px !important;}
+._5iwn ._58ak::before,._5iwm ._58ak::before
+{
+	background-image: url(https://k60.kn3.net/E/4/C/0/B/6/2CF.png)!important;
+	background-position: 0px 0px !important;    background-size: 15px 15px;
+}
+._5pr2.fbChatSidebar div._5qth ._5vmb
+{
+	background-image: url(https://k61.kn3.net/4/B/E/5/9/0/BA2.png)!important;
+	background-position: 4px 3px !important;background-size: 12px 12px;
+}
+._5pr2 ._3a-4,._5pr2 ._3a-4:hover
+{
+	background-image: url(https://k61.kn3.net/6/8/A/C/3/9/127.png)!important;
+	background-position: 2px 2px !important;background-size: 12px 12px;
+}
+._1rs .emoticonsPanel .emoteTogglerImg
+{
+    background-image: url(https://k61.kn3.net/1/C/B/5/0/4/D94.png) !important;
+    background-position: 0px 2px !important;
+}
+.__wu .roundedBox .uiTypeahead .searchIcon,._5jdr ._5jds
+{    background-image: url(https://k61.kn3.net/A/C/2/B/0/D/33C.png);background-position: -32px -265px;}
+._5jdr ._5jds{height: 14px;left: 12px;top: 14px;width: 16px;}
+._48gf .fbNubButton ._5qth ._5vmb,._48gf .fbNubButton ._5qth ._5vmb:hover{background-image: url(https://k60.kn3.net/5/A/5/2/2/0/6B8.png);background-position: 0px 0px;}
+._3m75 ._55yu>a, ._3m75 .sideNavItem .uiSideNavEditButton a{background-position: -115px -196px !important;background-image: url(https://k61.kn3.net/2/F/B/6/1/2/535.png);}
+._3m75 .sideNavItem .uiSideNavEditButton a{background-position:0px 30px !important;}
+.sp_esdzI9IL9Eb.sx_0c9f61 {background-position: 0px -71px;}
+._4x9_._48-k::before {background-image: url(https://k61.kn3.net/D/E/3/4/4/D/0B6.png);background-position:-30px -90px}
+._sa_ ._5yxe::before, ._sa_ ._1ysv::before { background-image: url(https://k60.kn3.net/1/5/9/E/4/7/477.png);background-position: 0px 0px;}
+._sa_ ._5f9b::before {background-image: url(https://k61.kn3.net/D/E/3/4/4/D/0B6.png);background-position:-35px -75px;}
+._6ge,._6gf,._6gs,._6gb,._3oxr,._6gg,._5yhk,.UFICommentStickerIcon,.UFICommentStickerButton:hover .UFICommentStickerIcon {background-position: 0px 0px;background-size: 16px 16px;}
+._6ge {background-image: url(https://k60.kn3.net/5/6/B/9/7/3/8E8.png);}
+._6gf {background-image: url(https://k60.kn3.net/7/2/E/1/D/4/53B.png);}
+._6gs {background-image: url(https://k61.kn3.net/F/A/A/3/F/E/A13.png);}
+._3oxr {background-image: url(https://k60.kn3.net/9/B/5/A/B/9/F35.png);}
+._6gg {background-image: url(https://k60.kn3.net/1/4/E/A/4/D/871.png);}
+._5yhk {background-image: url(https://k61.kn3.net/6/4/8/D/3/5/34A.png);}
+._3k_u {background-image: url(https://k60.kn3.net/C/1/2/F/5/0/96B.png);}
+._4cf0 {background-image: url(https://k61.kn3.net/C/2/8/A/B/6/ED0.png);background-size:16px 16px;background-position: 0px 0px;}
+.UFICommentStickerIcon,.UFICommentStickerButton:hover .UFICommentStickerIcon {background-image: url(https://k61.kn3.net/0/4/B/7/9/7/26E.png);}
+._2l5f > .uiSearchInput > span > button {margin-top:5px;} .uiSearchInput button {background-image: url(https://k60.kn3.net/E/4/C/0/B/6/2CF.png);}
+.UFICommentPhotoIcon,.UFIPhotoAttachLinkWrapper:hover .UFICommentPhotoIcon { background-image: url(https://k61.kn3.net/6/4/8/D/3/5/34A.png); background-position: -1px -2px;}
+._6gb:hover {opacity: 1;}
+._56ox .fbNubButton ._3a-4,._56ox .fbNubButton ._3a-4:hover {background-image: url(https://k61.kn3.net/3/4/5/E/F/8/A76.png);background-position: -20px -198px;}
+.sp_8cXKHyoQdKD.sx_26ed6c {background-position: 0px 0px;}
+.sp_e-REkWJBrzF.sx_84a0e6{background-position: -19px -356px;}
+._4d1i ._tmz,._4d1i ._59fc:hover ._tmz, ._4d1i ._59fc:focus ._tmz{background-image: url(https://k61.kn3.net/A/C/2/B/0/D/33C.png);background-position: -21px -207px;;opacity:1;background-size: 82px 283px;}
+._4xi2 a.jewelButton ._2n_9,._4xi2 a.jewelButton:hover ._2n_9, ._4xi2 a.jewelButton:focus ._2n_9{background-image: url(https://k61.kn3.net/665544347.png);background-position:0 -88px;opacity:1;background-size: 27px 516px;}
+._1z4y a.jewelButton ._2n_9,._1z4y a.jewelButton:hover ._2n_9, ._1z4y a.jewelButton:focus ._2n_9{background-position: 0px -264px;opacity:1;}
+._3nzl a.jewelButton ._2n_9,._3nzl a.jewelButton:hover ._2n_9, ._3nzl a.jewelButton:focus ._2n_9{background-image: url(https://k61.kn3.net/665544347.png);background-position:0 -39px;opacity:1;background-size: 27px 516px;}
+._5lxt,._5lxs:hover ._5lxt, ._5lxs:focus ._5lxt{    background-image: url(https://k61.kn3.net/A/C/2/B/0/D/33C.png);background-position: -34px -249px;opacity:1;background-size: 82px 283px;}
+div._59fb,._4d1i ._59fb,._4d1i ._59fc:active ._59fb, ._4d1i.openToggler ._59fc ._59fb,._4d1i ._59fc:hover ._59fb, ._4d1i ._59fc:focus ._59fb{background-image: url(https://k61.kn3.net/A/C/2/B/0/D/33C.png);background-position:1px -264px;opacity: 1;background-size: 82px 283px;}
+._330i._1z4y.hasNew a.jewelButton ._2n_9, ._330i._1z4y a.jewelButton:active ._2n_9, ._330i._1z4y.openToggler a.jewelButton ._2n_9,._330i._1z4y a.jewelButton ._2n_9,._330i._1z4y a.jewelButton:hover ._2n_9{background-image: url(https://k61.kn3.net/665544347.png);background-position:0 -288px;opacity:1;background-size: 27px 516px;}
+
+._3m75._1k0o .sideNavItem.sideNavItem.sideNavItem ._5afe
+{   margin-bottom: 2px !important;}
+*>a:hover
+{opacity: 0.8;}
+
+
+._5w1r,._hh7
+{    color: #f6bab2 !important;}
+
+._1nc6 ._5w1r,._nd_ ._hh7
+{	color: #ffffff !important;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+::-webkit-scrollbar-track-piece {
+    background-color: #000;
+    -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0) !important;
+    border-radius: 0 !important;
+    border: none !important;
+}
+::-webkit-scrollbar {
+    width: 5px;
+    height: 3px;
+    -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0) !important;
+    border-radius: 0 !important;
+    border: none !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #4267b2;
+    -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0) !important;
+    border-radius: 0 !important;
+    border: none !important;
+}
+::-webkit-scrollbar-thumb:active {
+    background-color: #fcd605;
+}
+
+@-moz-document domain("facebook.com") {
+::-webkit-scrollbar-thumb {
+    background-color: rgba(40, 100, 200, 1) !important;
+}
+::-webkit-scrollbar-thumb:active {
+    background-color: rgba(40, 100, 200, 0.7) !important;
+}
+}

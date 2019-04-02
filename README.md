@@ -2,7 +2,7 @@
 
 ### Simply extract to your home directory.
 
-![Preview](.dotfilesPreview.png)
+![Preview](.dotfiles_preview.png)
 
 > ### In preview:
 * [bspwm](https://github.com/baskerville/bspwm)
@@ -12,3 +12,5 @@
 * [neovim](https://neovim.io/)
 * [urxvt](https://wiki.archlinux.org/index.php/Rxvt-unicode)
 * [firefox](https://firefox.com) with [custom css](https://github.com/Ashe/dotfiles/tree/master/.css)
+
+![Colours](.dotfiles_colours.png)
