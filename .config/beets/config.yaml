@@ -1,0 +1,25 @@
+directory: ~/Music
+library: ~/.config/beets/library.db
+import:
+  copy: no
+  write: yes
+  log: beetslog.txt
+paths:
+  default: $albumartist/$album%aunique{}/$title
+  singleton: Non-Album/$artist/$title
+  comp: Compilations/$album%aunique{}/$title
+art_filename: album_art
+replace:
+    '[\\/]': _
+    '^\.': _
+    '[\x00-\x1f]': _
+    '[<>:"\?\*\|]': _
+    '\.$': _
+    '\s+$': ''
+    '^\s+': ''
+    '^-': _
+
+plugins: chroma fromfilename fetchart embedart info
+
+fetchart:
+  sources: filesystem coverart amazon albumart
