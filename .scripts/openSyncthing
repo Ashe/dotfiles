@@ -1,4 +1,4 @@
 #!/bin/bash
 
 notify-send -u low "Notification" "Opening Syncthing in Firefox"
-firefox http://127.0.0.1:8384
+firefox http://localhost:8384
