@@ -1,7 +1,6 @@
 directory: ~/Music
 library: ~/.config/beets/library.db
 import:
-  copy: no
   write: yes
   log: beetslog.txt
 paths:
