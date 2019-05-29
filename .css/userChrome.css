@@ -26,6 +26,9 @@
  *  Urlbar
  */
 
+#nav-bar {
+  margin-top: 15px;
+}
 
 #urlbar-container {
     min-width: 250px !important;
