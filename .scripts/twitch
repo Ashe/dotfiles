@@ -1,5 +1,5 @@
 #!/bin/bash
 
 # Open twitch in a new MPV window
-nohup mpv https://twitch.tv/$1 &
 notify-send -u low "Opening Twitch:" "Channel: $1"
+mpv https://twitch.tv/$1
