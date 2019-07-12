@@ -33,6 +33,11 @@ Plug 'calviken/vim-gdscript3'
 " Haskell plugins
 Plug 'neovimhaskell/haskell-vim'
 
+" Clojure plugins
+Plug 'guns/vim-clojure-static'
+Plug 'guns/vim-clojure-highlight'
+Plug 'tpope/vim-fireplace'
+
 " Show git additions in gutter
 Plug 'airblade/vim-gitgutter'
 
@@ -124,9 +129,3 @@ augroup END
  \ 'haskell': ['stack-ghc-mod', 'hlint'],
  \ 'cpp' : ['gcc', 'flawfinder']
  \}
-
-" Compile C# programs with the Unity engine DLL file on Mac.
-let g:ale_cs_mcsc_assemblies = [
-\'/opt/Unity/Editor/Data/Managed/UnityEngine.dll',
-\'/opt/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.dll'
-\]
