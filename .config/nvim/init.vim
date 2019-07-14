@@ -52,6 +52,9 @@ call plug#end()
 let g:airline_powerline_fonts=1
 let g:airline_theme='deus'
 
+" Set colour scheme
+colorscheme dracula
+
 " Enable syntax detection
 syntax on
 
