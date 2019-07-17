@@ -67,8 +67,8 @@ menu-1-1-exec = google-chrome-stable &
 
 menu-2-0 = Terminal
 menu-2-0-exec = urxvt &
-menu-2-1 = Nautilus
-menu-2-1-exec = nautilus &
+menu-2-1 = Polo
+menu-2-1-exec = polo &
 menu-2-2 = Screenshot
 menu-2-2-exec = screenshot &
 menu-2-3 = Peek

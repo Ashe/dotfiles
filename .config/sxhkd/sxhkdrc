@@ -181,7 +181,7 @@ super + shift + {1,2,3}
   }
 
 super + ctrl + shift + {1,2,3}
-	{ nautilus \
+	{ polo \
   , firefox --private-window \
-  , gpmdp \
+  , bspwmfloat urxvt -e ncmpcpp \
   }
