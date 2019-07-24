@@ -48,6 +48,12 @@ Plug 'vim-airline/vim-airline-themes'
 " Initialise plugin system
 call plug#end()
 
+" Place swap files in ~/.vim-tmp/
+set backup
+set swapfile
+set backupdir=~/.vim-tmp
+set directory=~/.vim-tmp
+
 "Airline configuration
 let g:airline_powerline_fonts=1
 let g:airline_theme='deus'
