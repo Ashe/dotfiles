@@ -6,11 +6,9 @@ mpd &
 numlockx &
 dropbox &
 popups &
-ckb &
 
 # These programs should load just as BSPWM is loading
 sleep 2
-killall ckb
 discord &
 popups &
 mpd-notification -m ${HOME}/Music &
