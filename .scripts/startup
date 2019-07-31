@@ -1,15 +1,26 @@
 #!/bin/bash
 
+# Set up environment
+export PATH=${PATH}:$HOME/.local/bin
+export PATH=${PATH}:$HOME/.scripts
+export PATH=${PATH}:$HOME/.config/bspwm
+
+# Load xrandr customisation
+$HOME/.screenlayout/default.sh &
+
 # Add any programs that should start before BSPWM here
 $HOME/.fehbg &
 mpd &
 numlockx &
 dropbox &
-popups &
-
-# These programs should load just as BSPWM is loading
-sleep 2
 discord &
+
+# Pause so that poly picks up all bspwm screens
+sleep 6
+
+# Enable popups and start notifications for mpd
 popups &
 mpd-notification -m ${HOME}/Music &
 
+# Show polybar
+startpoly &

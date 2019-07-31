@@ -1,12 +1,12 @@
 #! /bin/sh
 
-## Allow keyboard shortcuts
+# Run startup script
+$HOME/.scripts/startup
+
+# Allow keyboard shortcuts
 sxhkd &
 
-## Show polybar
-startpoly &
-
-## Monitor setup
+# Monitor setup
 numberOfScreens=12
 
 i=0
@@ -18,11 +18,11 @@ for monitor in `bspc query -M`; do
     i=$(( i + per ))
 done
 
-## Colours
+# Colours
 bspc config normal_border_color "#0d1335"
 bspc config focused_border_color "#95364d"
 
-## Rules
+# Rules
 bspc config border_width         2
 bspc config window_gap           35
 

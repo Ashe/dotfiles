@@ -48,26 +48,8 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-
-## Set up environment
-export PATH=${PATH}:$HOME/.local/bin
-export PATH=${PATH}:$HOME/.scripts
-export PATH=${PATH}:$HOME/.config/bspwm
-
-# Wait a moment
-sleep 6
-
-# Load xrandr customisation
-$HOME/.screenlayout/default.sh &
-
-# Another pause
-sleep 6
-
 # Run additional programs
 $HOME/.scripts/startup
-
-# Another pause
-sleep 2
 
 # Start window manager (sxhkd is started there)
 exec bspwm
