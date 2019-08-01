@@ -29,5 +29,3 @@ dunst \
 -lb "$BACKGROUND" -lf "$FOREGROUND" -lfr "$GREEN" \
 -nb "$BACKGROUND" -nf "$FOREGROUND" -nfr "$BLUE" \
 -cb "$BACKGROUND" -cf "$FOREGROUND" -cfr "$RED" &
-
-notify-send -u low "Notification" "Notifications enabled."

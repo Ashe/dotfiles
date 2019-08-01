@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Set up environment
-export PATH=${PATH}:$HOME/.local/bin
-export PATH=${PATH}:$HOME/.scripts
-export PATH=${PATH}:$HOME/.config/bspwm
-
 # Load xrandr customisation
 $HOME/.screenlayout/default.sh &
 
@@ -14,13 +9,14 @@ mpd &
 numlockx &
 dropbox &
 discord &
+$HOME/.scripts/popups &
 
 # Pause so that poly picks up all bspwm screens
 sleep 6
 
 # Enable popups and start notifications for mpd
-popups &
+$HOME/.scripts/popups &
 mpd-notification -m ${HOME}/Music &
 
 # Show polybar
-startpoly &
+$HOME/.scripts/startpoly &
