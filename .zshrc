@@ -94,7 +94,7 @@ export LANG=en_GB.UTF-8
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Alias termbin for easy pastes
-alias termbin="nc termbin.com 9999"
+alias tb="nc termbin.com 9999"
 
 # Display a random quote
 fortune | cowsay -f turkey
