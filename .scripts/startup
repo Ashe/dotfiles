@@ -1,22 +1,18 @@
 #!/bin/bash
 
 # Load xrandr customisation
-$HOME/.screenlayout/default.sh &
+$HOME/.screenlayout/default.sh
 
 # Add any programs that should start before BSPWM here
-$HOME/.fehbg &
+$HOME/.fehbg
 mpd &
 numlockx &
 dropbox &
 discord &
-$HOME/.scripts/popups &
-
-# Pause so that poly picks up all bspwm screens
-sleep 6
 
 # Enable popups and start notifications for mpd
-$HOME/.scripts/popups &
+$HOME/.scripts/popups
 mpd-notification -m ${HOME}/Music &
 
 # Show polybar
-$HOME/.scripts/startpoly &
+$HOME/.scripts/startpoly

@@ -93,11 +93,8 @@ export LANG=en_GB.UTF-8
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Alias termbin for easy pastes
+alias termbin="nc termbin.com 9999"
+
 # Display a random quote
 fortune | cowsay -f turkey
-
-# Remember current dir
-if [[ $TERM == xterm-termite ]]; then
-  . /etc/profile.d/vte.sh
-  __vte_osc7
-fi
