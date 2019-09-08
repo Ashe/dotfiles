@@ -68,7 +68,8 @@ syntax on
 set linebreak
 
 " Show column guideline to keep code within 80 lines
-set colorcolumn=80
+set textwidth=80
+set colorcolumn=+1
 
 " Spellchecking
 set spelllang=en
