@@ -64,8 +64,7 @@ colorscheme dracula
 " Enable syntax detection
 syntax on
 
-" Set line wrapping on 100 characters
-set columns=100
+" Set line wrapping
 set linebreak
 
 " Show column guideline to keep code within 80 lines
