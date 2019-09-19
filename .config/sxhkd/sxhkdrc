@@ -181,7 +181,7 @@ super + shift + {1,2,3}
   }
 
 super + ctrl + shift + {1,2,3}
-	{ polo \
+	{ thunar \
   , firefox --private-window \
   , bspwmfloat urxvt -e ncmpcpp \
   }
