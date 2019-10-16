@@ -73,8 +73,6 @@ menu-2-2 = Screenshot
 menu-2-2-exec = screenshot &
 menu-2-3 = Peek
 menu-2-3-exec = peek &
-menu-2-4 = CKB
-menu-2-4-exec = ckb &
 
 menu-3-0 = Reboot
 menu-3-0-exec = reboot &
