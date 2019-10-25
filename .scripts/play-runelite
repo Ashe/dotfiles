@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+# Exports
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# Launch runelite
+/usr/local/bin/runelite
