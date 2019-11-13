@@ -3,6 +3,9 @@
 # Load xrandr customisation
 $HOME/.screenlayout/default.sh
 
+# Perform keybinding remappings
+xmodmap $HOME/.config/xmodmap/xmodmap.conf
+
 # Add any programs that should start before BSPWM here
 $HOME/.fehbg
 mpd &
