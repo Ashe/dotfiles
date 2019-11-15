@@ -27,6 +27,9 @@ Plug 'kien/ctrlp.vim'
 " Linting plugin
 Plug 'w0rp/ale'
 
+" C# omnisharp plugin
+Plug 'omnisharp/omnisharp-vim'
+
 " GDScript plugin
 Plug 'calviken/vim-gdscript3'
 
@@ -98,7 +101,7 @@ nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 
-" Tabs are 4 spaces
+" Tabs are 2 spaces
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -140,8 +143,14 @@ augroup haskell
   endif
 augroup END
 
+" C# uses 4-space indents
+augroup cs
+  au FileType cs setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+augroup END
+
 " Change linters for ALE
  let g:ale_linters = {
  \ 'haskell': ['stack-ghc-mod', 'hlint'],
- \ 'cpp' : ['gcc', 'flawfinder']
+ \ 'cpp'    : ['gcc', 'flawfinder'],
+ \ 'cs'     : ['OmniSharp']
  \}
