@@ -148,6 +148,9 @@ augroup cs
   au FileType cs setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 augroup END
 
+" Configure Omnisharp
+let g:OmniSharp_server_stdio = 1
+
 " Change linters for ALE
  let g:ale_linters = {
  \ 'haskell': ['stack-ghc-mod', 'hlint'],
