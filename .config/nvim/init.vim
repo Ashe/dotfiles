@@ -22,7 +22,7 @@ else
 endif
 
 " Fuzzy search
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Linting plugin
 Plug 'w0rp/ale'
@@ -154,3 +154,6 @@ augroup END
  \ 'cpp'    : ['gcc', 'flawfinder'],
  \ 'cs'     : ['OmniSharp']
  \}
+
+ " Configure exceptions for CTRLP
+set wildignore+=*/tmp/*,*/bin/*,*/obj/*,*.so,*.swp,*.zi
