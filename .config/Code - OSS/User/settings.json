@@ -1,0 +1,11 @@
+{
+    "editor.tabSize": 2,
+    "vscode_custom_css.imports": [""],
+    "vscode_custom_css.policy": true,
+    "editor.fontSize": 16,
+    "editor.rulers" : [80],
+    "workbench.colorTheme": "Dank Neon",
+    "git.autofetch": true,
+    "editor.wordWrap": "on",
+    "editor.fontFamily": "'tamzen', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'"
+}
