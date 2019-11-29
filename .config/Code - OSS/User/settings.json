@@ -7,5 +7,7 @@
     "workbench.colorTheme": "Dank Neon",
     "git.autofetch": true,
     "editor.wordWrap": "on",
-    "editor.fontFamily": "'tamzen', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'"
+    "editor.fontFamily": "'tamzen', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "git.enableSmartCommit": true,
+    "csharp.referencesCodeLens.enabled": false
 }
