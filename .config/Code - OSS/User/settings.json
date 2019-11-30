@@ -9,5 +9,6 @@
     "editor.wordWrap": "on",
     "editor.fontFamily": "'tamzen', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "git.enableSmartCommit": true,
-    "csharp.referencesCodeLens.enabled": false
+    "csharp.referencesCodeLens.enabled": false,
+    "latex-workshop.view.pdf.viewer": "tab"
 }
