@@ -11,5 +11,6 @@
     "git.enableSmartCommit": true,
     "csharp.referencesCodeLens.enabled": false,
     "latex-workshop.view.pdf.viewer": "tab",
-    "window.menuBarVisibility": "toggle"
+    "window.menuBarVisibility": "toggle",
+    "vim.leader": " "
 }
