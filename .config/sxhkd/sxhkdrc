@@ -4,11 +4,11 @@
 
 # terminal emulator
 super + Return
-	urxvt
+	st
 
 # program launcher
 super + @space
-	$HOME/.scripts/rofia
+	$HOME/.scripts/show-rofi
 
 # lock the screen
 super + Escape
@@ -169,19 +169,19 @@ Print
 
 # Open quick access programs
 super + {1,2,3}
-	{ urxvt -e ranger \
+	{ st -e ranger \
   , firefox \
-  , urxvt -e ncmpcpp \
+  , st -e ncmpcpp \
   }
 
 super + shift + {1,2,3}
-	{ bspwmfloat urxvt -e ranger \
+	{ bspwmfloat st -e ranger \
   , bspwmfloat firefox \
-  , bspwmfloat urxvt -e ncmpcpp \
+  , bspwmfloat st -e ncmpcpp \
   }
 
 super + ctrl + shift + {1,2,3}
 	{ thunar \
   , firefox --private-window \
-  , bspwmfloat urxvt -e ncmpcpp \
+  , bspwmfloat st -e ncmpcpp \
   }

@@ -66,7 +66,7 @@ menu-1-1 = Chrome
 menu-1-1-exec = google-chrome-stable &
 
 menu-2-0 = Terminal
-menu-2-0-exec = urxvt &
+menu-2-0-exec = st &
 menu-2-1 = Thunar
 menu-2-1-exec = thunar &
 menu-2-2 = Screenshot

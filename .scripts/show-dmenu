@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Launch dmenu with colours from XResources
+dmenu \
+  -nb $(xrdb -query | grep "color8" | cut -f 2) \
+  -nf $(xrdb -query | grep "color5" | cut -f 2) \
+  -sb $(xrdb -query | grep "color5" | cut -f 2) \
+  -sf $(xrdb -query | grep "color8" | cut -f 2) \
+  "$@"
+  

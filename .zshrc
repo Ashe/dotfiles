@@ -95,6 +95,3 @@ export LANG=en_GB.UTF-8
 
 # Alias termbin for easy pastes
 alias tb="nc termbin.com 9999"
-
-# Display a random quote
-fortune | cowsay -f turkey
