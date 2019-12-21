@@ -7,6 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+autoload -U colors && colors
 ZSH_THEME="my"
 
 # Set list of themes to load
@@ -52,7 +53,7 @@ ZSH_THEME="my"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=~/.zsh-custom
+ZSH_CUSTOM=~/.config/zsh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -60,9 +61,8 @@ ZSH_CUSTOM=~/.zsh-custom
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  zsh-syntax-highlighting
 )
-
-source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -77,6 +77,18 @@ export LANG=en_GB.UTF-8
  else
    export EDITOR='nvim'
  fi
+
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+
+# Use vim keys in tab complete menu:
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -95,3 +107,52 @@ export LANG=en_GB.UTF-8
 
 # Alias termbin for easy pastes
 alias tb="nc termbin.com 9999"
+
+# Timeout
+export KEYTIMEOUT=1
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+
+# Use beam shape cursor on startup.
+echo -ne '\e[5 q'
+# Use beam shape cursor for each new prompt.
+preexec() { echo -ne '\e[5 q' ;}
+
+# Use lf to switch directories and bind it to ctrl-o
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        if [ -d "$dir" ]; then
+            if [ "$dir" != "$(pwd)" ]; then
+                cd "$dir"
+            fi
+        fi
+    fi
+}
+
+bindkey -s '^o' 'lfcd\n'  # zsh
+
+# Load zsh-syntax-highlighting; should be last.
+source $ZSH/oh-my-zsh.sh
