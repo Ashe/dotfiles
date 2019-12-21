@@ -1,8 +1,17 @@
-# Plugins
-plugins=(
-  git
-  zsh-syntax-highlighting
-)
+# Allow antibody plugin manager
+source /usr/share/zsh/share/antigen.zsh
+
+# Allow for sourcing git
+source /usr/lib/zsh-git-prompt/zshrc.sh
+
+# Install plugins
+antigen bundle git
+antigen bundle heroku
+antigen bundle pip
+antigen bundle lein
+antigen bundle command-not-found
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen apply
 
 # Ensure language is correct
 export LANG=en_GB.UTF-8
@@ -70,6 +79,15 @@ preexec() { echo -ne '\e[5 q' ;}
 # Switch directory using ranger
 bindkey -s '^o' '. ranger\n'
 
-# Customise prompt
-autoload -U colors && colors
-PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
+# Customise the prompt
+PROMPT='
+%{$fg_bold[cyan]%}%n %{$fg[blue]%}:: %{$fg_bold[green]%}%~%{$reset_color%}$(git_super_status)%{$reset_color%}
+$ '
+
+# Customise how git prompt is shown
+ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[blue]%}:: %{$fg[magenta]%}\uE0A0 "
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_SEPARATOR="%{$fg[blue]%} | "
+ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[red]%}!"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}?"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[cyan]%}-"
