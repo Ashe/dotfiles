@@ -1,13 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-autoload -U colors && colors
-autoload -U colors && colors
-PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
-
-# Move config files
-ZSH_CUSTOM=~/.config/zsh
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -16,8 +9,6 @@ plugins=(
   git
   zsh-syntax-highlighting
 )
-
-# User configuration
 
 # Ensure language is correct
 export LANG=en_GB.UTF-8
@@ -29,6 +20,7 @@ export LANG=en_GB.UTF-8
    export EDITOR='nvim'
  fi
 
+# Code completion
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
@@ -68,8 +60,9 @@ function zle-keymap-select {
 }
 zle -N zle-keymap-select
 
+# Initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
 zle-line-init() {
-    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    zle -K viins 
     echo -ne "\e[5 q"
 }
 zle -N zle-line-init
@@ -97,3 +90,7 @@ lfcd () {
 
 # Switch directory using ranger
 bindkey -s '^o' '. ranger\n'
+
+# Customise prompt
+autoload -U colors && colors
+PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
