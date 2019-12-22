@@ -1,11 +1,11 @@
 [colors]
 
-background = ${xrdb:color8}
-background-alt = ${xrdb:background}
-foreground = ${xrdb:color1}
-foreground-alt = ${xrdb:color1}
-accent = ${xrdb:color1}
-alert = ${xrdb:foreground}
+background = ${xrdb:polybar.background}
+background-alt = ${xrdb:polybar.background-alt}
+foreground = ${xrdb:polybar.foreground}
+foreground-alt = ${xrdb:polybar.foreground-alt}
+accent = ${xrdb:polybar.accent}
+alert = ${xrdb:polybar.alert}
 
 
 [bar/bar]
