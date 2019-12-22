@@ -61,11 +61,11 @@ set directory=~/.vim-tmp
 let g:airline_powerline_fonts=1
 let g:airline_theme='deus'
 
-" Set colour scheme
-colorscheme dracula
-
 " Enable syntax detection
 syntax on
+
+" Set light or dark mode
+set background=light
 
 " Set line wrapping
 set linebreak

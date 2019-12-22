@@ -8,7 +8,7 @@ super + Return
 
 # program launcher
 super + @space
-	$HOME/.scripts/show-rofi
+	rofi -show run
 
 # lock the screen
 super + Escape

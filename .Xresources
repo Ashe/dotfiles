@@ -1,36 +1,61 @@
-! special
-*.foreground:   #515151
-*.background:   #f2f0ec
-*.cursorColor:  #515151
+!------------------------------------
+! Terminal
+!------------------------------------
 
-! black
-*.color0:       #515151
-*.color8:       #373b41
+! Special
+*.foreground:         #515151
+*.background:         #f2f0ec
+*.cursorColor:        #515151
 
-! red
-*.color1:       #f2777a
-*.color9:       #f2777a
+! Black
+*.color0:             #515151
+*.color8:             #373b41
 
-! green
-*.color2:       #61af61
-*.color10:      #61af61
+! Red
+*.color1:             #f2777a
+*.color9:             #f2777a
 
-! yellow
-*.color3:       #e89a00
-*.color11:      #e89a00
+! Green
+*.color2:             #61af61
+*.color10:            #61af61
 
-! blue
-*.color4:       #6699cc
-*.color12:      #6699cc
+! Yellow
+*.color3:             #e89a00
+*.color11:            #e89a00
 
-! magenta
-*.color5:       #cc99cc
-*.color13:      #cc99cc
+! Blue
+*.color4:             #6699cc
+*.color12:            #6699cc
 
-! cyan
-*.color6:       #66cccc
-*.color14:      #66cccc
+! Magenta
+*.color5:             #cc99cc
+*.color13:            #cc99cc
 
-! white
-*.color7:       #d3d0c8
-*.color15:      #d3d0c8
+! Cyan
+*.color6:             #66cccc
+*.color14:            #66cccc
+
+! White
+*.color7:             #d3d0c8
+*.color15:            #d3d0c8
+
+!------------------------------------
+! Rofi
+!------------------------------------
+
+rofi.modi:            run,drun,window
+rofi.font:            Noto Sans 10
+rofi.sidebar-mode:    true
+rofi.terminal:        st
+rofi.lines:           12
+rofi.columns:         4
+rofi.width:           60
+rofi.location:        0
+rofi.bw:              2
+rofi.padding:         24
+rofi.hide-scrollbar:  true
+rofi.color-enabled:   true
+rofi.color-window:    #f2f0ec
+rofi.color-normal:    #f2f0ec
+rofi.color-active:    #f2f0ec
+rofi.color-urgent:    #f2f0ec
