@@ -1,31 +1,36 @@
-! Colours
-#define S_bg #111c3e
- 
-#define S_one   #0d1335
-#define S_two   #c83f4e
-#define S_three #544b6e
-#define S_four  #95364d
-#define S_five  #2e466f
-#define S_six   #d93e54
-#define S_seven #774d89
-#define S_eight #f6bab2
- 
-*background:  #111c3e
-*foreground:  #f6bab2
- 
-*color0:  S_bg
-*color1:  S_two
-*color2:  S_three
-*color3:  S_four
-*color4:  S_five
-*color5:  S_six
-*color6:  S_seven
-*color7:  S_eight
-*color8:  S_one
-*color9:  S_two
-*color10: S_three
-*color11: S_four
-*color12: S_five
-*color13: S_six
-*color14: S_seven
-*color15: S_eight
+! special
+*.foreground:   #515151
+*.background:   #f2f0ec
+*.cursorColor:  #515151
+
+! black
+*.color0:       #515151
+*.color8:       #373b41
+
+! red
+*.color1:       #f2777a
+*.color9:       #f2777a
+
+! green
+*.color2:       #61af61
+*.color10:      #61af61
+
+! yellow
+*.color3:       #e89a00
+*.color11:      #e89a00
+
+! blue
+*.color4:       #6699cc
+*.color12:      #6699cc
+
+! magenta
+*.color5:       #cc99cc
+*.color13:      #cc99cc
+
+! cyan
+*.color6:       #66cccc
+*.color14:      #66cccc
+
+! white
+*.color7:       #d3d0c8
+*.color15:      #d3d0c8

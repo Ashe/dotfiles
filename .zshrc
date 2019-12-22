@@ -81,7 +81,7 @@ bindkey -s '^o' '. ranger\n'
 
 # Customise the prompt
 PROMPT='
-%{$fg_bold[cyan]%}%n %{$fg[blue]%}:: %{$fg_bold[green]%}%~%{$reset_color%}$(git_super_status)%{$reset_color%}
+%{$fg_bold[cyan]%}%n %{$reset_color%}%{$fg[blue]%}:: %{$fg_bold[green]%}%~%{$reset_color%}$(git_super_status)%{$reset_color%}
 $ '
 
 # Customise how git prompt is shown
