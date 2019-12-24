@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+# Check if a theme exists
+DIR=$HOME/.themes/$1
+if [ -d "$DIR" ] && [ -f "$DIR/.Xresources" ] && [ -d "$DIR/wallpapers" ] ; then
+
+  # Copy and reload the new .Xresources file
+  cp $DIR/.Xresources $HOME/.Xresources
+  xrdb $HOME/.Xresources
+  
+  # Randomly distribute wallpapers from the wallpapers folder
+  echo \
+    "feh --no-fehbg --randomize --bg-fill ${DIR}/wallpapers/"'**' > $HOME/.fehbg
+
+  # Run image changing script
+  $HOME/.fehbg
+
+  # Echo success message to terminal
+  echo "Successfully changed theme to $1"
+
+else
+
+  # Create error message
+  echo "Error: Couldn't find theme $1"
+fi

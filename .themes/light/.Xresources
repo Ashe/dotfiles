@@ -1,0 +1,80 @@
+!--------------------------------------------------------------------
+! General
+!--------------------------------------------------------------------
+
+! Special
+*.background:                 #f2f0ec
+*.foreground:                 #373b41
+*.cursorColor:                #515151
+
+! Black
+*.color0:                     #515151
+*.color8:                     #373b41
+
+! Red
+*.color1:                     #f2777a
+*.color9:                     #f2777a
+
+! Green
+*.color2:                     #61af61
+*.color10:                    #61af61
+
+! Yellow
+*.color3:                     #e89a00
+*.color11:                    #e89a00
+
+! Blue
+*.color4:                     #6699cc
+*.color12:                    #6699cc
+
+! Magenta
+*.color5:                     #cc99cc
+*.color13:                    #cc99cc
+
+! Cyan
+*.color6:                     #66cccc
+*.color14:                    #66cccc
+
+! White
+*.color7:                     #d3d0c8
+*.color15:                    #d3d0c8
+
+!--------------------------------------------------------------------
+! BSPWM
+!--------------------------------------------------------------------
+
+bspwm.border-normal:          #f2f0ec
+bspwm.border-active:          #f2f0ec
+bspwm.border-focused:         #d3d0c8
+
+!--------------------------------------------------------------------
+! Polybar
+!--------------------------------------------------------------------
+
+polybar.background:           #f2f0ec
+polybar.background-alt:       #d3d0c8
+polybar.foreground:           #373b41
+polybar.foreground-alt:       #999999
+polybar.accent:               #515151
+polybar.alert:                #373b41
+
+!--------------------------------------------------------------------
+! Rofi
+!--------------------------------------------------------------------
+
+rofi.modi:                    run,drun,window
+rofi.font:                    Noto Sans 10
+rofi.sidebar-mode:            true
+rofi.terminal:                st
+rofi.lines:                   12
+rofi.columns:                 4
+rofi.width:                   60
+rofi.location:                0
+rofi.bw:                      2
+rofi.padding:                 24
+rofi.hide-scrollbar:          true
+rofi.color-enabled:           true
+rofi.color-window:            #f2f0ec
+rofi.color-normal:            #f2f0ec
+rofi.color-active:            #f2f0ec
+rofi.color-urgent:            #f2f0ec

@@ -1,3 +1,9 @@
+# Export default programs
+export EDITOR='nvim'
+export TERMINAL='st'
+export BROWSER='firefox'
+export FILE='ranger'
+
 # Append the path to include local scripts
 export PATH=$PATH;/usr/bin:
 export PATH=$PATH:$HOME/.local/bin

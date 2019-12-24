@@ -6,8 +6,13 @@ $HOME/.screenlayout/default.sh
 # Perform keybinding remappings
 xmodmap $HOME/.config/xmodmap/xmodmap.conf
 
-# Add any programs that should start before BSPWM here
+# Reload resources
+xrdb $HOME/.Xresources
+
+# Set background
 $HOME/.fehbg
+
+# Add any programs that should start before BSPWM here
 mpd &
 numlockx &
 dropbox &
@@ -15,7 +20,7 @@ discord &
 
 # Enable popups and start notifications for mpd
 $HOME/.scripts/popups
-mpd-notification -m ${HOME}/Music &
+mpd-notification -m $HOME/Music &
 
 # Show polybar
 $HOME/.scripts/start-poly

@@ -1,0 +1,80 @@
+!--------------------------------------------
+! General
+!--------------------------------------------
+
+! Special
+*.background:                 #111c3e
+*.foreground:                 #f6bab2
+*.cursorColor:                #f6bab2
+
+! Black
+*.color0:                     #111c3e
+*.color8:                     #0d1335
+
+! Red
+*.color1:                     #c83f4e
+*.color9:                     #c83f4e
+
+! Green
+*.color2:                     #544b6e
+*.color10:                    #544b6e
+
+! Yellow
+*.color3:                     #95364d
+*.color11:                    #95364d
+
+! Blue
+*.color4:                     #2e466f
+*.color12:                    #2e466f
+
+! Magenta
+*.color5:                     #d93e54
+*.color13:                    #d93e54
+
+! Cyan
+*.color6:                     #774d89
+*.color14:                    #774d89
+
+! White
+*.color7:                     #f6bab2
+*.color15:                    #f6bab2
+
+!--------------------------------------------
+! BSPWM
+!--------------------------------------------
+
+bspwm.border-normal:          #0d1335
+bspwm.border-active:          #0d1335
+bspwm.border-focused:         #544b6e
+
+!--------------------------------------------
+! Polybar
+!--------------------------------------------
+
+polybar.background:           #0d1335
+polybar.background-alt:       #111c3e
+polybar.foreground:           #c83f4e
+polybar.foreground-alt:       #c83f4e
+polybar.accent:               #c83f4e
+polybar.alert:                #f6bab2
+
+!--------------------------------------------
+! Rofi
+!--------------------------------------------
+
+rofi.modi:                    run,drun,window
+rofi.font:                    Noto Sans 10
+rofi.sidebar-mode:            true
+rofi.terminal:                st
+rofi.lines:                   12
+rofi.columns:                 4
+rofi.width:                   60
+rofi.location:                0
+rofi.bw:                      2
+rofi.padding:                 24
+rofi.hide-scrollbar:          true
+rofi.color-enabled:           true
+rofi.color-window:            #111c3e,#c83f4e,#111c3e
+rofi.color-normal:            #111c3e,#c83f4e,#111c3e,#c83f4e,#111c3e
+rofi.color-active:            #95364d,#111c3e,#95364d,#c83f4e,#111c3e
+rofi.color-urgent:            #774d89,#111c3e,#774d89,#c83f4e,#111c3e

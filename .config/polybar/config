@@ -1,11 +1,11 @@
 [colors]
 
-background = ${xrdb:color8}
-background-alt = ${xrdb:background}
-foreground = ${xrdb:color1}
-foreground-alt = ${xrdb:color1}
-accent = ${xrdb:color1}
-alert = ${xrdb:foreground}
+background = ${xrdb:polybar.background}
+background-alt = ${xrdb:polybar.background-alt}
+foreground = ${xrdb:polybar.foreground}
+foreground-alt = ${xrdb:polybar.foreground-alt}
+accent = ${xrdb:polybar.accent}
+alert = ${xrdb:polybar.alert}
 
 
 [bar/bar]
@@ -66,7 +66,7 @@ menu-1-1 = Chrome
 menu-1-1-exec = google-chrome-stable &
 
 menu-2-0 = Terminal
-menu-2-0-exec = urxvt &
+menu-2-0-exec = st &
 menu-2-1 = Thunar
 menu-2-1-exec = thunar &
 menu-2-2 = Screenshot
