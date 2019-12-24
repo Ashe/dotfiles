@@ -22,7 +22,6 @@ module-margin-left = 1
 module-margin-right = 1
 font-0 = TamzenForPowerline:size=13
 font-1 = FontAwesome:pixelsize=8
-font-2 = Weather Icons:size=12
 ;tray-position = right
 ;tray-padding = 2
 ;tray-background = ${colors.background}
@@ -31,7 +30,7 @@ line-color = ${colors.accent}
 wm-restack = bspwm
 modules-left = menu-apps updates-arch-combined mpd bspwm
 modules-center = xwindow 
-modules-right = cpu memory temperature wlan backlight volume weather date 
+modules-right = cpu memory backlight volume date 
 
 
 [module/menu-apps]
@@ -131,29 +130,9 @@ bar-progress-fill = ─
 bar-progress-empty = ─
 
 
-[module/wlan]
-
-type = internal/network
-interface = wlp2s0
-interval = 15
-format-connected = <ramp-signal>  <label-connected>
-label-connected = %essid%
-format-disconnected = <label-disconnected>
-label-disconnected =   Disconnected
-label-disconnected-foreground = ${colors.foreground-alt}
-ramp-signal-0 =  
-ramp-signal-1 =  
-ramp-signal-2 =  
-ramp-signal-3 =  
-ramp-signal-4 =  
-ramp-signal-5 =  
-ramp-signal-foreground = ${colors.accent}
-
-
-
 [module/volume]
 
-type = internal/volume
+type = internal/pulseaudio
 format-volume = <label-volume>
 label-volume = " %percentage%"
 label-volume-foreground = ${colors.accent}
@@ -161,25 +140,6 @@ format-muted-prefix = " "
 format-muted-foreground = ${colors.accent}
 label-muted = Muted
 label-muted-foreground= ${colors.foreground-alt}
-
-[module/battery]
-
-type = internal/battery
-full-at = 98
-battery = BAT1
-adapter = ACAD
-poll-interval = 60
-format-charging = <ramp-capacity>  <label-charging>
-label-charging =  %percentage%%
-label-full = Full
-format-discharging = <ramp-capacity>  <label-discharging>
-label-discharging = %percentage%%
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
-ramp-capacity-foreground = ${colors.accent}
 
 
 [module/date]
@@ -202,7 +162,7 @@ card = intel_backlight
 
 ; Available tokens:
 ;   %percentage% (default)
-label = %percentage%%
+label =  %percentage%%
 
 
 [module/cpu]
@@ -314,42 +274,7 @@ fixed-values = true
 ; Default: 2
 spacing = 1
 
-
-[module/temperature]
-type = internal/temperature
-
-; Seconds to sleep between updates
-; Default: 1
-interval = 0.5
-
-; Thermal zone to use
-; To list all the zone types, run 
-; $ for i in /sys/class/thermal/thermal_zone*; do echo "$i: $(<$i/type)"; done
-; Default: 0
-thermal-zone = 0
-
-; Full path of temperature sysfs path
-; Use `sensors` to find preferred temperature source, then run
-; $ for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*})) $(readlink -f $i)"; done
-; to find path to desired file
-; Default reverts to thermal zone setting
-hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
-
-; Threshold temperature to display warning label (in degrees celsius)
-; Default: 80
-warn-temperature = 60
-
-label = TEMP: %temperature%
-
-
 [module/updates-arch-combined]
 type = custom/script
 exec = ~/.scripts/polybar/updates-arch-combined.sh
 interval = 60
-
-
-[module/weather]
-type = custom/script
-exec = ~/.scripts/polybar/weather.sh
-interval = 600
-label-font = 3
