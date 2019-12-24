@@ -43,9 +43,9 @@
 ! BSPWM
 !--------------------------------------------------------------------
 
-bspwm.border-normal:          #f2f0ec
-bspwm.border-active:          #f2f0ec
-bspwm.border-focused:         #d3d0c8
+bspwm.border-normal:          #d3d0c8
+bspwm.border-active:          #d3d0c8
+bspwm.border-focused:         #515151
 
 !--------------------------------------------------------------------
 ! Polybar
@@ -74,7 +74,7 @@ rofi.bw:                      2
 rofi.padding:                 24
 rofi.hide-scrollbar:          true
 rofi.color-enabled:           true
-rofi.color-window:            #f2f0ec
-rofi.color-normal:            #f2f0ec
-rofi.color-active:            #f2f0ec
-rofi.color-urgent:            #f2f0ec
+rofi.color-window:            #f2f0ec,#515151,#515151
+rofi.color-normal:            #f2f0ec,#515151,#f2f0ec,#515151,#f2f0ec
+rofi.color-active:            #d3d0c8,#515151,#d3d0c8,#515151,#f2f0ec
+rofi.color-urgent:            #cc99cc,#515151,#cc99cc,#515151,#f2f0ec

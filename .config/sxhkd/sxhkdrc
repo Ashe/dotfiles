@@ -20,7 +20,7 @@ super + Escape
 
 # Reload bspwm and sxhkd configuration
 super + shift + BackSpace
-	bspwmrc ; pkill -USR1 -x sxhkd
+	restart-window-manager
 
 # Close and kill
 super + {_,shift + }w
