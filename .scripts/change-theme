@@ -16,9 +16,6 @@ if [ -d "$DIR" ] && [ -f "$DIR/.Xresources" ] && [ -d "$DIR/wallpapers" ] ; then
   # Run image changing script
   $HOME/.fehbg
 
-  # Run Paintee to change theme in current terminal
-  $HOME/.scripts/paintee
-
   # Echo success message to terminal
   echo "Successfully changed theme to $1"
 

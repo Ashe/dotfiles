@@ -74,7 +74,7 @@ rofi.bw:                      2
 rofi.padding:                 24
 rofi.hide-scrollbar:          true
 rofi.color-enabled:           true
-rofi.color-window:            #111c3e
-rofi.color-normal:            #111c3e
-rofi.color-active:            #111c3e
-rofi.color-urgent:            #111c3e
+rofi.color-window:            #111c3e,#c83f4e,#111c3e
+rofi.color-normal:            #111c3e,#c83f4e,#111c3e,#c83f4e,#111c3e
+rofi.color-active:            #95364d,#111c3e,#95364d,#c83f4e,#111c3e
+rofi.color-urgent:            #774d89,#111c3e,#774d89,#c83f4e,#111c3e
