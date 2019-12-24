@@ -31,7 +31,7 @@ fi
 
 # Setting up git
 git init
-git config --global user.name "crysikrend"
+git config --global user.name "ashe"
 git config --global user.email "ashley@aas.sh"
 sudo git config --system core.editor nvim
 git config --global credential.helper cache

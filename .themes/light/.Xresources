@@ -77,4 +77,4 @@ rofi.color-enabled:           true
 rofi.color-window:            #f2f0ec
 rofi.color-normal:            #f2f0ec
 rofi.color-active:            #f2f0ec
-rofi.color-urgent:          #f2f0ec
+rofi.color-urgent:            #f2f0ec
