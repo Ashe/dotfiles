@@ -15,5 +15,13 @@
     "vim.leader": " ",
     "cSpell.language": "en-GB",
     "cSpell.userWords": [
+        "AI's",
+        "gameplay",
+        "installments",
+        "knockback",
+        "pathfinding",
+        "pathing",
+        "pickups",
+        "skillsets"
     ]
 }
