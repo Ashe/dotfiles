@@ -16,12 +16,21 @@
     "cSpell.language": "en-GB",
     "cSpell.userWords": [
         "AI's",
+        "FSMs",
+        "GOAP's",
+        "firepower",
         "gameplay",
         "installments",
         "knockback",
+        "mana",
+        "optimisable",
         "pathfinding",
         "pathing",
         "pickups",
-        "skillsets"
+        "quadtree",
+        "reusability",
+        "skillsets",
+        "subtrees",
+        "templated"
     ]
 }
