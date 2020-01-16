@@ -21,10 +21,13 @@
         "Godot",
         "Godot's",
         "Imgui",
+        "Melee",
+        "Nuklear",
         "SFML",
         "demonstratory",
         "firepower",
         "gameplay",
+        "incentivise",
         "installments",
         "knockback",
         "mana",
@@ -34,8 +37,10 @@
         "pickups",
         "quadtree",
         "reusability",
+        "screenshot",
         "skillsets",
         "subtrees",
-        "templated"
+        "templated",
+        "waypoints"
     ]
 }
