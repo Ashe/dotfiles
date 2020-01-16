@@ -10,7 +10,9 @@ antigen bundle heroku
 antigen bundle pip
 antigen bundle lein
 antigen bundle command-not-found
-antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zdharma/fast-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-history-substring-search
 antigen apply
 
 # Ensure language is correct
@@ -27,16 +29,17 @@ fi
 autoload -U compinit
 zstyle ':completion:*' matcher-list \
   '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*' \
-  menu select
 zmodload zsh/complist
 compinit
 
-# Use vim keys in tab complete menu:
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
-bindkey -v '^?' backward-delete-char
+# Include hidden files in autocomplete:
+_comp_options+=(globdots)
+
+# Search history
+bindkey '^[[A' history-substring-search-up
+bindkey '^Y' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey '^E' history-substring-search-down
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
