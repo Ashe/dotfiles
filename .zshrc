@@ -25,12 +25,13 @@ else
  export EDITOR='nvim'
 fi
 
-# Code completion
-autoload -U compinit
-zstyle ':completion:*' matcher-list \
-  '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*' \
-zmodload zsh/complist
-compinit
+# Allow for autocomplete to be case insensitive
+zstyle ':completion:*' matcher-list '' \
+'m:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
+'+l:|?=** r:|?=**'
+
+# Initialize the autocompletion
+autoload -Uz compinit && compinit -i
 
 # Include hidden files in autocomplete:
 _comp_options+=(globdots)
