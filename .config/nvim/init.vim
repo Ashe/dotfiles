@@ -65,7 +65,7 @@ let g:airline_theme='deus'
 syntax on
 
 " Set light or dark mode
-set background=light
+set background=dark
 
 " Set line wrapping
 set linebreak
