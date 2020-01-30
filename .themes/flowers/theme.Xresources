@@ -43,9 +43,9 @@
 ! BSPWM
 !--------------------------------------------------------------------
 
-bspwm.border-normal:          #d3d0c8
-bspwm.border-active:          #d3d0c8
-bspwm.border-focused:         #515151
+bspwm.border-normal:          #111111
+bspwm.border-active:          #111111
+bspwm.border-focused:         #d3d0c8
 
 !--------------------------------------------------------------------
 ! Polybar
