@@ -20,18 +20,19 @@ padding-left = 8
 padding-right = 8
 module-margin-left = 1
 module-margin-right = 1
-font-0 = TamzenForPowerline:size=13
-font-1 = FontAwesome:pixelsize=8
+;font-0 = "FuraCode Nerd Font:size=10"
+font-0 = ${xrdb:polybar.font}
 ;tray-position = right
 ;tray-padding = 2
 ;tray-background = ${colors.background}
+dpi-x = 0
+dpi-y = 0
 line-size = 2
 line-color = ${colors.accent}
 wm-restack = bspwm
 modules-left = menu-apps updates-arch-combined mpd bspwm
 modules-center = xwindow 
 modules-right = cpu memory backlight volume date 
-
 
 [module/menu-apps]
 type = custom/menu
@@ -87,14 +88,14 @@ label-focused-underline = ${colors.accent}
 label-focused-background= ${colors.background-alt}
 label-focused-padding = 3
 label-occupied = %name%
-label-occupied-padding = 3
+label-occupied-padding = 2
 label-occupied-foreground= ${colors.foreground}
 label-urgent = %name%
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 3
+label-urgent-padding = 2
 label-empty = %name%
 label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 3
+label-empty-padding = 2
 
 
 [module/xwindow]

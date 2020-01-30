@@ -3,7 +3,7 @@
 !--------------------------------------------------------------------
 
 ! Special
-*.background:                 #f2f0ec
+*.background:                 #ffffff
 *.foreground:                 #373b41
 *.cursorColor:                #515151
 
@@ -63,7 +63,6 @@ polybar.alert:                #373b41
 !--------------------------------------------------------------------
 
 rofi.modi:                    run,drun,window
-rofi.font:                    Noto Sans 10
 rofi.sidebar-mode:            true
 rofi.terminal:                st
 rofi.lines:                   12

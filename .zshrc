@@ -48,9 +48,6 @@ bindkey '^E' history-substring-search-down
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-# Alias termbin for easy pastes
-alias tb="nc termbin.com 9999"
-
 # Timeout
 export KEYTIMEOUT=1
 
@@ -97,3 +94,11 @@ ZSH_THEME_GIT_PROMPT_SEPARATOR="%{$fg[blue]%} | "
 ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[red]%}!"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}?"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[cyan]%}-"
+
+# Configure autosuggestions
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=blue'
+ZSH_AUTOSUGGEST_STRATEGY='completion'
+
+# Alias termbin for easy pastes
+alias tb="nc termbin.com 9999"

@@ -72,7 +72,7 @@ set textwidth=0
 set wrapmargin=0
 set wrap
 set linebreak
-set colorcolumn=80
+set colorcolumn=81
 
 " Spellchecking
 set spelllang=en
