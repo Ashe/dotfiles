@@ -67,12 +67,12 @@ syntax on
 " Set light or dark mode
 set background=dark
 
-" Set line wrapping
-set linebreak
-
 " Show column guideline to keep code within 80 lines
-set textwidth=80
-set colorcolumn=+1
+set textwidth=0
+set wrapmargin=0
+set wrap
+set linebreak
+set colorcolumn=80
 
 " Spellchecking
 set spelllang=en
