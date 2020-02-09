@@ -43,6 +43,7 @@
         "skillsets",
         "subtrees",
         "templated",
-        "waypoints"
+        "waypoints",
+        "wireframe"
     ]
 }
