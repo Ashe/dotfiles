@@ -18,8 +18,11 @@ numlockx &
 dropbox &
 discord &
 
-# Enable popups and start notifications for mpd
+# Enable popups
 $HOME/.scripts/popups
+
+# Start music notifications
+killall mpd-notification
 mpd-notification -m $HOME/Music &
 
 # Show polybar
