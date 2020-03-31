@@ -102,5 +102,10 @@ ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=blue'
 ZSH_AUTOSUGGEST_STRATEGY='completion'
 
+# Start tmux every session
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  tmux attach -t $(tmux ls | grep -v attached | head -1 | cut -f1 -d:) || tmux
+fi
+
 # Alias termbin for easy pastes
 alias tb="nc termbin.com 9999"
