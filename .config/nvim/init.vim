@@ -4,6 +4,9 @@ call plug#begin('~/.config/nvim/plugged')
 " Enable mouse control
 set mouse=a
 
+" Navigate TMUX with vim
+Plug 'christoomey/vim-tmux-navigator'
+
 " Code completion plugin
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -15,14 +18,6 @@ Plug 'omnisharp/omnisharp-vim'
 
 " GDScript plugin
 Plug 'calviken/vim-gdscript3'
-
-" Haskell plugins
-Plug 'neovimhaskell/haskell-vim'
-
-" Clojure plugins
-Plug 'guns/vim-clojure-static'
-Plug 'guns/vim-clojure-highlight'
-Plug 'tpope/vim-fireplace'
 
 " Show git additions in gutter
 Plug 'airblade/vim-gitgutter'
