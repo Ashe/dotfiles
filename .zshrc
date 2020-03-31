@@ -104,7 +104,12 @@ ZSH_AUTOSUGGEST_STRATEGY='completion'
 
 # Start tmux every session
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  tmux attach -t $(tmux ls | grep -v attached | head -1 | cut -f1 -d:) || tmux
+  tmux_unattached=$(tmux list-sessions | grep -v attached | cut -d: -f1 | head -n1)
+  if [[ $tmux_unattached ]]; then
+      exec /usr/bin/tmux attach-session -t "$tmux_unattached"
+  else
+      exec /usr/bin/tmux new-session
+  fi
 fi
 
 # Alias termbin for easy pastes
