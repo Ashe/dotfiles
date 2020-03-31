@@ -1,31 +1,14 @@
 " Start loading plugins
 call plug#begin('~/.config/nvim/plugged')
 
-" Neovim specific
-if has('nvim')
+" Enable mouse control
+set mouse=a
 
-  " Enable mouse control
-  set mouse=a
-
-  " Code completion plugin
-  Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
-
-  " Haskell tools
-  Plug 'parsonsmatt/intero-neovim'
-
-" Vim specific
-else
-  " Code completion plugins
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+" Code completion plugin
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Fuzzy search
 Plug 'ctrlpvim/ctrlp.vim'
-
-" Linting plugin
-Plug 'w0rp/ale'
 
 " C# omnisharp plugin
 Plug 'omnisharp/omnisharp-vim'
@@ -64,8 +47,8 @@ let g:airline_theme='deus'
 " Enable syntax detection
 syntax on
 
-" Set light or dark mode
-set background=dark
+" Set colourscheme
+colorscheme dracula
 
 " Show column guideline to keep code within 80 lines
 set textwidth=0
@@ -120,28 +103,53 @@ set lazyredraw
 " Show matching parenthesis
 set showmatch
 
-" Start autocompleting using tab to cycle
-let g:deoplete#enable_at_startup=1
-inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+" Don't pass messages to |ins-completion-menu|
+set shortmess+=c
 
-" Intero for Haskell
-augroup haskell
-  if has('nvim')
-    au!
-    " Background process and window management
-    au FileType haskell nnoremap <silent> <leader>s :InteroStart<CR>
-    au FileType haskell nnoremap <silent> <leader>S :InteroKill<CR>
-    au FileType haskell nnoremap <silent> <leader>o :InteroOpen<CR>
-    au FileType haskell nnoremap <silent> <leader>O :InteroHide<CR>
-    au FileType haskell nnoremap <silent> <leader>r :InteroReload<CR>
-    au FileType haskell nnoremap <silent> <leader>f :InteroGoToDef<CR>
-    au FileType haskell nnoremap <silent> <leader>c :InteroLoadCurrentFile<CR>
-    au FileType haskell nnoremap <silent> <leader>C :InteroLoadCurrentModule<CR>
-    au FileType haskell map <silent> <leader>t <Plug>InteroGenericType
-    au FileType haskell map <silent> <leader>T <Plug>InteroType
-  endif
-augroup END
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved
+set signcolumn=yes
+
+" Give more space for displaying messages
+set cmdheight=2
+
+" Use tab for trigger completion with characters ahead and navigate
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" GoTo code navigation
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Highlight the symbol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" Formatting selected code
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Add (Neo)Vim's native statusline support
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " C# uses 4-space indents
 augroup cs
@@ -150,13 +158,6 @@ augroup END
 
 " Configure Omnisharp
 let g:OmniSharp_server_stdio = 1
-
-" Change linters for ALE
- let g:ale_linters = {
- \ 'haskell': ['stack-ghc-mod', 'hlint'],
- \ 'cpp'    : ['gcc', 'flawfinder'],
- \ 'cs'     : ['OmniSharp']
- \}
 
  " Configure exceptions for CTRLP
 set wildignore+=*/tmp/*,*/bin/*,*/obj/*,*.so,*.swp,*.zi

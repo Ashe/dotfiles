@@ -31,7 +31,9 @@ zstyle ':completion:*' matcher-list '' \
 '+l:|?=** r:|?=**'
 
 # Initialize the autocompletion
-autoload -Uz compinit && compinit -i
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+eval "$(stack --bash-completion-script stack)"
 
 # Include hidden files in autocomplete:
 _comp_options+=(globdots)
