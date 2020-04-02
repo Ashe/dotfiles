@@ -4,7 +4,7 @@
 
 # Terminal emulator
 super + Return
-	st
+	urxvt
 
 # Program launcher
 super + @space
@@ -180,21 +180,21 @@ Print
 
 # Quick program access
 super + {1,2,3}
-	{ st -e ranger \
+	{ urxvt -e ranger \
   , firefox \
-  , st -e ncmpcpp \
+  , urxvt -e ncmpcpp \
   }
 
 # Floating program quick access
 super + shift + {1,2,3}
-	{ bspwmfloat st -e ranger \
+	{ bspwmfloat urxvt -e ranger \
   , bspwmfloat firefox \
-  , bspwmfloat st -e ncmpcpp \
+  , bspwmfloat urxvt -e ncmpcpp \
   }
 
 # Alternative program access
 super + ctrl + shift + {1,2,3}
 	{ thunar \
   , firefox --private-window \
-  , bspwmfloat st -e ncmpcpp \
+  , bspwmfloat urxvt -e ncmpcpp \
   }

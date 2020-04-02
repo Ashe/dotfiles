@@ -20,7 +20,6 @@ padding-left = 8
 padding-right = 8
 module-margin-left = 1
 module-margin-right = 1
-;font-0 = "FuraCode Nerd Font:size=10"
 font-0 = ${xrdb:polybar.font}
 ;tray-position = right
 ;tray-padding = 2
@@ -66,7 +65,7 @@ menu-1-1 = Chrome
 menu-1-1-exec = google-chrome-stable &
 
 menu-2-0 = Terminal
-menu-2-0-exec = st &
+menu-2-0-exec = urxvt &
 menu-2-1 = Thunar
 menu-2-1-exec = thunar &
 menu-2-2 = Screenshot

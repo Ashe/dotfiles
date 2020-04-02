@@ -2,7 +2,18 @@
 ! Theme-agnostic resources
 !--------------------------------------------------------------------
 
-! Fonts
+! URXVT
+urxvt.font:                   xft:FuraCode Nerd Font:size=12
+urxvt.scrollBar:              false
+URxvt.perl-ext-common:        default,matcher,resize-font
+URxvt.url-launcher:           /usr/bin/xdg-open
+URxvt.matcher.button:         1
+
+! General
 *.font:                       FuraCode Nerd Font:size=12
+
+! Polybar
 polybar.font:                 FuraCode Nerd Font:size=10
+
+! Rofi
 rofi.font:                    Noto Sans 10
