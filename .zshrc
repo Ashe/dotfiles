@@ -102,7 +102,7 @@ ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=blue'
 ZSH_AUTOSUGGEST_STRATEGY='completion'
 
-# Start tmux every session
+# Attempt to attach to previous, unattached tmux session
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
   tmux_unattached=$(tmux list-sessions | grep -v attached | cut -d: -f1 | head -n1)
   if [[ $tmux_unattached ]]; then
