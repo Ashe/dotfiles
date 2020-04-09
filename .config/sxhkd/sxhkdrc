@@ -1,10 +1,10 @@
 ########################################
-# wm independent hotkeys #
+# WM Independent hotkeys #
 ########################################
 
 # Terminal emulator
 super + Return
-	urxvt
+	$TERMINAL
 
 # Program launcher
 super + @space
@@ -13,6 +13,10 @@ super + @space
 # Lock the screen
 super + Escape
   slock
+
+# Toggle polybar
+super + p
+  toggle-poly
 
 ########################################
 # BSPWM hotkeys #
@@ -180,21 +184,21 @@ Print
 
 # Quick program access
 super + {1,2,3}
-	{ urxvt -e ranger \
+	{ $TERMINAL -e ranger \
   , firefox \
-  , urxvt -e ncmpcpp \
+  , $TERMINAL -e ncmpcpp \
   }
 
 # Floating program quick access
 super + shift + {1,2,3}
-	{ bspwmfloat urxvt -e ranger \
+	{ bspwmfloat $TERMINAL -e ranger \
   , bspwmfloat firefox \
-  , bspwmfloat urxvt -e ncmpcpp \
+  , bspwmfloat $TERMINAL -e ncmpcpp \
   }
 
 # Alternative program access
 super + ctrl + shift + {1,2,3}
 	{ thunar \
   , firefox --private-window \
-  , bspwmfloat urxvt -e ncmpcpp \
+  , bspwmfloat $TERMINAL -e ncmpcpp \
   }

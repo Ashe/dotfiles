@@ -26,13 +26,15 @@ bspc config active_border_color \
 bspc config focused_border_color \
   $(xrdb -query | grep "bspwm.border-focused" | cut -f 2)
 
-# Rules
-bspc config border_width         2
-bspc config window_gap           15
+# Window sizing and setup
+bspc config border_width          2
+bspc config window_gap            15
+bspc config bottom_padding        60
 
-bspc config split_ratio          0.5
-bspc config borderless_monocle   true
-bspc config gapless_monocle      true
+# Change how splits work
+bspc config split_ratio           0.5
+bspc config borderless_monocle    true
+bspc config gapless_monocle       true
 
 bspc config focus_follows_pointer true
 bspc config click_to_focus button1

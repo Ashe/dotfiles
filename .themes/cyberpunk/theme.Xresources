@@ -52,11 +52,9 @@ bspwm.border-focused:         #544b6e
 !--------------------------------------------------------------------
 
 polybar.background:           #0d1335
-polybar.background-alt:       #111c3e
 polybar.foreground:           #c83f4e
-polybar.foreground-alt:       #c83f4e
 polybar.accent:               #c83f4e
-polybar.alert:                #f6bab2
+polybar.module:               #0d1335
 
 !--------------------------------------------------------------------
 ! Rofi

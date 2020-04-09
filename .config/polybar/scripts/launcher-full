@@ -1,0 +1,2 @@
+#!/bin/bash
+rofi -show run -fullscreen True -lines 5 -line-margin 5 -padding 300 -bw 0

@@ -13,7 +13,8 @@ URxvt.matcher.button:         1
 *.font:                       FuraCode Nerd Font:size=12
 
 ! Polybar
-polybar.font:                 FuraCode Nerd Font:size=10
+polybar.font:                 Ubuntu Condensed:size=10;2
+polybar.iconfont:             icomoon\-feather:size=10;2
 
 ! Rofi
 rofi.font:                    Noto Sans 10
