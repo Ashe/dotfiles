@@ -6,7 +6,7 @@ showpoly() {
   local m=$(bspc query -M -m --names)
   local p=$(</tmp/polybar_pid_$m)
   polybar-msg -p $p cmd show
-  bspc config -m $m bottom_padding 60
+  bspc config -m $m top_padding 60
 }
 
 # Hides the bar and reclaims space
@@ -14,13 +14,13 @@ hidepoly() {
   local m=$(bspc query -M -m --names)
   local p=$(</tmp/polybar_pid_$m)
   polybar-msg -p $p cmd hide
-  bspc config -m $m bottom_padding 0
+  bspc config -m $m top_padding 0
 }
 
 # Decides whether to show or hide based on space
 togglepoly() {
   local m=$(bspc query -M -m --names)
-  if [ $(bspc config -m $m bottom_padding) == 0 ] 
+  if [ $(bspc config -m $m top_padding) == 0 ] 
   then
     showpoly
   else
