@@ -43,7 +43,7 @@ let g:airline_theme='deus'
 syntax on
 
 " Set colourscheme
-colorscheme dracula
+colorscheme theme
 
 " Show column guideline to keep code within 80 lines
 set textwidth=0

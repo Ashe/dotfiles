@@ -4,6 +4,7 @@
 DIR=$HOME/.themes/$1
 if [ -d "$DIR" ] && \
     [ -f "$DIR/theme.Xresources" ] && \
+    [ -f "$DIR/theme.vim" ] && \
     [ -d "$DIR/wallpapers" ] ; then
 
   # Use base .Xresources file and append theme resources
@@ -15,6 +16,9 @@ if [ -d "$DIR" ] && \
 
   # Reload the new .Xresources file
   xrdb $HOME/.Xresources
+
+  # Copy neovim theme to nvim/colors/theme.vim
+  cp $DIR/theme.vim $HOME/.config/nvim/colors/theme.vim
   
   # Randomly distribute wallpapers from the wallpapers folder
   echo \
