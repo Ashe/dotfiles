@@ -3,8 +3,8 @@
 ########################################
 
 # Terminal emulator
-super + {shift} + Return
-	{bspwmfloat} $TERMINAL
+super + {_,shift+} Return
+	{ ,bspwmfloat} $TERMINAL
 
 # Program launcher
 super + @space
