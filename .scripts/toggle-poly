@@ -4,7 +4,8 @@ set -e
 # Shows the bar and makes space
 showpoly() {
   local m=$(bspc query -M -m --names)
-  local p=$(</tmp/polybar_pid_$m)
+  local p=$(grep pid /tmp/polybar_data_$m.ini | \
+    sed 's/.*= \?[a-zA-Z0-9]* \([a-zA-Z0-9]*\).*/\1/')
   polybar-msg -p $p cmd show
   bspc config -m $m top_padding 60
 }
@@ -12,7 +13,8 @@ showpoly() {
 # Hides the bar and reclaims space
 hidepoly() {
   local m=$(bspc query -M -m --names)
-  local p=$(</tmp/polybar_pid_$m)
+  local p=$(grep pid /tmp/polybar_data_$m.ini | \
+    sed 's/.*= \?[a-zA-Z0-9]* \([a-zA-Z0-9]*\).*/\1/')
   polybar-msg -p $p cmd hide
   bspc config -m $m top_padding 0
 }

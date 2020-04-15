@@ -1,5 +1,45 @@
 #!/usr/bin/env sh
 
+# Creates the file if it doesn't exist
+createIfNotExist() {
+  if [ ! -f $1 ] || \
+      ! grep -q 'pid'         $1 || \
+      ! grep -q 'bg'          $1 || \
+      ! grep -q 'fg'          $1 || \
+      ! grep -q 'ac'          $1 || \
+      ! grep -q 'bi'          $1 || \
+      ! grep -q 'be'          $1 || \
+      ! grep -q 'mf'          $1 || \
+      ! grep -q 'trans'       $1 || \
+      ! grep -q 'white'       $1 || \
+      ! grep -q 'black'       $1 || \
+      ! grep -q 'red'         $1 || \
+      ! grep -q 'pink'        $1 || \
+      ! grep -q 'purple'      $1 || \
+      ! grep -q 'deep-purple' $1 || \
+      ! grep -q 'indigo'      $1 || \
+      ! grep -q 'blue'        $1 || \
+      ! grep -q 'light-blue'  $1 || \
+      ! grep -q 'cyan'        $1 || \
+      ! grep -q 'teal'        $1 || \
+      ! grep -q 'green'       $1 || \
+      ! grep -q 'light-green' $1 || \
+      ! grep -q 'lime'        $1 || \
+      ! grep -q 'yellow'      $1 || \
+      ! grep -q 'amber'       $1 || \
+      ! grep -q 'orange'      $1 || \
+      ! grep -q 'deep-orange' $1 || \
+      ! grep -q 'brown'       $1 || \
+      ! grep -q 'grey'        $1 || \
+      ! grep -q 'blue-gray'   $1; \
+    then
+      echo "Creating polybar config file: $1.."
+      cp -f $HOME/.config/polybar/config.ini $1
+    else
+      echo "Found polybar config file: $1.."
+  fi
+}
+
 # Terminate already running bar instances
 killall -q polybar
 
@@ -9,8 +49,10 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 # Launch bar
 if type "xrandr"; then
   for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-    MONITOR=$m polybar -c $HOME/.config/polybar/config.ini --reload main &
-    echo $! > /tmp/polybar_pid_$m
+    f=/tmp/polybar_data_$m.ini
+    createIfNotExist $f
+    MONITOR=$m polybar -c $f --reload main &
+    sed -i -e "s/pid = .*/pid = $!/g" $f
   done
 else
   polybar -c $HOME/.config/polybar/config.ini --reload main &
