@@ -184,21 +184,21 @@ Print
 
 # Quick program access
 super + {1,2,3}
-	{ $TERMINAL -e ranger \
-  , firefox \
+	{ $TERMINAL -e $FILE \
+  , $BROWSER \
   , $TERMINAL -e ncmpcpp \
   }
 
 # Floating program quick access
 super + shift + {1,2,3}
-	{ bspwmfloat $TERMINAL -e ranger \
-  , bspwmfloat firefox \
+	{ bspwmfloat $TERMINAL -e $FILE \
+  , bspwmfloat $BROWSER \
   , bspwmfloat $TERMINAL -e ncmpcpp \
   }
 
 # Alternative program access
 super + ctrl + shift + {1,2,3}
-	{ thunar \
-  , firefox --private-window \
+	{ $FILEGUI \
+  , $BROWSER --private-window \
   , bspwmfloat $TERMINAL -e ncmpcpp \
   }

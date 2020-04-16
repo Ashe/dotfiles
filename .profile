@@ -1,8 +1,9 @@
 # Export default programs
 export EDITOR='nvim'
 export TERMINAL='urxvt'
-export BROWSER='firefox'
+export BROWSER='brave'
 export FILE='ranger'
+export FILEGUI='nautilus'
 
 # Append the path to include local scripts
 export PATH=$PATH:/usr/bin:
