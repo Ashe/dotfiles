@@ -46,14 +46,23 @@ killall -q polybar
 # Wait until the processes have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-# Launch bar
+# If multiple bars may exist
 if type "xrandr"; then
+
+  # Check if polybar cache directory exists
+  if [ ! -d $HOME/.cache/polybar/ ]; then
+    mkdir -p $HOME/.cache/polybar/
+  fi
+
+  # Ensure a config file exists for each bar and launch
   for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-    f=/tmp/polybar_data_$m.ini
+    f=$HOME/.cache/polybar/config_$m.ini
     createIfNotExist $f
     MONITOR=$m polybar -c $f --reload main &
     sed -i -e "s/pid = .*/pid = $!/g" $f
   done
+
+# Otherwise, use default config file
 else
   polybar -c $HOME/.config/polybar/config.ini --reload main &
 fi
