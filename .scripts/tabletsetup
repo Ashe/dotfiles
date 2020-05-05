@@ -31,8 +31,10 @@ standard_mode() {
 osu_mode() {
   broadcast "Tablet set to Osu mode."
 
-  # Set area corners from (0,2287) to (5590,6509)
-  xsetwacom set "Wacom Intuos PT S Pen stylus" Area 0 2287 5590 6509
+  # Adjust corners of area
+  # Max area: (15200, 9500)
+  # Max area in 16x9: (15200, 8550)
+  xsetwacom set "Wacom Intuos PT S Pen stylus" Area 2000 1125 13200 7425
 }
 
 # Change tablet mode depending on argument
