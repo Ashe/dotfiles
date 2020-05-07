@@ -25,7 +25,9 @@ else
  export EDITOR='nvim'
 fi
 
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+# Allow case insensitive autocompletion
+zstyle ':completion:*' matcher-list '' \
+  'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 # Initialize the autocompletion
 autoload -U +X compinit && compinit
