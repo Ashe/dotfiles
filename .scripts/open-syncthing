@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
-notify-send -u low "Notification" "Opening Syncthing in Firefox"
-firefox http://localhost:8384
+notify-send -u low "Notification" "Opening Syncthing in browser"
+$BROWSER http://localhost:8384

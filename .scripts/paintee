@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Paintee
 # A script to get colours from xrdb & deploy it to cache

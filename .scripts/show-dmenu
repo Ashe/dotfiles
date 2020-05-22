@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Launch dmenu with colours from XResources
 dmenu \

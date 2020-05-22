@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Load xrandr customisation
 $HOME/.screenlayout/default.sh

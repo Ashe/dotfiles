@@ -1,4 +1,3 @@
-#!/bin/bash
-
+#!/bin/sh
 notify-send -u low "Notification" "Starting Syncthing"
 systemctl start syncthing.service --user

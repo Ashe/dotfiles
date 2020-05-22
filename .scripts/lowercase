@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Convert every words in a file to lowercase
 # Useful to make every colour hex code converted to lowercase

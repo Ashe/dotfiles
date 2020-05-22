@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # A helper script to setup Git, originally written by Erik Dubois
 # Change the email & username if You want to use this

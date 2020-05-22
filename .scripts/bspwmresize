@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/sh
 
 # Setup variables in preparation for resizing
 wid=$(xdotool getactivewindow)

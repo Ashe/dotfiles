@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Open twitch in a new MPV window
 notify-send -u low "Opening Twitch.." "Channel: $1"

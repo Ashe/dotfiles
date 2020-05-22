@@ -1,4 +1,5 @@
 # Export default programs
+export SHELL='fish'
 export EDITOR='nvim'
 export TERMINAL='urxvt'
 export BROWSER='brave'
