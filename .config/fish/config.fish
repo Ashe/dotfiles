@@ -1,6 +1,9 @@
 #!/usr/bin/fish
 
-# Remove keybindings for fzf
+# Allow vi keybindings
+fish_vi_key_bindings
+
+# Remove specific package keybindings
 bind --erase \ct '__fzf_find_file'
 bind --erase \ct '__fzf_find_file'
 bind --erase \cr '__fzf_reverse_isearch'

@@ -76,9 +76,9 @@ super + bracket{left,right}
 
 # Move node to the next/previous desktop in current monitor
 super + shift + bracket{left,right}
-  DIR={prev,next}; \
-  bspc node -d "$DIR"; \
-  bspc desktop -f "$DIR"
+  set direction {prev,next}; \
+  bspc node -d "$direction"; \
+  bspc desktop -f "$direction"
 
 # Focus the next/previous desktop using scroll wheel
 super + shift + button{4,5}
@@ -124,7 +124,8 @@ super + alt + {h,j,k,l}
 
 # Window gap via mouse wheel
 super + button{4,5}
-    bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 5))
+  set gap (bspc config -d focused window_gap); \
+  bspc config -d focused window_gap (expr $gap {-,+} 5)
 
 ########################################
 # Brightness
