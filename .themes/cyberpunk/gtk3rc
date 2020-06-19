@@ -1,2 +1,4 @@
-gtk-font-name = "flowers"
-gtk-icon-theme-name = "Papirus Custom"
+[Settings]
+gtk-theme-name = flowers
+gtk-icon-theme-name = Papirus Custom
+gtk-font-name = Ubuntu Condensed 11
