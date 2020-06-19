@@ -5,6 +5,10 @@ DIR=$HOME/.themes/$1
 if [ -d "$DIR" ] && \
     [ -f "$DIR/theme.Xresources" ] && \
     [ -f "$DIR/theme.vim" ] && \
+    [ -h "$DIR/gtk-2.0" ] && \
+    [ -f "$DIR/gtk2rc" ] && \
+    [ -h "$DIR/gtk-3.0" ] && \
+    [ -f "$DIR/gtk3rc" ] && \
     [ -d "$DIR/wallpapers" ] ; then
 
   # Use base .Xresources file and append theme resources
@@ -19,6 +23,11 @@ if [ -d "$DIR" ] && \
 
   # Copy neovim theme to nvim/colors/theme.vim
   cp $DIR/theme.vim $HOME/.config/nvim/colors/theme.vim
+
+  # Copy GTK configurations to respective locations
+  cp $DIR/gtk2rc $HOME/.gtkrc-2.0
+  mkdir -p $HOME/.config/gtk-3.0/
+  cp $DIR/gtk3rc $HOME/.config/gtk-3.0/settings.ini
   
   # Randomly distribute wallpapers from the wallpapers folder
   echo \
@@ -30,7 +39,7 @@ if [ -d "$DIR" ] && \
   # Echo success message to terminal
   echo "Successfully changed theme to $1. Restart terminal."
 
-  # Restart window manager
+  # Restart window manager to apply changes
   $HOME/.scripts/restart-window-manager
 
 else

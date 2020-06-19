@@ -1,0 +1,4 @@
+#!/bin/sh
+
+$TERMINAL -g 86x14 -e ncmpcpp -c ~/.ncmpcpp/albumart
+exit 0

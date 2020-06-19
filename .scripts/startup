@@ -12,18 +12,17 @@ xrdb $HOME/.Xresources
 # Set background
 $HOME/.fehbg
 
-# Add any programs that should start before BSPWM here
+# Start order-insensitive programs
 mpd &
 numlockx &
-dropbox &
-discord &
+
+# Autostart all executable files in autostart
+for file in $HOME/.config/autostart/*; do
+  dex "$file"
+done
 
 # Enable popups
 $HOME/.scripts/popups
-
-# Start music notifications
-killall mpd-notification
-mpd-notification -m $HOME/Music &
 
 # Show polybar
 $HOME/.scripts/start-poly
