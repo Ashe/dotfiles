@@ -16,7 +16,7 @@ super + Escape
 
 # Toggle polybar
 super + p
-  toggle-poly
+  $HOME/.config/polybar/scripts/toggle-poly.sh
 
 ########################################
 # BSPWM hotkeys #

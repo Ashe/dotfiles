@@ -25,4 +25,4 @@ done
 $HOME/.scripts/popups
 
 # Show polybar
-$HOME/.scripts/start-poly
+$HOME/.config/polybar/scripts/start-poly.sh
