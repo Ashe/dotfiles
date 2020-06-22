@@ -1,20 +1,16 @@
-#!/usr/bin/env bash
-
-BAR_ICON=""
-NOTIFY_ICON=/usr/share/icons/Papirus/32x32/apps/system-software-update.svg
-
+#!/bin/sh
+BAR_ICON=""
 get_total_updates() { UPDATES=$(checkupdates 2>/dev/null | wc -l); }
-
 while true; do
-    get_total_updates
+  get_total_updates
 
-    # when there are updates available
-    # every 10 seconds another check for updates is done
+    # When there are updates available
+    # Every 10 seconds another check for updates is done
     while (( UPDATES > 0 )); do
         if (( UPDATES == 1 )); then
-            echo " $UPDATES Update"
+            echo " $UPDATES Update"
         elif (( UPDATES > 1 )); then
-            echo " $UPDATES Updates"
+            echo " $UPDATES Updates"
         else
             echo $BAR_ICON
         fi

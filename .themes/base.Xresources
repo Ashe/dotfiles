@@ -14,7 +14,7 @@ URxvt.matcher.button:         1
 
 ! Polybar
 polybar.font:                 Ubuntu Condensed:size=11;2
-polybar.iconfont:             icomoon\-feather:size=10;2
+polybar.iconfont:             waffle:size=16;2
 
 ! Rofi
 rofi.modi:                    run,drun,window

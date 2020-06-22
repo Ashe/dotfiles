@@ -1,6 +1,2 @@
-#!/bin/bash
-rofi -modi run,drun -show drun \
-  -location 1 -xoffset 14 -yoffset 52 \
-  -line-padding 4 \ -columns 1 -width 20 \
-  -lines 10 -padding 25 -hide-scrollbar \
-  -show-icons -drun-icon-theme
+#!/bin/sh
+rofi -no-lazy-grab -show drun -theme $HOME/.config/polybar/scripts/themes/launcher.rasi
