@@ -7,7 +7,7 @@ showpoly() {
   local p=$(grep pid $HOME/.cache/polybar/config_$m.ini | \
     sed 's/.*= \?[a-zA-Z0-9]* \([a-zA-Z0-9]*\).*/\1/')
   polybar-msg -p $p cmd show
-  bspc config -m $m top_padding 60
+  bspc config -m $m top_padding 30
 }
 
 # Hides the bar and reclaims space
