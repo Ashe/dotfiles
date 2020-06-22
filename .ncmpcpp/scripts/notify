@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 MUSIC_DIR=$HOME/Music/ # Your music directory
 COVER=/tmp/album_art.jpg

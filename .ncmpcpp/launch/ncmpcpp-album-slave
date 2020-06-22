@@ -1,4 +1,0 @@
-#!/bin/sh
-
-$TERMINAL -g 111x14 -e ncmpcpp -c ~/.ncmpcpp/albumart-slave
-exit 0
