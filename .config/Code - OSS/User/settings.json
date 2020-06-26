@@ -28,6 +28,7 @@
         "Vulkan's",
         "centered",
         "checkbox",
+        "coronavirus",
         "demonstratory",
         "eigen",
         "esoterism",
@@ -95,5 +96,5 @@
         "wireframe",
         "wireframes"
     ],
-    "window.zoomLevel": 1
+    "window.zoomLevel": 0
 }
