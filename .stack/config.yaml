@@ -10,7 +10,7 @@ templates:
   params:
     author-name: Ashley Smith
     author-email: me@aas.sh
-    copyright:
+    copyright: 'Copyright (c) 2020 Ashley Smith'
     github-username: Ashe
 
 # The following parameter specifies stack's output styles; STYLES is a
