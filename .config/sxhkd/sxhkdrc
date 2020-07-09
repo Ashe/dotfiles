@@ -98,6 +98,10 @@ super + {o,i}
 super + shift + Tab
   rofi -show window
 
+# Open window switcher with rofi (alternative binding)
+super + shift + space
+  rofi -show window
+
 ########################################
 # Preselection
 ########################################
