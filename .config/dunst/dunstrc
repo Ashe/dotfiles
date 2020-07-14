@@ -5,7 +5,7 @@ monitor = 0
 follow = mouse
 
 ;; Set programs used by dunst
-browser = /usr/bin/firefox -new-tab
+browser = $BROWSER
 dmenu = rofi -show drun
 
 ;; Mouse interactions
