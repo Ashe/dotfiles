@@ -55,12 +55,3 @@ rofi.color-window:            #111c3e,#c83f4e,#c83f4e
 rofi.color-normal:            #111c3e,#c83f4e,#111c3e,#c83f4e,#111c3e
 rofi.color-active:            #95364d,#111c3e,#95364d,#c83f4e,#111c3e
 rofi.color-urgent:            #774d89,#111c3e,#774d89,#c83f4e,#111c3e
-
-!--------------------------------------------------------------------
-! Dmenu
-!--------------------------------------------------------------------
-
-dmenu.background:           #0d1335
-dmenu.highlight-background: #c83f4e
-dmenu.foreground:           #c83f4e
-dmenu.highlight-foreground: #0d1335

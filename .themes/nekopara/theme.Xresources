@@ -1,0 +1,66 @@
+!--------------------------------------------------------------------
+! Theme font overrides
+!--------------------------------------------------------------------
+
+! Fonts
+urxvt.font:                   xft:azukifontB:size=12
+polybar.font:                 azukifontB:size=11;3
+rofi.font:                    azukifontB 12
+
+!--------------------------------------------------------------------
+! General
+!--------------------------------------------------------------------
+
+! Special
+*background:                  #fffcfd
+*foreground:                  #250e07
+*.cursorColor:                #515151
+
+! Black + Darkgrey
+*color0:                      #f3eae9
+*color8:                      #d8b8b3
+
+! Darkred + Red
+*color1:                      #873e40
+*color9:                      #832426
+
+! Darkgreen + Green
+*color2:                      #839a53
+*color10:                     #6f873e
+
+! Darkyellow + Yellow
+*color3:                      #d4a520
+*color11:                     #c39104
+
+! Darkblue + Blue
+*color4:                      #a6b6ce
+*color12:                     #7b91b3
+
+! Darkmagenta + Magenta
+*color5:                      #d68482
+*color13:                     #c97270
+
+! Darkcyan + Cyan
+*color6:                      #89beb7
+*color14:                     #63a098
+
+! Lightgrey + White
+*color7:                      #ecc3c2
+*color15:                     #f2cc60
+
+!--------------------------------------------------------------------
+! BSPWM
+!--------------------------------------------------------------------
+
+bspwm.border-normal:          #d68482
+bspwm.border-active:          #d68482
+bspwm.border-focused:         #ecc3c2
+
+!--------------------------------------------------------------------
+! Rofi
+!--------------------------------------------------------------------
+
+rofi.color-window:            #fffcfd,#d68482,#d68482
+rofi.color-normal:            #fffcfd,#d68482,#f3eae9,#d68482,#fffcfd
+rofi.color-active:            #d4a520,#fffcfd,#d3d0c8,#d68482,#fffcfd
+rofi.color-urgent:            #cc99cc,#d68482,#cc99cc,#d68482,#fffcfd
