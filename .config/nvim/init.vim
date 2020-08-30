@@ -10,14 +10,11 @@ Plug 'christoomey/vim-tmux-navigator'
 " Code completion plugin
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Lisp plugin
+Plug 'kovisoft/slimv'
+
 " Fuzzy search
 Plug 'ctrlpvim/ctrlp.vim'
-
-" C# omnisharp plugin
-Plug 'omnisharp/omnisharp-vim'
-
-" GDScript plugin
-Plug 'calviken/vim-gdscript3'
 
 " Show git additions in gutter
 Plug 'airblade/vim-gitgutter'
@@ -119,9 +116,6 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion
-inoremap <silent><expr> <c-space> coc#refresh()
-
 " GoTo code navigation
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -138,18 +132,13 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
+" Allow the lisp REPL to open with tmux
+let g:slimv_swank_cmd = '! tmux new-window -d -n REPL-SBCL "sbcl --load ~/.config/nvim/plugged/slimv/slime/start-swank.lisp"'
+
 " Add (Neo)Vim's native statusline support
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" C# uses 4-space indents
-augroup cs
-  au FileType cs setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
-augroup END
-
-" Configure Omnisharp
-let g:OmniSharp_server_stdio = 1
 
  " Configure exceptions for CTRLP
 set wildignore+=*/tmp/*,*/bin/*,*/obj/*,*.so,*.swp,*.zi
