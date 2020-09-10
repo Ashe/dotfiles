@@ -14,10 +14,10 @@ if  [[ $polybar_theme = "light" ]]; then
 
   sed -i -e "s/theme = .*/theme = dark/g" $polybar_path
 
-  sed -i -e 's/bg = .*/bg = #212B30/g' $polybar_path
-  sed -i -e 's/bg-alt = .*/bg-alt = #5C6F7B/g' $polybar_path
-  sed -i -e 's/fg = .*/fg = #C4C7C5/g' $polybar_path
-  sed -i -e 's/ac = .*/ac = #4DD0E1/g' $polybar_path
+  sed -i -e 's/bg = .*/bg = #2E3440/g' $polybar_path
+  sed -i -e 's/bg-alt = .*/bg-alt = #4C566A/g' $polybar_path
+  sed -i -e 's/fg = .*/fg = #D8DEE9/g' $polybar_path
+  sed -i -e 's/ac = .*/ac = #88C0D0/g' $polybar_path
 
   sed -i -e 's/red = .*/red = #EC7875/g' $polybar_path
   sed -i -e 's/pink = .*/pink = #EC407A/g' $polybar_path
@@ -38,10 +38,10 @@ elif  [[ $polybar_theme = "dark" ]]; then
 
   sed -i -e "s/theme = .*/theme = light/g" $polybar_path
 
-  sed -i -e 's/bg = .*/bg = #FFFFFF/g' $polybar_path
-  sed -i -e 's/bg-alt = .*/bg-alt = #CACACA/g' $polybar_path
-  sed -i -e 's/fg = .*/fg = #555555/g' $polybar_path
-  sed -i -e 's/ac = .*/ac = #4DA8B9/g' $polybar_path
+  sed -i -e 's/bg = .*/bg = #E5E9F0/g' $polybar_path
+  sed -i -e 's/bg-alt = .*/bg-alt = #81A1C1/g' $polybar_path
+  sed -i -e 's/fg = .*/fg = #4C566A/g' $polybar_path
+  sed -i -e 's/ac = .*/ac = #81A1C1/g' $polybar_path
 
   sed -i -e 's/red = .*/red = #F06A6A/g' $polybar_path
   sed -i -e 's/pink = .*/pink = #EC1850/g' $polybar_path
