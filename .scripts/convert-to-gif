@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Create a palette from video
+ffmpeg -y -i $1 -vf palettegen /tmp/palette.png
+ffmpeg -y -i $1 -i /tmp/palette.png -r 30 $2
