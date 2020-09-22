@@ -3,7 +3,7 @@
 !--------------------------------------------------------------------
 
 ! General
-*.font:                       FuraCode Nerd Font:size=12
+*.font:                       Fira Code:size=12
 
 ! Polybar
 polybar.font:                 Ubuntu Condensed:size=11;2

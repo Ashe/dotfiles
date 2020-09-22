@@ -1,0 +1,34 @@
+/*
+  RainbowBrackets user settings in here override the default
+*/
+{
+  "languages": {
+        "lisp": {
+          "extensions": ["lisp", "asd"],
+          "mode": "all"
+        },
+        "scheme": {
+            "extensions": ["scm", "ss"],
+            "mode": "all"
+        },
+        "json": {
+            // 将扩展名列在 "extensions" 中的文件按 JSON 文件处理
+            // treat files whose extension is listed
+            // in "extensions" as JSON file.
+            "extensions": [
+                "json",
+                "sublime-settings",
+                "sublime-menu",
+                "sublime-build",
+                "sublime-keymap",
+                "sublime-color-scheme"
+            ],
+            // 搜索全文内容以匹配所有括号
+            // Search full text to match brackets.
+            "mode": "all",
+            // 将该文件类型不需要的括号添加到这儿，以加快搜索速度
+            // To speed up the search, add brackets which are not nessesary by this file type to "!brackets"
+            "!brackets": ["("]
+        }
+    }
+}

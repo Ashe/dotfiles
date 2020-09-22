@@ -1,0 +1,23 @@
+{
+	"color_scheme": "Packages/Nord/Nord.sublime-color-scheme",
+	"dictionary": "Packages/Language - English/en_GB.dic",
+	"font_face": "Fira Code",
+	"font_size": 12,
+	"ignored_packages":
+	[
+		"Six",
+		"Vintage",
+		"Vintageous",
+	],
+	"neovintageous_build_version": 11100,
+	"rulers":
+	[
+		80
+	],
+	"tab_size": 2,
+	"theme": "Adaptive.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"vintageous_use_ctrl_keys": null,
+	"vintageous_use_super_keys": null,
+	"close_windows_when_empty": false,
+}
