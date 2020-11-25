@@ -30,3 +30,6 @@ if  status is-interactive &&
     exec /usr/bin/tmux new-session
   end
 end
+# ghcup-env
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
+test -f /home/ashe/.ghcup/env ; and set -gx PATH $HOME/.cabal/bin /home/ashe/.ghcup/bin $PATH

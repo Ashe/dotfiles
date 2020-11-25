@@ -1,0 +1,11 @@
+// Settings in here override those in "LSP/LSP.sublime-settings"
+{
+  "clients": {
+    "haskell-language-server": {
+      "command": ["haskell-language-server-wrapper", "--lsp"],
+      "scopes": ["source.haskell"],
+      "syntaxes": ["Packages/Haskell/Haskell.sublime-syntax"],
+      "languageId": "haskell"
+    }
+  }
+}

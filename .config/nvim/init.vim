@@ -10,9 +10,6 @@ Plug 'christoomey/vim-tmux-navigator'
 " Code completion plugin
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Lisp plugin
-Plug 'kovisoft/slimv'
-
 " Fuzzy search
 Plug 'ctrlpvim/ctrlp.vim'
 
@@ -40,7 +37,7 @@ let g:airline_theme='deus'
 syntax on
 
 " Set colourscheme
-colorscheme theme
+colorscheme dracula
 
 " Show column guideline to keep code within 80 lines
 set textwidth=0
