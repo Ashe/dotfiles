@@ -5,7 +5,8 @@
       "command": ["haskell-language-server-wrapper", "--lsp"],
       "scopes": ["source.haskell"],
       "syntaxes": ["Packages/Haskell/Haskell.sublime-syntax"],
-      "languageId": "haskell"
-    }
-  }
+      "languageId": "haskell",
+      "enabled": true,
+    },
+  },
 }
