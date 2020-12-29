@@ -13,9 +13,8 @@
 # is used in the bar {} block below.
 font pango:Fira Code 12
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
+# Hide title bar unless tabbed
+default_border pixel 3
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -89,7 +88,8 @@ bindsym $super+Control+Return split h
 bindsym $super+shift+f fullscreen toggle
 
 # Change container layout
-bindsym $super+t layout tabbed
+bindsym $super+t split toggle, layout tabbed
+bindsym $super+Shift+t layout toggle split
 
 # Toggle tiling / floating
 bindsym $super+s floating toggle
