@@ -13,8 +13,8 @@
 # is used in the bar {} block below.
 font pango:Fira Code 12
 
-# Hide title bar unless tabbed
-default_border pixel 3
+# Allow space for polybar
+gaps top 28
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -33,15 +33,6 @@ set $super Mod4
 # Startup script
 exec $HOME/.scripts/startup
 
-# Bind multimedia keys
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec pulseaudio-ctl up
-bindsym XF86AudioLowerVolume exec pulseaudio-ctl down
-bindsym XF86AudioMute exec pulseaudio-ctl mute
-bindsym XF86AudioPlay exec mpc toggle
-bindsym XF86AudioPrev exec mpc prev
-bindsym XF86AudioNext exec mpc next
-
 # Navigation Keys
 set $up k
 set $down j
@@ -54,8 +45,9 @@ floating_modifier $super
 # Start terminal
 bindsym $super+Return exec $TERMINAL
 
-# Kill focused window
+# Kill windows
 bindsym $super+w kill
+bindsym --release button2 kill
 
 # Program launcher
 bindsym $super+space exec rofi -show run
@@ -106,46 +98,66 @@ bindsym $super+d focus child
 # Move the currently focused window to the scratchpad
 bindsym $super+Shift+minus move scratchpad
 
+# Switch between workspaces
+bindsym $super+i exec $HOME/.scripts/i3-goto-workspace -1
+bindsym $super+o exec $HOME/.scripts/i3-goto-workspace 1
+bindsym $super+Shift+i exec $HOME/.scripts/i3-move-container-to-workspace -1
+bindsym $super+Shift+o exec $HOME/.scripts/i3-move-container-to-workspace 1
+
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $super+minus scratchpad show
 
 # Reload the configuration file
 bindsym $super+BackSpace reload
+
 # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $super+Shift+BackSpace restart
+
 # Exit i3 (logs you out of your X session)
-bindsym $super+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $super+Control+Shift+BackSpace exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# Program shortcuts
+bindsym $super+1 exec $TERMINAL -e $FILE
+bindsym $super+Shift+Control+1 exec $FILEGUI
+bindsym $super+2 exec $BROWSER
+bindsym $super+3 exec $TERMINAL -e ncmpcpp
+
+# Bind multimedia keys
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec pulseaudio-ctl up
+bindsym XF86AudioLowerVolume exec pulseaudio-ctl down
+bindsym XF86AudioMute exec pulseaudio-ctl mute
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioNext exec mpc next
 
 # Resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+  # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym $left       resize shrink width 10 px or 10 ppt
-        bindsym $down       resize grow height 10 px or 10 ppt
-        bindsym $up         resize shrink height 10 px or 10 ppt
-        bindsym $right      resize grow width 10 px or 10 ppt
+  # Pressing left will shrink the window’s width.
+  # Pressing right will grow the window’s width.
+  # Pressing up will shrink the window’s height.
+  # Pressing down will grow the window’s height.
+  bindsym $left       resize shrink width 10 px or 10 ppt
+  bindsym $down       resize grow height 10 px or 10 ppt
+  bindsym $up         resize shrink height 10 px or 10 ppt
+  bindsym $right      resize grow width 10 px or 10 ppt
 
-        # Same bindings, but for the arrow keys
-        bindsym Left        resize shrink width 10 px or 10 ppt
-        bindsym Down        resize grow height 10 px or 10 ppt
-        bindsym Up          resize shrink height 10 px or 10 ppt
-        bindsym Right       resize grow width 10 px or 10 ppt
+  # Same bindings, but for the arrow keys
+  bindsym Left        resize shrink width 10 px or 10 ppt
+  bindsym Down        resize grow height 10 px or 10 ppt
+  bindsym Up          resize shrink height 10 px or 10 ppt
+  bindsym Right       resize grow width 10 px or 10 ppt
 
-        # Back to normal: Enter or Escape or $super+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $super+r mode "default"
+  # Back to normal: Enter or Escape or $super+r
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym $super+r mode "default"
 }
 
 bindsym $super+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-# bar {
-#         status_command i3status
-# }
+# Start polybar
+exec_always --no-startup-id $HOME/.config/polybar/scripts/start-poly.sh

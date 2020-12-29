@@ -23,6 +23,3 @@ done
 
 # Enable popups
 $HOME/.scripts/popups
-
-# Show polybar
-$HOME/.config/polybar/scripts/start-poly.sh
