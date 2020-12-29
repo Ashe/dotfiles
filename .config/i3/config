@@ -13,6 +13,9 @@
 # is used in the bar {} block below.
 font pango:Fira Code 12
 
+# Hide titlebars
+default_border pixel 3
+
 # Allow space for polybar
 gaps top 28
 
