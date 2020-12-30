@@ -1,0 +1,169 @@
+# i3 config file (v4)
+
+# Font for window titles
+font pango:Fira Code 12
+
+# Hide titlebars
+default_border pixel 3
+
+# Allow space for polybar
+gaps top 28
+
+# Create gaps between windows
+gaps inner 10
+
+# Theme colors
+# class                 border  backgr. text    indic.   child_border
+client.focused          #81a1c1 #81a1c1 #d8dee9 #d08770
+client.focused_inactive #3b4252 #3b4252 #81a1c1 #454948
+client.unfocused        #3b4252 #3b4252 #81a1c1 #454948
+client.urgent           #d08770 #d8dee9 #81a1c1 #5e81ac
+client.placeholder      #000000 #0c0c0c #ffffff #000000 
+client.background       #2e3440
+
+# The combination of xss-lock, nm-applet and pactl is a popular choice, so
+# they are included here as an example. Modify as you see fit.
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id nm-applet
+
+# Set super key
+set $super Mod4
+
+# Startup script
+exec $HOME/.scripts/startup
+
+# Navigation Keys
+set $up k
+set $down j
+set $left h
+set $right l
+
+# Drag floating windows
+floating_modifier $super
+
+# Start terminal
+bindsym $super+Return exec $TERMINAL
+
+# Kill windows
+bindsym $super+w kill
+bindsym --release button2 kill
+
+# Program launcher
+bindsym $super+space exec rofi -show run
+
+# Change focus
+bindsym $super+$up focus up
+bindsym $super+Up focus up
+bindsym $super+$down focus down
+bindsym $super+Down focus down
+bindsym $super+$left focus left
+bindsym $super+Left focus left
+bindsym $super+$right focus right
+bindsym $super+Right focus right
+
+# Move focused window
+bindsym $super+Shift+$up move up
+bindsym $super+Shift+Up move up
+bindsym $super+Shift+$down move down
+bindsym $super+Shift+Down move down
+bindsym $super+Shift+$left move left
+bindsym $super+Shift+Left move left
+bindsym $super+Shift+$right move right
+bindsym $super+Shift+Right move right
+
+# Split in horizontal orientation
+bindsym $super+Control+space split v
+bindsym $super+Control+Return split h
+
+# Enter fullscreen mode for the focused container
+bindsym $super+shift+f fullscreen toggle
+
+# Change container layout
+bindsym $super+t split toggle, layout tabbed
+bindsym $super+Shift+t layout toggle split
+
+# Toggle tiling / floating
+bindsym $super+s floating toggle
+
+# Change focus between tiling / floating windows
+bindsym $super+shift+s focus mode_toggle
+
+# Focus the parent container
+bindsym $super+a focus parent
+
+# Focus the child container
+bindsym $super+d focus child
+
+# Move the currently focused window to the scratchpad
+bindsym $super+Shift+minus move scratchpad
+
+# Switch between workspaces
+bindsym $super+i exec $HOME/.scripts/i3-goto-workspace -1
+bindsym $super+o exec $HOME/.scripts/i3-goto-workspace 1
+bindsym $super+Shift+i exec $HOME/.scripts/i3-move-container-to-workspace -1
+bindsym $super+Shift+o exec $HOME/.scripts/i3-move-container-to-workspace 1
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $super+minus scratchpad show
+
+# Reload the configuration file
+bindsym $super+BackSpace reload
+
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $super+Shift+BackSpace restart
+
+# Exit i3 (logs you out of your X session)
+bindsym $super+Control+Shift+BackSpace exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# Program shortcuts
+bindsym $super+1 exec $TERMINAL -e $FILE
+bindsym $super+Shift+Control+1 exec $FILEGUI
+bindsym $super+2 exec $BROWSER
+bindsym $super+3 exec $TERMINAL -e ncmpcpp
+
+# Bind multimedia keys
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec pulseaudio-ctl up
+bindsym XF86AudioLowerVolume exec pulseaudio-ctl down
+bindsym XF86AudioMute exec pulseaudio-ctl mute
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioNext exec mpc next
+bindsym Print exec $HOME/.scripts/screenshot
+
+# Resize window (you can also use the mouse for that)
+mode "resize" {
+  # These bindings trigger as soon as you enter the resize mode
+
+  # Pressing left will shrink the window’s width.
+  # Pressing right will grow the window’s width.
+  # Pressing up will shrink the window’s height.
+  # Pressing down will grow the window’s height.
+  bindsym $left       resize shrink width 10 px or 10 ppt
+  bindsym $down       resize grow height 10 px or 10 ppt
+  bindsym $up         resize shrink height 10 px or 10 ppt
+  bindsym $right      resize grow width 10 px or 10 ppt
+
+  # Same bindings, but for the arrow keys
+  bindsym Left        resize shrink width 10 px or 10 ppt
+  bindsym Down        resize grow height 10 px or 10 ppt
+  bindsym Up          resize shrink height 10 px or 10 ppt
+  bindsym Right       resize grow width 10 px or 10 ppt
+
+  # Back to normal: Enter or Escape or $super+r
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym $super+r mode "default"
+}
+
+bindsym $super+r mode "resize"
+
+# Start polybar
+exec_always --no-startup-id $HOME/.config/polybar/scripts/start-poly.sh
