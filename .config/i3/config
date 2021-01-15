@@ -90,6 +90,7 @@ bindsym $super+Shift+t layout toggle split
 
 # Toggle tiling / floating
 bindsym $super+s floating toggle
+bindsym --whole-window $super+button2 floating toggle
 
 # Change focus between tiling / floating windows
 bindsym $super+shift+s focus mode_toggle
