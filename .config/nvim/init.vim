@@ -137,5 +137,6 @@ let g:slimv_swank_cmd = '! tmux new-window -d -n REPL-SBCL "sbcl --load ~/.confi
 " provide custom statusline: lightline.vim, vim-airline
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
- " Configure exceptions for CTRLP
+ " Configure CTRLP
 set wildignore+=*/tmp/*,*/bin/*,*/obj/*,*.so,*.swp,*.zi
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
