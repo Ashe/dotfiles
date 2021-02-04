@@ -20,6 +20,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" Allow use with Godot
+Plug 'habamax/vim-godot'
+
 " Initialise plugin system
 call plug#end()
 
