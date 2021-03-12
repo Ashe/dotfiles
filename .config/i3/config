@@ -51,7 +51,7 @@ floating_modifier $super
 bindsym $super+Return exec $TERMINAL
 
 # Kill windows
-bindsym $super+w kill
+bindsym $super+Shift+w kill
 bindsym --release button2 kill
 
 # Program launcher
