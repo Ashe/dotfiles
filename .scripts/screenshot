@@ -2,7 +2,7 @@
 
 # A simple script to take screenshoot using scrot
 # Then add date to the file name
-# Then open the result instantly using Viewnior
+# Then open the result instantly using feh
 
 mkdir -p ~/Pictures/screenshots
 sleep 0.2
