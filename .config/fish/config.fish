@@ -23,11 +23,11 @@ if  status is-interactive &&
 
   # Reattach to any unattached sessions available
   if set -q tmux_unattached[1]
-    exec /usr/bin/tmux attach-session -t "$tmux_unattached[1]"
+    exec tmux attach-session -t "$tmux_unattached[1]"
 
   # Otherwise start a new session
   else
-    exec /usr/bin/tmux new-session
+    exec tmux new-session
   end
 end
 # ghcup-env
