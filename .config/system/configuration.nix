@@ -76,6 +76,7 @@
   environment.systemPackages = with pkgs; [
     arandr
     brave
+    dex
     discord
     dropbox-cli
     dunst
@@ -83,9 +84,12 @@
     fish
     git
     gnome3.nautilus
+    jq
     killall
+    mpd
     neofetch
     neovim
+    numlockx
     pavucontrol
     polybarFull
     ranger
@@ -93,6 +97,7 @@
     steam
     slock
     tmux
+    xorg.xmodmap
 
     # Personal fork of ST
     (st.overrideAttrs (oa: rec {

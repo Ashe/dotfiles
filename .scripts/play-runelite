@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Exports
 export _JAVA_AWT_WM_NONREPARENTING=1

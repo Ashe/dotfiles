@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 killall -q dunst
 
 ## Colours
@@ -15,7 +15,7 @@ getcolors () {
 	WHITE=$(xrdb -query | grep 'color7:'| awk '{print $NF}')
 }
 xrdb ~/.Xresources
-paintee
+$HOME/.scripts/paintee
 
 # Only use the function above if the cache of paintee couldn't be found
 if [ -e ~/.cache/paintee ]; then

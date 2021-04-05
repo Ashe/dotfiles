@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 ## download mp3 from YouTube
 youtube-dl $1\

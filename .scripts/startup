@@ -1,7 +1,4 @@
-#!/bin/sh
-
-# Load xrandr customisation
-$HOME/.screenlayout/default.sh
+#!/usr/bin/env bash
 
 # Perform keybinding remappings
 xmodmap $HOME/.config/xmodmap/xmodmap.conf

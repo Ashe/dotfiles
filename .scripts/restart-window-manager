@@ -1,4 +1,0 @@
-#!/bin/sh
-
-# Restart BSPWM
-bspwmrc ; pkill -USR1 -x sxhkd

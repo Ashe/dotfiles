@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # A simple script to take screenshoot using scrot
 # Then add date to the file name

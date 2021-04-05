@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Create a palette from video
 ffmpeg -y -i $1 -vf palettegen /tmp/palette.png
