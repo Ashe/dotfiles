@@ -84,19 +84,23 @@
     fish
     git
     gnome3.nautilus
+    hardinfo
     jq
     killall
     mpd
+    mpv
     neofetch
     neovim
     numlockx
     pavucontrol
+    pciutils
     polybarFull
     ranger
     rofi
-    steam
+    scrot
     slock
     tmux
+    xclip
     xorg.xmodmap
 
     # Personal fork of ST
@@ -151,6 +155,11 @@
       package = pkgs.i3-gaps;
     };
   };
+
+  # Enable NVIDIA drivers
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.opengl.driSupport32Bit = true;
+  hardware.nvidia.modesetting.enable = true;
   
   # Enable dropbox service
   systemd.user.services.dropbox = {
@@ -170,17 +179,6 @@
       Nice = 10;
     };
   };
-
-  # Change resolution (hardcoded for now)
-  services.xserver.xrandrHeads = [
-    {
-      output = "DP-3";
-      primary = true;
-      monitorConfig = ''
-        Option "PreferredMode" "5120x1440"
-      '';
-    }
-  ];
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;

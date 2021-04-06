@@ -164,7 +164,11 @@ mode "resize" {
   bindsym $super+r mode "default"
 }
 
+# Bind resize function
 bindsym $super+r mode "resize"
+
+# Reset resolution
+exec_always xrandr -s 5120x1440
 
 # Start polybar
 exec_always --no-startup-id $HOME/.config/polybar/scripts/start-poly.sh
