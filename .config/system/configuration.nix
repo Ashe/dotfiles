@@ -57,8 +57,9 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
+  # Enable touchpad support but disable middle mouse emulation
   services.xserver.libinput.enable = true;
+  services.xserver.libinput.touchpad.middleEmulation = false;
 
   # User configurations
   users.users.ashe = {
