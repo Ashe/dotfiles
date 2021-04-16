@@ -50,16 +50,17 @@
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "eurosign:e";
 
-  # Enable CUPS to print documents.
+  # Enable CUPS to print documents
   services.printing.enable = true;
 
-  # Enable sound.
+  # Enable sound
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # Enable touchpad support but disable middle mouse emulation
+  # Enable touchpad support but disable middle emulation on middle mouse
   services.xserver.libinput.enable = true;
-  services.xserver.libinput.touchpad.middleEmulation = false;
+  services.xserver.libinput.mouse.middleEmulation = false;
+  services.xserver.libinput.touchpad.middleEmulation = true;
 
   # User configurations
   users.users.ashe = {
@@ -86,6 +87,7 @@
     git
     gnome3.nautilus
     hardinfo
+    htop
     jq
     killall
     mpd
@@ -188,6 +190,22 @@
   networking.firewall = {
     allowedTCPPorts = [ 17500 ];
     allowedUDPPorts = [ 17500 ];
+  };
+
+  # Get location from geoclue
+  location.provider = "geoclue2";
+
+  # Enable redshift
+  services.redshift = {
+    enable = true;
+    brightness = {
+      day = "1";
+      night = "1";
+    };
+    temperature = {
+      day = 5500;
+      night = 3700;
+    };
   };
 
   # This value determines the NixOS release from which the default
