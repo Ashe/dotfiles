@@ -35,14 +35,5 @@ song_status_format = "$2%a $1• $3%t $1• $4%b {(Disc %d) }$1• $5%y$1"
 song_window_title_format = "{%a - }{%t}|{%f}"
 song_columns_list_format = "(5f)[blue]{l} (33)[cyan]{t} (32)[green]{a} (30)[magenta]{b}"
 
-# Visualiser
-visualizer_fifo_path = "/tmp/mpd.fifo"
-visualizer_output_name = "visualizer"
-visualizer_sync_interval = "30" 
-visualizer_in_stereo = "yes"
-visualizer_type = "spectrum"
-visualizer_look = "•▮"
-visualizer_color = blue, cyan, green, yellow, magenta, red
-
 # Exec Script
 execute_on_song_change="bash -c '~/.ncmpcpp/scripts/notify'"

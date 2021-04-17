@@ -10,6 +10,9 @@
 
     # Include the results of the hardware scan
     ./hardware-configuration.nix
+
+    # Allow customisation via home-manager
+    (import "${builtins.fetchTarball https://github.com/nix-community/home-manager/archive/master.tar.gz}/nixos")
   ];
 
   # Enable grub as bootloader
@@ -70,6 +73,11 @@
     shell = pkgs.fish;
     extraGroups = [ "wheel" "networkmanager" ];
   };
+
+  # Enable use of the home manager
+  home-manager.users = {
+    ashe = import /home/ashe/.config/system/user-configuration.nix;
+  };
   
   # List of directories to symlink in /run/current-system/sw
   environment.pathsToLink = [ "/libexec" ];
@@ -77,11 +85,7 @@
   # List packages installed in system profile
   environment.systemPackages = with pkgs; [
     arandr
-    brave
     dex
-    discord
-    dropbox-cli
-    dunst
     feh
     fish
     git
@@ -90,31 +94,24 @@
     htop
     jq
     killall
-    mpd
-    mpv
     neofetch
-    neovim
     numlockx
     pavucontrol
     pciutils
-    polybarFull
     ranger
-    rofi
-    scrot
-    slock
     tmux
+    xdg-user-dirs
     xclip
     xorg.xmodmap
-
-    # Personal fork of ST
-    (st.overrideAttrs (oa: rec {
-      src = builtins.fetchTarball {
-        url = "https://github.com/Ashe/st/archive/master.tar.gz";
-      };
-      buildInputs = oa.buildInputs ++ [ harfbuzz ];
-    }))
   ];
-  
+
+  # Fonts used throughout system
+  fonts.fonts = with pkgs; [
+    noto-fonts
+    noto-fonts-emoji
+    ubuntu_font_family
+  ];
+
   # Variables for changing what programs are used
   environment.variables = {
     TERMINAL = "st";
@@ -123,21 +120,11 @@
     FILE = "ranger";
     FILEGUI = "nautilus";
   };
-
-  # Fonts used throughout system
-  fonts.fonts = with pkgs; [
-    fira-code
-    fira-code-symbols
-    noto-fonts
-    noto-fonts-emoji
-    ubuntu_font_family
-    (pkgs.callPackage ./packages/waffle.nix {})
-  ];
   
   # Allow proprietary software
   nixpkgs.config.allowUnfree = true;
 
-  # Enable steam
+  # Enable Steam
   programs.steam.enable = true;
 
   # Enable FISH
@@ -163,25 +150,6 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.driSupport32Bit = true;
   hardware.nvidia.modesetting.enable = true;
-  
-  # Enable dropbox service
-  systemd.user.services.dropbox = {
-    description = "Dropbox";
-    wantedBy = [ "graphical-session.target" ];
-    environment = {
-      QT_PLUGIN_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtPluginPrefix;
-      QML2_IMPORT_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtQmlPrefix;
-    };
-    serviceConfig = {
-      ExecStart = "${pkgs.dropbox.out}/bin/dropbox";
-      ExecReload = "${pkgs.coreutils.out}/bin/kill -HUP $MAINPID";
-      KillMode = "control-group"; # upstream recommends process
-      Restart = "on-failure";
-      PrivateTmp = true;
-      ProtectSystem = "full";
-      Nice = 10;
-    };
-  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
