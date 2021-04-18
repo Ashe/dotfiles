@@ -181,6 +181,11 @@ with lib;
           " Formatting selected code
           xmap <leader>f  <Plug>(coc-format-selected)
           nmap <leader>f  <Plug>(coc-format-selected)
+
+          " Add (Neo)Vim's native statusline support
+          " NOTE: Please see `:h coc-status` for integrations with external plugins that
+          " provide custom statusline: lightline.vim, vim-airline
+          set statusline^=%{coc#status()}%{get(b:,'coc_current_function',\'\')}
         '';
       }
       {
@@ -284,11 +289,6 @@ with lib;
 
       " Allow the lisp REPL to open with tmux
       let g:slimv_swank_cmd = '! tmux new-window -d -n REPL-SBCL "sbcl --load ~/.config/nvim/plugged/slimv/slime/start-swank.lisp"'
-
-      " Add (Neo)Vim's native statusline support
-      " NOTE: Please see `:h coc-status` for integrations with external plugins that
-      " provide custom statusline: lightline.vim, vim-airline
-      set statusline^=%{coc#status()}%{get(b:,'coc_current_function',\'\')}
     '';
   };
 
