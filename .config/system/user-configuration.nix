@@ -110,8 +110,8 @@ with lib;
         set sessions (cat $HOME/.cache/tmux/sessions | grep -v attached | cut -d: -f1)
 
         # Reattach to any unattached sessions available
-        if set -q tmux_unattached[1]
-          exec tmux attach-session -t "$tmux_unattached[1]"
+        if set -q sessions[1]
+          exec tmux attach-session -t "$sessions[1]"
 
         # Otherwise start a new session
         else
