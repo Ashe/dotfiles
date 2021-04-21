@@ -170,5 +170,8 @@ bindsym $super+r mode "resize"
 # Reset resolution
 exec_always $HOME/.scripts/auto-set-resolution
 
+# Update background
+exec_always $HOME/.fehbg
+
 # Start polybar
 exec_always --no-startup-id $HOME/.config/polybar/scripts/start-poly.sh

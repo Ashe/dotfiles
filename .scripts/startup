@@ -6,9 +6,6 @@ xmodmap $HOME/.config/xmodmap/xmodmap.conf
 # Reload resources
 xrdb $HOME/.Xresources
 
-# Set background
-$HOME/.fehbg
-
 # Start order-insensitive programs
 mpd &
 numlockx &
