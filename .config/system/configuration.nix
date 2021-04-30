@@ -10,9 +10,6 @@
 
     # Include the results of the hardware scan
     /etc/nixos/hardware-configuration.nix
-
-    # Allow customisation via home-manager
-    (import "${builtins.fetchTarball https://github.com/nix-community/home-manager/archive/master.tar.gz}/nixos")
   ];
 
   # Enable grub as bootloader
@@ -73,11 +70,6 @@
     shell = pkgs.fish;
     extraGroups = [ "wheel" "networkmanager" ];
   };
-
-  # Enable use of the home manager
-  home-manager.users = {
-    ashe = import /home/ashe/.config/system/user-configuration.nix;
-  };
   
   # List of directories to symlink in /run/current-system/sw
   environment.pathsToLink = [ "/libexec" ];
@@ -91,6 +83,7 @@
     git
     gnome3.nautilus
     hardinfo
+    home-manager
     htop
     jq
     killall
@@ -183,6 +176,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.09"; # Did you read the comment?
-
 }
-
