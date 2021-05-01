@@ -36,8 +36,7 @@
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-  networking.interfaces.eno1.useDHCP = true;
-  networking.interfaces.wlp7s0.useDHCP = true;
+  networking.interfaces.enp4s0.useDHCP = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -139,10 +138,17 @@
     };
   };
 
-  # Enable NVIDIA drivers
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.opengl.driSupport32Bit = true;
-  hardware.nvidia.modesetting.enable = true;
+  # Enable AMD drivers
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  hardware.opengl = {
+    driSupport = true;
+    driSupport32Bit = true;
+    extraPackages = with pkgs; [
+      amdvlk
+      rocm-opencl-icd
+      rocm-opencl-runtime
+    ];
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
