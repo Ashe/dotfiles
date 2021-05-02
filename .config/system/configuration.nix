@@ -77,15 +77,18 @@
   environment.systemPackages = with pkgs; [
     arandr
     dex
+    dosfstools
     feh
     fish
     git
     gnome3.nautilus
+    gparted
     hardinfo
     home-manager
     htop
     jq
     killall
+    mtools
     neofetch
     numlockx
     pavucontrol
