@@ -134,7 +134,7 @@ in
       # Configure colours
       colors = {
         unfocused = {
-          background = "#3b5252"; 
+          background = "#3b4252"; 
           border = "#3b5252"; 
           childBorder = "";
           indicator = "#454948"; 
