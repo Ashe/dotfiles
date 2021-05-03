@@ -56,11 +56,6 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # Enable touchpad support but disable middle emulation on middle mouse
-  services.xserver.libinput.enable = true;
-  services.xserver.libinput.mouse.middleEmulation = false;
-  services.xserver.libinput.touchpad.middleEmulation = true;
-
   # User configurations
   users.users.ashe = {
     description = "Ashley Smith";
@@ -75,29 +70,36 @@
 
   # List packages installed in system profile
   environment.systemPackages = with pkgs; [
-    arandr
+
+    # Allow per-user customisation
+    home-manager
+
+    # Basic packages
+    alacritty
     dex
-    dosfstools
-    feh
-    fish
     git
     gnome3.nautilus
-    gparted
-    hardinfo
-    home-manager
-    htop
-    jq
-    killall
-    mtools
+    fish
     neofetch
     numlockx
     pavucontrol
-    pciutils
     ranger
     tmux
+
+    # System tools
+    dosfstools
+    gparted
+    hardinfo
+    htop
+    killall
+    networkmanager
     xdg-user-dirs
-    xclip
-    xorg.xmodmap
+    
+    # Miscellaneous
+    jq
+    mtools
+    pciutils
+    pulseaudio-ctl
   ];
 
   # Fonts used throughout system
@@ -124,34 +126,6 @@
 
   # Enable FISH
   programs.fish.enable = true;
-
-  # Enable and configure X server
-  services.xserver = {
-    enable = true;
-
-    # Use lightdm as display manager
-    displayManager = {
-      lightdm.enable = true;
-    };
-
-    # Use i3-gaps as window manager
-    windowManager.i3 = {
-      enable = true; 
-      package = pkgs.i3-gaps;
-    };
-  };
-
-  # Enable AMD drivers
-  services.xserver.videoDrivers = [ "amdgpu" ];
-  hardware.opengl = {
-    driSupport = true;
-    driSupport32Bit = true;
-    extraPackages = with pkgs; [
-      amdvlk
-      rocm-opencl-icd
-      rocm-opencl-runtime
-    ];
-  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
