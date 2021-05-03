@@ -16,6 +16,9 @@ with lib;
   # Packages to install
   home.packages = with pkgs; [
 
+    # Import package entries from other files
+    (callPackage ./packages/st/st.nix {})
+
     # Languages
     nodejs
     python3Minimal
@@ -40,19 +43,13 @@ with lib;
     wl-clipboard
     wofi
 
-    # Personal fork of ST
-    (st.overrideAttrs (oa: rec {
-      src = builtins.fetchTarball {
-        url = "https://github.com/Ashe/st/archive/master.tar.gz";
-      };
-      buildInputs = oa.buildInputs ++ [ harfbuzz ];
-    }))
-
     # Fonts
     fira-code
     fira-code-symbols
     font-awesome
-    (pkgs.callPackage ./packages/waffle.nix {})
+    noto-fonts
+    noto-fonts-emoji
+    ubuntu_font_family
   ];
 
   # Allow proprietary software

@@ -61,7 +61,6 @@
     description = "Ashley Smith";
     isNormalUser = true;
     home = "/home/ashe";
-    shell = pkgs.fish;
     extraGroups = [ "wheel" "networkmanager" ];
   };
   
@@ -78,8 +77,8 @@
     alacritty
     dex
     git
+    gnome3.gnome-system-monitor
     gnome3.nautilus
-    fish
     neofetch
     numlockx
     pavucontrol
@@ -100,13 +99,6 @@
     mtools
     pciutils
     pulseaudio-ctl
-  ];
-
-  # Fonts used throughout system
-  fonts.fonts = with pkgs; [
-    noto-fonts
-    noto-fonts-emoji
-    ubuntu_font_family
   ];
 
   # Variables for changing what programs are used
