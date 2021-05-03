@@ -38,16 +38,29 @@
   networking.useDHCP = false;
   networking.interfaces.enp4s0.useDHCP = true;
 
-  # Select internationalisation properties.
+  # Select internationalisation properties
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
     keyMap = "us";
   };
 
-  # Configure keymap in X11
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "eurosign:e";
+  # Enable AMD gpu
+  hardware = {
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [
+        amdvlk
+        rocm-opencl-icd
+        rocm-opencl-runtime
+      ];
+      extraPackages32 = with pkgs; [
+        driversi686Linux.amdvlk
+      ];
+    };
+  };
 
   # Enable CUPS to print documents
   services.printing.enable = true;
@@ -61,6 +74,7 @@
     description = "Ashley Smith";
     isNormalUser = true;
     home = "/home/ashe";
+    shell = pkgs.fish;
     extraGroups = [ "wheel" "networkmanager" ];
   };
   
@@ -93,8 +107,10 @@
     killall
     networkmanager
     xdg-user-dirs
+    xwayland
     
     # Miscellaneous
+    (inxi.override { withRecommends = true; })
     jq
     libnotify
     mtools
