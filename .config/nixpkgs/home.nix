@@ -37,7 +37,9 @@ with lib;
     # Utilities
     dunst
     gammastep
+    grim
     mpc_cli
+    slurp
     swaylock
     swayidle
     wdisplays

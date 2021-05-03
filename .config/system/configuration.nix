@@ -96,6 +96,7 @@
     
     # Miscellaneous
     jq
+    libnotify
     mtools
     pciutils
     pulseaudio-ctl
