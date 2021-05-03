@@ -62,8 +62,7 @@ with lib;
       if  status is-interactive &&
           command -sq tmux &> /dev/null &&
           not string match -q 'screen*' -- $TERM &&
-          not string match -q 'tmux*' -- $TERM &&
-          test -z "$TMUX"
+          not string match -q 'tmux*' -- $TERM
 
         # Check if there's an unattached session
         mkdir -p $HOME/.cache/tmux
