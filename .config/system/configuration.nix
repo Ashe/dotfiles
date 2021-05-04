@@ -110,6 +110,7 @@
     xwayland
     
     # Miscellaneous
+    geoclue2
     (inxi.override { withRecommends = true; })
     jq
     libnotify
@@ -147,19 +148,6 @@
 
   # Get location from geoclue
   location.provider = "geoclue2";
-
-  # Enable redshift
-  services.redshift = {
-    enable = true;
-    brightness = {
-      day = "1";
-      night = "1";
-    };
-    temperature = {
-      day = 5500;
-      night = 3700;
-    };
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

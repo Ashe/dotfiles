@@ -26,7 +26,6 @@ with lib;
     # Programs
     brave
     discord
-    dropbox
     sway-contrib.grimshot
     mpd
     mpv
@@ -36,7 +35,6 @@ with lib;
 
     # Utilities
     dunst
-    gammastep
     grim
     mpc_cli
     slurp
@@ -75,21 +73,17 @@ with lib;
     };
   };
 
-  # Enable dropbox service
-  systemd.user.services.dropbox = {
-    Unit = {
-      Description = "Dropbox";
-      After = [ "graphical-session-pre.target" ];
-      PartOf = [ "graphical-session.target" ];
-    };
-    Service = {
-      Restart = "on-failure";
-      RestartSec = 1;
-      ExecStart = "${pkgs.dropbox}/bin/dropbox";
-      Environment = "QT_PLUGIN_PATH=/run/current-system/sw/${pkgs.qt5.qtbase.qtPluginPrefix}";
-    };
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
+  # Configure services
+  services = {
+
+    # Enable dropbox
+    dropbox.enable = true;
+
+    # Enable gammastep
+    gammastep = {
+      enable = true;
+      provider = "geoclue2";
+      tray = true;
     };
   };
 }
