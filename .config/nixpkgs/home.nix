@@ -26,7 +26,7 @@ with lib;
     # Programs
     brave
     discord
-    sway-contrib.grimshot
+    lutris
     mpd
     mpv
     ncmpcpp
@@ -40,6 +40,7 @@ with lib;
     slurp
     swaylock
     swayidle
+    sway-contrib.grimshot
     wdisplays
     wl-clipboard
     wofi
@@ -76,14 +77,29 @@ with lib;
   # Configure services
   services = {
 
-    # Enable dropbox
-    dropbox.enable = true;
-
     # Enable gammastep
     gammastep = {
       enable = true;
       provider = "geoclue2";
       tray = true;
+    };
+  };
+
+  # Enable dropbox service
+  systemd.user.services.dropbox = {
+    Unit = {
+      Description = "Dropbox";
+      After = [ "graphical-session-pre.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+    Service = {
+      Restart = "on-failure";
+      RestartSec = 1;
+      ExecStart = "${pkgs.dropbox}/bin/dropbox";
+      Environment = "QT_PLUGIN_PATH=/run/current-system/sw/${pkgs.qt5.qtbase.qtPluginPrefix}";
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
     };
   };
 }

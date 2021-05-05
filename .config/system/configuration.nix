@@ -108,9 +108,10 @@
     networkmanager
     xdg-user-dirs
     xwayland
-    
+
     # Miscellaneous
     geoclue2
+    gnome3.adwaita-icon-theme
     (inxi.override { withRecommends = true; })
     jq
     libnotify
