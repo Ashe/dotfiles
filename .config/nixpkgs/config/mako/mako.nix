@@ -31,7 +31,7 @@
 
     # Icons
     icons = true;
-    maxIconSize = 128;
+    maxIconSize = 96;
 
     # Font
     font = "sans-serif 14";
