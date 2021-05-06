@@ -50,6 +50,7 @@ in
         # Basics
         "${cfg.config.modifier}+Shift+w" = "kill";
         "${cfg.config.modifier}+space" = "exec ${cfg.config.menu} --show run";
+        "${cfg.config.modifier}+Shift+space" = "exec ${cfg.config.menu} --show drun";
         "${cfg.config.modifier}+BackSpace" = "reload";
         "${cfg.config.modifier}+Control+Shift+BackSpace" =
           "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
@@ -97,8 +98,17 @@ in
         "${cfg.config.modifier}+Control+space" = "splitv";
         "${cfg.config.modifier}+Control+Return" = "splith";
 
+        # Navigate workspaces
+        "${cfg.config.modifier}+i" = "workspace prev_on_output --create";
+        "${cfg.config.modifier}+o" = "workspace next_on_output -- create";
+        "${cfg.config.modifier}+Shift+i" = "move container to workspace prev, workspace prev";
+        "${cfg.config.modifier}+Shift+o" = "move container to workspace next, workspace next";
+
         # Enter fullscreen mode for currently focused container
         "${cfg.config.modifier}+Shift+f" = "fullscreen toggle";
+
+        # Resize containers
+        "${cfg.config.modifier}+r" = "mode resize";
 
         # Change container layout
         "${cfg.config.modifier}+t" = "split toggle, layout tabbed";
@@ -111,8 +121,6 @@ in
         # Send programs to scratchpad
         "${cfg.config.modifier}+Shift+minus" = "move scratchpad";
         "${cfg.config.modifier}+minus" = "scratchpad show";
-
-        "${cfg.config.modifier}+r" = "mode resize";
       };
 
       # Configure colours
