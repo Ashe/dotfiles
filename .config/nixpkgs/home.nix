@@ -8,6 +8,7 @@ with lib;
   # Import other config files
   imports = [
     ./config/fish/fish.nix
+    ./config/mako/mako.nix
     ./config/neovim/neovim.nix
     ./config/sway/sway.nix
     ./config/waybar/waybar.nix
@@ -34,7 +35,6 @@ with lib;
     youtube-dl
 
     # Utilities
-    dunst
     grim
     mpc_cli
     slurp
