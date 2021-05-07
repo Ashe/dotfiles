@@ -17,7 +17,7 @@
     # Positioning and size
     anchor = "top-right";
     layer = "overlay";
-    height = 300;
+    height = 200;
     width = 500;
     padding = "12,12,12,12";
     borderSize = 3;
@@ -34,7 +34,7 @@
     maxIconSize = 96;
 
     # Font
-    font = "sans-serif 14";
+    font = "sans-serif 12";
 
     # Colours
     backgroundColor = "#2E3440";
