@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-notify-send -u low "Notification" "Opening Syncthing in browser"
-$BROWSER http://localhost:8384
