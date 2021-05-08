@@ -35,6 +35,7 @@ with lib;
     youtube-dl
 
     # Utilities
+    geoclue2
     grim
     mpc_cli
     slurp
