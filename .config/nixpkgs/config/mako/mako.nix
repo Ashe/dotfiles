@@ -19,6 +19,7 @@
     layer = "overlay";
     height = 200;
     width = 500;
+    margin = "20,20,20,20";
     padding = "12,12,12,12";
     borderSize = 3;
     borderRadius = 3;
