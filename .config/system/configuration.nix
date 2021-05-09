@@ -97,10 +97,10 @@
     numlockx
     pavucontrol
     ranger
-    tmux
 
     # System tools
     dosfstools
+    geoclue2
     gparted
     hardinfo
     htop

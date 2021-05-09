@@ -12,6 +12,7 @@ with lib;
     ./config/ncmpcpp/ncmpcpp.nix
     ./config/neovim/neovim.nix
     ./config/sway/sway.nix
+    ./config/tmux/tmux.nix
     ./config/waybar/waybar.nix
   ];
 
@@ -35,7 +36,6 @@ with lib;
     youtube-dl
 
     # Utilities
-    geoclue2
     grim
     mpc_cli
     slurp
