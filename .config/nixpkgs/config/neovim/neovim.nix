@@ -32,7 +32,6 @@ with lib;
         plugin = airline;
         config = ''
           " Set airline appearance
-          let g:airline_powerline_fonts=1
           let g:airline_theme='deus'
         '';
       }

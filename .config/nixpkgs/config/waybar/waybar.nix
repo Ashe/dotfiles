@@ -79,6 +79,9 @@ with lib;
             on-click-right = "pavucontrol";
             all-outputs = true;
           };
+          "sway/mode" = {
+            format = " {}";
+          };
           "sway/window" = {
             format = " {}";
           };

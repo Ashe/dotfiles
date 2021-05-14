@@ -100,7 +100,6 @@
 
     # System tools
     dosfstools
-    geoclue2
     gparted
     hardinfo
     htop
@@ -131,14 +130,22 @@
   # Allow proprietary software
   nixpkgs.config.allowUnfree = true;
 
-  # Enable Steam
-  programs.steam.enable = true;
+  # Configure system-wide programs
+  programs = {
 
-  # Enable FISH
-  programs.fish.enable = true;
+    # Enable Steam
+    steam.enable = true;
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+    # Enable FISH
+    fish.enable = true;
+  };
+
+  # Configure system-wide services
+  services = {
+
+    # Enable the OpenSSH daemon
+    openssh.enable = true;
+  };
 
   # Open ports in the firewall.
   networking.firewall = {

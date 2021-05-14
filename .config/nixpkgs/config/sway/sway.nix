@@ -42,6 +42,7 @@ in
       # Startup commands
       startup = [
         { command = "mpd"; }
+        { command = "dropbox start"; }
       ];
 
       # Keybindings
