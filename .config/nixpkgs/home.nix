@@ -41,8 +41,6 @@ with lib;
     grim
     mpc_cli
     slurp
-    swaylock
-    swayidle
     sway-contrib.grimshot
     wdisplays
     wl-clipboard
