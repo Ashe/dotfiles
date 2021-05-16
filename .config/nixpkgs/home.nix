@@ -9,6 +9,7 @@ with lib;
   imports = [
     ./config/fish/fish.nix
     ./config/mako/mako.nix
+    ./config/mpd/mpd.nix
     ./config/ncmpcpp/ncmpcpp.nix
     ./config/neovim/neovim.nix
     ./config/sway/sway.nix

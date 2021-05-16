@@ -51,8 +51,8 @@ with lib;
           mpd = {
             format = "{stateIcon} {title}";
             format-paused = "{stateIcon} {title}";
-            format-stopped = "";
-            format-disconnected = "";
+            format-stopped = "";
+            format-disconnected = "";
             state-icons = {
               playing = "";
               paused = "";
@@ -327,21 +327,21 @@ with lib;
       }
 
       #mpd {
-          background-color: #5E81AC;
-          border-bottom: 3px solid #9ED1FC;
-          color: #2a5c45;
-      }
-
-      #mpd.disconnected {
-          background-color: #f53c3c;
-      }
-
-      #mpd.stopped {
-          background-color: #90b1b1;
+          background-color: #A3BE8C;
+          border-bottom: 3px solid #C3DEAC;
+          color: #000000;
       }
 
       #mpd.paused {
-          background-color: #51a37a;
+          background-color: #BF616A;
+          border-bottom: 3px solid #DF818A;
+          color: #000000;
+      }
+
+      #mpd.disconnected,
+      #mpd.stopped {
+          background-color: #3B4252;
+          border-bottom: 3px solid #4C566A;
       }
 
       #language {

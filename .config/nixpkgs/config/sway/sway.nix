@@ -60,6 +60,7 @@ in
         "${cfg.config.modifier}+Return" = "exec ${cfg.config.terminal}";
         "${cfg.config.modifier}+1" = "exec $FILEGUI";
         "${cfg.config.modifier}+2" = "exec $BROWSER";
+        "${cfg.config.modifier}+3" = "exec ${cfg.config.terminal} -e ncmpcpp";
         "${cfg.config.modifier}+Shift+s" = "exec grimshot copy area";
         "Print" = "exec grimshot save area";
 
