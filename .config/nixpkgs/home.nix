@@ -64,6 +64,25 @@ with lib;
   # Enable discovery of fonts from installed packages
   fonts.fontconfig.enable = lib.mkForce true;
 
+  # Configure GTK
+  gtk = {
+
+    # Enable GTK customisation
+    enable = true;
+
+    # Set theme
+    theme = {
+      name = "Nordic";
+      package = pkgs.nordic;
+    };
+    
+    # Set icon theme
+    iconTheme = {
+      name = "Papirus";
+      package = pkgs.papirus-icon-theme;
+    };
+  };
+
   # Configure programs
   programs = {
 

@@ -62,9 +62,6 @@
     };
   };
 
-  # Enable CUPS to print documents
-  services.printing.enable = true;
-
   # Enable sound
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -136,6 +133,9 @@
   # Configure system-wide programs
   programs = {
 
+    # Enable dconf
+    dconf.enable = true;
+
     # Enable Steam
     steam.enable = true;
 
@@ -145,6 +145,9 @@
 
   # Configure system-wide services
   services = {
+
+    # Enable CUPS to print documents
+    printing.enable = true;
 
     # Enable the OpenSSH daemon
     openssh.enable = true;
