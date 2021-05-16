@@ -97,6 +97,7 @@
     numlockx
     pavucontrol
     ranger
+    ungoogled-chromium
 
     # System tools
     dosfstools
@@ -105,6 +106,7 @@
     htop
     killall
     networkmanager
+    unzip
     xdg-user-dirs
     xwayland
 
@@ -122,7 +124,7 @@
   environment.variables = {
     TERMINAL = "st";
     EDITOR = "nvim";
-    BROWSER = "brave";
+    BROWSER = "chromium";
     FILE = "ranger";
     FILEGUI = "nautilus";
   };
@@ -151,6 +153,9 @@
   networking.firewall = {
     allowedTCPPorts = [ 17500 ];
     allowedUDPPorts = [ 17500 ];
+    allowedUDPPortRanges = [
+      { from = 32768; to = 60999; }
+    ];
   };
 
   # Get location from geoclue

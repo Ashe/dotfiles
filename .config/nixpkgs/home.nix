@@ -27,13 +27,15 @@ with lib;
     python3Minimal
 
     # Programs
-    brave
     discord
     lutris
     mpd
     mpv
     neofetch
-    youtube-dl
+
+    # Games
+    ajour
+    runelite
 
     # Utilities
     grim
@@ -45,6 +47,7 @@ with lib;
     wdisplays
     wl-clipboard
     wofi
+    youtube-dl
 
     # Fonts
     dina-font
