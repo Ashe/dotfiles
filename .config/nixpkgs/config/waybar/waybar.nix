@@ -31,6 +31,7 @@ with lib;
         # Right modules
         modules-right = [ 
           "cpu"
+          "temperature"
           "battery"
           "network"
           "pulseaudio"
@@ -78,6 +79,12 @@ with lib;
             on-click-middle = "pavucontrol";
             on-click-right = "pavucontrol";
             all-outputs = true;
+          };
+          temperature = {
+            format = " {temperatureC}°C";
+            format-critical = " {temperatureC}°C";
+            critical-threshhold = 80;
+            hwmon-path = "/sys/class/hwmon/hwmon1/temp1_input";
           };
           "sway/mode" = {
             format = " {}";
@@ -203,7 +210,7 @@ with lib;
       }
 
       #clock {
-          background-color: #64727D;
+          background-color: #4C566A;
       }
 
       #battery {
@@ -238,7 +245,8 @@ with lib;
       }
 
       #cpu {
-          background-color: #2ecc71;
+          background-color: #A3BE8C;
+          border-bottom: 3px solid #C3DEAC;
           color: #000000;
       }
 
@@ -255,21 +263,27 @@ with lib;
       }
 
       #network {
-          background-color: #2980b9;
+          background-color: #81A1C1;
+          border-bottom: 3px solid #A1C1E1;
+          color: #000000;
       }
 
       #network.disconnected {
-          background-color: #f53c3c;
+          background-color: #BF616A;
+          border-bottom: 3px solid #DF818A;
+          color: #000000;
       }
 
       #pulseaudio {
-          background-color: #f1c40f;
+          background-color: #EBCB8B;
+          border-bottom: 3px solid #FFEBAB;
           color: #000000;
       }
 
       #pulseaudio.muted {
-          background-color: #90b1b1;
-          color: #2a5c45;
+          background-color: #BF616A;
+          border-bottom: 3px solid #DF818A;
+          color: #000000;
       }
 
       #custom-media {
@@ -287,15 +301,20 @@ with lib;
       }
 
       #temperature {
-          background-color: #f0932b;
+          background-color: #8FBCBB;
+          border-bottom: 3px solid #AFDCDB;
+          color: #000000;
       }
 
       #temperature.critical {
-          background-color: #eb4d4b;
+          background-color: #D08770;
+          border-bottom: 3px solid #F0A790;
+          color: #000000;
       }
 
       #tray {
-          background-color: #2980b9;
+          background-color: #3B4252;
+          border-bottom: 3px solid #4C566A;
       }
 
       #idle_inhibitor {
@@ -308,7 +327,8 @@ with lib;
       }
 
       #mpd {
-          background-color: #66cc99;
+          background-color: #5E81AC;
+          border-bottom: 3px solid #9ED1FC;
           color: #2a5c45;
       }
 

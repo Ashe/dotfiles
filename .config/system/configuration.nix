@@ -89,7 +89,6 @@
 
     # Basic packages
     alacritty
-    dex
     git
     gnome3.gnome-system-monitor
     gnome3.nautilus
@@ -100,12 +99,14 @@
     ungoogled-chromium
 
     # System tools
+    dex
     dosfstools
     gparted
     hardinfo
     htop
     killall
     networkmanager
+    tree
     unzip
     xdg-user-dirs
     xwayland
