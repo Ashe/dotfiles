@@ -42,6 +42,7 @@ in
       # Startup commands
       startup = [
         { command = "dropbox start"; }
+        { command = "mako"; }
       ];
 
       # Keybindings

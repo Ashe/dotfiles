@@ -1,8 +1,0 @@
-// Settings in here override those in "TrailingSpaces/trailing_spaces.sublime-settings"
-
-{
-  "enabled": false,
-  "highlight_color": "",
-  "include_current_line": false,
-  "trim_on_save": true
-}
