@@ -245,8 +245,8 @@ with lib;
       }
 
       #cpu {
-          background-color: #A3BE8C;
-          border-bottom: 3px solid #C3DEAC;
+          background-color: #81A1C1;
+          border-bottom: 3px solid #A1C1E1;
           color: #000000;
       }
 
@@ -263,8 +263,8 @@ with lib;
       }
 
       #network {
-          background-color: #81A1C1;
-          border-bottom: 3px solid #A1C1E1;
+          background-color: #A3BE8C;
+          border-bottom: 3px solid #C3DEAC;
           color: #000000;
       }
 
