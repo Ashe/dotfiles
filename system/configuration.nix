@@ -84,6 +84,9 @@
     # Allow per-user customisation
     home-manager
 
+    # Nix utilities
+    nix-index
+
     # Basic packages
     alacritty
     git
