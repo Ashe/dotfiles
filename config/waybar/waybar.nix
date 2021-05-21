@@ -32,6 +32,7 @@ with lib;
         modules-right = [ 
           "cpu"
           "temperature"
+          "temperature#gpu"
           "battery"
           "network"
           "pulseaudio"
@@ -81,10 +82,20 @@ with lib;
             all-outputs = true;
           };
           temperature = {
-            format = " {temperatureC}°C";
-            format-critical = " {temperatureC}°C";
+            format = "  CPU: {temperatureC}°C";
+            format-critical = " CPU: {temperatureC}°C";
+            tooltip = true;
+            tooltip-format = " CPU: {temperatureC}°C";
             critical-threshhold = 80;
             hwmon-path = "/sys/class/hwmon/hwmon1/temp1_input";
+          };
+          "temperature#gpu" = {
+            format = " GPU: {temperatureC}°C";
+            format-critical = " GPU: {temperatureC}°C";
+            tooltip = true;
+            tooltip-format = " GPU: {temperatureC}°C";
+            critical-threshhold = 80;
+            hwmon-path = "/sys/class/drm/card0/device/hwmon/hwmon0/temp1_input";
           };
           "sway/mode" = {
             format = " {}";
@@ -245,8 +256,8 @@ with lib;
       }
 
       #cpu {
-          background-color: #81A1C1;
-          border-bottom: 3px solid #A1C1E1;
+          background-color: #6E91BC;
+          border-bottom: 3px solid #8EB1DC;
           color: #000000;
       }
 
@@ -301,6 +312,12 @@ with lib;
       }
 
       #temperature {
+          background-color: #91B1D1;
+          border-bottom: 3px solid #B1C1F1;
+          color: #000000;
+      }
+
+      #temperature.gpu {
           background-color: #8FBCBB;
           border-bottom: 3px solid #AFDCDB;
           color: #000000;
