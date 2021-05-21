@@ -120,6 +120,7 @@ in
    mtools
    pciutils
    pulseaudio-ctl
+   xdg-utils
   ];
 
   # Variables for changing what programs are used
