@@ -16,6 +16,7 @@ with lib;
     ./config/sway/sway.nix
     ./config/tmux/tmux.nix
     ./config/waybar/waybar.nix
+    ./config/xdg/xdg.nix
   ];
 
   # Packages to install

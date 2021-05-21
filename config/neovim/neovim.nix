@@ -25,11 +25,11 @@ with lib;
       coc-highlight
       coc-nvim
       coc-yaml
-      gitgutter
-      tmux-navigator
+      vim-gitgutter
+      vim-tmux-navigator
       vim-airline-themes
       {
-        plugin = airline;
+        plugin = vim-airline;
         config = ''
           " Set airline appearance
           let g:airline_theme='deus'
@@ -61,7 +61,7 @@ with lib;
         '';
       }
       {
-        plugin = ctrlp;
+        plugin = ctrlp-vim;
         config = ''
           " Filter what gets shown by ctrlp
           set wildignore+=*/tmp/*,*/bin/*,*/obj/*,*.so,*.swp,*.zi

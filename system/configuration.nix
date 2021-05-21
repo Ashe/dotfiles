@@ -4,6 +4,8 @@
 
 { config, pkgs, ... }:
 
+let home-manager = import <home-manager> { inherit pkgs; };
+in
 {
   # Import other config files
   imports = [
@@ -81,44 +83,43 @@
   # List packages installed in system profile
   environment.systemPackages = with pkgs; [
 
-    # Allow per-user customisation
-    home-manager
+   # Allow per-user customisation
+   home-manager.home-manager
 
-    # Nix utilities
-    nix-index
+   # Nix utilities
+   pkgs.nix-index
 
-    # Basic packages
-    alacritty
-    git
-    gnome3.gnome-system-monitor
-    gnome3.nautilus
-    neofetch
-    numlockx
-    pavucontrol
-    ranger
-    ungoogled-chromium
+   # Basic packages
+   alacritty
+   git
+   gnome3.gnome-system-monitor
+   gnome3.nautilus
+   neofetch
+   numlockx
+   pavucontrol
+   ranger
+   ungoogled-chromium
 
-    # System tools
-    dex
-    dosfstools
-    gparted
-    hardinfo
-    htop
-    killall
-    networkmanager
-    tree
-    unzip
-    xdg-user-dirs
-    xwayland
+   # System tools
+   dex
+   dosfstools
+   gparted
+   hardinfo
+   htop
+   killall
+   networkmanager
+   tree
+   unzip
+   xwayland
 
-    # Miscellaneous
-    gnome3.adwaita-icon-theme
-    (inxi.override { withRecommends = true; })
-    jq
-    libnotify
-    mtools
-    pciutils
-    pulseaudio-ctl
+   # Miscellaneous
+   gnome3.adwaita-icon-theme
+   (inxi.override { withRecommends = true; })
+   jq
+   libnotify
+   mtools
+   pciutils
+   pulseaudio-ctl
   ];
 
   # Variables for changing what programs are used
