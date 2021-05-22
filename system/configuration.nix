@@ -76,60 +76,66 @@ in
     shell = pkgs.fish;
     extraGroups = [ "wheel" "networkmanager" ];
   };
+
+  # Configure environment related settings
+  environment = {
   
-  # List of directories to symlink in /run/current-system/sw
-  environment.pathsToLink = [ "/libexec" ];
+    # List of directories to symlink in /run/current-system/sw
+    pathsToLink = [ "/libexec" ];
 
-  # List packages installed in system profile
-  environment.systemPackages = with pkgs; [
+    # List packages installed in system profile
+    systemPackages = with pkgs; [
 
-   # Allow per-user customisation
-   home-manager.home-manager
+     # Allow per-user customisation
+     home-manager.home-manager
 
-   # Nix utilities
-   pkgs.nix-index
+     # Nix utilities
+     pkgs.nix-index
 
-   # Basic packages
-   alacritty
-   git
-   gnome3.gnome-system-monitor
-   gnome3.nautilus
-   neofetch
-   numlockx
-   pavucontrol
-   ranger
-   ungoogled-chromium
+     # Basic packages
+     alacritty
+     git
+     gnome3.gnome-system-monitor
+     gnome3.nautilus
+     neofetch
+     numlockx
+     pavucontrol
+     ranger
+     ungoogled-chromium
 
-   # System tools
-   dex
-   dosfstools
-   gparted
-   hardinfo
-   htop
-   killall
-   networkmanager
-   tree
-   unzip
-   xwayland
+     # System tools
+     dex
+     dosfstools
+     gparted
+     hardinfo
+     htop
+     killall
+     networkmanager
+     tree
+     unzip
+     xwayland
 
-   # Miscellaneous
-   gnome3.adwaita-icon-theme
-   (inxi.override { withRecommends = true; })
-   jq
-   libnotify
-   mtools
-   pciutils
-   pulseaudio-ctl
-   xdg-utils
-  ];
+     # Miscellaneous
+     gnome3.adwaita-icon-theme
+     (inxi.override { withRecommends = true; })
+     jq
+     libnotify
+     mtools
+     pciutils
+     pulseaudio-ctl
+     xdg-utils
+    ];
 
-  # Variables for changing what programs are used
-  environment.variables = {
-    TERMINAL = "st";
-    EDITOR = "nvim";
-    BROWSER = "chromium";
-    FILE = "ranger";
-    FILEGUI = "nautilus";
+    # Set environment variables
+    variables = {
+
+      # Programs to use
+      TERMINAL = "st";
+      EDITOR = "nvim";
+      BROWSER = "chromium";
+      FILE = "ranger";
+      FILEGUI = "nautilus";
+    };
   };
   
   # Allow proprietary software

@@ -36,10 +36,6 @@ with lib;
     mpv
     neofetch
 
-    # Games
-    ajour
-    runelite
-
     # Utilities
     grim
     mpc_cli
