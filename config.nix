@@ -1,5 +1,8 @@
 {
 
+  # Allow proprietary packages
+  allowUnfree = true;
+
   # Extend available packages from nixpkgs
   packageOverrides = pkgs: {
 
