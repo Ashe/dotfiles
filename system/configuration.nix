@@ -47,8 +47,13 @@ in
     keyMap = "us";
   };
 
-  # Enable AMD gpu
+  # Configure hardware
   hardware = {
+
+    # Enable bluetooth
+    bluetooth.enable = true;
+
+    # Enable AMD gpu
     opengl = {
       enable = true;
       driSupport = true;
@@ -156,6 +161,9 @@ in
 
   # Configure system-wide services
   services = {
+
+    # Enable bluetooth manager
+    blueman.enable = true;
 
     # Enable CUPS to print documents
     printing.enable = true;
