@@ -74,8 +74,6 @@ with lib;
     })];
   };
 
-
-
   # Enable discovery of fonts from installed packages
   fonts.fontconfig.enable = lib.mkForce true;
 
