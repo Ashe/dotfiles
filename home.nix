@@ -24,6 +24,7 @@ with lib;
 
     # Import package entries from other files
     (callPackage ./packages/st/st.nix {})
+    (callPackage ./packages/runelite/runelite.nix {})
 
     # Languages
     nodejs
@@ -57,8 +58,23 @@ with lib;
     ubuntu_font_family
   ];
 
-  # Allow proprietary software
-  nixpkgs.config.allowUnfree = true;
+  # Configure nixpkgs
+  nixpkgs = {
+
+    # Allow proprietary software
+    config.allowUnfree = true;
+
+    # Apply overlays
+    overlays = [ (self: super: { 
+
+      # Always keep discord up-to-date
+      discord = super.discord.overrideAttrs (_: { 
+        src = builtins.fetchTarball https://discord.com/api/download?platform=linux&format=tar.gz; 
+      });
+    })];
+  };
+
+
 
   # Enable discovery of fonts from installed packages
   fonts.fontconfig.enable = lib.mkForce true;
