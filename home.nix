@@ -24,7 +24,6 @@ with lib;
 
     # Import package entries from other files
     (callPackage ./packages/st/st.nix {})
-    (callPackage ./packages/runelite/runelite.nix {})
 
     # Languages
     nodejs
