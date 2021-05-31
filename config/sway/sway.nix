@@ -41,6 +41,7 @@ in
 
       # Startup commands
       startup = [
+        { command = "blueman-applet"; }
         { command = "dropbox start"; }
         { command = "mako"; }
       ];
