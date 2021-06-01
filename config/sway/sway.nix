@@ -51,8 +51,7 @@ in
 
         # Basics
         "${cfg.config.modifier}+Shift+w" = "kill";
-        "${cfg.config.modifier}+space" = "exec ${cfg.config.menu} --show run";
-        "${cfg.config.modifier}+Shift+space" = "exec ${cfg.config.menu} --show drun";
+        "${cfg.config.modifier}+space" = "exec ${cfg.config.menu} --show drun -w 3 -i -I";
         "${cfg.config.modifier}+BackSpace" = "reload";
         "${cfg.config.modifier}+Control+Shift+BackSpace" =
           "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
