@@ -120,8 +120,10 @@ with lib;
     # Enable gammastep
     gammastep = {
       enable = true;
-      provider = "geoclue2";
+      provider = "manual";
       tray = true;
+      latitude = 51.509;
+      longitude = -0.126;
     };
   };
 }
