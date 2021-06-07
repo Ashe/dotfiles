@@ -165,11 +165,14 @@ in
     # Enable bluetooth manager
     blueman.enable = true;
 
-    # Enable CUPS to print documents
-    printing.enable = true;
+    # Enable gnome virtual file system (enables trash)
+    gvfs.enable = true;
 
     # Enable the OpenSSH daemon
     openssh.enable = true;
+
+    # Enable CUPS to print documents
+    printing.enable = true;
   };
 
   # Open ports in the firewall.
