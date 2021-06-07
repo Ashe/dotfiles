@@ -31,10 +31,10 @@ with lib;
 
     # Programs
     discord
-    lutris
     mpd
     mpv
     neofetch
+    obsidian
 
     # Utilities
     grim
