@@ -29,6 +29,9 @@ with lib;
     nodejs
     python3Minimal
 
+    # Libraries and frameworks
+    hugo
+
     # Programs
     discord
     mpd
@@ -43,6 +46,7 @@ with lib;
     sway-contrib.grimshot
     wdisplays
     wl-clipboard
+    wlogout
     wofi
     youtube-dl
 

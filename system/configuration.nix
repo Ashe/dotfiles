@@ -91,44 +91,44 @@ in
     # List packages installed in system profile
     systemPackages = with pkgs; [
 
-     # Allow per-user customisation
-     home-manager.home-manager
+      # Allow per-user customisation
+      home-manager.home-manager
 
-     # Nix utilities
-     pkgs.nix-index
+      # Nix utilities
+      pkgs.nix-index
 
-     # Basic packages
-     alacritty
-     git
-     gnome3.gnome-system-monitor
-     gnome3.nautilus
-     neofetch
-     numlockx
-     pavucontrol
-     ranger
-     ungoogled-chromium
+      # Basic packages
+      alacritty
+      git
+      gnome3.gnome-system-monitor
+      gnome3.nautilus
+      neofetch
+      numlockx
+      pavucontrol
+      ranger
+      ungoogled-chromium
 
-     # System tools
-     dex
-     dosfstools
-     gparted
-     hardinfo
-     htop
-     killall
-     networkmanager
-     tree
-     unzip
-     xwayland
+      # System tools
+      dex
+      dosfstools
+      gparted
+      hardinfo
+      htop
+      killall
+      networkmanager
+      tree
+      unzip
+      xwayland
 
-     # Miscellaneous
-     gnome3.adwaita-icon-theme
-     (inxi.override { withRecommends = true; })
-     jq
-     libnotify
-     mtools
-     pciutils
-     pulseaudio-ctl
-     xdg-utils
+      # Miscellaneous
+      gnome3.adwaita-icon-theme
+      (inxi.override { withRecommends = true; })
+      jq
+      libnotify
+      mtools
+      pciutils
+      pulseaudio-ctl
+      xdg-utils
     ];
 
     # Set environment variables
