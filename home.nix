@@ -35,6 +35,7 @@ with lib;
     # Programs
     blender
     discord
+    godot
     mpd
     mpv
     neofetch
