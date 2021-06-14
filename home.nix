@@ -33,6 +33,7 @@ with lib;
     hugo
 
     # Programs
+    blender
     discord
     mpd
     mpv
