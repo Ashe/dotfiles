@@ -33,9 +33,11 @@ with lib;
     hugo
 
     # Programs
+    audacity
     blender
     discord
     godot
+    lmms
     mpd
     mpv
     neofetch
