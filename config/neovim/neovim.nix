@@ -21,7 +21,7 @@ with lib;
       coc-markdownlint
       coc-python
       coc-spell-checker
-      coc-snippets
+      coc-tabnine
       coc-highlight
       coc-nvim
       coc-yaml
