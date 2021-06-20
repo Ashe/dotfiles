@@ -10,6 +10,7 @@ with lib;
     ./config/beets/beets.nix
     ./config/fish/fish.nix
     ./config/mako/mako.nix
+    ./config/mangohud/mangohud.nix
     ./config/mpd/mpd.nix
     ./config/ncmpcpp/ncmpcpp.nix
     ./config/neovim/neovim.nix
