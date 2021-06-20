@@ -15,7 +15,7 @@ with lib;
       output_folder = ~/.mangologs;
 
       # Keybindings
-      toggle_hud = "Super_L+M";
+      toggle_hud = "Super_L+Shift_L+M";
       toggle_logging = "Super_L+Control_L+M";
       reload_cfg = "Super_L+Alt_L+M";
 
