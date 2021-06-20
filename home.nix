@@ -43,6 +43,7 @@ with lib;
     mpv
     neofetch
     obsidian
+    sublime4
 
     # Utilities
     grim
