@@ -117,6 +117,12 @@ with lib;
       userName  = "ashe";
       userEmail = "git@aas.sh";
     };
+
+    # Enable lazygit client
+    lazygit.enable = true;
+
+    # Enable nix-index file database for nixpkgs
+    nix-index.enable = true;
   };
 
   # Configure services
