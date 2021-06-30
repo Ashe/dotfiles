@@ -63,7 +63,7 @@ with lib;
     font-awesome
     noto-fonts
     noto-fonts-cjk
-    noto-fonts-emoji
+    twitter-color-emoji
     ubuntu_font_family
   ];
 
