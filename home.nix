@@ -43,6 +43,7 @@ with lib;
     mpv
     neofetch
     obsidian
+    slack
     sublime4
 
     # Utilities
