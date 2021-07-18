@@ -98,11 +98,17 @@ with lib;
       name = "Nordic";
       package = pkgs.nordic;
     };
-    
+
     # Set icon theme
     iconTheme = {
       name = "Papirus";
       package = pkgs.papirus-icon-theme;
+    };
+
+    # Set font
+    font = {
+      name = "Ubuntu";
+      size = 12;
     };
   };
 

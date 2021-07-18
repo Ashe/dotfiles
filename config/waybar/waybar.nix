@@ -123,8 +123,8 @@ with lib;
           border: none;
           border-radius: 0;
           /* `otf-font-awesome` is required to be installed for icons */
-          font-family: Roboto, Helvetica, Arial, sans-serif;
-          font-size: 13px;
+          font-family: Ubuntu, sans-serif;
+          font-size: 14px;
           min-height: 0;
       }
 
@@ -330,7 +330,7 @@ with lib;
       }
 
       #tray {
-          background-color: #3B4252;
+          background: rgba(0, 0, 0, 0);
           border-bottom: 3px solid #4C566A;
       }
 
