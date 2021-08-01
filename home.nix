@@ -38,6 +38,7 @@ with lib;
     blender
     discord
     godot
+    gthumb
     lmms
     mpd
     mpv

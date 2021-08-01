@@ -149,9 +149,6 @@ in
     # Enable dconf
     dconf.enable = true;
 
-    # Enable Steam
-    steam.enable = true;
-
     # Enable FISH
     fish.enable = true;
   };
@@ -162,6 +159,9 @@ in
     # Enable bluetooth manager
     blueman.enable = true;
 
+    # Enable flatpak
+    flatpak.enable = true;
+
     # Enable gnome virtual file system (enables trash)
     gvfs.enable = true;
 
@@ -171,6 +171,9 @@ in
     # Enable CUPS to print documents
     printing.enable = true;
   };
+
+  # Enable xdg desktop integration
+  xdg.portal.enable = true;
 
   # Open ports in the firewall.
   networking.firewall = {
