@@ -27,6 +27,8 @@ with lib;
     (callPackage ./packages/st/st.nix {})
 
     # Languages
+    chicken
+    guile
     nodejs
     python3Minimal
 
