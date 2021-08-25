@@ -38,7 +38,6 @@ with lib;
     # Programs
     audacity
     blender
-    discord
     godot
     gthumb
     lmms
