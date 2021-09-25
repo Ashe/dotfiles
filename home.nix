@@ -45,6 +45,7 @@ with lib;
     mpv
     neofetch
     obsidian
+    scanmem
     slack
     sublime4
 
