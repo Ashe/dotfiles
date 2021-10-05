@@ -7,7 +7,6 @@ with lib;
 {
   # Import other config files
   imports = [
-    ./config/beets/beets.nix
     ./config/fish/fish.nix
     ./config/mako/mako.nix
     ./config/mangohud/mangohud.nix
@@ -50,6 +49,7 @@ with lib;
     sublime4
 
     # Utilities
+    any-nix-shell
     grim
     mpc_cli
     slurp
