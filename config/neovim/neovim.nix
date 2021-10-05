@@ -12,6 +12,7 @@ with lib;
     vimdiffAlias = true;
     withPython3 = true;
     plugins = with pkgs.vimPlugins; [
+      a-vim
       coc-cmake
       coc-css
       coc-git
@@ -20,12 +21,17 @@ with lib;
       coc-lua
       coc-markdownlint
       coc-python
+      coc-rust-analyzer
       coc-spell-checker
       coc-tabnine
       coc-highlight
       coc-nvim
       coc-yaml
+      nord-vim
+      rust-vim
+      vim-fugitive
       vim-gitgutter
+      vim-nix
       vim-tmux-navigator
       vim-airline-themes
       {
@@ -82,7 +88,10 @@ with lib;
       set backupdir=~/.vim-tmp
       set directory=~/.vim-tmp
 
-      " Enable syntax detection
+      " Set colour scheme
+      color nord
+
+      " Enable syntax highlighting
       syntax on
 
       " Show column guideline to keep code within 80 lines
@@ -162,5 +171,42 @@ with lib;
       " Allow the lisp REPL to open with tmux
       let g:slimv_swank_cmd = '! tmux new-window -d -n REPL-SBCL "sbcl --load ~/.config/nvim/plugged/slimv/slime/start-swank.lisp"'
     '';
+
+    # Configure Conquer of Completion
+    coc = {
+      enable = true;
+      settings = {
+        "suggest.noselect" = true;
+        "suggest.enablePreview" = true;
+        "suggest.enablePreselect" = false;
+        "suggest.disableKind" = true;
+
+        # Configure CoC per language
+        languageserver = {
+
+          haskell = {
+            command = "haskell-language-server-wrapper";
+            args = [ "--lsp" ];
+            rootPatterns = [
+              "*.cabal"
+              "stack.yaml"
+              "cabal.project"
+              "package.yaml"
+              "hie.yaml"
+            ];
+            filetypes = [ "haskell" "lhaskell" ];
+          };
+
+          nix = {
+            command = "rnix-lsp";
+            filetypes = [ "nix" ];
+          };
+
+        };
+
+        # Miscellaneous settings
+        "rust-analyzer.serverPath" = "rust-analyzer";
+      };
+    };
   };
 }
