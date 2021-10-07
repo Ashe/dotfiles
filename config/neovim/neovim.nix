@@ -205,7 +205,10 @@ with lib;
         };
 
         # Miscellaneous settings
-        "rust-analyzer.serverPath" = "rust-analyzer";
+        "rust-analyzer.server.path" = "rust-analyzer";
+        "rust-analyzer.updates.channel" = "nightly";
+        "rust-analyzer.updates.prompt" = false;
+        "rust-analyzer.procMacro.enable" = false;
       };
     };
   };
