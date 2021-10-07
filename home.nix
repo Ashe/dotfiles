@@ -52,6 +52,7 @@ with lib;
     any-nix-shell
     grim
     mpc_cli
+    rnix-lsp
     slurp
     sway-contrib.grimshot
     wdisplays
