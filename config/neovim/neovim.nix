@@ -12,7 +12,6 @@ with lib;
     vimdiffAlias = true;
     withPython3 = true;
     plugins = with pkgs.vimPlugins; [
-      a-vim
       coc-cmake
       coc-css
       coc-git
