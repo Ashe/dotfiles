@@ -143,6 +143,13 @@ in
   # Allow proprietary software
   nixpkgs.config.allowUnfree = true;
 
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+       experimental-features = nix-command flakes
+    '';
+  };
+
   # Configure system-wide programs
   programs = {
 
