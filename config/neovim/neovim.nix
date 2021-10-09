@@ -12,6 +12,33 @@ with lib;
     vimdiffAlias = true;
     withPython3 = true;
     plugins = with pkgs.vimPlugins; [
+
+      # Appearance
+      barbar-nvim
+      nvim-web-devicons
+      vim-gitgutter
+      vim-airline-themes
+      {
+        plugin = vim-airline;
+        config = ''
+          " Set airline appearance
+          let g:airline_theme='deus'
+        '';
+      }
+
+      # Functionality
+      vim-fugitive
+      vim-tmux-navigator
+      {
+        plugin = ctrlp-vim;
+        config = ''
+          " Filter what gets shown by ctrlp
+          set wildignore+=*/tmp/*,*/bin/*,*/obj/*,*.so,*.swp,*.zi
+          let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+        '';
+      }
+
+      # Autocomplete
       coc-cmake
       coc-css
       coc-git
@@ -26,20 +53,8 @@ with lib;
       coc-highlight
       coc-nvim
       coc-yaml
-      nord-vim
       rust-vim
-      vim-fugitive
-      vim-gitgutter
       vim-nix
-      vim-tmux-navigator
-      vim-airline-themes
-      {
-        plugin = vim-airline;
-        config = ''
-          " Set airline appearance
-          let g:airline_theme='deus'
-        '';
-      }
       {
         plugin = coc-nvim;
         config = ''
@@ -65,14 +80,6 @@ with lib;
           set statusline^=%{coc#status()}%{get(b:,'coc_current_function',\'\')}
         '';
       }
-      {
-        plugin = ctrlp-vim;
-        config = ''
-          " Filter what gets shown by ctrlp
-          set wildignore+=*/tmp/*,*/bin/*,*/obj/*,*.so,*.swp,*.zi
-          let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-        '';
-      }
     ];
 
     # Settings for neovim
@@ -86,9 +93,6 @@ with lib;
       set swapfile
       set backupdir=~/.vim-tmp
       set directory=~/.vim-tmp
-
-      " Set colour scheme
-      color nord
 
       " Enable syntax highlighting
       syntax on
