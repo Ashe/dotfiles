@@ -4,14 +4,12 @@
 
 { config, pkgs, ... }:
 
-let home-manager = import <home-manager> { inherit pkgs; };
-in
 {
   # Import other config files
   imports = [
 
     # Include the results of the hardware scan
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
   ];
 
   # Enable grub as bootloader
@@ -90,9 +88,6 @@ in
 
     # List packages installed in system profile
     systemPackages = with pkgs; [
-
-      # Allow per-user customisation
-      home-manager.home-manager
 
       # Basic packages
       alacritty
