@@ -36,7 +36,7 @@ rebuild_system_config()
   if [ "$1" == "--update" ]
   then
     echo -e "\nUpdating system flake.lock.."
-    (cd ./system/; sudo nix flake update)
+    (cd system/; sudo nix flake update)
   fi
 
   # Rebuild system configuration
@@ -51,13 +51,16 @@ rebuild_user_config()
   if [ "$1" == "--update" ]
   then
     echo -e "\nUpdating user flake.lock.."
-    (cd ./users/; nix flake update)
+    (cd users/; nix flake update)
   fi
 
   # Rebuild user configuration
   echo -e "\nRebuilding user configuration.."
   nix run home-manager --no-write-lock-file -- switch --flake "./users#nixos"
 }
+
+# Operate inside the dotfiles directory
+cd ~/.dotfiles/
 
 # Parse commands
 if [ "$#" -gt 1 ]
@@ -68,16 +71,17 @@ then
   rebuild_system_config --update && 
   sleep 5 &&
   rebuild_user_config --update
+else
+  case "$1" in
+    -h | --help | --usage) usage ;;
+    -s | --system) rebuild_system_config --update ;;
+    -u | --user) rebuild_user_config --update ;;
+    -r | --rebuild) rebuild_system_config && rebuild_user_config ;;
+    --rebuild-system) rebuild_system_config ;;
+    --rebuild-user) rebuild_user_config ;;
+    *) error $@ ;;
+  esac
 fi
-case "$1" in
-  -h | --help | --usage) usage ;;
-  -s | --system) rebuild_system_config --update ;;
-  -u | --user) rebuild_user_config --update ;;
-  -r | --rebuild) rebuild_system_config && rebuild_user_config ;;
-  --rebuild-system) rebuild_system_config ;;
-  --rebuild-user) rebuild_user_config ;;
-  *) error $@ ;;
-esac
 
 # Finished updating
 echo -e "\nDone!\n"
