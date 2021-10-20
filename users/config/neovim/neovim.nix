@@ -78,6 +78,17 @@ with lib;
           " NOTE: Please see `:h coc-status` for integrations with external plugins that
           " provide custom statusline: lightline.vim, vim-airline
           set statusline^=%{coc#status()}%{get(b:,'coc_current_function',\'\')}
+
+          " Documentation function
+          function! s:show_documentation()
+            if(index(['vim','help'], &filetype) >=0)
+              execute 'h '.expand('<cword>')
+            elseif (coc#rpc#ready())
+              call CocActionAsync('doHover')
+            else
+              execute '!' . &keywordprg . " " . expand('<cword>')
+            endif
+          endfunction
         '';
       }
     ];
@@ -130,6 +141,10 @@ with lib;
       nnoremap <leader>P "+P
       vnoremap <leader>p "+p
       vnoremap <leader>P "+P
+      
+      " Show switch buffers quickly
+      nnoremap <Tab> :bn<CR>
+      nnoremap <S-Tab> :bp<CR>
 
       " Tabs are 2 spaces
       set tabstop=2
@@ -170,9 +185,6 @@ with lib;
         let col = col('.') - 1
         return !col || getline('.')[col - 1]  =~# '\s'
       endfunction
-
-      " Allow the lisp REPL to open with tmux
-      let g:slimv_swank_cmd = '! tmux new-window -d -n REPL-SBCL "sbcl --load ~/.config/nvim/plugged/slimv/slime/start-swank.lisp"'
     '';
 
     # Configure Conquer of Completion
