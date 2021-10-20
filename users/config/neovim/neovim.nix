@@ -58,6 +58,10 @@ with lib;
       {
         plugin = coc-nvim;
         config = ''
+
+          " Change appearance of floating windows
+          hi NormalFloat ctermbg=Black ctermfg=White
+
           " Goto code navigation
           nmap <silent> gd <Plug>(coc-definition)
           nmap <silent> gy <Plug>(coc-type-definition)
