@@ -63,23 +63,25 @@ with lib;
       fish_vi_key_bindings
 
       # Start tmux every session
-      if  status is-interactive &&
-          command -sq tmux &> /dev/null &&
-          not string match -q 'screen*' -- $TERM &&
-          not string match -q 'tmux*' -- $TERM
+      if [ $XDG_SESSION_TYPE != tty ]
+        if  status is-interactive &&
+            command -sq tmux &> /dev/null &&
+            not string match -q 'screen*' -- $TERM &&
+            not string match -q 'tmux*' -- $TERM
 
-        # Check if there's an unattached session
-        mkdir -p $HOME/.cache/tmux
-        tmux list-sessions > $HOME/.cache/tmux/sessions
-        set sessions (cat $HOME/.cache/tmux/sessions | grep -v attached | cut -d: -f1)
+          # Check if there's an unattached session
+          mkdir -p $HOME/.cache/tmux
+          tmux list-sessions > $HOME/.cache/tmux/sessions
+          set sessions (cat $HOME/.cache/tmux/sessions | grep -v attached | cut -d: -f1)
 
-        # Reattach to any unattached sessions available
-        if set -q sessions[1]
-          exec tmux attach-session -t "$sessions[1]"
+          # Reattach to any unattached sessions available
+          if set -q sessions[1]
+            exec tmux attach-session -t "$sessions[1]"
 
-        # Otherwise start a new session
-        else
-          exec tmux new-session
+          # Otherwise start a new session
+          else
+            exec tmux new-session
+          end
         end
       end
     '';
