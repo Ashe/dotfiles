@@ -22,8 +22,6 @@
     (callPackage ./packages/st/st.nix {})
 
     # Languages
-    chicken
-    guile
     nodejs
     python3Minimal
 
@@ -45,7 +43,6 @@
     sublime4
 
     # Utilities
-    any-nix-shell
     grim
     mpc_cli
     rnix-lsp
