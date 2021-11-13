@@ -122,17 +122,6 @@
       pulseaudio-ctl
       xdg-utils
     ];
-
-    # Set environment variables
-    variables = {
-
-      # Programs to use
-      TERMINAL = "st";
-      EDITOR = "nvim";
-      BROWSER = "chromium";
-      FILE = "ranger";
-      FILEGUI = "nautilus";
-    };
   };
   
   # Allow proprietary software

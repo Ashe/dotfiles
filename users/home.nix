@@ -1,6 +1,15 @@
 { config, lib, pkgs, ... }:
 
+let
+  theme = (import ./themes/nord.nix);
+in
 {
+
+  # Pass these arguments to all imports
+  _module.args = {
+    theme = theme;
+  };
+
   # Import other config files
   imports = [
     ./config/fish/fish.nix
@@ -15,55 +24,70 @@
     ./config/xdg/xdg.nix
   ];
 
-  # Packages to install
-  home.packages = with pkgs; [
+  # Configure user experience
+  home = {
 
-    # Import package entries from other files
-    (callPackage ./packages/st/st.nix {})
+    # Set environment variables
+    sessionVariables = {
 
-    # Languages
-    nodejs
-    python3Minimal
+      # Programs to use
+      TERMINAL = "st";
+      EDITOR = "nvim";
+      BROWSER = "chromium";
+      FILE = "ranger";
+      FILEGUI = "nautilus";
+    };
 
-    # Libraries and frameworks
-    hugo
+    # Packages to install
+    packages = with pkgs; [
 
-    # Programs
-    audacity
-    blender
-    godot
-    gthumb
-    lmms
-    mpd
-    mpv
-    neofetch
-    obsidian
-    scanmem
-    slack
-    sublime4
+      # Import package entries from other files
+      (callPackage ./packages/st/st.nix { theme = theme; })
 
-    # Utilities
-    grim
-    mpc_cli
-    rnix-lsp
-    slurp
-    sway-contrib.grimshot
-    wdisplays
-    wl-clipboard
-    wlogout
-    wofi
-    youtube-dl
+      # Languages
+      nodejs
+      python3Minimal
 
-    # Fonts
-    dina-font
-    fira-code
-    fira-code-symbols
-    font-awesome
-    noto-fonts
-    noto-fonts-cjk
-    twitter-color-emoji
-    ubuntu_font_family
-  ];
+      # Libraries and frameworks
+      hugo
+
+      # Programs
+      audacity
+      blender
+      godot
+      gthumb
+      lmms
+      mpd
+      mpv
+      neofetch
+      obsidian
+      scanmem
+      slack
+      sublime4
+
+      # Utilities
+      grim
+      mpc_cli
+      rnix-lsp
+      slurp
+      sway-contrib.grimshot
+      wdisplays
+      wl-clipboard
+      wlogout
+      wofi
+      youtube-dl
+
+      # Fonts
+      dina-font
+      fira-code
+      fira-code-symbols
+      font-awesome
+      noto-fonts
+      noto-fonts-cjk
+      twitter-color-emoji
+      ubuntu_font_family
+    ];
+  };
 
   # Configure nixpkgs
   nixpkgs = {
@@ -83,8 +107,8 @@
 
     # Set theme
     theme = {
-      name = "Nordic";
-      package = pkgs.nordic;
+      name = (theme.data pkgs).gtk-name;
+      package = (theme.data pkgs).gtk-package;
     };
 
     # Set icon theme

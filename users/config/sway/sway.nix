@@ -1,9 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, theme, ... }:
 
 with lib;
 
 let 
   cfg = config.wayland.windowManager.sway;
+  colours = theme.colourscheme;
 in
 {
 
@@ -129,39 +130,39 @@ in
       # Configure colours
       colors = {
         unfocused = {
-          background = "#3b4252"; 
-          border = "#3b5252"; 
+          background = colours.bg-secondary; 
+          border = colours.bg-secondary;
           childBorder = "";
-          indicator = "#454948"; 
-          text = "#81a1c1";
+          indicator = colours.bg-secondary;
+          text = colours.fg-secondary;
         };
         focused = {
-          background = "#81a1c1"; 
-          border = "#81a1c1"; 
+          background = colours.accent-primary;
+          border = colours.accent-primary;
           childBorder = "";
-          indicator = "#d08770"; 
-          text = "#d8dee9";
+          indicator = colours.warning;
+          text = colours.fg-primary-bright;
         };
         focusedInactive = {
-          background = "#3b4252"; 
-          border = "#3b4252"; 
+          background = colours.bg-secondary;
+          border = colours.bg-secondary;
           childBorder = "";
-          indicator = "#454948"; 
-          text = "#81a1c1";
+          indicator = colours.bg-primary;
+          text = colours.fg-secondary;
         };
         urgent = {
-          background = "#d8dee9"; 
-          border = "#d08770"; 
+          background = colours.bg-primary;
+          border = colours.alert;
           childBorder = "";
-          indicator = "#5e81ac";
-          text = "#81a1c1";
+          indicator = colours.accent-primary;
+          text = colours.fg-secondary;
         };
         placeholder = {
-          background = "#d8dee9"; 
-          border = "#000000"; 
+          background = colours.fg-primary;
+          border = colours.bg-primary;
           childBorder = "";
-          indicator = "#5e81ac"; 
-          text = "#81a1c1";
+          indicator = colours.accent-primary;
+          text = colours.fg-secondary;
         };
       };
     };

@@ -1,10 +1,12 @@
-{ st, harfbuzz, writeText, fetchpatch, ... }:
+{ st, harfbuzz, writeText, fetchpatch, theme, ... }:
 
 # Personal fork of ST
 (st.overrideAttrs ( oa: rec { 
 
   # Config file
-  configFile = writeText "config.def.h" (builtins.readFile ./config.h);
+  rawConfigData = builtins.readFile ./config.h;
+  configData = builtins.replaceStrings (builtins.attrNames theme.colourscheme) (builtins.attrValues theme.colourscheme) rawConfigData;
+  configFile = writeText "config.def.h" configData;
   postPatch = "${oa.postPatch}\n cp ${configFile} config.def.h";
 
   # Dependencies
