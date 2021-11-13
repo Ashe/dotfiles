@@ -32,6 +32,7 @@ in
 
       # Programs to use
       TERMINAL = "st";
+      MENU = "wofi";
       EDITOR = "nvim";
       BROWSER = "chromium";
       FILE = "ranger";

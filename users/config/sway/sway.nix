@@ -33,10 +33,6 @@ in
       gaps.smartGaps = true;
       gaps.inner = 10;
 
-      # Set default programs
-      terminal = "st";
-      menu = "wofi";
-
       # Change modifier to Super
       modifier = "Mod4";
 
@@ -52,17 +48,17 @@ in
 
         # Basics
         "${cfg.config.modifier}+Shift+w" = "kill";
-        "${cfg.config.modifier}+space" = "exec ${cfg.config.menu} --show drun -w 3 -i -I";
+        "${cfg.config.modifier}+space" = "exec $MENU --show drun -w 3 -i -I";
         "${cfg.config.modifier}+Escape" = "exec wlogout";
         "${cfg.config.modifier}+BackSpace" = "reload";
         "${cfg.config.modifier}+Control+Shift+BackSpace" =
           "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
 
         # Program shortcuts
-        "${cfg.config.modifier}+Return" = "exec ${cfg.config.terminal}";
+        "${cfg.config.modifier}+Return" = "exec $TERMINAL";
         "${cfg.config.modifier}+1" = "exec $FILEGUI --new-window";
         "${cfg.config.modifier}+2" = "exec $BROWSER";
-        "${cfg.config.modifier}+3" = "exec ${cfg.config.terminal} -e ncmpcpp";
+        "${cfg.config.modifier}+3" = "exec $TERMINAL -e ncmpcpp";
         "${cfg.config.modifier}+Shift+s" = "exec wl-copy -t image/png < $(grimshot save area)";
         "Print" = "exec wl-copy -t image/png < $(grimshot save area)";
 
@@ -103,8 +99,8 @@ in
         "${cfg.config.modifier}+Control+Return" = "splith";
 
         # Navigate workspaces
-        "${cfg.config.modifier}+i" = "workspace prev_on_output --create";
-        "${cfg.config.modifier}+o" = "workspace next_on_output -- create";
+        "${cfg.config.modifier}+i" = "workspace prev_on_output";
+        "${cfg.config.modifier}+o" = "workspace next_on_output --create";
         "${cfg.config.modifier}+Shift+i" = "move container to workspace prev, workspace prev";
         "${cfg.config.modifier}+Shift+o" = "move container to workspace next, workspace next";
 
