@@ -126,7 +126,7 @@ in
       # Configure colours
       colors = {
         unfocused = {
-          background = colours.bg-secondary; 
+          background = colours.bg-primary; 
           border = colours.bg-secondary;
           childBorder = "";
           indicator = colours.bg-secondary;
@@ -137,10 +137,10 @@ in
           border = colours.accent-primary;
           childBorder = "";
           indicator = colours.warning;
-          text = colours.fg-primary-bright;
+          text = colours.fg-bright-primary;
         };
         focusedInactive = {
-          background = colours.bg-secondary;
+          background = colours.bg-primary;
           border = colours.bg-secondary;
           childBorder = "";
           indicator = colours.bg-primary;

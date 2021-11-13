@@ -10,15 +10,15 @@
 
     # Background
     bg-primary = black;
-    bg-primary-bright = bright-black;
+    bg-bright-primary = bright-black;
     bg-secondary = dark-grey;
-    bg-secondary-bright = bright-dark-grey;
+    bg-bright-secondary = bright-dark-grey;
 
     # Foreground
     fg-primary = white;
-    fg-primary-bright = bright-white;
+    fg-bright-primary = bright-white;
     fg-secondary = light-grey;
-    fg-secondary-bright = bright-light-grey;
+    fg-bright-secondary = bright-light-grey;
 
     # Additional
     accent-primary = blue;
@@ -42,10 +42,10 @@
     # Bright colours
     bright-black = "#434c5e";
     bright-red = "#bf616a";
-    bright-green = "#a3be8c";
-    bright-yellow = "#ebcb8b";
-    bright-blue = "#5e81ac";
-    bright-magenta = "#b48ead";
+    bright-green = "#b3ce9c";
+    bright-yellow = "#fbdb9b";
+    bright-blue = "#91b1d1";
+    bright-magenta = "#c49ebd";
     bright-cyan = "#8fbcbb";
     bright-white = "#eceff4";
     bright-dark-grey = "#4c566a";

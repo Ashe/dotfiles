@@ -4,8 +4,10 @@
 (st.overrideAttrs ( oa: rec { 
 
   # Config file
-  rawConfigData = builtins.readFile ./config.h;
-  configData = builtins.replaceStrings (builtins.attrNames theme.colourscheme) (builtins.attrValues theme.colourscheme) rawConfigData;
+  configData = builtins.replaceStrings 
+      (builtins.attrNames theme.colourscheme) 
+      (builtins.attrValues theme.colourscheme) 
+      (builtins.readFile ./config.h);
   configFile = writeText "config.def.h" configData;
   postPatch = "${oa.postPatch}\n cp ${configFile} config.def.h";
 
