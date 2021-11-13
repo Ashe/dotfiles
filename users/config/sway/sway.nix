@@ -29,8 +29,7 @@ in
         { command = "waybar"; }
       ];
 
-      # Create gaps (unless only one container)
-      gaps.smartGaps = true;
+      # Create gaps
       gaps.inner = 10;
 
       # Change modifier to Super
@@ -48,7 +47,7 @@ in
 
         # Basics
         "${cfg.config.modifier}+Shift+w" = "kill";
-        "${cfg.config.modifier}+space" = "exec $MENU --show drun -w 3 -i -I";
+        "${cfg.config.modifier}+space" = "exec $MENU";
         "${cfg.config.modifier}+Escape" = "exec wlogout";
         "${cfg.config.modifier}+BackSpace" = "reload";
         "${cfg.config.modifier}+Control+Shift+BackSpace" =

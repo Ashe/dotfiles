@@ -1,180 +1,110 @@
+/***********/
+/* General */
+/***********/
+
 * {
+  /* `otf-font-awesome` is required to be installed for icons */
+  color: fg-primary;
+  font-family: Ubuntu, sans-serif;
+  font-size: 18px;
+  min-height: 0;
+  background-color: rgba(0, 0, 0, 0);
   border: none;
   border-radius: 0;
-  /* `otf-font-awesome` is required to be installed for icons */
-  font-family: Ubuntu, sans-serif;
-  font-size: 14px;
-  min-height: 0;
 }
 
-window#waybar {
+.modules-left,
+.modules-center,
+.modules-right {
+  margin: 10px;
+  margin-bottom: 2px;
+  padding: 8px 16px;
+  border-radius: 25px;
   background-color: bg-primary;
-  border-bottom: 3px solid bg-secondary;
   color: fg-primary;
-  transition-property: background-color;
-  transition-duration: .5s;
 }
 
-#mode {
-  background-color: bg-secondary;
-  border-bottom: 3px solid fg-secondary;
+.widget {
+  color: fg-primary;
+  padding: 0px 8px;
 }
 
-#clock,
-#battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
 #backlight,
+#battery,
+#clock,
+#cpu,
+#custom-media,
+#disk,
+#idle_inhibitor,
+#memory,
+#mode,
+#mpd,
 #network,
 #pulseaudio,
-#custom-media,
+#temperature,
 #tray,
-#mode,
-#idle_inhibitor,
-#mpd {
-  padding: 0 10px;
-  margin: 0 4px;
+#workspaces,
+#custom-browser,
+#custom-filebrowser,
+#custom-guilded,
+#custom-menu,
+#custom-terminal {
+  padding: 0px 15px;
+}
+
+tooltip,
+#tray menu {
+  background: bg-secondary;
+  border: 1px solid bg-bright-secondary;
+}
+
+tooltip label {
   color: fg-primary;
 }
 
-#window,
-#workspaces {
-  margin: 0 4px;
-}
-
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-  margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-  margin-right: 0;
-}
+/***********/
+/* Colours */
+/***********/
 
 #clock {
-  background-color: bg-bright-secondary;
-}
-
-#battery {
-  background-color: fg-primary;
-}
-
-#battery.charging, #battery.plugged {
-  background-color: bg-primary;
   color: fg-primary;
-}
-
-@keyframes blink {
-  to {
-      background-color: fg-primary;
-      color: bg-primary;
-  }
-}
-
-#battery.critical:not(.charging) {
-  background-color: bg-primary;
-  color: fg-primary;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-#cpu {
-  background-color: blue;
-  border-bottom: 3px solid bright-blue;
-  color: bg-primary;
-}
-
-#memory {
-  background-color: magenta;
-  border-bottom: 3px solid bright-magenta;
-  color: bg-primary;
-}
-
-#disk {
-  background-color: #964B00;
-}
-
-#backlight {
-  background-color: #90b1b1;
-}
-
-#network {
-  background-color: magenta;
-  border-bottom: 3px solid bright-magenta;
-  color: bg-primary;
-}
-
-#network.disconnected {
-  background-color: #BF616A;
-  border-bottom: 3px solid #DF818A;
-  color: bg-primary;
 }
 
 #pulseaudio {
-  background-color: yellow;
-  border-bottom: 3px solid bright-yellow;
-  color: bg-primary;
+  color: yellow;
 }
-
 #pulseaudio.muted {
-  background-color: red;
-  border-bottom: 3px solid bright-red;
-  color: bg-primary;
+  color: red;
 }
 
-#custom-media {
-  background-color: #66cc99;
-  min-width: 100px;
-  color: #2a5c45;
+#network {
+  color: blue;
 }
 
-#custom-media.custom-spotify {
-  background-color: #66cc99;
+#cpu {
+  color: magenta;
 }
 
-#custom-media.custom-vlc {
-  background-color: #ffa000;
+#custom-menu {
+  color: red;
 }
 
-#temperature {
-  background-color: green;
-  border-bottom: 3px solid bright-green;
-  color: bg-primary;
+#custom-terminal {
+  color: green;
 }
 
-#temperature.gpu {
-  background-color: green;
-  border-bottom: 3px solid bright-green;
-  color: bg-primary;
+#custom-filebrowser {
+  color: yellow;
 }
 
-#temperature.critical {
-  background-color: red;
-  border-bottom: 3px solid bright-red;
-  color: bg-primary;
+#custom-browser {
+  color: blue;
+}
+
+#custom-guilded {
+  color: magenta;
 }
 
 #mpd {
-  background-color: bg-primary;
-  border-bottom: 3px solid bg-bright-secondary;
-  color: fg-primary;
-}
-
-#mpd.paused {
-  background-color: red;
-  border-bottom: 3px solid bright-red;
-  color: #000000;
-}
-
-#mpd.disconnected,
-#mpd.stopped {
-  background-color: rgba(0, 0, 0, 0);
-  border-bottom: 3px solid rgba(0, 0, 0, 0);
-  color: rgba(0, 0, 0, 0);
+  color: cyan;
 }

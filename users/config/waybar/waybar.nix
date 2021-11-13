@@ -12,25 +12,27 @@
         # Basics
         layer = "top";
         position = "top";
-        height = 30;
+        height = 20;
 
         # Left modules
         modules-left = [ 
-          "sway/workspaces" 
-          "sway/mode" 
+          "custom/menu"
+          "custom/terminal"
+          "custom/filebrowser"
+          "custom/browser"
+          "custom/guilded"
           "mpd" 
+          "sway/mode" 
         ];
 
         # Central modules
         modules-center = [ 
-          "sway/window" 
+          "sway/workspaces" 
         ];
 
         # Right modules
         modules-right = [ 
           "cpu"
-          "temperature"
-          "temperature#gpu"
           "battery"
           "network"
           "pulseaudio"
@@ -40,35 +42,47 @@
 
         # Module configuration
         modules = {
+
+          # Current time and date
           clock = {
-            format = " {:%A, %d %B %I:%M %p}";
-            tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+            format = "  {:%a, %d %b %I:%M %p}";
+            tooltip-format = "<big>  {:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
           };
+
+          # CPU usage
           cpu = {
-            format = " {usage}%";
+            format = "  {usage}%";
           };
+
+          # MPD music daemon
           mpd = {
-            format = "{stateIcon} {title}";
-            format-paused = "{stateIcon} {title}";
-            format-stopped = "";
-            format-disconnected = "";
+            format = "{stateIcon}  {title}";
+            format-paused = "{stateIcon}";
+            format-stopped = "";
+            format-disconnected = "";
             state-icons = {
-              playing = "";
-              paused = "";
+              playing = "";
+              paused = "";
             };
+            tooltip-format = "  {title} | {artist} | {album}";
+            tooltip-format-disconnected = "  (disconnected)";
           };
+
+          # Network usage
           network = {
-            format-ethernet = " {bandwidthDownBits}";
-            tooltip-format-ethernet = " {ifname} - {ipaddr}";
+            format-ethernet = "  {bandwidthDownBits}";
+            tooltip-format-ethernet = "  {bandwidthDownBits} - {ipaddr}";
             format-wifi = " {essid} {bandwidthDownBits}";
             tooltip-format-wifi = " {ifname} - {ipaddr}";
             format-disconnected = "";
             tooltip-format-disconnected = "No internet connection";
           };
+
+          # Volume slider
           pulseaudio = {
-            format = "{icon} {volume}";
+            format = "{icon}  {volume}";
             format-bluetooth = "{icon} {volume}";
-            format-muted = " {volume}";
+            format-muted = "  {volume}";
             format-icons = {
               default = "";
               headphone = "";
@@ -79,28 +93,13 @@
             on-click-right = "pavucontrol";
             all-outputs = true;
           };
-          temperature = {
-            format = "  CPU: {temperatureC}°C";
-            format-critical = " CPU: {temperatureC}°C";
-            tooltip = true;
-            tooltip-format = " CPU: {temperatureC}°C";
-            critical-threshhold = 80;
-            hwmon-path = "/sys/class/hwmon/hwmon1/temp1_input";
-          };
-          "temperature#gpu" = {
-            format = " GPU: {temperatureC}°C";
-            format-critical = " GPU: {temperatureC}°C";
-            tooltip = true;
-            tooltip-format = " GPU: {temperatureC}°C";
-            critical-threshhold = 80;
-            hwmon-path = "/sys/class/drm/card0/device/hwmon/hwmon0/temp1_input";
-          };
+
+          # Current sway mode (resize etc)
           "sway/mode" = {
-            format = " {}";
+            format = "  {}";
           };
-          "sway/window" = {
-            format = " {}";
-          };
+
+          # Current sway workspaces
           "sway/workspaces" = {
             format = "{icon}";
             enable-bar-scroll = true;
@@ -110,6 +109,49 @@
               urgent = "";
             };
           };
+
+          # App tray
+          tray = {
+            icon-size = 18;
+            spacing = 8;
+          };
+
+          # Menu shortcut
+          "custom/menu" = {
+            format = "";
+            on-click = "$MENU";
+            on-click-right = "wlogout";
+            tooltip = false;
+          };
+
+          # Terminal shortcut
+          "custom/terminal" = {
+            format = "";
+            on-click = "$TERMINAL";
+            tooltip = false;
+          };
+
+          # File browser shortcut
+          "custom/filebrowser" = {
+            format = "";
+            on-click = "$FILEGUI";
+            tooltip = false;
+          };
+
+          # Browser shortcut
+          "custom/browser" = {
+            format = "";
+            on-click = "$BROWSER";
+            tooltip = false;
+          };
+
+          # Guilded shortcut
+          "custom/guilded" = {
+            format = "";
+            on-click = "flatpak run gg.guilded.Guilded";
+            tooltip = false;
+          };
+
         };
       }
     ];

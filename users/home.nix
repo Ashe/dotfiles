@@ -32,7 +32,7 @@ in
 
       # Programs to use
       TERMINAL = "st";
-      MENU = "wofi";
+      MENU = "wofi --show drun -w 3 -i -I";
       EDITOR = "nvim";
       BROWSER = "chromium";
       FILE = "ranger";
