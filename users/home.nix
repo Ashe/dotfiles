@@ -37,6 +37,7 @@ in
       BROWSER = "chromium";
       FILE = "ranger";
       FILEGUI = "nautilus";
+      MUSIC = "spotify";
     };
 
     # Packages to install
@@ -56,9 +57,8 @@ in
       # Programs
       audacity
       blender
-      godot
+      discord
       gthumb
-      lmms
       mpd
       mpv
       neofetch

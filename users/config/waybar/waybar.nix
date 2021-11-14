@@ -20,7 +20,7 @@
           "custom/terminal"
           "custom/filebrowser"
           "custom/browser"
-          "custom/guilded"
+          "custom/discord"
           "mpd" 
           "sway/mode" 
         ];
@@ -146,9 +146,9 @@
           };
 
           # Guilded shortcut
-          "custom/guilded" = {
-            format = "";
-            on-click = "flatpak run gg.guilded.Guilded";
+          "custom/discord" = {
+            format = "";
+            on-click = "discord";
             tooltip = false;
           };
         };

@@ -147,10 +147,10 @@
   # Configure system-wide services
   services = {
 
-    # Enable bluetooth manager
+    # Enable bluetooth support and device management (via bluetooth manager)
     blueman.enable = true;
 
-    # Enable flatpak
+    # Enable flatpak for non-nix packages (or temporary broken packages)
     flatpak.enable = true;
 
     # Enable gnome virtual file system (enables trash)
@@ -163,7 +163,7 @@
     printing.enable = true;
   };
 
-  # Enable xdg desktop integration
+  # Enable XDG desktop integration
   xdg.portal.enable = true;
 
   # Open ports in the firewall.

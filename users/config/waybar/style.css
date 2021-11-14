@@ -45,9 +45,10 @@
 #tray,
 #workspaces,
 #custom-browser,
+#custom-discord,
 #custom-filebrowser,
-#custom-guilded,
 #custom-menu,
+#custom-spotify,
 #custom-terminal {
   padding: 0px 15px;
 }
@@ -86,11 +87,11 @@ tooltip label {
 }
 
 #custom-menu {
-  color: red;
+  color: cyan;
 }
 
 #custom-terminal {
-  color: green;
+  color: magenta;
 }
 
 #custom-filebrowser {
@@ -98,13 +99,14 @@ tooltip label {
 }
 
 #custom-browser {
+  color: red;
+}
+
+#custom-discord {
   color: blue;
 }
 
-#custom-guilded {
-  color: magenta;
-}
-
-#mpd {
-  color: cyan;
+#mpd,
+#custom-spotify {
+  color: green;
 }

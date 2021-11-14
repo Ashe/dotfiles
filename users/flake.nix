@@ -10,9 +10,7 @@
         username = "ashe";
         homeDirectory = "/home/ashe";
         system = "x86_64-linux";
-        configuration = { config, lib, pkgs, ...}@configInput: {
-          imports = [ ./home.nix ];
-        };
+        configuration.imports = [ ./home.nix ];
       };
     };
   };

@@ -55,7 +55,7 @@ in
         "${cfg.config.modifier}+Return" = "exec $TERMINAL";
         "${cfg.config.modifier}+1" = "exec $FILEGUI --new-window";
         "${cfg.config.modifier}+2" = "exec $BROWSER";
-        "${cfg.config.modifier}+3" = "exec $TERMINAL -e ncmpcpp";
+        "${cfg.config.modifier}+3" = "exec $MUSIC";
         "${cfg.config.modifier}+Shift+s" = "exec wl-copy -t image/png < $(grimshot save area)";
         "Print" = "exec wl-copy -t image/png < $(grimshot save area)";
 
