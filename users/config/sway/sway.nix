@@ -1,6 +1,4 @@
-{ config, lib, pkgs, theme, ... }:
-
-with lib;
+{ config, theme, ... }:
 
 let 
   cfg = config.wayland.windowManager.sway;

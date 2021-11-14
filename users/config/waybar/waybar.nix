@@ -1,4 +1,4 @@
-{ config, lib, pkgs, theme, ... }:
+{ theme, ... }:
 
 {
   # Enable Waybar
@@ -151,7 +151,6 @@
             on-click = "flatpak run gg.guilded.Guilded";
             tooltip = false;
           };
-
         };
       }
     ];

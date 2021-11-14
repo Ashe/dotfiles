@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ theme, ... }:
 
 {
   # Configure Mako notification daemon
@@ -22,7 +22,7 @@
     margin = "20,20,20,20";
     padding = "12,12,12,12";
     borderSize = 3;
-    borderRadius = 3;
+    borderRadius = 25;
 
     # Layout of notification
     markup = true;
@@ -38,9 +38,9 @@
     font = "sans-serif 12";
 
     # Colours
-    backgroundColor = "#2E3440";
-    borderColor = "#88C0D0";
-    progressColor = "over #FFFFFF";
-    textColor = "#ECEFF4";
+    backgroundColor = theme.colourscheme.bg-primary;
+    borderColor = theme.colourscheme.bg-bright-secondary;
+    progressColor = theme.colourscheme.fg-primary;
+    textColor = theme.colourscheme.fg-primary;
   };
 }

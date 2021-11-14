@@ -43,6 +43,7 @@ in
     packages = with pkgs; [
 
       # Import package entries from other files
+      (callPackage ./packages/scripts/scripts.nix { })
       (callPackage ./packages/st/st.nix { theme = theme; })
 
       # Languages
@@ -64,6 +65,7 @@ in
       obsidian
       scanmem
       slack
+      spotify
       sublime4
 
       # Utilities

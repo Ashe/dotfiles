@@ -1,6 +1,4 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
+{ pkgs, ... }:
 
 {
   # Configure tmux
@@ -9,8 +7,8 @@ with lib;
     customPaneNavigationAndResize = false;
 
     # Enable plugins
-    plugins = with pkgs; [
-      { plugin = tmuxPlugins.vim-tmux-navigator; }
+    plugins = [
+      { plugin = pkgs.tmuxPlugins.vim-tmux-navigator; }
     ];
 
     # Set prefix key

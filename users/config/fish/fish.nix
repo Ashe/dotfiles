@@ -1,9 +1,5 @@
 { pkgs, ... }:
 
-with import <nixpkgs> {};
-with builtins;
-with lib;
-
 {
   # Configure FISH
   programs.fish = {
