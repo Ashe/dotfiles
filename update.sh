@@ -19,14 +19,14 @@ Will update both system and user configurations by default
 
 # Error message
 error(){
-    if [ "$#" -gt 1 ] 
-    then
-      echo "`cmd`: illegal number of parameters"
-    else
-      echo "`cmd`: invalid option -- '$1'"
-    fi
-    echo "Try '`cmd` -h' for more information.";
-    exit 1;
+  if [ "$#" -gt 1 ] 
+  then
+    echo "`cmd`: illegal number of parameters"
+  else
+    echo "`cmd`: invalid option -- '$1'"
+  fi
+  echo "Try '`cmd` -h' for more information.";
+  exit 1;
 }
 
 # Rebuild system configuration
@@ -56,7 +56,10 @@ rebuild_user_config()
 
   # Rebuild user configuration
   echo -e "\nRebuilding user configuration.."
-  nix run home-manager --no-write-lock-file -- switch --flake "./users#nixos"
+  nix build ./users#homeConfigurations.nixos.activationPackage 
+  if [[ -f result/activate ]]; then
+    ./result/activate && rm -rd result
+  fi
 }
 
 # Operate inside the dotfiles directory
