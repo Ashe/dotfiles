@@ -1,20 +1,21 @@
 #!/bin/sh
 
+# Fail on errors
+set -e
+
 # Gets the command name without path
 cmd(){ echo `basename $0`; }
 
 # Help command output
 usage(){
-echo "\
-`cmd` [ OPTION... ]
-Will update both system and user configurations by default
--h, --help;       Show this prompt
--s, --system;     Update and rebuild system configuration
--u, --user;       Update and rebuild user configuration
--r, --rebuild;    Rebuild both system and user configurations
---rebuild-system; Rebuild system configuration without updating
---rebuild-user;   Rebuild user configuration without updating
-"
+  echo "`cmd` [ OPTION... ]"
+  echo "Will UPDATE both system and user configurations by default."
+  echo "-h, --help;       Show this prompt"
+  echo "-s, --system;     Rebuild system configuration"
+  echo "-u, --user;       Rebuild user configuration"
+  echo "-r, --rebuild;    Rebuild both system and user configurations"
+  echo "--update;         Update and rebuild both system and user configurations"
+  exit 0;
 }
 
 # Error message
@@ -77,11 +78,10 @@ then
 else
   case "$1" in
     -h | --help | --usage) usage ;;
-    -s | --system) rebuild_system_config --update ;;
-    -u | --user) rebuild_user_config --update ;;
+    -s | --system) rebuild_system_config ;;
+    -u | --user) rebuild_user_config ;;
     -r | --rebuild) rebuild_system_config && rebuild_user_config ;;
-    --rebuild-system) rebuild_system_config ;;
-    --rebuild-user) rebuild_user_config ;;
+    --update) rebuild_system_config --update && rebuild_user_config--update ;;
     *) error $@ ;;
   esac
 fi

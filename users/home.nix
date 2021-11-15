@@ -71,6 +71,7 @@ in
       # Utilities
       grim
       mpc_cli
+      playerctl
       rnix-lsp
       slurp
       sway-contrib.grimshot

@@ -48,9 +48,25 @@
 #custom-discord,
 #custom-filebrowser,
 #custom-menu,
-#custom-spotify,
+#custom-spotify-shortcut,
 #custom-terminal {
   padding: 0px 15px;
+}
+
+#custom-spotify-monitor,
+#custom-spotify-metadata,
+#custom-spotify-prev,
+#custom-spotify-play-pause,
+#custom-spotify-next {
+  padding: 0px 5px;
+}
+
+#custom-spotify-metadata {
+  padding-left: 15px;
+}
+
+#custom-spotify-next {
+  padding-right: 15px;
 }
 
 tooltip,
@@ -107,6 +123,11 @@ tooltip label {
 }
 
 #mpd,
-#custom-spotify {
+#custom-spotify-shortcut,
+#custom-spotify-monitor,
+#custom-spotify-metadata,
+#custom-spotify-prev,
+#custom-spotify-play-pause,
+#custom-spotify-next {
   color: green;
 }

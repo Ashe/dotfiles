@@ -21,8 +21,8 @@
           "custom/filebrowser"
           "custom/browser"
           "custom/discord"
-          "mpd" 
-          "sway/mode" 
+          "custom/spotify-shortcut"
+          "sway/mode"
         ];
 
         # Central modules
@@ -32,6 +32,11 @@
 
         # Right modules
         modules-right = [ 
+          "custom/spotify-monitor"
+          "custom/spotify-metadata"
+          "custom/spotify-prev"
+          "custom/spotify-play-pause"
+          "custom/spotify-next"
           "cpu"
           "battery"
           "network"
@@ -52,20 +57,6 @@
           # CPU usage
           cpu = {
             format = "  {usage}%";
-          };
-
-          # MPD music daemon
-          mpd = {
-            format = "{stateIcon}  {title}";
-            format-paused = "{stateIcon}";
-            format-stopped = "";
-            format-disconnected = "";
-            state-icons = {
-              playing = "";
-              paused = "";
-            };
-            tooltip-format = "  {title} | {artist} | {album}";
-            tooltip-format-disconnected = "  (disconnected)";
           };
 
           # Network usage
@@ -145,11 +136,67 @@
             tooltip = false;
           };
 
-          # Guilded shortcut
+          # Discord shortcut
           "custom/discord" = {
             format = "";
             on-click = "discord";
             tooltip = false;
+          };
+
+          # Shortcut for spotify
+          "custom/spotify-shortcut" = {
+            format = "";
+            on-click = "spotify";
+            tooltip = false;
+          };
+
+          # Continuously polls Spotify
+          "custom/spotify-monitor" = {
+            interval = 1;
+            exec = "waybar-spotify-monitor.sh";
+            signal = 4;
+            tooltip = false;
+          };
+
+          # Shows detail about current Spotify song
+          "custom/spotify-metadata" = {
+            format = "  {}";
+            max-length = 500;
+            interval = "once";
+            return-type = "json";
+            exec = "waybar-spotify-metadata.sh";
+            on-click = "waybar-spotify-controls.sh";
+            signal = 5;
+          };
+
+          # Allows the playing or pausing of Spotify
+          "custom/spotify-play-pause" = {
+            format = "{}";
+            interval = "once";
+            return-type = "json";
+            exec = "waybar-spotify-play-pause.sh";
+            on-click = "waybar-spotify-controls.sh";
+            signal = 5;
+          };
+
+          # Skip to next Spotify song
+          "custom/spotify-next" = {
+            format = "";
+            return-type = "json";
+            interval = "once";
+            exec = "waybar-spotify-metadata.sh";
+            on-click = "waybar-spotify-controls.sh next";
+            signal = 5;
+          };
+
+          # Skip to previous Spotify song
+          "custom/spotify-prev" = {
+            format = "";
+            interval = "once";
+            return-type = "json";
+            exec = "waybar-spotify-metadata.sh";
+            on-click = "waybar-spotify-controls.sh prev";
+            signal = 5;
           };
         };
       }
