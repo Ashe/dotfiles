@@ -20,8 +20,8 @@
           "custom/terminal"
           "custom/filebrowser"
           "custom/browser"
-          "custom/discord"
           "custom/spotify-shortcut"
+          "custom/discord"
           "sway/mode"
         ];
 
@@ -125,7 +125,8 @@
           # File browser shortcut
           "custom/filebrowser" = {
             format = "";
-            on-click = "$FILEGUI";
+            on-click = "$FILEGUI --new-window";
+            on-click-middle = "pkill $FILEGUI";
             tooltip = false;
           };
 
@@ -133,6 +134,7 @@
           "custom/browser" = {
             format = "";
             on-click = "$BROWSER";
+            on-click-middle = "pkill $BROWSER";
             tooltip = false;
           };
 
@@ -140,6 +142,7 @@
           "custom/discord" = {
             format = "";
             on-click = "discord";
+            on-click-middle = "pkill discord";
             tooltip = false;
           };
 
@@ -147,6 +150,7 @@
           "custom/spotify-shortcut" = {
             format = "";
             on-click = "spotify";
+            on-click-middle = "pkill spotify";
             tooltip = false;
           };
 
