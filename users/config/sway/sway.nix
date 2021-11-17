@@ -40,6 +40,9 @@ in
         { command = "mako"; }
       ];
 
+      # Allows quick returning to previous workspace
+      workspaceAutoBackAndForth = true;
+
       # Keybindings
       keybindings = {
 

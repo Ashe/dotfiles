@@ -94,6 +94,7 @@
           "sway/workspaces" = {
             format = "{icon}";
             enable-bar-scroll = true;
+            disable-scroll-wraparound = true;
             format-icons = {
               default = "";
               focused = "";
