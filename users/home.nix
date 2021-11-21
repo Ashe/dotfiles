@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  theme = (import ./themes/nord.nix);
+  theme = (import ./themes/rose-pine.nix);
 in
 {
 

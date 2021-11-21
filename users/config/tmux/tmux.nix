@@ -1,5 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, theme, ... }:
 
+let 
+  colours = theme.colourscheme;
+in
 {
   # Configure tmux
   programs.tmux = {
@@ -75,23 +78,14 @@
       setw -g pane-border-status top
       setw -g pane-border-format '#[bold]#{?#{&&:#{pane_active},#{client_prefix}},#[underscore],}\
       #{?pane_active, ACTIVE ⇒,} #I/#{session_windows} :: #P ⇒ #{pane_current_command} '
-      set -g pane-border-style fg=green
-      set -g pane-active-border-style fg=cyan
+      set -g pane-active-border-style fg=${colours.accent-primary}
+      set -g pane-border-style fg=${colours.accent-secondary}
 
       # Windows
       set -g status-justify 'centre'
       set -g status-left-length '80'
       set -g status-right-length '80'
       setw -g window-status-separator '''
-
-      # Default statusbar colors
-      set -g status-bg white
-      set -g status-left ' #[fg=magenta,bold] #S'
-      set -g status-right '#[fg=brightyellow] #{?client_prefix,⌨ ,  }  #[fg=magenta,bold] %Y-%m-%d %H:%M '
-      setw -g window-status-format '#[fg=magenta,bold] #I #W '
-      setw -g window-status-current-format '#[fg=brightblue,bold] #I #W:#F'
-      setw -g window-status-activity-style bg=black
-      setw -g window-status-bell-style bg=black
     '';
   };
 }

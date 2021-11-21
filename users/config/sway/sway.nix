@@ -18,7 +18,7 @@ in
       output = {
         DP-1 = {
           mode = "5120x1440";
-          bg = "~/Pictures/wallpaper.png center";
+          bg = "${theme.wallpaper} fill";
         };
       };
 

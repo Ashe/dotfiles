@@ -41,7 +41,7 @@
 
     # Bright colours
     bright-black = "#434c5e";
-    bright-red = "#bf616a";
+    bright-red = "#cf717a";
     bright-green = "#b3ce9c";
     bright-yellow = "#fbdb9b";
     bright-blue = "#91b1d1";
@@ -51,4 +51,7 @@
     bright-dark-grey = "#4c566a";
     bright-light-grey = "#e5e9f0";
   };
+
+  # Theme wallpaper
+  wallpaper = "~/Pictures/wallpapers/nord.png";
 }

@@ -39,7 +39,7 @@
 
     # Colours
     backgroundColor = theme.colourscheme.bg-primary;
-    borderColor = theme.colourscheme.bg-bright-secondary;
+    borderColor = theme.colourscheme.accent-primary;
     progressColor = theme.colourscheme.fg-primary;
     textColor = theme.colourscheme.fg-primary;
   };
