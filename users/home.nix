@@ -16,7 +16,6 @@ in
     ./config/mako/mako.nix
     ./config/mangohud/mangohud.nix
     ./config/mpd/mpd.nix
-    ./config/ncmpcpp/ncmpcpp.nix
     ./config/neovim/neovim.nix
     ./config/sway/sway.nix
     ./config/tmux/tmux.nix
