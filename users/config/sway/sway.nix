@@ -30,6 +30,9 @@ in
       # Create gaps
       gaps.inner = 10;
 
+      # Never steal focus
+      focus.newWindow = "urgent";
+
       # Change modifier to Super
       modifier = "Mod4";
 
