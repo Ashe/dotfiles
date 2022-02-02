@@ -164,7 +164,10 @@
   };
 
   # Enable XDG desktop integration
-  xdg.portal.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 
   # Open ports in the firewall.
   networking.firewall = {
