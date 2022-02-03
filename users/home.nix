@@ -65,6 +65,7 @@ in
       scanmem
       slack
       spotify
+      steam
       sublime4
 
       # Utilities
