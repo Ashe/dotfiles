@@ -65,7 +65,6 @@ in
       scanmem
       slack
       spotify
-      steam
       sublime4
 
       # Utilities
@@ -74,6 +73,7 @@ in
       playerctl
       rnix-lsp
       slurp
+      steam-run
       sway-contrib.grimshot
       wdisplays
       wl-clipboard
@@ -94,10 +94,10 @@ in
   };
 
   # Configure nixpkgs
-  nixpkgs = {
+  nixpkgs.config = {
 
     # Allow proprietary software
-    config.allowUnfree = true;
+    allowUnfree = true;
   };
 
   # Enable discovery of fonts from installed packages

@@ -12,16 +12,23 @@
     ./hardware-configuration.nix
   ];
 
-  # Enable grub as bootloader
-  boot.loader = {
-    systemd-boot.enable = false;
-    efi.canTouchEfiVariables = true;
-    efi.efiSysMountPoint = "/boot/EFI";
-    grub = {
-      enable = true;
-      efiSupport = true;
-      version = 2;
-      devices = [ "nodev" ];
+  # Configure boot parameters
+  boot = {
+
+    # Always use latest kernel version
+    kernelPackages = pkgs.linuxPackages_latest;
+
+    # Enable grub as bootloader
+    loader = {
+      systemd-boot.enable = false;
+      efi.canTouchEfiVariables = true;
+      efi.efiSysMountPoint = "/boot/EFI";
+      grub = {
+        enable = true;
+        efiSupport = true;
+        version = 2;
+        devices = [ "nodev" ];
+      };
     };
   };
 
@@ -65,6 +72,7 @@
         driversi686Linux.amdvlk
       ];
     };
+    steam-hardware.enable = true;
   };
 
   # Enable sound
@@ -123,15 +131,36 @@
       xdg-utils
     ];
   };
-  
-  # Allow proprietary software
-  nixpkgs.config.allowUnfree = true;
 
+  # Configure nix
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
        experimental-features = nix-command flakes
     '';
+  };
+
+  # Configure nixpkgs
+  nixpkgs.config = {
+
+    # Allow proprietary software
+    allowUnfree = true;
+
+    # Package overrides
+    packageOverrides = pkgs: {
+      steam = pkgs.steam.override {
+        extraPkgs = pkgs: with pkgs; [
+          libgdiplus
+          libpng
+          libpulseaudio
+          libvorbis
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXinerama
+          xorg.libXScrnSaver
+        ];
+      };
+    };
   };
 
   # Configure system-wide programs
@@ -142,6 +171,9 @@
 
     # Enable FISH
     fish.enable = true;
+
+    # Enable steam
+    steam.enable = true;
   };
 
   # Configure system-wide services
