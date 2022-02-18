@@ -98,6 +98,11 @@ in
 
     # Allow proprietary software
     allowUnfree = true;
+
+    # Permit specific insecure packages
+    permittedInsecurePackages = [
+      "electron-13.6.9"
+    ];
   };
 
   # Enable discovery of fonts from installed packages
