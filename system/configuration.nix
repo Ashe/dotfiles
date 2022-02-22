@@ -18,6 +18,11 @@
     # Always use latest kernel version
     kernelPackages = pkgs.linuxPackages_latest;
 
+    # Install extra kernel packages
+    extraModulePackages = with config.boot.kernelPackages; [
+      v4l2loopback
+    ];
+
     # Enable grub as bootloader
     loader = {
       systemd-boot.enable = false;

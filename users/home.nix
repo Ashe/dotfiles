@@ -17,6 +17,7 @@ in
     ./config/mangohud/mangohud.nix
     ./config/mpd/mpd.nix
     ./config/neovim/neovim.nix
+    ./config/obs-studio/obs-studio.nix
     ./config/sway/sway.nix
     ./config/tmux/tmux.nix
     ./config/waybar/waybar.nix
