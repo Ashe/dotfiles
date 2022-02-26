@@ -179,6 +179,9 @@
 
     # Enable steam
     steam.enable = true;
+
+    # Enable gamemode for steam
+    gamemode.enable = true;
   };
 
   # Configure system-wide services

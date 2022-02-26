@@ -13,25 +13,25 @@
   border-radius: 0;
 }
 
-.modules-left,
-.modules-center,
-.modules-right {
-  margin: 10px;
-  margin-bottom: 2px;
-  padding: 8px 16px;
-  border-radius: 25px;
+window#waybar {
+  margin-left: 2px;
+  padding: 16px 8px;
   background-color: bg-primary;
   color: fg-primary;
+  transition-property: background-color;
+  transition-duration: .5s;
 }
 
 .widget {
   color: fg-primary;
-  padding: 0px 8px;
+  padding: 8px 0px;
 }
 
 #backlight,
 #battery,
 #clock,
+clock.day,
+clock.date,
 #cpu,
 #custom-media,
 #disk,
@@ -50,7 +50,7 @@
 #custom-menu,
 #custom-spotify-shortcut,
 #custom-terminal {
-  padding: 0px 15px;
+  padding: 15px 0px;
 }
 
 #custom-spotify-monitor,
@@ -58,15 +58,15 @@
 #custom-spotify-prev,
 #custom-spotify-play-pause,
 #custom-spotify-next {
-  padding: 0px 5px;
+  padding: 5px 0px;
 }
 
 #custom-spotify-metadata {
-  padding-left: 15px;
+  padding-top: 15px;
 }
 
 #custom-spotify-next {
-  padding-right: 15px;
+  padding-bottom: 15px;
 }
 
 tooltip,
@@ -83,8 +83,11 @@ tooltip label {
 /* Colours */
 /***********/
 
-#clock {
+#clock,
+clock.day,
+clock.date {
   color: fg-primary;
+  padding: 5px 0px;
 }
 
 #pulseaudio {

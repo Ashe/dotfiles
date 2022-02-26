@@ -15,7 +15,7 @@
     actions = true;
 
     # Positioning and size
-    anchor = "top-right";
+    anchor = "bottom-right";
     layer = "overlay";
     height = 200;
     width = 500;

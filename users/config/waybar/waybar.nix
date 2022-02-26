@@ -11,8 +11,8 @@
       {
         # Basics
         layer = "top";
-        position = "top";
-        height = 20;
+        position = "right";
+        width = 100;
 
         # Left modules
         modules-left = [ 
@@ -25,23 +25,16 @@
           "sway/mode"
         ];
 
-        # Central modules
-        modules-center = [ 
-          "sway/workspaces" 
-        ];
-
         # Right modules
         modules-right = [ 
           "custom/spotify-monitor"
-          "custom/spotify-metadata"
-          "custom/spotify-prev"
           "custom/spotify-play-pause"
-          "custom/spotify-next"
           "cpu"
-          "battery"
           "network"
           "pulseaudio"
           "tray"
+          "clock#day"
+          "clock#date"
           "clock"
         ];
 
@@ -49,8 +42,20 @@
         modules = {
 
           # Current time and date
-          clock = {
-            format = "  {:%a, %d %b %I:%M %p}";
+          "clock#day" = {
+            format = "{:%A}";
+            tooltip-format = "<big>  {:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+          };
+
+          # Current time and date
+          "clock#date" = {
+            format = "{:%d %b}";
+            tooltip-format = "<big>  {:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+          };
+
+          # Current time and date
+          "clock" = {
+            format = "{:%I:%M %p}";
             tooltip-format = "<big>  {:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
           };
 
@@ -181,6 +186,10 @@
             return-type = "json";
             exec = "waybar-spotify-play-pause.sh";
             on-click = "waybar-spotify-controls.sh";
+            on-click-right = "waybar-spotify-controls.sh next";
+            on-scroll-up = "waybar-spotify-controls.sh next";
+            on-click-middle = "waybar-spotify-controls.sh prev";
+            on-scroll-down = "waybar-spotify-controls.sh prev";
             signal = 5;
           };
 
