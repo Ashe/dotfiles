@@ -5,11 +5,21 @@
 { config, pkgs, mesa-git, ... }:
 
 {
+
+  # Pass these arguments to all imports
+  _module.args = {
+    inherit mesa-git;
+  };
+
   # Import other config files
   imports = [
 
     # Include the results of the hardware scan
     ./hardware-configuration.nix
+
+    # Import other config files
+    ./config/mesa-git/mesa-git.nix
+    ./config/steam/steam.nix
   ];
 
   # Configure boot parameters
@@ -62,42 +72,6 @@
 
     # Enable bluetooth
     bluetooth.enable = true;
-
-    # Enable AMD gpu
-    opengl = 
-    let 
-      attrs = oa: {
-        name = "mesa-git";
-        src = mesa-git;
-        nativeBuildInputs = oa.nativeBuildInputs ++ [ pkgs.glslang ];
-        mesonFlags = oa.mesonFlags ++ [ "-Dvulkan-layers=device-select,overlay" ];
-        postInstall = oa.postInstall + ''
-          mv $out/lib/libVkLayer* $drivers/lib
-          layer=VkLayer_MESA_device_select
-          substituteInPlace $drivers/share/vulkan/implicit_layer.d/''${layer}.json \
-            --replace "lib''${layer}" "$drivers/lib/lib''${layer}"
-          layer=VkLayer_MESA_overlay
-          substituteInPlace $drivers/share/vulkan/explicit_layer.d/''${layer}.json \
-            --replace "lib''${layer}" "$drivers/lib/lib''${layer}"
-        '';
-      }; 
-      ovrd = _: {
-        driDrivers = [];
-      };
-    in with pkgs; {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
-      package = ((mesa.override ovrd).overrideAttrs attrs).drivers;
-      package32 = ((pkgsi686Linux.mesa.override ovrd).overrideAttrs attrs).drivers;
-      extraPackages = with pkgs; [
-        amdvlk
-      ];
-      extraPackages32 = with pkgs; [
-        driversi686Linux.amdvlk
-      ];
-    };
-    steam-hardware.enable = true;
   };
 
   # Enable sound
@@ -118,13 +92,6 @@
   
     # List of directories to symlink in /run/current-system/sw
     pathsToLink = [ "/libexec" ];
-
-    # Configure system-wide environment variables
-    variables = {
-
-      # Force RADV drivers
-      AMD_VULKAN_ICD = "RADV";
-    };
 
     # List packages installed in system profile
     systemPackages = with pkgs; [
@@ -177,24 +144,6 @@
 
     # Allow proprietary software
     allowUnfree = true;
-
-    # Package overrides
-    packageOverrides = pkgs: {
-
-      # Provide extra libraries to Steam
-      steam = pkgs.steam.override {
-        extraPkgs = pkgs: with pkgs; [
-          libgdiplus
-          libpng
-          libpulseaudio
-          libvorbis
-          xorg.libXcursor
-          xorg.libXi
-          xorg.libXinerama
-          xorg.libXScrnSaver
-        ];
-      };
-    };
   };
 
   # Configure system-wide programs
@@ -205,12 +154,6 @@
 
     # Enable FISH
     fish.enable = true;
-
-    # Enable steam
-    steam.enable = true;
-
-    # Enable gamemode for steam
-    gamemode.enable = true;
   };
 
   # Configure system-wide services
