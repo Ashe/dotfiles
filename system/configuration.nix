@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, mesa-git, ... }:
 
 {
   # Import other config files
@@ -64,13 +64,37 @@
     bluetooth.enable = true;
 
     # Enable AMD gpu
-    opengl = {
+    opengl = 
+    let 
+      attrs = oa: {
+        name = "mesa-git";
+        src = mesa-git;
+        nativeBuildInputs = oa.nativeBuildInputs ++ [ pkgs.glslang ];
+        mesonFlags = oa.mesonFlags ++ [ "-Dvulkan-layers=device-select,overlay" ];
+        postInstall = oa.postInstall + ''
+          mv $out/lib/libVkLayer* $drivers/lib
+          layer=VkLayer_MESA_device_select
+          substituteInPlace $drivers/share/vulkan/implicit_layer.d/''${layer}.json \
+            --replace "lib''${layer}" "$drivers/lib/lib''${layer}"
+          layer=VkLayer_MESA_overlay
+          substituteInPlace $drivers/share/vulkan/explicit_layer.d/''${layer}.json \
+            --replace "lib''${layer}" "$drivers/lib/lib''${layer}"
+        '';
+      }; 
+      ovrd = _: {
+        driDrivers = [];
+      };
+    in with pkgs; {
       enable = true;
       driSupport = true;
       driSupport32Bit = true;
+      package = ((mesa.override ovrd).overrideAttrs attrs).drivers;
+      package32 = ((pkgsi686Linux.mesa.override ovrd).overrideAttrs attrs).drivers;
       extraPackages = with pkgs; [
-        rocm-opencl-icd
-        rocm-opencl-runtime
+        amdvlk
+      ];
+      extraPackages32 = with pkgs; [
+        driversi686Linux.amdvlk
       ];
     };
     steam-hardware.enable = true;
@@ -94,6 +118,13 @@
   
     # List of directories to symlink in /run/current-system/sw
     pathsToLink = [ "/libexec" ];
+
+    # Configure system-wide environment variables
+    variables = {
+
+      # Force RADV drivers
+      AMD_VULKAN_ICD = "RADV";
+    };
 
     # List packages installed in system profile
     systemPackages = with pkgs; [
@@ -149,6 +180,8 @@
 
     # Package overrides
     packageOverrides = pkgs: {
+
+      # Provide extra libraries to Steam
       steam = pkgs.steam.override {
         extraPkgs = pkgs: with pkgs; [
           libgdiplus

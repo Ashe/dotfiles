@@ -7,7 +7,7 @@ in
 
   # Pass these arguments to all imports
   _module.args = {
-    theme = theme;
+    inherit theme;
   };
 
   # Import other config files
@@ -76,6 +76,7 @@ in
       slurp
       steam-run
       sway-contrib.grimshot
+      vulkan-tools
       wdisplays
       wl-clipboard
       wlogout
