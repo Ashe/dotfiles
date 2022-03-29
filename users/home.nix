@@ -4,7 +4,6 @@ let
   theme = (import ./themes/rose-pine.nix);
 in
 {
-
   # Pass these arguments to all imports
   _module.args = {
     inherit theme;
@@ -12,6 +11,7 @@ in
 
   # Import other config files
   imports = [
+    ./config/eww/eww.nix
     ./config/fish/fish.nix
     ./config/mako/mako.nix
     ./config/mangohud/mangohud.nix
