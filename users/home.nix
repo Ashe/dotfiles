@@ -58,6 +58,7 @@ in
       audacity
       blender
       discord
+      godot
       gthumb
       mpd
       mpv
