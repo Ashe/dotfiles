@@ -81,7 +81,7 @@ else
     -s | --system) rebuild_system_config ;;
     -u | --user) rebuild_user_config ;;
     -r | --rebuild) rebuild_system_config && rebuild_user_config ;;
-    --update) rebuild_system_config --update && rebuild_user_config--update ;;
+    --update) rebuild_system_config --update && rebuild_user_config --update ;;
     *) error $@ ;;
   esac
 fi
