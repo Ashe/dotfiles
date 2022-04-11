@@ -46,7 +46,7 @@ in
 
       # Import package entries from other files
       (callPackage ./packages/scripts/scripts.nix { })
-      (callPackage ./packages/st/st.nix { theme = theme; })
+      (callPackage ./packages/st/st.nix { inherit theme; })
 
       # Languages
       haxe
