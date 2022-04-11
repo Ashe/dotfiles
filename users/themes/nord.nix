@@ -1,8 +1,13 @@
 {
   # Theme data
   data = (pkgs: {
-    gtk-name = "Nordic";
-    gtk-package = pkgs.nordic; 
+    gtk = {
+      name = "Nordic";
+      package = pkgs.nordic; 
+    };
+    vs-code = {
+      package = pkgs.vscode-extensions.arcticicestudio.nord-visual-studio-code;
+    };
   });
 
   # Theme colourscheme

@@ -20,6 +20,7 @@ in
     ./config/obs-studio/obs-studio.nix
     ./config/sway/sway.nix
     ./config/tmux/tmux.nix
+    ./config/vs-code/vs-code.nix
     ./config/waybar/waybar.nix
     ./config/xdg/xdg.nix
   ];
@@ -48,6 +49,7 @@ in
       (callPackage ./packages/st/st.nix { theme = theme; })
 
       # Languages
+      haxe
       nodejs
       python3Minimal
 
@@ -119,8 +121,8 @@ in
 
     # Set theme
     theme = {
-      name = (theme.data pkgs).gtk-name;
-      package = (theme.data pkgs).gtk-package;
+      name = (theme.data pkgs).gtk.name;
+      package = (theme.data pkgs).gtk.package;
     };
 
     # Set icon theme

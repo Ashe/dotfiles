@@ -1,8 +1,13 @@
 {
   # Theme data
   data = (pkgs: {
-    gtk-name = "Rose-Pine";
-    gtk-package = pkgs.rose-pine-gtk-theme; 
+    gtk = {
+      name = "Rose-Pine";
+      package = pkgs.rose-pine-gtk-theme; 
+    };
+    vs-code = {
+      package = pkgs.vscode-extensions.mvllow.rose-pine;
+    };
   });
 
   # Theme colourscheme
