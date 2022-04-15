@@ -5,8 +5,40 @@
     # Enable managing of xdg directories
     enable = true;
 
-    # Allow programs and files to be opened with appropriate programs
+    # Support XDG Shared MIME-info specification
     mime.enable = true;
+
+    # Allow files to be opened with appropriate programs
+    mimeApps = {
+      enable = true;
+
+      # Configure default applications for mimetypes
+      defaultApplications = {
+
+        # Applications
+        "application/zip" = ["org.gnome.Nautilus.desktop"];
+        "application/octet-stream" = ["org.gnome.Nautilus.desktop" "chromium-browser.desktop"];
+        "application/x-compressed-tar" = ["org.gnome.Nautilus.desktop"];
+        "application/x-xz-compressed-tar" = ["org.gnome.Nautilus.desktop"];
+        "application/json" = ["sublime_text.desktop"];
+
+        # Directories
+        "inode/directory" = ["org.gnome.Nautilus.desktop"];
+
+        # Text
+        "text/html" = ["sublime_text.desktop" "chromium-browser.desktop"];
+        "text/markdown" = ["sublime_text.desktop"];
+        "text/plain" = ["sublime_text.desktop"];
+        "text/x-log" = ["sublime_text.desktop"];
+
+        # Images
+        "image/png" = ["org.gnome.gThumb.desktop" "chromium-browser.desktop"];
+        "image/gif" = ["chromium-browser.desktop"];
+
+        # Email
+        "x-scheme-handler/mailto" = ["chromium-browser.desktop"];
+      };
+    };
 
     # Configure system directories
     systemDirs = {
