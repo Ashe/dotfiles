@@ -6,9 +6,16 @@ let
 in
 {
 
-  # Enable Sway for Wayland
+  # Configure sway for Wayland
   wayland.windowManager.sway = {
+
+    # Enable sway
     enable = true;
+
+    # Enable xwayland compatibility layer for running X applications
+    xwayland = true;
+
+    # Allow sway to facilitate GTK applications
     wrapperFeatures.gtk = true;
 
     # Configure sway
