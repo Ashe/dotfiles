@@ -20,19 +20,20 @@
         "application/octet-stream" = ["org.gnome.Nautilus.desktop" "chromium-browser.desktop"];
         "application/x-compressed-tar" = ["org.gnome.Nautilus.desktop"];
         "application/x-xz-compressed-tar" = ["org.gnome.Nautilus.desktop"];
-        "application/json" = ["sublime_text.desktop"];
+        "application/json" = ["code.desktop"];
 
         # Directories
         "inode/directory" = ["org.gnome.Nautilus.desktop"];
 
         # Text
-        "text/html" = ["sublime_text.desktop" "chromium-browser.desktop"];
-        "text/markdown" = ["sublime_text.desktop"];
-        "text/plain" = ["sublime_text.desktop"];
-        "text/x-log" = ["sublime_text.desktop"];
+        "text/html" = ["code.desktop" "chromium-browser.desktop"];
+        "text/markdown" = ["code.desktop"];
+        "text/plain" = ["code.desktop"];
+        "text/x-log" = ["code.desktop"];
 
         # Images
         "image/png" = ["org.gnome.gThumb.desktop" "chromium-browser.desktop"];
+        "image/jpg" = ["org.gnome.gThumb.desktop" "chromium-browser.desktop"];
         "image/gif" = ["chromium-browser.desktop"];
 
         # Email

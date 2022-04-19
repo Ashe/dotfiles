@@ -14,11 +14,15 @@
       (theme.data pkgs).vs-code.package
 
       # Utility
+      formulahendry.code-runner
+      ms-vsliveshare.vsliveshare
       vscodevim.vim
       xaver.clang-format
 
       # Languages
       bbenoist.nix
+      shardulm94.trailing-spaces
+      yzhang.markdown-all-in-one
     ];
   };
 }
