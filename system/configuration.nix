@@ -117,6 +117,7 @@
       networkmanager
       tree
       unzip
+      wlr-randr
       xwayland
 
       # Miscellaneous
