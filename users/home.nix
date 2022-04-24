@@ -13,6 +13,7 @@ in
   imports = [
     ./config/eww/eww.nix
     ./config/fish/fish.nix
+    ./config/kanshi/kanshi.nix
     ./config/mako/mako.nix
     ./config/mangohud/mangohud.nix
     ./config/mpd/mpd.nix
