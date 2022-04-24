@@ -3,7 +3,7 @@
   data = (pkgs: {
     gtk = {
       name = "Nordic";
-      package = pkgs.nordic; 
+      package = pkgs.nordic;
     };
     vs-code = {
       package = pkgs.vscode-extensions.arcticicestudio.nord-visual-studio-code;

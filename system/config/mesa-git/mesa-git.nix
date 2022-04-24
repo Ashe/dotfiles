@@ -3,7 +3,7 @@
 {
   # Enable AMD GPU
   hardware.opengl =
-  let 
+  let
     attrs = oa: {
       name = "mesa-git";
       src = mesa-git;
@@ -18,7 +18,7 @@
         substituteInPlace $drivers/share/vulkan/explicit_layer.d/''${layer}.json \
           --replace "lib''${layer}" "$drivers/lib/lib''${layer}"
       '';
-    }; 
+    };
     ovrd = _: {
       driDrivers = [];
     };

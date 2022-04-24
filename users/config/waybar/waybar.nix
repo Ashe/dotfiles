@@ -6,7 +6,7 @@
     enable = true;
 
     # Configure Waybar
-    settings = 
+    settings =
     [
       {
         # Basics
@@ -15,7 +15,7 @@
         width = 100;
 
         # Left modules
-        modules-left = [ 
+        modules-left = [
           "custom/menu"
           "custom/terminal"
           "custom/filebrowser"
@@ -26,7 +26,7 @@
         ];
 
         # Right modules
-        modules-right = [ 
+        modules-right = [
           "custom/spotify-monitor"
           "custom/spotify-play-pause"
           "cpu"
@@ -217,9 +217,9 @@
     ];
 
     # Appearance
-    style = builtins.replaceStrings 
-        (builtins.attrNames theme.colourscheme) 
-        (builtins.attrValues theme.colourscheme) 
+    style = builtins.replaceStrings
+        (builtins.attrNames theme.colourscheme)
+        (builtins.attrValues theme.colourscheme)
         (builtins.readFile ./style.css);
   };
 }

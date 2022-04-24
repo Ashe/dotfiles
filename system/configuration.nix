@@ -89,7 +89,7 @@
 
   # Configure environment related settings
   environment = {
-  
+
     # List of directories to symlink in /run/current-system/sw
     pathsToLink = [ "/libexec" ];
 
@@ -178,7 +178,7 @@
   # Enable XDG desktop integration
   xdg.portal = {
     enable = true;
-    extraPortals = [ 
+    extraPortals = [
       pkgs.xdg-desktop-portal
       pkgs.xdg-desktop-portal-gtk
     ];

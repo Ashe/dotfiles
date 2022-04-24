@@ -3,7 +3,7 @@
   data = (pkgs: {
     gtk = {
       name = "Rose-Pine";
-      package = pkgs.rose-pine-gtk-theme; 
+      package = pkgs.rose-pine-gtk-theme;
     };
     vs-code = {
       package = pkgs.vscode-extensions.mvllow.rose-pine;

@@ -1,7 +1,7 @@
 {
   # Configure mpd music server
   services.mpd = {
-    
+
     # Enable mpd
     enable = true;
 

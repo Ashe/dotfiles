@@ -22,8 +22,8 @@
     { device = "/dev/disk/by-uuid/e8a0f5c8-4a6f-4deb-a279-6c8b3eff0b1b";
       fsType = "ext4";
     };
-    
-  fileSystems."/boot/EFI" = 
+
+  fileSystems."/boot/EFI" =
     {
       device = "/dev/disk/by-label/boot";
       fsType = "vfat";
@@ -36,6 +36,4 @@
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
-  
-
 }

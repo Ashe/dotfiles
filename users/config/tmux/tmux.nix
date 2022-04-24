@@ -1,6 +1,6 @@
 { pkgs, theme, ... }:
 
-let 
+let
   colours = theme.colourscheme;
 in
 {
@@ -42,7 +42,7 @@ in
       bind-key -T copy-mode-vi 'C-l' select-pane -R
 
       # Session switching
-      bind -r ( switch-client -p 
+      bind -r ( switch-client -p
       bind -r ) switch-client -n
 
       # Easy splitting

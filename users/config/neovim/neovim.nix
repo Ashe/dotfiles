@@ -95,7 +95,7 @@
 
     # Settings for neovim
     extraConfig = ''
-      
+
       " Enable mouse control
       set mouse=a
 
@@ -141,7 +141,7 @@
       nnoremap <leader>P "+P
       vnoremap <leader>p "+p
       vnoremap <leader>P "+P
-      
+
       " Show switch buffers quickly
       nnoremap <Tab> :bn<CR>
       nnoremap <S-Tab> :bp<CR>

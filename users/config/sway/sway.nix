@@ -1,6 +1,6 @@
 { config, theme, ... }:
 
-let 
+let
   cfg = config.wayland.windowManager.sway;
   colours = theme.colourscheme;
 in
@@ -20,7 +20,7 @@ in
 
     # Configure sway
     config = {
-    
+
       # Configure monitor outputs
       output = {
         DP-1 = {
@@ -136,7 +136,7 @@ in
       # Configure colours
       colors = {
         unfocused = {
-          background = colours.bg-primary; 
+          background = colours.bg-primary;
           border = colours.bg-secondary;
           childBorder = "";
           indicator = colours.bg-secondary;
