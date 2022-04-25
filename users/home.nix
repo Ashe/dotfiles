@@ -152,6 +152,9 @@ in
       userEmail = "git@aas.sh";
     };
 
+    # Enable just project runner and builder
+    just.enable = true;
+
     # Enable lazygit client
     lazygit.enable = true;
 

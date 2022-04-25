@@ -19,15 +19,12 @@
           --replace "lib''${layer}" "$drivers/lib/lib''${layer}"
       '';
     };
-    ovrd = _: {
-      driDrivers = [];
-    };
   in with pkgs; {
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-    package = ((mesa.override ovrd).overrideAttrs attrs).drivers;
-    package32 = ((pkgsi686Linux.mesa.override ovrd).overrideAttrs attrs).drivers;
+    package = (mesa.overrideAttrs attrs).drivers;
+    package32 = (pkgsi686Linux.mesa.overrideAttrs attrs).drivers;
     extraPackages = with pkgs; [
       amdvlk
     ];
