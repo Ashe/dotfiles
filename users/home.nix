@@ -66,6 +66,7 @@ in
       mpd
       mpv
       neofetch
+      nicotine-plus
       obsidian
       scanmem
       slack
