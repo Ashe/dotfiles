@@ -42,7 +42,10 @@ rebuild_system_config()
 
   # Rebuild system configuration
   echo -e "\nRebuilding system configuration.."
-  sudo nixos-rebuild switch --flake './system#nixos'
+  nixos-rebuild build --flake './system#nixos'
+  if [[ -f result/bin/switch-to-configuration ]]; then
+    sudo ./result/bin/switch-to-configuration switch && rm -rd result
+  fi
 }
 
 # Rebuild user configuration
