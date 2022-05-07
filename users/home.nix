@@ -45,17 +45,15 @@ in
     # Packages to install
     packages = with pkgs; [
 
-      # Import package entries from other files
+      # Build custom packages
       (callPackage ./packages/scripts/scripts.nix { })
       (callPackage ./packages/st/st.nix { inherit theme; })
+      (callPackage ./packages/hashlink/hashlink.nix { })
 
       # Languages
       haxe
       nodejs
       python3Minimal
-
-      # Libraries and frameworks
-      hugo
 
       # Programs
       audacity
