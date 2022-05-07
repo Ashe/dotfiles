@@ -37,7 +37,7 @@ rebuild_system_config()
   if [ "$1" == "--update" ]
   then
     echo -e "\nUpdating system flake.lock.."
-    (cd system/; sudo nix flake update)
+    nix flake update './system'
   fi
 
   # Rebuild system configuration
@@ -55,7 +55,7 @@ rebuild_user_config()
   if [ "$1" == "--update" ]
   then
     echo -e "\nUpdating user flake.lock.."
-    (cd users/; nix flake update)
+    nix flake update './users'
   fi
 
   # Rebuild user configuration
