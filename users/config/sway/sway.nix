@@ -53,6 +53,16 @@ in
       # Allows quick returning to previous workspace
       workspaceAutoBackAndForth = true;
 
+      # Configure input devices
+      input = {
+
+        # Graphics tablet
+        "1386:770:Wacom_Intuos_PT_S_Pen" = {
+          map_from_region = "0.1644x0.148 0.8355x0.752";
+          map_to_region = "1280 0 2560 1440";
+        };
+      };
+
       # Keybindings
       keybindings = {
 
