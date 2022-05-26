@@ -17,8 +17,10 @@
     # Include the results of the hardware scan
     ./hardware-configuration.nix
 
+    # Build graphic drivers from source
+    # ./config/mesa-git/mesa-git.nix
+
     # Import other config files
-    ./config/mesa-git/mesa-git.nix
     ./config/steam/steam.nix
   ];
 
