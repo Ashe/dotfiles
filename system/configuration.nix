@@ -136,6 +136,34 @@
     ];
   };
 
+  # Manage fonts
+  fonts = {
+
+    # Download font packages
+    fonts = with pkgs; [ 
+      dina-font
+      fira-code
+      fira-code-symbols
+      font-awesome
+      noto-fonts
+      noto-fonts-cjk
+      twitter-color-emoji
+      ubuntu_font_family
+    ];
+
+    # Enable default fonts
+    enableDefaultFonts = true;
+
+    # Configure default fonts
+    fontconfig = {
+      defaultFonts = {
+        serif = [ "Ubuntu" ];
+        sansSerif = [ "Ubuntu" ];
+        monospace = [ "Ubuntu" ];
+      };
+    };
+  };
+
   # Configure nix
   nix = {
     package = pkgs.nixFlakes;

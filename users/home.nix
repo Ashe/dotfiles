@@ -85,16 +85,6 @@ in
       wlogout
       wofi
       youtube-dl
-
-      # Fonts
-      dina-font
-      fira-code
-      fira-code-symbols
-      font-awesome
-      noto-fonts
-      noto-fonts-cjk
-      twitter-color-emoji
-      ubuntu_font_family
     ];
   };
 
@@ -109,9 +99,6 @@ in
       "electron-13.6.9"
     ];
   };
-
-  # Enable discovery of fonts from installed packages
-  fonts.fontconfig.enable = lib.mkForce true;
 
   # Configure GTK
   gtk = {
