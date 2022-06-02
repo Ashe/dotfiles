@@ -157,9 +157,9 @@
     # Configure default fonts
     fontconfig = {
       defaultFonts = {
-        serif = [ "Ubuntu" ];
-        sansSerif = [ "Ubuntu" ];
-        monospace = [ "Ubuntu" ];
+        serif = [ "Ubuntu" "Regular" ];
+        sansSerif = [ "Ubuntu" "Regular" ];
+        monospace = [ "Fira Code" "Regular" ];
       };
     };
   };
