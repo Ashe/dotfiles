@@ -15,12 +15,13 @@
 
       # Utility
       ms-vsliveshare.vsliveshare
+      shardulm94.trailing-spaces
       vscodevim.vim
       xaver.clang-format
 
       # Languages
       bbenoist.nix
-      shardulm94.trailing-spaces
+      haskell.haskell
       yzhang.markdown-all-in-one
     ];
   };
