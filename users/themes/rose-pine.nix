@@ -6,6 +6,7 @@
       package = pkgs.rose-pine-gtk-theme;
     };
     vs-code = {
+      name = "Rosé Pine Moon";
       package = pkgs.vscode-extensions.mvllow.rose-pine;
     };
   });

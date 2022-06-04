@@ -6,6 +6,7 @@
       package = pkgs.nordic;
     };
     vs-code = {
+      name = "Nord";
       package = pkgs.vscode-extensions.arcticicestudio.nord-visual-studio-code;
     };
   });
