@@ -18,10 +18,10 @@
     ./hardware-configuration.nix
 
     # Build graphic drivers from source
-    # ./config/mesa-git/mesa-git.nix
+    # ./config/mesa-git/default.nix
 
     # Import other config files
-    ./config/steam/steam.nix
+    ./config/steam/default.nix
   ];
 
   # Configure boot parameters

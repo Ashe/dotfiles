@@ -1,2 +1,0 @@
-(defwidget custom-label [?text]
-  (label :text text))

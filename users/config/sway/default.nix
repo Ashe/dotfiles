@@ -52,7 +52,7 @@ in
       startup = [
         { command = "blueman-applet"; }
         { command = "dropbox start"; }
-        { command = "mako"; }
+        { command = "swaync"; }
       ];
 
       # Allows quick returning to previous workspace

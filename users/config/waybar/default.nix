@@ -42,6 +42,7 @@
           "clock#day"
           "clock#date"
           "clock"
+          "custom/notifications"
         ];
 
         # Module configuration
@@ -156,6 +157,24 @@
             on-click = "discord";
             on-click-middle = "pkill discord";
             tooltip = false;
+          };
+
+          # Notification center
+          "custom/notifications" = {
+            tooltip = false;
+            format = "{icon}";
+            format-icons = {
+              notification = "<span foreground='red'><sup></sup></span>";
+              none = "";
+              dnd-notification = "<span foreground='red'><sup></sup></span>";
+              dnd-none = "";
+            };
+            return-type = "json";
+            exec-if = "which swaync-client";
+            exec = "swaync-client -swb";
+            on-click = "swaync-client -t -sw";
+            on-click-right = "swaync-client -d -sw";
+            escape = true;
           };
 
           # Shortcut for spotify

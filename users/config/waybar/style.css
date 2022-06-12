@@ -44,6 +44,7 @@ clock.date,
 #temperature,
 #tray,
 #workspaces,
+#custom-notifications,
 #custom-browser,
 #custom-discord,
 #custom-filebrowser,
@@ -123,6 +124,11 @@ clock.date {
 
 #custom-discord {
   color: blue;
+}
+
+#custom-notifications {
+  color: white;
+  padding: 5px 0px 15px;
 }
 
 #mpd,

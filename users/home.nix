@@ -11,19 +11,18 @@ in
 
   # Import other config files
   imports = [
-    ./config/eww/eww.nix
-    ./config/fish/fish.nix
-    ./config/kanshi/kanshi.nix
-    ./config/mako/mako.nix
-    ./config/mangohud/mangohud.nix
-    ./config/mpd/mpd.nix
-    ./config/neovim/neovim.nix
-    ./config/obs-studio/obs-studio.nix
-    ./config/sway/sway.nix
-    ./config/tmux/tmux.nix
-    ./config/vs-code/vs-code.nix
-    ./config/waybar/waybar.nix
-    ./config/xdg/xdg.nix
+    ./config/fish/default.nix
+    ./config/kanshi/default.nix
+    ./config/mangohud/default.nix
+    ./config/mpd/default.nix
+    ./config/neovim/default.nix
+    ./config/obs-studio/default.nix
+    ./config/sway/default.nix
+    ./config/sway-notification-center/default.nix
+    ./config/tmux/default.nix
+    ./config/vs-code/default.nix
+    ./config/waybar/default.nix
+    ./config/xdg/default.nix
   ];
 
   # Configure user experience
@@ -46,8 +45,8 @@ in
     packages = with pkgs; [
 
       # Build custom packages
-      (callPackage ./packages/scripts/scripts.nix { })
-      (callPackage ./packages/st/st.nix { inherit theme; })
+      (callPackage ./packages/scripts/default.nix { })
+      (callPackage ./packages/st/default.nix { inherit theme; })
 
       # Languages
       haxe
@@ -78,6 +77,7 @@ in
       slurp
       steam-run
       sway-contrib.grimshot
+      swaynotificationcenter
       vulkan-tools
       wdisplays
       wl-clipboard

@@ -1,5 +1,0 @@
-; Import main widgets
-(include "./bar.yuck")
-
-; Import reusable widgets
-(include "./widgets/custom-label.yuck")
