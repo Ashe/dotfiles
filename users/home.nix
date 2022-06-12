@@ -48,7 +48,6 @@ in
       # Build custom packages
       (callPackage ./packages/scripts/scripts.nix { })
       (callPackage ./packages/st/st.nix { inherit theme; })
-      (callPackage ./packages/hashlink/hashlink.nix { })
 
       # Languages
       haxe
