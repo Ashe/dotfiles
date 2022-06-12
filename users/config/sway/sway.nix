@@ -5,6 +5,11 @@ let
   colours = theme.colourscheme;
 in
 {
+  # Place additional files in .config/sway
+  xdg.configFile.sway = {
+    source = ./extra;
+    target = "sway/extra";
+  };
 
   # Configure sway for Wayland
   wayland.windowManager.sway = {

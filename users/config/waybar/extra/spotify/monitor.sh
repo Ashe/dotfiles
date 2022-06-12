@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # we are a clock for the other
 # spotify elements.

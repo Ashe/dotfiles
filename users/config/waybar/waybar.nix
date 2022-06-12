@@ -1,6 +1,12 @@
 { theme, ... }:
 
 {
+  # Place additional files in .config/waybar/extra
+  xdg.configFile.waybar = {
+    source = ./extra;
+    target = "waybar/extra";
+  };
+
   # Enable Waybar
   programs.waybar = {
     enable = true;
@@ -163,7 +169,7 @@
           # Continuously polls Spotify
           "custom/spotify-monitor" = {
             interval = 1;
-            exec = "waybar-spotify-monitor.sh";
+            exec = "/home/ashe/.config/waybar/extra/spotify/monitor.sh";
             signal = 4;
             tooltip = false;
           };
@@ -174,8 +180,8 @@
             max-length = 500;
             interval = "once";
             return-type = "json";
-            exec = "waybar-spotify-metadata.sh";
-            on-click = "waybar-spotify-controls.sh";
+            exec = "/home/ashe/.config/waybar/extra/spotify/metadata.sh";
+            on-click = "/home/ashe/.config/waybar/extra/spotify/controls.sh";
             signal = 5;
           };
 
@@ -184,12 +190,12 @@
             format = "{}";
             interval = "once";
             return-type = "json";
-            exec = "waybar-spotify-play-pause.sh";
-            on-click = "waybar-spotify-controls.sh";
-            on-click-right = "waybar-spotify-controls.sh next";
-            on-scroll-up = "waybar-spotify-controls.sh next";
-            on-click-middle = "waybar-spotify-controls.sh prev";
-            on-scroll-down = "waybar-spotify-controls.sh prev";
+            exec = "/home/ashe/.config/waybar/extra/spotify/play-pause.sh";
+            on-click = "/home/ashe/.config/waybar/extra/spotify/controls.sh";
+            on-click-right = "/home/ashe/.config/waybar/extra/spotify/controls.sh next";
+            on-scroll-up = "/home/ashe/.config/waybar/extra/spotify/controls.sh next";
+            on-click-middle = "/home/ashe/.config/waybar/extra/spotify/controls.sh prev";
+            on-scroll-down = "/home/ashe/.config/waybar/extra/spotify/controls.sh prev";
             signal = 5;
           };
 
@@ -198,8 +204,8 @@
             format = "";
             return-type = "json";
             interval = "once";
-            exec = "waybar-spotify-metadata.sh";
-            on-click = "waybar-spotify-controls.sh next";
+            exec = "/home/ashe/.config/waybar/extra/spotify/metadata.sh";
+            on-click = "/home/ashe/.config/waybar/extra/spotify/controls.sh next";
             signal = 5;
           };
 
@@ -208,8 +214,8 @@
             format = "";
             interval = "once";
             return-type = "json";
-            exec = "waybar-spotify-metadata.sh";
-            on-click = "waybar-spotify-controls.sh prev";
+            exec = "/home/ashe/.config/waybar/extra/spotify/metadata.sh";
+            on-click = "/home/ashe/.config/waybar/extra/spotify/controls.sh prev";
             signal = 5;
           };
         };

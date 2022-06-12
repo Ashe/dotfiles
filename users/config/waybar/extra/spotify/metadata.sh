@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 status=$(playerctl -p spotify status)
 artist=$(playerctl -p spotify metadata xesam:artist)
