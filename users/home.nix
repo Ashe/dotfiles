@@ -11,6 +11,7 @@ in
 
   # Import other config files
   imports = [
+    ./config/nixpkgs/default.nix
     ./config/fish/default.nix
     ./config/kanshi/default.nix
     ./config/mangohud/default.nix
