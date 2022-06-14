@@ -77,15 +77,16 @@ in
         "${cfg.config.modifier}+Escape" = "exec wlogout";
         "${cfg.config.modifier}+BackSpace" = "reload";
         "${cfg.config.modifier}+Control+Shift+BackSpace" =
-          "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
+          "exec /home/ashe/.config/sway/extra/exit-sway.sh";
 
         # Program shortcuts
         "${cfg.config.modifier}+Return" = "exec $TERMINAL";
         "${cfg.config.modifier}+1" = "exec $FILEGUI --new-window";
         "${cfg.config.modifier}+2" = "exec $BROWSER";
         "${cfg.config.modifier}+3" = "exec $MUSIC";
-        "${cfg.config.modifier}+Shift+s" = "exec wl-copy -t image/png < $(grimshot save area)";
-        "Print" = "exec wl-copy -t image/png < $(grimshot save area)";
+        "${cfg.config.modifier}+Shift+s" = "exec screenshot.sh area &";
+        "${cfg.config.modifier}+Control+Shift+s" = "exec screenshot.sh active &";
+        "Print" = "exec screenshot.sh &";
 
         # Multimedia
         XF86AudioRaiseVolume = "exec pulseaudio-ctl up";
