@@ -24,11 +24,26 @@
     ./config/steam/default.nix
   ];
 
+  # @TEMPORARY: Add EDID for Samsung Odyssey G9 monitor
+  hardware.firmware = [(
+    pkgs.runCommandNoCC "install-odyssey-g9-edid" { } ''
+      mkdir -p $out/lib/firmware/edid
+      cp ${./samsung-g9.bin} $out/lib/firmware/edid/samsung-g9.bin
+    ''
+  )];
+
   # Configure boot parameters
   boot = {
 
     # Always use latest kernel version
     kernelPackages = pkgs.linuxPackages_latest;
+
+    # Additional kernel parameters
+    kernelParams = [
+      "drm.edid_firmware=DP-1:edid/samsung-g9.bin"
+      "video=DP-1:e"
+      "quiet"
+    ];
 
     # Install extra kernel packages
     extraModulePackages = with config.boot.kernelPackages; [
