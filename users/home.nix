@@ -50,11 +50,11 @@ in
       (callPackage ./packages/st/default.nix { inherit theme; })
 
       # Languages
-      haxe
       nodejs
       python3Minimal
 
       # Programs
+      anki-bin
       audacity
       blender
       discord
