@@ -2,7 +2,7 @@
 
 # Location of screenshots taken
 dir="$XDG_PICTURES_DIR/Screenshots"
-filename=$(date +"%d-%m-%Y_%T")
+filename=$(date +"%d-%m-%Y_%T.png")
 
 # Ensure screenshot directory exists
 mkdir -p "$dir"
