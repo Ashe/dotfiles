@@ -10,20 +10,12 @@
   };
   outputs = { self, nur, ... } @ inputs: {
     homeConfigurations = {
-      nixos = inputs.home-manager.lib.homeManagerConfiguration rec {
-        username = "ashe";
-        homeDirectory = "/home/ashe";
-        system = "x86_64-linux";
-         pkgs = import inputs.nixpkgs {
-           system = "x86_64-linux";
-           config.allowUnfree = true;
-           overlays = [
-             nur.overlay
-           ];
-         };
-        configuration = {
-          imports = [ ./home.nix ];
-        };
+      nixos = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
+        modules = [ 
+          ./home.nix 
+          { nixpkgs.overlays = [ nur.overlay ]; }
+        ];
       };
     };
   };

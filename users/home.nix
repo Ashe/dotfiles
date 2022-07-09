@@ -29,6 +29,11 @@ in
   # Configure user experience
   home = {
 
+    # Home variables
+    username = "ashe";
+    homeDirectory = "/home/ashe";
+    stateVersion = "22.11";
+
     # Set environment variables
     sessionVariables = {
 
@@ -92,7 +97,7 @@ in
   nixpkgs.config = {
 
     # Allow proprietary software
-    allowUnfree = true;
+    allowUnfreePredicate = _: true;
 
     # Permit specific insecure packages
     permittedInsecurePackages = [
