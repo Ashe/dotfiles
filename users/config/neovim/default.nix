@@ -35,19 +35,22 @@
       }
 
       # Autocomplete
+      coc-clangd
       coc-cmake
       coc-css
       coc-git
+      coc-haxe
+      coc-highlight
       coc-html
       coc-json
       coc-lua
       coc-markdownlint
+      coc-nvim
       coc-python
       coc-rust-analyzer
       coc-spell-checker
+      coc-sh
       coc-tabnine
-      coc-highlight
-      coc-nvim
       coc-yaml
       rust-vim
       vim-nix

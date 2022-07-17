@@ -22,6 +22,7 @@
       # Languages
       bbenoist.nix
       haskell.haskell
+      ms-vscode.cpptools
       yzhang.markdown-all-in-one
     ];
 
