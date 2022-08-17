@@ -17,7 +17,7 @@
 
         # Applications
         "application/zip" = ["org.gnome.Nautilus.desktop"];
-        "application/octet-stream" = ["org.gnome.Nautilus.desktop" "chromium-browser.desktop"];
+        "application/octet-stream" = ["org.gnome.Nautilus.desktop" "brave.desktop"];
         "application/x-compressed-tar" = ["org.gnome.Nautilus.desktop"];
         "application/x-xz-compressed-tar" = ["org.gnome.Nautilus.desktop"];
         "application/json" = ["code.desktop"];
@@ -26,18 +26,18 @@
         "inode/directory" = ["org.gnome.Nautilus.desktop"];
 
         # Text
-        "text/html" = ["code.desktop" "chromium-browser.desktop"];
+        "text/html" = ["code.desktop" "brave.desktop"];
         "text/markdown" = ["code.desktop"];
         "text/plain" = ["code.desktop"];
         "text/x-log" = ["code.desktop"];
 
         # Images
-        "image/png" = ["org.gnome.gThumb.desktop" "chromium-browser.desktop"];
-        "image/jpg" = ["org.gnome.gThumb.desktop" "chromium-browser.desktop"];
-        "image/gif" = ["chromium-browser.desktop"];
+        "image/png" = ["org.gnome.gThumb.desktop" "brave.desktop"];
+        "image/jpg" = ["org.gnome.gThumb.desktop" "brave.desktop"];
+        "image/gif" = ["brave.desktop"];
 
         # Email
-        "x-scheme-handler/mailto" = ["chromium-browser.desktop"];
+        "x-scheme-handler/mailto" = ["brave.desktop"];
       };
     };
 

@@ -41,7 +41,7 @@ in
       TERMINAL = "st";
       MENU = "wofi --show drun -w 3 -i -I";
       EDITOR = "nvim";
-      BROWSER = "chromium";
+      BROWSER = "brave";
       FILE = "ranger";
       FILEGUI = "nautilus";
       MUSIC = "spotify";
@@ -62,6 +62,7 @@ in
       anki-bin
       audacity
       blender
+      brave
       discord
       godot
       gthumb

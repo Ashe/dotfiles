@@ -123,7 +123,6 @@
       numlockx
       pavucontrol
       ranger
-      ungoogled-chromium
 
       # System tools
       dex
