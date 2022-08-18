@@ -84,7 +84,6 @@ in
       slurp
       steam-run
       sway-contrib.grimshot
-      swaynotificationcenter
       vulkan-tools
       wdisplays
       wl-clipboard

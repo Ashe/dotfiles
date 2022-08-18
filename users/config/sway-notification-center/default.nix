@@ -1,6 +1,11 @@
-{ theme, ... }:
+{ pkgs, theme, ... }:
 
 {
+  # Install Sway Notification Center
+  home.packages = [
+    pkgs.swaynotificationcenter
+  ];
+
   # Manage sway notification center settings
   xdg.configFile.swaync-settings = {
     source = ./config.json;

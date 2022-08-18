@@ -14,7 +14,10 @@
         pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
         modules = [ 
           ./home.nix 
-          { nixpkgs.overlays = [ nur.overlay ]; }
+          ./overlays.nix
+          { nixpkgs.overlays = [
+            nur.overlay
+          ];}
         ];
       };
     };
