@@ -53,6 +53,7 @@ in
         { command = "blueman-applet"; }
         { command = "dropbox start"; }
         { command = "swaync"; }
+        { command = "fcitx"; }
       ];
 
       # Allows quick returning to previous workspace

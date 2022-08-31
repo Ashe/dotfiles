@@ -160,7 +160,10 @@
       fira-code-symbols
       font-awesome
       noto-fonts
-      noto-fonts-cjk
+      source-han-sans
+      source-han-serif
+      source-han-mono
+      source-han-code-jp
       twitter-color-emoji
       ubuntu_font_family
     ];
