@@ -1,4 +1,4 @@
-{ config, theme, ... }:
+{ config, pkgs, theme, ... }:
 
 let
   cfg = config.wayland.windowManager.sway;
@@ -189,4 +189,10 @@ in
       };
     };
   };
+
+  # Install grimshot for screenshotting with sway
+  home.packages = with pkgs; [
+    grim
+    sway-contrib.grimshot
+  ];
 }

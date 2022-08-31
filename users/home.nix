@@ -14,6 +14,7 @@ in
     ./config/nixpkgs/default.nix
     ./config/fish/default.nix
     ./config/kanshi/default.nix
+    ./config/language/default.nix
     ./config/mangohud/default.nix
     ./config/mpd/default.nix
     ./config/neovim/default.nix
@@ -66,7 +67,6 @@ in
       discord
       godot
       gthumb
-      mpd
       mpv
       neofetch
       nicotine-plus
@@ -77,13 +77,10 @@ in
       sublime4
 
       # Utilities
-      grim
       mpc_cli
       playerctl
       rnix-lsp
       slurp
-      steam-run
-      sway-contrib.grimshot
       vulkan-tools
       wdisplays
       wl-clipboard

@@ -15,7 +15,6 @@
 
     # Open firewall for Source Dedicated Server
     dedicatedServer.openFirewall = true;
-
   };
 
   # Enable Gamemode optimisation
@@ -36,4 +35,9 @@
       ];
     };
   };
+
+  # Install tool for optimising games
+  home.packages = [
+    pkgs.steam-run
+  ];
 }
