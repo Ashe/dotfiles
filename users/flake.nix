@@ -15,9 +15,7 @@
         modules = [ 
           ./home.nix 
           ./overlays.nix
-          { nixpkgs.overlays = [
-            nur.overlay
-          ];}
+          nur.nixosModules.nur
         ];
       };
     };

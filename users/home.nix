@@ -12,6 +12,7 @@ in
   # Import other config files
   imports = [
     ./config/nixpkgs/default.nix
+    ./config/firefox/default.nix
     ./config/fish/default.nix
     ./config/kanshi/default.nix
     ./config/language/default.nix
@@ -42,7 +43,7 @@ in
       TERMINAL = "st";
       MENU = "wofi --show drun -w 3 -i -I";
       EDITOR = "nvim";
-      BROWSER = "brave";
+      BROWSER = "firefox";
       FILE = "ranger";
       FILEGUI = "nautilus";
       MUSIC = "spotify";
