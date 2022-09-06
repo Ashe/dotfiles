@@ -21,8 +21,15 @@
       id = 0;
       isDefault = true;
       settings = {
+
+        # Disable the Firefox new-tab-page
         "browser.newtabpage.enabled" = false;
+
+        # Set homepage to duckduckgo
         "browser.startup.homepage" = "https://start.duckduckgo.com";
+
+        # Allow tiling of fullscreen windows
+        "full-screen-api.ignore-widgets" = true;
       };
     };
   };
