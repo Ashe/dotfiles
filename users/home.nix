@@ -64,7 +64,6 @@ in
       anki-bin
       audacity
       blender
-      brave
       discord
       godot
       gthumb
