@@ -26,8 +26,12 @@
         # Disable the Firefox new-tab-page
         "browser.newtabpage.enabled" = false;
 
-        # Set homepage to duckduckgo
-        "browser.startup.homepage" = "https://start.duckduckgo.com";
+        # Set startup page
+        # 0=blank, 1=home, 2=last visited page, 3=resume previous session
+        "browser.startup.page" = 3;
+
+        # Set a blank homepage
+        "browser.startup.homepage" = "about:blank";
 
         # Allow tiling of fullscreen windows
         "full-screen-api.ignore-widgets" = true;
