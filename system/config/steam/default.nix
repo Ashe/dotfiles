@@ -37,7 +37,7 @@
   };
 
   # Install tool for optimising games
-  home.packages = [
+  environment.systemPackages = [
     pkgs.steam-run
   ];
 }

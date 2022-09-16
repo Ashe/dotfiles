@@ -154,10 +154,9 @@
   fonts = {
 
     # Download font packages
-    fonts = with pkgs; [ 
+    fonts = with pkgs; [
+      (nerdfonts.override { fonts = [ "FiraCode" ]; })
       dina-font
-      fira-code
-      fira-code-symbols
       font-awesome
       noto-fonts
       source-han-sans
@@ -176,7 +175,7 @@
       defaultFonts = {
         serif = [ "Ubuntu" "Regular" ];
         sansSerif = [ "Ubuntu" "Regular" ];
-        monospace = [ "Fira Code" "Regular" ];
+        monospace = [ "FiraCode Nerd Font" "Regular" ];
       };
     };
   };

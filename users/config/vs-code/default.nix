@@ -30,7 +30,7 @@
     userSettings = {
       "workbench.colorTheme" = (theme.data pkgs).vs-code.name;
       "workbench.startupEditor" = "none";
-      "editor.fontFamily" = "'Fira Code', monospace";
+      "editor.fontFamily" = "'FiraCode Nerd Font', monospace";
       "window.zoomLevel" = 1;
       "editor.wordWrap" = "wordWrapColumn";
       "explorer.confirmDelete" = false;
