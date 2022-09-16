@@ -12,7 +12,6 @@
       betterttv
       bitwarden
       https-everywhere
-      i-dont-care-about-cookies
       protondb-for-steam
       ublock-origin
     ];
