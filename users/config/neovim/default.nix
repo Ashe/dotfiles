@@ -9,32 +9,44 @@
     withPython3 = true;
     plugins = with pkgs.vimPlugins; [
 
-      # Appearance
+      # Splash screen
+      alpha-nvim
+
+      # Tabs
       barbar-nvim
+
+      # Status line
+      galaxyline-nvim
+
+      # Indentation markers
+      indent-blankline-nvim
+
+      # Icons
       nvim-web-devicons
+
+      # Whitespace trimming
+      trim-nvim
+
+      # Git representation
       vim-gitgutter
-      vim-airline-themes
-      {
-        plugin = vim-airline;
-        config = ''
-          " Set airline appearance
-          let g:airline_theme='deus'
-        '';
-      }
 
-      # Functionality
-      vim-fugitive
+      # Tmux integration
       vim-tmux-navigator
-      {
-        plugin = ctrlp-vim;
-        config = ''
-          " Filter what gets shown by ctrlp
-          set wildignore+=*/tmp/*,*/bin/*,*/obj/*,*.so,*.swp,*.zi
-          let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-        '';
-      }
 
-      # Autocomplete
+      # File browser
+      nvim-tree-lua
+
+      # File searching
+      telescope-nvim
+
+      # Code completion
+      nvim-cmp
+
+      # Treesitter syntax highlighting and completion
+      nvim-treesitter
+      cmp-treesitter
+
+      # CoC Autocomplete
       coc-clangd
       coc-cmake
       coc-css

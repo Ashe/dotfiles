@@ -74,7 +74,6 @@ in
       scanmem
       slack
       spotify
-      sublime4
 
       # Utilities
       mpc_cli
