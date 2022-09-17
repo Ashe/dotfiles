@@ -5,7 +5,7 @@
   programs.neovim = {
 
     # Install plugins related to nvim-treesitter
-    plugins = with pkgs.vimPlugins; [ 
+    plugins = with pkgs.vimPlugins; [
 
       # Install nvim-treesitter
       {

@@ -14,6 +14,11 @@ require'nvim-treesitter.configs'.setup {
 
   -- Change install location for parsers
   parser_install_dir = "~/.local/share/nvim-treesitter/parsers",
+
+  -- Enable syntax highlighting
+  highlight = {
+    enable = true,
+  }
 }
 
 -- Ensure parser location added to path
