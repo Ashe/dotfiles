@@ -53,5 +53,8 @@
 
     # Status line
     ./plugins/lualine/default.nix
+
+    # Zen mode
+    ./plugins/true-zen/default.nix
   ];
 }

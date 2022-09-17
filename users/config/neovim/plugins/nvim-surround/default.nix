@@ -13,7 +13,7 @@
         " ================================
 
         lua << EOF
-        require("nvim-surround").setup({
+        require('nvim-surround').setup({
           -- Configuration here, or leave empty to use defaults
         })
         EOF
