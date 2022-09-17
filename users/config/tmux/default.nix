@@ -88,4 +88,9 @@ in
       setw -g window-status-separator '''
     '';
   };
+
+  # Enable tmux navigator plugin for neovim
+  programs.neovim.plugins = with pkgs.vimPlugins; [
+    vim-tmux-navigator
+  ];
 }

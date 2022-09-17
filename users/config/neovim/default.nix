@@ -1,6 +1,17 @@
 { pkgs, ... }:
 
 {
+  # Configure neovim
+  programs.neovim = {
+    enable = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+    withPython3 = true;
+
+    # General configuration for neovim
+    extraConfig = (builtins.readFile ./config.vim);
+  };
+
   # Import plugins with customisation
   imports = [
 
@@ -39,33 +50,8 @@
 
     # Git integration
     ./plugins/gitsigns/default.nix
+
+    # Status line
+    ./plugins/lualine/default.nix
   ];
-
-  # Configure neovim
-  programs.neovim = {
-    enable = true;
-    vimAlias = true;
-    vimdiffAlias = true;
-    withPython3 = true;
-
-    # Standard plugins
-    plugins = with pkgs.vimPlugins; [
-
-      # Status line
-      galaxyline-nvim
-
-      # Icons
-      nvim-web-devicons
-
-      # Tmux integration
-      vim-tmux-navigator
-
-      # File detection
-      rust-vim
-      vim-nix
-    ];
-
-    # General configuration for neovim
-    extraConfig = (builtins.readFile ./config.vim);
-  };
 }
