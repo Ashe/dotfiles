@@ -14,13 +14,17 @@
 
         let mapleader = " "
         nnoremap <silent> <S-Tab> <Cmd>BufferPrevious<CR>
+        nnoremap <silent> <A-h> <Cmd>BufferPrevious<CR>
         nnoremap <silent> <Tab> <Cmd>BufferNext<CR>
+        nnoremap <silent> <A-l> <Cmd>BufferNext<CR>
         nnoremap <silent> <leader>bp <Cmd>BufferMovePrevious<CR>
         nnoremap <silent> <leader>bn <Cmd>BufferMoveNext<CR>
-        nnoremap <silent> <leader>bx <Cmd>BufferClose<CR>
+        nnoremap <silent> <A-S-h> <Cmd>BufferMovePrevious<CR>
+        nnoremap <silent> <A-S-l> <Cmd>BufferMoveNext<CR>
         nnoremap <silent> <A-p> <Cmd>BufferMovePrevious<CR>
         nnoremap <silent> <A-n> <Cmd>BufferMoveNext<CR>
-        nnoremap <silent> <A-x> <Cmd>BufferClose<CR>
+        nnoremap <silent> <leader>bx <Cmd>BufferClose<CR>
+        nnoremap <silent> <A-BS> <Cmd>BufferClose<CR>
         nnoremap <silent> <A-1> <Cmd>BufferGoto 1<CR>
         nnoremap <silent> <A-2> <Cmd>BufferGoto 2<CR>
         nnoremap <silent> <A-3> <Cmd>BufferGoto 3<CR>

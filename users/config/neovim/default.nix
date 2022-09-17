@@ -4,6 +4,9 @@
   # Import plugins with customisation
   imports = [
 
+    # Dashboard splash screen
+    ./plugins/dashboard/default.nix
+
     # Tabs
     ./plugins/barbar/default.nix
 
@@ -16,6 +19,15 @@
     # Completion
     ./plugins/nvim-cmp/default.nix
 
+    # Commenting
+    ./plugins/nvim-comment/default.nix
+
+    # Surrounding
+    ./plugins/nvim-surround/default.nix
+
+    # Whitespace trimming
+    ./plugins/trim/default.nix
+
     # File browsing
     ./plugins/nvim-tree/default.nix
 
@@ -24,6 +36,9 @@
 
     # Key suggestions
     ./plugins/which-key/default.nix
+
+    # Git integration
+    ./plugins/gitsigns/default.nix
   ];
 
   # Configure neovim
@@ -32,22 +47,15 @@
     vimAlias = true;
     vimdiffAlias = true;
     withPython3 = true;
-    plugins = with pkgs.vimPlugins; [
 
-      # Splash screen
-      alpha-nvim
+    # Standard plugins
+    plugins = with pkgs.vimPlugins; [
 
       # Status line
       galaxyline-nvim
 
       # Icons
       nvim-web-devicons
-
-      # Whitespace trimming
-      trim-nvim
-
-      # Git representation
-      gitsigns-nvim
 
       # Tmux integration
       vim-tmux-navigator

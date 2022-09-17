@@ -1,4 +1,3 @@
-
 " ================================
 " nvim-lspconfig
 " ================================
@@ -65,10 +64,6 @@ local servers = {
 
   -- Rust
   'rust_analyzer',
-
-  -- Web
-  'html',
-  'cssls'
 }
 
 -- Congigure all servers
