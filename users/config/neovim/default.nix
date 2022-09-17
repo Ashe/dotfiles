@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, theme, ... }:
 
 {
   # Configure neovim
@@ -9,8 +9,20 @@
     withPython3 = true;
 
     # General configuration for neovim
-    extraConfig = (builtins.readFile ./config.vim);
+    extraConfig = builtins.replaceStrings
+        ["<COLOURSCHEME>"] [(theme.data pkgs).neovim.name]
+        (builtins.readFile ./config.vim);
+
+    # Install colourscheme
+    plugins = [
+      (theme.data pkgs).neovim.package
+    ];
   };
+
+  # Install neovide, dedicated neovim editor
+  home.packages = with pkgs; [
+    neovide
+  ];
 
   # Import plugins with customisation
   imports = [

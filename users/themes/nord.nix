@@ -5,6 +5,10 @@
       name = "Nordic";
       package = pkgs.nordic;
     };
+    neovim = {
+      name = "onenord";
+      package = pkgs.vimPlugins.onenord-nvim;
+    };
     vs-code = {
       name = "Nord";
       package = pkgs.vscode-extensions.arcticicestudio.nord-visual-studio-code;

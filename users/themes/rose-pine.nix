@@ -5,6 +5,10 @@
       name = "Rose-Pine";
       package = pkgs.rose-pine-gtk-theme;
     };
+    neovim = {
+      name = "rose-pine";
+      package = pkgs.vimPlugins.rose-pine;
+    };
     vs-code = {
       name = "Rosé Pine Moon";
       package = pkgs.vscode-extensions.mvllow.rose-pine;

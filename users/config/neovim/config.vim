@@ -1,6 +1,6 @@
-" =======================================================
+" ================================
 " General
-" =======================================================
+" ================================
 
 " Enable mouse control
 set mouse=a
@@ -53,9 +53,9 @@ set shortmess+=c
 " diagnostics appear/become resolved
 set signcolumn=yes
 
-" =======================================================
+" ================================
 " Keybindings
-" =======================================================
+" ================================
 
 " Set leader key to space
 let mapleader = " "
@@ -74,3 +74,10 @@ nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
+
+" ================================
+" Appearance
+" ================================
+
+" Set colourscheme
+colorscheme <COLOURSCHEME>

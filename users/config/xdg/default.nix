@@ -20,16 +20,16 @@
         "application/octet-stream" = ["org.gnome.Nautilus.desktop" "firefox.desktop"];
         "application/x-compressed-tar" = ["org.gnome.Nautilus.desktop"];
         "application/x-xz-compressed-tar" = ["org.gnome.Nautilus.desktop"];
-        "application/json" = ["code.desktop"];
+        "application/json" = ["neovide.desktop"];
 
         # Directories
         "inode/directory" = ["org.gnome.Nautilus.desktop"];
 
         # Text
-        "text/html" = ["code.desktop" "firefox.desktop"];
-        "text/markdown" = ["code.desktop"];
-        "text/plain" = ["code.desktop"];
-        "text/x-log" = ["code.desktop"];
+        "text/html" = ["neovide.desktop" "firefox.desktop"];
+        "text/markdown" = ["neovide.desktop"];
+        "text/plain" = ["neovide.desktop"];
+        "text/x-log" = ["neovide.desktop"];
 
         # Images
         "image/png" = ["org.gnome.gThumb.desktop" "firefox.desktop"];

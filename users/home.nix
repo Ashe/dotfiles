@@ -42,7 +42,7 @@ in
       # Programs to use
       TERMINAL = "st";
       MENU = "wofi --show drun -w 3 -i -I";
-      EDITOR = "nvim";
+      EDITOR = "neovide";
       BROWSER = "firefox";
       FILE = "ranger";
       FILEGUI = "nautilus";
