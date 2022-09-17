@@ -34,14 +34,14 @@ db.custom_center = {
   },
   {
     icon = '  ',
-    desc = 'Recently opened files                   ',
-    action =  'Telescope oldfiles',
+    desc = 'Recently opened                         ',
+    action = 'Telescope oldfiles',
     shortcut = 'SPC f r'
   },
   {
-    icon = ' פּ  ',
-    desc ='File Browser                            ',
-    action =  'NvimTreeToggle',
+    icon = 'פּ  ',
+    desc = 'File browser                            ',
+    action = 'NvimTreeToggle',
     shortcut = 'SPC f o'
   },
   {
