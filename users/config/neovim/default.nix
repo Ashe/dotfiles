@@ -7,8 +7,14 @@
     # Tabs
     ./plugins/barbar/default.nix
 
-    # Code completion
-    ./plugins/coc/default.nix
+    # LSP configuring
+    ./plugins/lsp/default.nix
+
+    # Syntax highlighting
+    ./plugins/nvim-treesitter/default.nix
+
+    # Completion
+    ./plugins/nvim-cmp/default.nix
 
     # File browsing
     ./plugins/nvim-tree/default.nix

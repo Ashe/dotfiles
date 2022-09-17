@@ -11,9 +11,6 @@ set swapfile
 set backupdir=~/.vim-tmp
 set directory=~/.vim-tmp
 
-" Enable syntax highlighting
-syntax on
-
 " Show column guideline to keep code within 80 lines
 set textwidth=0
 set wrapmargin=0

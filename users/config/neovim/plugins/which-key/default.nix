@@ -6,16 +6,29 @@
 
     # Install which-key plugin
     plugins = with pkgs.vimPlugins; [ {
-      plugin = vim-which-key;
+      plugin = which-key-nvim;
       config = ''
         " ================================
         " which-key
         " ================================
-        let g:mapleader = ' '
-        nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
-        vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
+
         set timeoutlen=500
-        highlight WhichKeyFloating cterm=NONE ctermfg=8 ctermbg=0
+        lua << EOF
+          require("which-key").setup {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+          }
+        EOF
+
+        " Background
+        highlight WhichKeyFloat ctermbg=0
+
+        " Label
+        highlight WhichKeyDesc ctermfg=6
+
+        " Separator
+        highlight WhichKeySeparator ctermfg=4
       '';
     }];
   };

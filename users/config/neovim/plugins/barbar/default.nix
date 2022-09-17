@@ -11,6 +11,7 @@
         " ================================
         " barbar
         " ================================
+
         let mapleader = " "
         nnoremap <silent> <S-Tab> <Cmd>BufferPrevious<CR>
         nnoremap <silent> <Tab> <Cmd>BufferNext<CR>
