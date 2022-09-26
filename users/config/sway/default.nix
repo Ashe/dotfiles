@@ -196,4 +196,9 @@ in
     grim
     sway-contrib.grimshot
   ];
+
+  # Specify desktop environment environment variable
+  home.sessionVariables = {
+    XDG_CURRENT_DESKTOP = "sway";
+  };
 }

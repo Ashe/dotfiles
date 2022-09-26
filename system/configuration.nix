@@ -205,6 +205,9 @@
     # Enable the OpenSSH daemon
     openssh.enable = true;
 
+    # Enable Pipewire for a/v (used for screensharing)
+    pipewire.enable = true;
+
     # Enable CUPS to print documents
     printing.enable = true;
   };
@@ -213,7 +216,7 @@
   xdg.portal = {
     enable = true;
     extraPortals = [
-      pkgs.xdg-desktop-portal
+      pkgs.xdg-desktop-portal-wlr
       pkgs.xdg-desktop-portal-gtk
     ];
   };
