@@ -1,6 +1,8 @@
+{ pkgs, ... }:
+
 {
   # Theme data
-  data = (pkgs: {
+  data = {
     gtk = {
       name = "Nordic";
       package = pkgs.nordic;
@@ -13,7 +15,7 @@
       name = "Nord";
       package = pkgs.vscode-extensions.arcticicestudio.nord-visual-studio-code;
     };
-  });
+  };
 
   # Theme colourscheme
   colourscheme = rec {

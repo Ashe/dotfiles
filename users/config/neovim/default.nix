@@ -10,12 +10,12 @@
 
     # General configuration for neovim
     extraConfig = builtins.replaceStrings
-        ["<COLOURSCHEME>"] [(theme.data pkgs).neovim.name]
+        ["<COLOURSCHEME>"] [theme.data.neovim.name]
         (builtins.readFile ./config.vim);
 
     # Install colourscheme
     plugins = [
-      (theme.data pkgs).neovim.package
+      theme.data.neovim.package
     ];
   };
 

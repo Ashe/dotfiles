@@ -11,7 +11,7 @@
     extensions = with pkgs.vscode-extensions; [
 
       # Theme
-      (theme.data pkgs).vs-code.package
+      theme.data.vs-code.package
 
       # Utility
       ms-vsliveshare.vsliveshare
@@ -28,7 +28,7 @@
 
     # Set up user settings
     userSettings = {
-      "workbench.colorTheme" = (theme.data pkgs).vs-code.name;
+      "workbench.colorTheme" = theme.data.vs-code.name;
       "workbench.startupEditor" = "none";
       "editor.fontFamily" = "'FiraCode Nerd Font', monospace";
       "window.zoomLevel" = 1;

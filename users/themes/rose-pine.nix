@@ -1,6 +1,8 @@
+{ pkgs, ... }:
+
 {
   # Theme data
-  data = (pkgs: {
+  data = {
     gtk = {
       name = "Rose-Pine";
       package = pkgs.rose-pine-gtk-theme;
@@ -13,7 +15,7 @@
       name = "Rosé Pine Moon";
       package = pkgs.vscode-extensions.mvllow.rose-pine;
     };
-  });
+  };
 
   # Theme colourscheme
   colourscheme = rec {

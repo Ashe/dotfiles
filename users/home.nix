@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  theme = (import ./themes/rose-pine.nix);
+  theme = (import ./themes/rose-pine.nix) pkgs;
 in
 {
   # Pass these arguments to all imports
@@ -108,10 +108,7 @@ in
     enable = true;
 
     # Set theme
-    theme = {
-      name = (theme.data pkgs).gtk.name;
-      package = (theme.data pkgs).gtk.package;
-    };
+    theme = theme.data.gtk;
 
     # Set icon theme
     iconTheme = {
