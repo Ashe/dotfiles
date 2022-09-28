@@ -102,8 +102,8 @@
       alacritty
       git
       git-lfs
-      gnome3.gnome-system-monitor
-      gnome3.nautilus
+      gnome.gnome-system-monitor
+      gnome.nautilus
       neofetch
       numlockx
       pavucontrol
@@ -124,7 +124,7 @@
       xwayland
 
       # Miscellaneous
-      gnome3.adwaita-icon-theme
+      gnome.adwaita-icon-theme
       (inxi.override { withRecommends = true; })
       jq
       libnotify
@@ -167,7 +167,7 @@
 
   # Configure nix
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     extraOptions = ''
        experimental-features = nix-command flakes
     '';
@@ -216,6 +216,7 @@
   xdg.portal = {
     enable = true;
     extraPortals = [
+      pkgs.xdg-desktop-portal
       pkgs.xdg-desktop-portal-wlr
       pkgs.xdg-desktop-portal-gtk
     ];

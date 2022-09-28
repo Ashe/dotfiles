@@ -3,11 +3,11 @@
     "mesa-git": {
       "flake": false,
       "locked": {
-        "lastModified": 1663342989,
-        "narHash": "sha256-oLIOyoBA5IGbDos9+ITYa+yFpxZPIse7XH35yzUZrDA=",
+        "lastModified": 1664357120,
+        "narHash": "sha256-nkXuAir7Qaj/YKdZjR51BZ06XLt+SbtMJEF/Vi878ec=",
         "ref": "main",
-        "rev": "10ddbf50bb69baf8b467579a04e99826ce686b20",
-        "revCount": 159886,
+        "rev": "97850c0bf0b878f38b33a09cb5ad61172946245b",
+        "revCount": 160624,
         "type": "git",
         "url": "https://gitlab.freedesktop.org/mesa/mesa"
       },
@@ -19,11 +19,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1663178737,
-        "narHash": "sha256-ayOtdyoNx6BqJtTYVzdQCDz/YWb67TY/CMGacFCgNQo=",
+        "lastModified": 1664281702,
+        "narHash": "sha256-haixZ4TJLu1Dciow54wrHrHvlGDVr5sW6MTeAV/ZLuI=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "1158501e7c7cba26d922723cf9f70099995eb755",
+        "rev": "7e52b35fe98481a279d89f9c145f8076d049d2b9",
         "type": "github"
       },
       "original": {
