@@ -42,6 +42,9 @@
 
         # Allow tiling of fullscreen windows
         "full-screen-api.ignore-widgets" = true;
+
+        # Disable popup when mic or webcam is active
+        "privacy.webrtc.legacyGlobalIndicator" = false;
       };
     };
   };
