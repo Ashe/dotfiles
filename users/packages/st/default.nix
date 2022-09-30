@@ -23,5 +23,11 @@
       sha256 = "18fllssg5d5gik1x0ppz232vdphr0y2j5z8lhs5j9zjs8m9ria5w";
     })
 
+    # Undercurls
+    (fetchpatch {
+      url = "https://st.suckless.org/patches/undercurl/st-undercurl-0.8.4-20210822.diff";
+      sha256 = "sha256-sPsm4cVhoIweYYjOlJ3QLqS3DyjwwwK+SUKJw28bNO0";
+    })
+
   ];
 }))

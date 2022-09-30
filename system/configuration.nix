@@ -85,7 +85,7 @@
     description = "Ashley Smith";
     isNormalUser = true;
     home = "/home/ashe";
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
     extraGroups = [ "wheel" "networkmanager" ];
   };
 
@@ -185,9 +185,6 @@
 
     # Enable dconf
     dconf.enable = true;
-
-    # Enable FISH
-    fish.enable = true;
   };
 
   # Configure system-wide services

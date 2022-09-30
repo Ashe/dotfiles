@@ -13,19 +13,20 @@ in
   imports = [
     ./config/nixpkgs/default.nix
     ./config/firefox/default.nix
-    ./config/fish/default.nix
     ./config/kanshi/default.nix
     ./config/language/default.nix
     ./config/mangohud/default.nix
     ./config/mpd/default.nix
     ./config/neovim/default.nix
     ./config/obs-studio/default.nix
+    ./config/starship/default.nix
     ./config/sway/default.nix
     ./config/sway-notification-center/default.nix
     ./config/tmux/default.nix
     ./config/vs-code/default.nix
     ./config/waybar/default.nix
     ./config/xdg/default.nix
+    ./config/zsh/default.nix
   ];
 
   # Configure user experience
@@ -126,18 +127,12 @@ in
   # Configure programs
   programs = {
 
-    # Enable fuzzy-file-finder
-    fzf.enable = true;
-
     # Configure git
     git = {
       enable = true;
       userName  = "ashe";
       userEmail = "git@aas.sh";
     };
-
-    # Enable just project runner and builder
-    just.enable = true;
 
     # Enable lazygit client
     lazygit.enable = true;
