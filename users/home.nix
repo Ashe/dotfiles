@@ -14,6 +14,7 @@ in
     ./config/nixpkgs/default.nix
     ./config/firefox/default.nix
     ./config/kanshi/default.nix
+    ./config/kitty/default.nix
     ./config/language/default.nix
     ./config/mangohud/default.nix
     ./config/mpd/default.nix
@@ -22,7 +23,6 @@ in
     ./config/starship/default.nix
     ./config/sway/default.nix
     ./config/sway-notification-center/default.nix
-    ./config/tmux/default.nix
     ./config/vs-code/default.nix
     ./config/waybar/default.nix
     ./config/xdg/default.nix
@@ -41,7 +41,7 @@ in
     sessionVariables = {
 
       # Programs to use
-      TERMINAL = "st";
+      TERMINAL = "kitty";
       MENU = "wofi --show drun -w 3 -i -I";
       EDITOR = "neovide";
       BROWSER = "firefox";
@@ -55,7 +55,6 @@ in
 
       # Build custom packages
       (callPackage ./packages/scripts/default.nix { })
-      (callPackage ./packages/st/default.nix { inherit theme; })
 
       # Languages
       nodejs
@@ -139,6 +138,12 @@ in
 
     # Enable nix-index file database for nixpkgs
     nix-index.enable = true;
+
+    # Fuzzy file finding
+    fzf.enable = true;
+
+    # Cheat sheets
+    navi.enable = true;
   };
 
   # Configure services

@@ -7,6 +7,9 @@
       name = "Rose-Pine";
       package = pkgs.rose-pine-gtk-theme;
     };
+    kitty = {
+      name = "Rosé Pine Moon";
+    };
     neovim = {
       name = "rose-pine";
       package = pkgs.vimPlugins.rose-pine;

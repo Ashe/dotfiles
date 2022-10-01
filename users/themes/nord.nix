@@ -7,6 +7,9 @@
       name = "Nordic";
       package = pkgs.nordic;
     };
+    kitty = {
+      name = "Nord";
+    };
     neovim = {
       name = "onenord";
       package = pkgs.vimPlugins.onenord-nvim;
