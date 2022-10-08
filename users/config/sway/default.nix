@@ -191,14 +191,23 @@ in
     };
   };
 
-  # Install grimshot for screenshotting with sway
-  home.packages = with pkgs; [
-    grim
-    sway-contrib.grimshot
-  ];
+  # Extra wayland-specific home configuration
+  home = {
 
-  # Specify desktop environment environment variable
-  home.sessionVariables = {
-    XDG_CURRENT_DESKTOP = "sway";
+    # Install grimshot for screenshotting with sway
+    packages = with pkgs; [
+      grim
+      sway-contrib.grimshot
+    ];
+
+    # Specify desktop environment environment variable
+    sessionVariables = {
+      XDG_CURRENT_DESKTOP = "sway";
+    };
+
+    # Add shell alias for running things with XWayland easily
+    shellAliases = {
+      run-with-xwayland = "env -u WAYLAND_DISPLAY";
+    };
   };
 }
