@@ -54,6 +54,7 @@ in
         { command = "dropbox start"; }
         { command = "swaync"; }
         { command = "fcitx"; }
+        { command = "/home/ashe/.config/sway/extra/check-for-unsaved-dotfiles.sh &"; }
       ];
 
       # Allows quick returning to previous workspace
