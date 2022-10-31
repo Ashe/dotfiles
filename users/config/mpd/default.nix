@@ -6,7 +6,7 @@
     enable = true;
 
     # Specify music location
-    musicDirectory = ~/Music;
+    musicDirectory = "~/Music";
 
     # Configure server networking settings
     network = {

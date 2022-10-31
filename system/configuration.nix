@@ -167,7 +167,11 @@
 
   # Configure nix
   nix = {
+
+    # The actual package of nix to use
     package = pkgs.nixVersions.stable;
+
+    # Enable use of a flake configuration
     extraOptions = ''
        experimental-features = nix-command flakes
     '';

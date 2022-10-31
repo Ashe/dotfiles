@@ -8,7 +8,7 @@
     settings = {
 
       # Logging output folder
-      output_folder = ~/.mangologs;
+      output_folder = "~/.mangologs";
 
       # Keybindings
       toggle_hud = "Super_L+Shift_L+M";

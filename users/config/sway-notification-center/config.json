@@ -18,12 +18,6 @@
   "hide-on-clear": false,
   "hide-on-action": true,
   "script-fail-notify": true,
-  "scripts": {
-    "example-script": {
-      "exec": "echo 'Do something...'",
-      "urgency": "Normal"
-    }
-  },
   "notification-visibility": {
     "spotify-songs": {
       "state": "enabled",
