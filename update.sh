@@ -20,7 +20,7 @@ usage(){
 
 # Error message
 error(){
-  if [ "$#" -gt 1 ] 
+  if [ "$#" -gt 1 ]
   then
     echo "`cmd`: illegal number of parameters"
   else
@@ -34,14 +34,14 @@ error(){
 rebuild_system_config()
 {
   # Update system flake.lock
-  if [ "$1" == "--update" ]
+  if [ "$1" = "--update" ]
   then
-    echo -e "\nUpdating system flake.lock.."
+    echo "Updating system flake.lock.."
     nix flake update './system'
   fi
 
   # Rebuild system configuration
-  echo -e "\nRebuilding system configuration.."
+  echo "Rebuilding system configuration.."
   nixos-rebuild switch --flake './system#nixos' --use-remote-sudo
 }
 
@@ -49,16 +49,16 @@ rebuild_system_config()
 rebuild_user_config()
 {
   # Update user flake.lock
-  if [ "$1" == "--update" ]
+  if [ "$1" = "--update" ]
   then
-    echo -e "\nUpdating user flake.lock.."
+    echo "Updating user flake.lock.."
     nix flake update './users'
   fi
 
   # Rebuild user configuration
-  echo -e "\nRebuilding user configuration.."
-  nix build ./users#homeConfigurations.nixos.activationPackage 
-  if [[ -f result/activate ]]; then
+  echo "Rebuilding user configuration.."
+  nix build ./users#homeConfigurations.nixos.activationPackage
+  if [ -e result/activate ]; then
     ./result/activate && rm -rd result
   fi
 }
@@ -68,11 +68,11 @@ cd ~/.dotfiles/
 
 # Parse commands
 if [ "$#" -gt 1 ]
-then 
+then
   error $@
 elif [ "$#" -eq 0 ]
 then
-  rebuild_system_config --update && 
+  rebuild_system_config --update &&
   sleep 5 &&
   rebuild_user_config --update
 else
@@ -87,4 +87,4 @@ else
 fi
 
 # Finished updating
-echo -e "\nDone!\n"
+echo "Done!"
