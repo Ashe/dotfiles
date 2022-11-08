@@ -25,8 +25,6 @@
     lib = import ./lib inputs;
 
     # Packages to build
-    packages.x86_64-linux = (import ./packages inputs)
-      // self.lib.nixosConfigurationsAsPackages.x86_64-linux
-      // self.lib.homeConfigurationsAsPackages.x86_64-linux;
+    packages.x86_64-linux = import ./packages inputs;
   };
 }

@@ -1,4 +1,4 @@
-_: { config, lib, pkgs, ... }:
+{ self, ... } : { config, lib, pkgs, ... }:
 
 {
   ##################
@@ -40,6 +40,9 @@ _: { config, lib, pkgs, ... }:
 
     # Packages to install
     packages = with pkgs; [
+
+      # Custom packages
+      self.packages.x86_64-linux.scripts
 
       # Languages
       nodejs
