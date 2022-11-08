@@ -35,13 +35,6 @@ _: { config, lib, pkgs, ... }:
   # Configure programs
   programs = {
 
-    # Configure git
-    git = {
-      enable = true;
-      userName  = "ashe";
-      userEmail = "git@aas.sh";
-    };
-
     # Enable lazygit client
     lazygit.enable = true;
 

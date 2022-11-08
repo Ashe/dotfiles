@@ -91,7 +91,6 @@ _: { config, lib, pkgs, ... }:
 
     # Configure git
     git = {
-      enable = true;
       userName  = "ashe";
       userEmail = "git@aas.sh";
     };
