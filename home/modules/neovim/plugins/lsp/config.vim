@@ -78,4 +78,11 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+-- Bespoke configurations
+
+-- Java
+lspconfig.java_language_server.setup {
+  cmd = {"java-language-server"}
+}
+
 EOF

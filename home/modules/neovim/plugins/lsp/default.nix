@@ -21,6 +21,9 @@
     # C / C++
     ccls
 
+    # Java
+    java-language-server
+
     # Nix
     rnix-lsp
   ];
