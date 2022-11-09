@@ -11,7 +11,7 @@
       flake = false;
     };
   };
-  outputs = { self, ... } @ inputs: {
+  outputs = inputs: {
 
     # System configurations and modules
     nixosConfigurations = import ./nixos/configurations inputs;
@@ -21,10 +21,10 @@
     homeConfigurations = import ./home/configurations inputs;
     homeModules = import ./home/modules inputs;
 
-    # Custom library extensions
+    # Custom library functions
     lib = import ./lib inputs;
 
     # Packages to build
-    packages.x86_64-linux = import ./packages inputs;
+    packages = import ./packages inputs;
   };
 }

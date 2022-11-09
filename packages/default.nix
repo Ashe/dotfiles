@@ -1,5 +1,9 @@
-inputs: let pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux; in {
+inputs: let pkgs = inputs.nixpkgs.legacyPackages; in {
 
-  # Bundle scripts and add to path
-  scripts = pkgs.callPackage ./scripts {};
+  # Linux scripts
+  x86_64-linux = {
+
+    # Bundle scripts and add to path
+    scripts = pkgs.x86_64-linux.callPackage ./scripts {};
+  };
 }
