@@ -15,7 +15,22 @@
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback
     ];
+
+    # Load Samsung Odyssey G9 EDID to support 240hz
+    kernelParams = [
+      "drm.edid_firmware=DP-1:edid/samsung-g9.bin"
+      "video=DP-1:e"
+      "quiet"
+    ];
   };
+
+  # Add EDID for Samsung Odyssey G9 Monitor
+  hardware.firmware = [(
+    pkgs.runCommandNoCC "install-odyssey-g9-edid" { } ''
+      mkdir -p $out/lib/firmware/edid
+      cp ${./samsung-g9.bin} $out/lib/firmware/edid/samsung-g9.bin
+    ''
+  )];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/7834d079-f28d-40ab-adae-aa9ce5a7e515";
