@@ -1,4 +1,5 @@
 inputs: {
+  btop = import ./btop inputs;
   fcitx = import ./fcitx inputs;
   firefox = import ./firefox inputs;
   kitty = import ./kitty inputs;

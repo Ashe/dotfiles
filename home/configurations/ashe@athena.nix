@@ -5,6 +5,7 @@
   # Custom modules #
   ##################
 
+  btop.enable = true;
   fcitx.enable = true;
   firefox.enable = true;
   kitty.enable = true;
@@ -73,6 +74,7 @@
       wl-clipboard
       wlogout
       wofi
+      xwayland
       youtube-dl
     ];
   };
