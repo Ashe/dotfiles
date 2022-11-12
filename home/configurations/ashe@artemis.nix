@@ -5,6 +5,7 @@ _: { config, lib, pkgs, ... }:
   # Custom modules #
   ##################
 
+  htop.enable = true;
   neovim.enable = true;
   starship.enable = true;
   zsh.enable = true;
