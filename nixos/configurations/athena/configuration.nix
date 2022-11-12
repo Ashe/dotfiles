@@ -81,14 +81,12 @@ _: { config, lib, pkgs, ... }:
       dosfstools
       gparted
       hardinfo
-      htop
       killall
       networkmanager
       tree
       unzip
       wget
       wlr-randr
-      xwayland
 
       # Miscellaneous
       gnome.adwaita-icon-theme

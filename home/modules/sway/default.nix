@@ -201,10 +201,15 @@ in
     # Extra wayland-specific home configuration
     home = {
 
-      # Install grimshot for screenshotting with sway
+      # Extra packages accompanying sway
       packages = with pkgs; [
+
+        # Install grimshot for screenshotting with sway
         grim
         sway-contrib.grimshot
+
+        # Enable explicit use of xwayland compatibility layer
+        xwayland
       ];
 
       # Specify desktop environment environment variable
