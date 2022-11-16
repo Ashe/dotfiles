@@ -24,16 +24,6 @@ _: { config, lib, pkgs, theme, ... }:
         theme.data.neovim.package
       ];
     };
-
-    # Install neovide, dedicated neovim editor
-    home.packages = with pkgs; [
-      neovide
-    ];
-
-    # Set environment variables
-    home.sessionVariables = {
-      EDITOR = "neovide";
-    };
   };
 
   # Import plugins with customisation

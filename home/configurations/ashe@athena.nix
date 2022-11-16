@@ -35,6 +35,7 @@
 
       # Programs to use
       MENU = "wofi --show drun -w 3 -i -I";
+      EDITOR = "neovide";
       FILE = "ranger";
       FILEGUI = "nautilus";
     };
@@ -58,6 +59,7 @@
       gthumb
       mpv
       neofetch
+      neovide
       nicotine-plus
       obsidian
       ranger
