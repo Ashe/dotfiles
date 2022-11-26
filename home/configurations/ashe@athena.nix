@@ -8,6 +8,7 @@
   btop.enable = true;
   fcitx.enable = true;
   firefox.enable = true;
+  gtk.config.enable = true;
   kitty.enable = true;
   mangohud.enable = true;
   neovim.enable = true;
@@ -35,6 +36,7 @@
 
       # Programs to use
       MENU = "wofi --show drun -w 3 -i -I";
+      BROWSER = "firefox";
       EDITOR = "neovide";
       FILE = "ranger";
       FILEGUI = "nautilus";

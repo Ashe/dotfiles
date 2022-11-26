@@ -164,6 +164,9 @@ _: { config, lib, pkgs, ... }:
 
     # Enable CUPS to print documents
     printing.enable = true;
+
+    # TEMP: Fix for nautilus and other gtk programs running slow
+    gnome.at-spi2-core.enable = true;
   };
 
   # Enable XDG desktop integration

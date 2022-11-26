@@ -13,13 +13,8 @@ _: { config, lib, pkgs, ... }:
       # Install Firefox
       enable = true;
 
-      # Use Wayland version of Firefox for screen sharing
-      package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
-        forceWayland = true;
-        extraPolicies = {
-          ExtensionSettings = {};
-        };
-      };
+      # Use nightly version of firefox
+      package = with pkgs; firefox-wayland;
 
       # Install default extensions
       extensions = with config.nur.repos.rycee.firefox-addons; [
@@ -57,7 +52,8 @@ _: { config, lib, pkgs, ... }:
 
     # Set environment variables
     home.sessionVariables = {
-      BROWSER = "firefox";
+
+      # Use wayland version of firefox
       MOZ_ENABLE_WAYLAND = 1;
     };
   };

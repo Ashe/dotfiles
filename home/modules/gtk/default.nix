@@ -1,4 +1,4 @@
-_: { config, lib, pkgs, ... }:
+_: { config, lib, pkgs, theme, ... }:
 
 {
   # Add options for gtk, toolkit for gnome

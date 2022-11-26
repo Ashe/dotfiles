@@ -2,6 +2,7 @@ inputs: {
   btop = import ./btop inputs;
   fcitx = import ./fcitx inputs;
   firefox = import ./firefox inputs;
+  gtk = import ./gtk inputs;
   kitty = import ./kitty inputs;
   mangohud = import ./mangohud inputs;
   neovim = import ./neovim inputs;
