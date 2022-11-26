@@ -64,6 +64,7 @@
       neovide
       nicotine-plus
       obsidian
+      qbittorrent
       ranger
       scanmem
       slack

@@ -11,6 +11,7 @@ _: { config, lib, pkgs, ... }:
 
   nix.flakes.enable = true;
   jellyfin.enable = true;
+  mullvad.enable = true;
   steam.enable = true;
 
   ##################
