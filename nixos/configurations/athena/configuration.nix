@@ -9,8 +9,9 @@ _: { config, lib, pkgs, ... }:
   # Custom modules #
   ##################
 
-  steam.enable = true;
   nix.flakes.enable = true;
+  jellyfin.enable = true;
+  steam.enable = true;
 
   ##################
   # Configurations #
@@ -181,6 +182,7 @@ _: { config, lib, pkgs, ... }:
 
   # Open ports in the firewall.
   networking.firewall = {
+    enable = true;
     allowedTCPPorts = [ 17500 ];
     allowedUDPPorts = [ 17500 ];
     allowedUDPPortRanges = [
