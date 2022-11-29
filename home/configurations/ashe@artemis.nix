@@ -30,6 +30,9 @@ _: { config, lib, pkgs, ... }:
 
       # Programs
       ranger
+
+      # Utilities
+      clang-tools
     ];
   };
 
