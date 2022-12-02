@@ -63,7 +63,7 @@
       neofetch
       neovide
       nicotine-plus
-      obsidian
+      logseq
       qbittorrent
       ranger
       scanmem
