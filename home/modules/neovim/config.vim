@@ -53,6 +53,9 @@ set shortmess+=c
 " diagnostics appear/become resolved
 set signcolumn=yes
 
+" Don't show '~'
+set fillchars=fold:\ ,vert:\│,eob:\ ,msgsep:‾
+
 " ================================
 " Keybindings
 " ================================
