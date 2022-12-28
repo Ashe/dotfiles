@@ -6,7 +6,7 @@
     loader = {
       systemd-boot.enable = false;
       efi.canTouchEfiVariables = true;
-      efi.efiSysMountPoint = "/boot/EFI";
+      efi.efiSysMountPoint = "/boot/efi";
       grub = {
         enable = true;
         efiSupport = true;
