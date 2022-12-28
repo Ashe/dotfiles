@@ -1,18 +1,12 @@
 {
-  # Configure boot parameters
+  # Configure bootloader
   boot = {
 
-    # Enable grub as bootloader
+    # Use systemd-boot as bootloader
     loader = {
-      systemd-boot.enable = false;
+      systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
       efi.efiSysMountPoint = "/boot/efi";
-      grub = {
-        enable = true;
-        efiSupport = true;
-        version = 2;
-        devices = [ "nodev" ];
-      };
     };
   };
 }

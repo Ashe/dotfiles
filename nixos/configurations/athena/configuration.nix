@@ -24,11 +24,8 @@ _: { config, lib, pkgs, ... }:
   # Set your time zone.
   time.timeZone = "Europe/London";
 
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = false;
-  networking.interfaces.enp4s0.useDHCP = true;
+  # Enable networking
+  networking.networkmanager.enable = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
@@ -110,7 +107,6 @@ _: { config, lib, pkgs, ... }:
       gparted
       hardinfo
       killall
-      networkmanager
       tree
       unzip
       wget
