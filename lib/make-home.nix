@@ -17,7 +17,7 @@ in inputs.home-manager.lib.homeManagerConfiguration {
           inputs.home-manager.packages.${system}.home-manager
         ];
       };
-      programs.git.enable = true;
+      programs.git.enable = inputs.nixpkgs.lib.mkDefault true;
     }
   ];
 }

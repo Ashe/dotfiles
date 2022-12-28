@@ -16,7 +16,7 @@ in inputs.nixpkgs.lib.nixosSystem {
       networking.hostName = name;
       system.configurationRevision = self.rev or "dirty";
       documentation.man = {
-        enable = true;
+        enable = inputs.nixpkgs.lib.mkDefault true;
         generateCaches = true;
       };
     }
