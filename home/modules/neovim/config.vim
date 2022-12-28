@@ -84,3 +84,15 @@ vnoremap <leader>P "+P
 
 " Set colourscheme
 colorscheme <COLOURSCHEME>
+
+" ================================
+" Plugin-preparation
+" ================================
+
+lua << EOF
+
+-- nvim-tree: Disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
+
+EOF

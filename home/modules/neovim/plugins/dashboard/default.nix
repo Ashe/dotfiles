@@ -7,7 +7,8 @@
     # Install dashboard for nvim
     plugins = with pkgs.vimPlugins; [{
       plugin = dashboard-nvim;
-      config = (builtins.readFile ./config.vim);
+      type = "lua";
+      config = builtins.readFile ./config.lua;
     }];
   };
 }

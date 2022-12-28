@@ -10,22 +10,8 @@
       # Install telescope
       {
         plugin = telescope-nvim;
-        config = ''
-          " ================================
-          " telescope
-          " ================================
-
-          let mapleader = " "
-          nnoremap <leader><leader> <cmd>Telescope find_files<cr>
-          nnoremap <C-p> <cmd>Telescope find_files<cr>
-          nnoremap <leader>ff <cmd>Telescope find_files<cr>
-          nnoremap <leader>fr <cmd>Telescope oldfiles<cr>
-          nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-          nnoremap <leader>fb <cmd>Telescope buffers<cr>
-          nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-          nnoremap <leader>? <cmd>Telescope commands<cr>
-          nnoremap <C-S-p> <cmd>Telescope commands<cr>
-        '';
+        type = "lua";
+        config = builtins.readFile ./config.lua;
       }
 
       # Install devicons to improve appearance

@@ -7,16 +7,15 @@
     # Install nvim-surround
     plugins = with pkgs.vimPlugins; [{
       plugin = nvim-surround;
+      type = "lua";
       config = ''
-        " ================================
-        " nvim-surround
-        " ================================
+        ----------------------------------
+        -- nvim-surround
+        ----------------------------------
 
-        lua << EOF
         require('nvim-surround').setup({
           -- Configuration here, or leave empty to use defaults
         })
-        EOF
       '';
     }];
   };

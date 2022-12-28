@@ -5,12 +5,13 @@
   programs.neovim = {
 
     # Install plugins related to cmp
-    plugins = with pkgs.vimPlugins; [ 
+    plugins = with pkgs.vimPlugins; [
 
       # Install nvim-cmp plugin
       {
         plugin = nvim-cmp;
-        config = (builtins.readFile ./config.vim);
+        type = "lua";
+        config = builtins.readFile ./config.lua;
       }
 
       # Install lsp integrations for cmp

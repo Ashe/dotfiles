@@ -7,12 +7,12 @@
     # Install trim for nvim
     plugins = with pkgs.vimPlugins; [{
       plugin = trim-nvim;
+      type = "lua";
       config = ''
-        " ================================
-        " trim
-        " ================================
+        ----------------------------------
+        -- trim
+        ----------------------------------
 
-        lua << EOF
         require('trim').setup({
           patterns = {
 
@@ -26,7 +26,6 @@
             [[%s/\%^\n\+//]],
           },
         })
-        EOF
       '';
     }];
   };

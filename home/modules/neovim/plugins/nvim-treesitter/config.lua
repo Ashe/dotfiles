@@ -1,10 +1,8 @@
-" ================================
-" nvim-treesitter
-" ================================
+----------------------------------
+-- nvim-treesitter
+----------------------------------
 
-lua << EOF
-
-require'nvim-treesitter.configs'.setup {
+require'nvim-treesitter.configs'.setup({
 
   -- A list of parser names, or "all"
   ensure_installed = all,
@@ -19,9 +17,7 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
   }
-}
+})
 
 -- Ensure parser location added to path
 vim.opt.runtimepath:append("~/.local/share/nvim-treesitter/parsers")
-
-EOF

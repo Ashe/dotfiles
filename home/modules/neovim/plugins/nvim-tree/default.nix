@@ -10,7 +10,8 @@
       # Install nvim-tree
       {
         plugin = nvim-tree-lua;
-        config = (builtins.readFile ./config.vim);
+        type = "lua";
+        config = builtins.readFile ./config.lua;
       }
 
       # Install devicons to improve appearance

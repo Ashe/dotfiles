@@ -7,18 +7,17 @@
     # Install lualine
     plugins = with pkgs.vimPlugins; [{
       plugin = lualine-nvim;
+      type = "lua";
       config = ''
-        " ================================
-        " lualine
-        " ================================
+        ----------------------------------
+        -- lualine
+        ----------------------------------
 
-        lua << EOF
-        require('lualine').setup {
+        require('lualine').setup({
           options = {
             theme = 'palenight'
           }
-        }
-        EOF
+        })
       '';
     }];
   };

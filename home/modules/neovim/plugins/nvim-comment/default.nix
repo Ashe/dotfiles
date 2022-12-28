@@ -7,12 +7,12 @@
     # Install nvim-comment
     plugins = with pkgs.vimPlugins; [{
       plugin = nvim-comment;
+      type = "lua";
       config = ''
-        " ================================
-        " nvim-comment
-        " ================================
+        ----------------------------------
+        -- nvim-comment
+        ----------------------------------
 
-        lua << EOF
         require('nvim_comment').setup({
 
           -- Linters prefer comment and line to have a space in between markers
@@ -39,7 +39,6 @@
           -- Hook function to call before commenting takes place
           hook = nil
         })
-        EOF
       '';
     }];
   };

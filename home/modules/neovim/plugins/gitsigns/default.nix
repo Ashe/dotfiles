@@ -7,7 +7,8 @@
     # Install gitsigns
     plugins = with pkgs.vimPlugins; [{
       plugin = gitsigns-nvim;
-      config = (builtins.readFile ./config.vim);
+      type = "lua";
+      config = builtins.readFile ./config.lua;
     }];
   };
 }
