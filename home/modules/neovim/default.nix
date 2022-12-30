@@ -44,6 +44,9 @@ _: { config, lib, pkgs, theme, ... }:
     # Completion
     ./plugins/nvim-cmp/default.nix
 
+    # Motion
+    ./plugins/leap/default.nix
+
     # Commenting
     ./plugins/nvim-comment/default.nix
 
@@ -67,6 +70,9 @@ _: { config, lib, pkgs, theme, ... }:
 
     # Status line
     ./plugins/lualine/default.nix
+
+    # Cursor line
+    ./plugins/cursorline/default.nix
 
     # Zen mode
     ./plugins/true-zen/default.nix

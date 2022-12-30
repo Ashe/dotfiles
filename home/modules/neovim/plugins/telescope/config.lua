@@ -7,7 +7,6 @@ require('telescope').setup()
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
-map('n', '<leader><leader>', '<Cmd>Telescope find_files<CR>', opts)
 map('n', '<C-p>', '<Cmd>Telescope find_files<CR>', opts)
 map('n', '<leader>ff', '<Cmd>Telescope find_files<CR>', opts)
 map('n', '<leader>fr', '<Cmd>Telescope oldfiles<CR>', opts)
