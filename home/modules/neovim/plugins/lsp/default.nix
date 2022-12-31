@@ -28,4 +28,9 @@
     # Nix
     rnix-lsp
   ];
+
+  # Add language server specific files to global ignore list
+  programs.git.ignores = [
+    ".ccls-cache/"
+  ];
 }
