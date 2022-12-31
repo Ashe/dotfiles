@@ -30,51 +30,54 @@ _: { config, lib, pkgs, theme, ... }:
   imports = [
 
     # Dashboard splash screen
-    ./plugins/dashboard/default.nix
+    ./plugins/dashboard
 
     # Tabs
-    ./plugins/barbar/default.nix
+    ./plugins/barbar
 
     # LSP configuring
-    ./plugins/lsp/default.nix
+    ./plugins/lsp
 
     # Syntax highlighting
-    ./plugins/nvim-treesitter/default.nix
+    ./plugins/nvim-treesitter
 
     # Completion
-    ./plugins/nvim-cmp/default.nix
+    ./plugins/nvim-cmp
 
     # Motion
-    ./plugins/leap/default.nix
+    ./plugins/leap
 
     # Commenting
-    ./plugins/nvim-comment/default.nix
+    ./plugins/nvim-comment
 
     # Surrounding
-    ./plugins/nvim-surround/default.nix
+    ./plugins/nvim-surround
 
     # Whitespace trimming
-    ./plugins/trim/default.nix
+    ./plugins/trim
 
     # File browsing
-    ./plugins/nvim-tree/default.nix
+    ./plugins/nvim-tree
 
     # File searching
-    ./plugins/telescope/default.nix
+    ./plugins/telescope
 
     # Key suggestions
-    ./plugins/which-key/default.nix
+    ./plugins/which-key
 
     # Git integration
-    ./plugins/gitsigns/default.nix
+    ./plugins/gitsigns
 
     # Status line
-    ./plugins/lualine/default.nix
+    ./plugins/lualine
 
     # Cursor line
-    ./plugins/cursorline/default.nix
+    ./plugins/cursorline
+
+    # Progress visualisation
+    ./plugins/fidget
 
     # Zen mode
-    ./plugins/true-zen/default.nix
+    ./plugins/true-zen
   ];
 }
