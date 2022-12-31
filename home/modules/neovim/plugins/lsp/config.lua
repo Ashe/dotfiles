@@ -2,6 +2,52 @@
 -- nvim-lspconfig
 ----------------------------------
 
+-- Keybindings
+
+-- Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+
+  -- Function that lets us more easily define mappings specific for LSP items
+  -- It sets the mode, buffer and description for us each time
+  local nmap = function(keys, func, desc)
+    vim.keymap.set('n', keys, func, {
+      noremap=true, silent=true, buffer = bufnr, desc = desc
+    })
+  end
+
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- General mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  nmap('gD', vim.lsp.buf.declaration, 'Goto Declaration')
+  nmap('gd', vim.lsp.buf.definition, 'Goto Definition')
+  nmap('K', vim.lsp.buf.hover, 'Hover documentation')
+  nmap('gi', vim.lsp.buf.implementation, 'Goto Implementation')
+  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<leader>D', vim.lsp.buf.type_definition, 'Type Definition')
+  nmap('<leader>rn', vim.lsp.buf.rename, 'Rename')
+  nmap('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
+  nmap('<leader>f', vim.lsp.buf.formatting, 'Format Code')
+
+  -- Telescope mappings
+  nmap('gr', require('telescope.builtin').lsp_references, 'Goto References')
+  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
+end
+
+
+-- Servers
+
 -- Setup lspconfig
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
@@ -45,40 +91,3 @@ end
 lspconfig.java_language_server.setup {
   cmd = {"java-language-server"}
 }
-
-
--- Keybindings
-
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
-end

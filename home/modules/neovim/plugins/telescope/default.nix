@@ -22,5 +22,6 @@
   # RipGrep used for telescope
   home.packages = with pkgs; [
     ripgrep
+    fd
   ];
 }
