@@ -17,21 +17,21 @@
       v4l2loopback
     ];
 
-    /* # Load Samsung Odyssey G9 EDID to support 240hz */
-    /* kernelParams = [ */
-    /*   "drm.edid_firmware=DP-1:edid/samsung-g9.bin" */
-    /*   "video=DP-1:e" */
-    /*   "quiet" */
-    /* ]; */
+    # Load Samsung Odyssey G9 EDID to support 240hz
+    kernelParams = [
+      "drm.edid_firmware=DP-1:edid/samsung-g9.bin"
+      "video=DP-1:e"
+      "quiet"
+    ];
   };
 
-  /* # Add EDID for Samsung Odyssey G9 Monitor */
-  /* hardware.firmware = [( */
-  /*   pkgs.runCommandNoCC "install-odyssey-g9-edid" { } '' */
-  /*     mkdir -p $out/lib/firmware/edid */
-  /*     cp ${./samsung-g9.bin} $out/lib/firmware/edid/samsung-g9.bin */
-  /*   '' */
-  /* )]; */
+  # Add EDID for Samsung Odyssey G9 Monitor
+  hardware.firmware = [(
+    pkgs.runCommandNoCC "install-odyssey-g9-edid" { } ''
+      mkdir -p $out/lib/firmware/edid
+      cp ${./samsung-g9.bin} $out/lib/firmware/edid/samsung-g9.bin
+    ''
+  )];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/d8b8d4ac-10dd-4ece-8653-96ff070c7fe4";
