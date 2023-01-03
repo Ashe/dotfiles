@@ -23,7 +23,6 @@ _: { config, lib, pkgs, ... }:
         https-everywhere
         protondb-for-steam
         ublock-origin
-        web-scrobbler
       ];
 
       # Configure user profiles
