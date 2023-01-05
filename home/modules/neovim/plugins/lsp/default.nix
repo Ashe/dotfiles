@@ -22,6 +22,9 @@
     # C / C++
     ccls
 
+    # CMake
+    cmake-language-server
+
     # Java
     java-language-server
 
