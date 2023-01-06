@@ -4,12 +4,18 @@
   # Configure neovim
   programs.neovim = {
 
-    # Install plugins related to nvim-treesitter
+    # Install plugins related to treesitter
     plugins = with pkgs.vimPlugins; [
+
+      # Install nvim-treesitter-textobjects
+      {
+        plugin = nvim-treesitter-textobjects;
+        type = "lua";
+      }
 
       # Install nvim-treesitter
       {
-        plugin = (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars));
+        plugin = nvim-treesitter;
         type = "lua";
         config = builtins.readFile ./config.lua;
       }

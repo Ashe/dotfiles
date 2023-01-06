@@ -27,7 +27,7 @@ require('nvim-treesitter.configs').setup({
     },
   },
 
-  -- Define custom text objects for navigation and text manipulation
+  -- Configure nvim-treesitter-textobjects plugin
   textobjects = {
 
     -- Define custom selections
