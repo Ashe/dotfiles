@@ -35,14 +35,14 @@ local on_attach = function(client, bufnr)
   nmap('K', vim.lsp.buf.hover, 'Hover documentation')
   nmap('gi', vim.lsp.buf.implementation, 'Goto Implementation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
-  nmap('<leader>D', vim.lsp.buf.type_definition, 'Type Definition')
+  nmap('<leader>td', vim.lsp.buf.type_definition, 'Type Definition')
   nmap('<leader>rn', vim.lsp.buf.rename, 'Rename')
   nmap('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
   nmap('<leader>f', vim.lsp.buf.formatting, 'Format Code')
 
   -- Telescope mappings
   nmap('gr', require('telescope.builtin').lsp_references, 'Goto References')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
+  nmap('<leader>s', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
 end
 
 

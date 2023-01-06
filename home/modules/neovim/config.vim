@@ -10,6 +10,8 @@ vim.opt.mouse = "a"
 -- Make sure swap and backup files are created
 vim.opt.backup = true
 vim.opt.swapfile = true
+vim.opt.directory = os.getenv("HOME") .. "/.local/share/nvim/cache"
+vim.opt.backupdir = os.getenv("HOME") .. "/.local/share/nvim/cache"
 
 -- Show column guideline to keep code within 80 lines
 vim.opt.textwidth = 0
@@ -98,7 +100,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc="Half-page up" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc="Half-page down" })
 
 -- Set up text replacement macro
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc="Substitute" })
+vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc="Substitute" })
 
 ----------------------------------
 -- Appearance
