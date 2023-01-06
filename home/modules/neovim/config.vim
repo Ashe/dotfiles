@@ -1,62 +1,67 @@
-" ================================
-" General
-" ================================
-
-" Enable mouse control
-set mouse=a
-
-" Place swap files in ~/.vim-tmp/
-set backup
-set swapfile
-set backupdir=~/.vim-tmp
-set directory=~/.vim-tmp
-
-" Show column guideline to keep code within 80 lines
-set textwidth=0
-set wrapmargin=0
-set wrap
-set linebreak
-set colorcolumn=81
-
-" Spellchecking
-set spelllang=en
-
-" Make terminal title same as the file you're editing
-set title
-
-" Indent depending on plugins and filetype
-filetype plugin indent on
-
-" Tabs are 2 spaces
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-
-" Relative line numbers
-set number
-set relativenumber
-
-" Autocomplete interface
-set wildmenu
-
-" Make vim only redraw when needed
-set lazyredraw
-
-" Show matching parenthesis
-set showmatch
-
-" Don't pass messages to |ins-completion-menu|
-set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved
-set signcolumn=yes
-
-" Don't show '~'
-set fillchars=fold:\ ,vert:\│,eob:\ ,msgsep:‾
-
 lua << EOF
+
+----------------------------------
+-- General
+----------------------------------
+
+-- Enable mouse control
+vim.opt.mouse = "a"
+
+-- Make sure swap and backup files are created
+vim.opt.backup = true
+vim.opt.swapfile = true
+
+-- Show column guideline to keep code within 80 lines
+vim.opt.textwidth = 0
+vim.opt.wrapmargin = 0
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.colorcolumn = "81"
+
+-- Spellchecking
+vim.opt.spelllang = "en"
+
+-- Make terminal title same as the file you're editing
+vim.opt.title = true
+
+-- Tabs are 2 spaces
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.expandtab = true
+
+-- Relative line numbers
+vim.opt.number = true
+vim.opt.relativenumber = true
+
+-- Autocomplete interface
+vim.opt.wildmenu = true
+
+-- Show matching parenthesis
+vim.opt.showmatch = true
+
+-- Ignores all the 'hit-enter' prompts
+-- -c prevents messages being given for ins-completion
+vim.opt.shortmess = vim.o.shortmess .. "c"
+
+-- Always show the signcolumn, otherwise it would shift the text each time
+-- diagnostics appear/become resolved
+vim.opt.signcolumn = "yes"
+
+-- Change decorative characters
+-- Also prevent '~' from showing on blank lines
+vim.opt.fillchars = {
+  horiz = '━',
+  horizup = '┻',
+  horizdown = '┳',
+  vert = '┃',
+  vertleft  = '┫',
+  vertright = '┣',
+  verthoriz = '╋',
+  fold = ' ',
+  eob = ' ',
+  msgsep = '‾'
+}
 
 ----------------------------------
 -- Keybindings
