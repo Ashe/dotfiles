@@ -48,14 +48,11 @@
       # Custom packages
       self.packages.x86_64-linux.scripts
 
-      # Languages
-      nodejs
-      python3Minimal
-
       # Programs
       anki-bin
       audacity
       blender
+      chromium
       discord
       godot
       gthumb
