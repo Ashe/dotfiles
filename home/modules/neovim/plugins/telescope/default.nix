@@ -19,9 +19,13 @@
     ];
   };
 
-  # RipGrep used for telescope
+  # Install packages relating to telescope
   home.packages = with pkgs; [
+
+    # Used for live grepping
     ripgrep
+
+    # Helps with searching for files
     fd
   ];
 }

@@ -2,16 +2,28 @@
 -- telescope
 ----------------------------------
 
-require('telescope').setup()
+require('telescope').setup({})
 
-local map = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
 
-map('n', '<leader><leader>', '<Cmd>Telescope buffers<CR>', opts)
-map('n', '<C-p>', '<Cmd>Telescope git_files<CR>', opts)
-map('n', '<leader>ff', '<Cmd>Telescope find_files<CR>', opts)
-map('n', '<leader>fr', '<Cmd>Telescope oldfiles<CR>', opts)
-map('n', '<leader>fg', '<Cmd>Telescope live_grep<CR>', opts)
-map('n', '<leader>fh', '<Cmd>Telescope help_tags<CR>', opts)
-map('n', '<leader>?', '<Cmd>Telescope commands<CR>', opts)
-map('n', '<C-S-p>', '<Cmd>Telescope commands<CR>', opts)
+-- Keybindings
+
+-- git_files, but falls back to find_files if not in a git repo
+project_files = function()
+  local opts = {}
+  vim.fn.system('git rev-parse --is-inside-work-tree')
+  if vim.v.shell_error == 0 then
+    require"telescope.builtin".git_files(opts)
+  else
+    require"telescope.builtin".find_files(opts)
+  end
+end
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = "Buffers" })
+vim.keymap.set('n', '<C-p>', project_files, { desc = "Project files" })
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Files" })
+vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = "Recent files" })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Live grep" })
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Help tags" })
+vim.keymap.set('n', '<leader>?', builtin.commands, { desc = "Commands" })
+vim.keymap.set('n', '<C-S-p>', builtin.commands, { desc = "Commands" })

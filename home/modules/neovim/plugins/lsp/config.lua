@@ -29,7 +29,6 @@ local on_attach = function(client, bufnr)
 
   -- General mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
   nmap('gD', vim.lsp.buf.declaration, 'Goto Declaration')
   nmap('gd', vim.lsp.buf.definition, 'Goto Definition')
   nmap('K', vim.lsp.buf.hover, 'Hover documentation')
@@ -41,8 +40,8 @@ local on_attach = function(client, bufnr)
   nmap('<leader>f', vim.lsp.buf.formatting, 'Format Code')
 
   -- Telescope mappings
-  nmap('gr', require('telescope.builtin').lsp_references, 'Goto References')
-  nmap('<leader>s', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
+  nmap('<leader>fr', require('telescope.builtin').lsp_references, 'References')
+  nmap('<leader>fs', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
 end
 
 

@@ -7,17 +7,17 @@
     # Install plugins related to treesitter
     plugins = with pkgs.vimPlugins; [
 
-      # Install nvim-treesitter-textobjects
-      {
-        plugin = nvim-treesitter-textobjects;
-        type = "lua";
-      }
-
       # Install nvim-treesitter
       {
         plugin = nvim-treesitter;
         type = "lua";
         config = builtins.readFile ./config.lua;
+      }
+
+      # Install nvim-treesitter-textobjects
+      {
+        plugin = nvim-treesitter-textobjects;
+        type = "lua";
       }
     ];
   };
