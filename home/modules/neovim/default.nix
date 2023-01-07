@@ -77,6 +77,9 @@ _: { config, lib, pkgs, theme, ... }:
     # Zen mode
     ./plugins/true-zen
 
+    # Suggestions and completions for wildmenu
+    ./plugins/wilder
+
     # Key suggestions
     ./plugins/which-key
   ];

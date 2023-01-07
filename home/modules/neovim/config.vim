@@ -89,7 +89,7 @@ vim.keymap.set({"n", "v"}, "<leader>p", "\"+p", { desc="Paste after" })
 
 -- Delete into the void
 vim.keymap.set({"n", "v"}, "<leader>d", "\"_d", { desc="Void delete" })
-vim.keymap.set("n", "<leader>D", "_\"_d$", { desc="Void line to void" })
+vim.keymap.set("n", "<leader>D", "\"_dd", { desc="Void line to void" })
 
 -- Move block up and down
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc="Move block up" })
