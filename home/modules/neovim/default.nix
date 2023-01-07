@@ -62,9 +62,6 @@ _: { config, lib, pkgs, theme, ... }:
     # File searching
     ./plugins/telescope
 
-    # Key suggestions
-    ./plugins/which-key
-
     # Git integration
     ./plugins/gitsigns
 
@@ -79,5 +76,8 @@ _: { config, lib, pkgs, theme, ... }:
 
     # Zen mode
     ./plugins/true-zen
+
+    # Key suggestions
+    ./plugins/which-key
   ];
 }

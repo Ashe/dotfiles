@@ -2,7 +2,8 @@
 -- which-key
 ----------------------------------
 
-require('which-key').setup({
+local which_key = require('which-key')
+which_key.setup({
 
   plugins = {
 
@@ -69,7 +70,7 @@ require('which-key').setup({
     separator = "➜",
 
     -- Symbol prepended to a group
-    group = "+",
+    group = "+ ",
   },
 
   popup_mappings = {
@@ -83,7 +84,7 @@ require('which-key').setup({
 
   window = {
     -- None, single, double, shadow
-    border = "none",
+    border = "single",
 
     -- Bottom, top
     position = "bottom",
