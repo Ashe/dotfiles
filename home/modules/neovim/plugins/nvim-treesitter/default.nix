@@ -30,5 +30,8 @@
 
     # Treesitter-nvim requires 'cc' executable
     gcc
+
+    # Treesitter-nvim requires 'node' executable
+    nodejs
   ];
 }
