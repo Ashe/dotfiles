@@ -43,7 +43,9 @@ local on_attach = function(client, bufnr)
   nmap('<leader>cf', vim.lsp.buf.formatting, 'Format Code')
 
   -- Telescope mappings
-  nmap('<leader>fr', require('telescope.builtin').lsp_references, 'References')
+  nmap('gr', require('telescope.builtin').lsp_references, 'References')
+  nmap('<leader>fR', require('telescope.builtin').lsp_references, 'References')
+  nmap('gs', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
   nmap('<leader>fs', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
 end
 
