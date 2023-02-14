@@ -100,6 +100,7 @@
     git = {
       userName  = "ashe";
       userEmail = "git@aas.sh";
+      lfs.enable = true;
     };
 
     # Enable lazygit client
