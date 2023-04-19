@@ -16,10 +16,11 @@ inputs : { config, lib, pkgs, theme, ... }:
     # Enable and configure hyprland
     wayland.windowManager.hyprland = {
       enable = true;
-      extraConfig = builtins.replaceStrings
-        (builtins.attrNames theme.colourscheme)
-        (builtins.attrValues theme.colourscheme)
-        (builtins.readFile ./hyprland.conf);
+      extraConfig = let f = (a : b :  builtins.replaceStrings (builtins.attrNames b) (builtins.attrValues b) a); in f (
+        builtins.readFile ./hyprland.conf) (theme.colourscheme // {
+          WALLPAPER = theme.wallpaper;
+        }
+      );
     };
 
     # Extra wayland-specific home configuration
@@ -37,6 +38,9 @@ inputs : { config, lib, pkgs, theme, ... }:
 
         # Colour picker
         hyprpicker
+
+        # Wallpaper setter
+        swaybg
       ];
 
       # Specify desktop environment environment variables
