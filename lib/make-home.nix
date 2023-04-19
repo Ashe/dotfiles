@@ -9,6 +9,7 @@ in inputs.home-manager.lib.homeManagerConfiguration {
   modules = builtins.attrValues self.homeModules ++ [
     config-file
     inputs.nur.nixosModules.nur
+    inputs.hyprland.homeManagerModules.default
     {
       home = {
         username = user;

@@ -10,6 +10,7 @@
       url = "git+https://gitlab.freedesktop.org/mesa/mesa?ref=main";
       flake = false;
     };
+    hyprland.url = "github:hyprwm/Hyprland";
   };
   outputs = inputs: {
 

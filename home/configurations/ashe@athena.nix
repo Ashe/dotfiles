@@ -9,13 +9,14 @@
   #fcitx.enable = true;
   firefox.enable = true;
   gtk.config.enable = true;
+  hyprland.enable = true;
+  kanshi.enable = true;
   kitty.enable = true;
+  mako.enable = true;
   mangohud.enable = true;
   neovim.enable = true;
   obs-studio.enable = true;
   starship.enable = true;
-  sway.enable = true;
-  sway-notification-center.enable = true;
   vs-code.enable = true;
   waybar.enable = true;
   xdg.config.enable = true;
@@ -52,8 +53,8 @@
       anki-bin
       audacity
       blender
+      bottles
       chromium
-      discord
       godot
       gthumb
       mpv
@@ -65,6 +66,7 @@
       ranger
       scanmem
       slack
+      webcord
 
       # Utilities
       mpc_cli
@@ -131,23 +133,6 @@
       tray = true;
       latitude = 51.509;
       longitude = -0.126;
-    };
-
-    # Configure Kanshi, a wayland daemon that automatically configures outputs
-    kanshi = {
-      enable = true;
-      profiles = {
-        odyssey = {
-          outputs = [{
-            criteria = "Samsung Electric Company LC49G95T H4ZN701223";
-            mode = "5120x1440@240Hz";
-            position = "0,0";
-            scale = null;
-            status = "enable";
-            transform = "normal";
-          }];
-        };
-      };
     };
   };
 }

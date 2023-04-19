@@ -3,7 +3,10 @@ inputs: {
   fcitx = import ./fcitx inputs;
   firefox = import ./firefox inputs;
   gtk = import ./gtk inputs;
+  hyprland = import ./hyprland inputs;
+  kanshi = import ./kanshi inputs;
   kitty = import ./kitty inputs;
+  mako = import ./mako inputs;
   mangohud = import ./mangohud inputs;
   neovim = import ./neovim inputs;
   obs-studio = import ./obs-studio inputs;
