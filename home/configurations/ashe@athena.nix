@@ -55,6 +55,7 @@
       blender
       bottles
       chromium
+      discord
       godot
       gthumb
       mpv
@@ -66,7 +67,6 @@
       ranger
       scanmem
       slack
-      webcord
 
       # Utilities
       mpc_cli
