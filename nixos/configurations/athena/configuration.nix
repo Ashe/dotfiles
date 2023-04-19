@@ -166,6 +166,9 @@ _: { config, lib, pkgs, ... }:
 
     # Enable dconf
     dconf.enable = true;
+
+    # Enable zsh
+    zsh.enable = true;
   };
 
   # Configure system-wide services

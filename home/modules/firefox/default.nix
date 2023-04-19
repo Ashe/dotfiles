@@ -16,19 +16,12 @@ _: { config, lib, pkgs, ... }:
       # Use nightly version of firefox
       package = with pkgs; firefox-wayland;
 
-      # Install default extensions
-      extensions = with config.nur.repos.rycee.firefox-addons; [
-        betterttv
-        bitwarden
-        https-everywhere
-        protondb-for-steam
-        ublock-origin
-      ];
-
       # Configure user profiles
       profiles.ashe = {
         id = 0;
         isDefault = true;
+
+        # Profile settings
         settings = {
 
           # Disable the Firefox new-tab-page
@@ -47,6 +40,14 @@ _: { config, lib, pkgs, ... }:
           # Disable popup when mic or webcam is active
           "privacy.webrtc.legacyGlobalIndicator" = false;
         };
+
+        # Profile extensions
+        extensions = with config.nur.repos.rycee.firefox-addons; [
+          betterttv
+          bitwarden
+          protondb-for-steam
+          ublock-origin
+        ];
       };
     };
 
