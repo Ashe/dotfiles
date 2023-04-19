@@ -197,16 +197,6 @@ _: { config, lib, pkgs, ... }:
     gnome.at-spi2-core.enable = true;
   };
 
-  # Enable XDG desktop integration
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal
-      pkgs.xdg-desktop-portal-wlr
-      pkgs.xdg-desktop-portal-gtk
-    ];
-  };
-
   # Open ports in the firewall.
   networking.firewall = {
     enable = true;
