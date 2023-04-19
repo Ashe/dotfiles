@@ -34,7 +34,7 @@ in
 
         # Configure monitor outputs
         output = {
-          DP-1 = {
+          DP-2 = {
             mode = "5120x1440";
             bg = "${theme.wallpaper} fill";
           };

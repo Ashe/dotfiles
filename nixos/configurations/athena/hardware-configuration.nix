@@ -19,8 +19,8 @@
 
     # Load Samsung Odyssey G9 EDID to support 240hz
     kernelParams = [
-      "drm.edid_firmware=DP-1:edid/samsung-g9.bin"
-      "video=DP-1:e"
+      "drm.edid_firmware=DP-2:edid/samsung-g9.bin"
+      "video=DP-2:e"
       "quiet"
     ];
   };
