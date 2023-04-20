@@ -18,7 +18,7 @@ inputs : { config, lib, pkgs, theme, ... }:
       enable = true;
       extraConfig = let f = (a : b :  builtins.replaceStrings (builtins.attrNames b) (builtins.attrValues b) a); in f (
         builtins.readFile ./hyprland.conf) (theme.colourscheme // {
-          WALLPAPER = theme.wallpaper;
+          "<wallpaper>" = theme.wallpaper;
         }
       );
     };

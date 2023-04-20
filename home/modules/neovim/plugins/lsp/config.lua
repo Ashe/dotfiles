@@ -95,3 +95,9 @@ end
 lspconfig.java_language_server.setup {
   cmd = {"java-language-server"}
 }
+
+-- C#
+lspconfig.omnisharp.setup {
+  cmd = { "dotnet", "<omnisharp>/lib/omnisharp-roslyn/OmniSharp.dll" },
+  root_dir = lspconfig.util.root_pattern(".sln",".git",".csproj")
+}

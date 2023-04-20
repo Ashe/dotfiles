@@ -11,7 +11,10 @@
       {
         plugin = nvim-lspconfig;
         type = "lua";
-        config = builtins.readFile ./config.lua;
+        config = builtins.replaceStrings
+          [ "<omnisharp>" ]
+          [ "${pkgs.omnisharp-roslyn}" ]
+          (builtins.readFile ./config.lua);
       }
     ];
   };
@@ -21,6 +24,9 @@
 
     # C / C++
     ccls
+
+    # C-sharp
+    omnisharp-roslyn
 
     # CMake
     cmake-language-server

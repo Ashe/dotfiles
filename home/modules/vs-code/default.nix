@@ -29,6 +29,7 @@ _: { config, lib, pkgs, theme, ... }:
         bbenoist.nix
         haskell.haskell
         ms-vscode.cpptools
+        ms-dotnettools.csharp
         yzhang.markdown-all-in-one
       ];
 

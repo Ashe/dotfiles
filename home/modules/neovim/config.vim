@@ -106,7 +106,7 @@ vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- Appearance
 ----------------------------------
 
-local ok, _ = pcall(vim.cmd, 'colorscheme <COLOURSCHEME>')
+local ok, _ = pcall(vim.cmd, 'colorscheme <colourscheme>')
 if not ok then
   vim.cmd 'colorscheme default'
 end
