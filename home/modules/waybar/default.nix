@@ -72,12 +72,18 @@ _: { config, lib, pkgs, theme, ... }:
         # Workspace module
         "wlr/workspaces" = {
           format = "{icon}";
+          format-icons = {
+            default = "";
+            urgent = "";
+            active = "";
+          };
           sort-by-number = true;
           on-click = "activate";
           on-scroll-up = "hyprctl dispatch workspace e-1";
           on-scroll-down = "hyprctl dispatch workspace e+1";
           on-click-backward = "hyprctl dispatch workspace e-1";
           on-click-forward = "hyprctl dispatch workspace e+1";
+          tooltip = "AA";
         };
 
         # Spotify module

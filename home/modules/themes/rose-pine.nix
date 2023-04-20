@@ -25,8 +25,10 @@
 
     # Background
     bg-primary = black;
+    bg-dark-primary = "#121017";
     bg-bright-primary = bright-black;
     bg-secondary = dark-grey;
+    bg-dark-secondary = "#122027";
     bg-bright-secondary = bright-dark-grey;
 
     # Foreground

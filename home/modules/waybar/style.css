@@ -3,17 +3,29 @@
   padding-right: 3px;
 }
 
+button {
+    border: none;
+    border-radius: 0;
+
+}
+
+button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+    background: inherit;
+}
+
 window#waybar {
   background: transparent;
-  color: #dcd7ba;
+  color: fg-primary;
 }
 
 tooltip {
-  background: #1f1f28;
+  background: bg-primary;
   border-radius: 15px;
   border-width: 2px;
   border-style: solid;
-  border-color: #7e9cd8;
+  border-color: bg-secondary;
   font-size: 13pt;
 }
 
@@ -23,39 +35,43 @@ tooltip label {
 
 #custom-home {
   color: fg-primary;
-  background: #16161d;
-  font-size: 30pt;
+  background: bg-dark-primary;
+  font-size: 40pt;
   padding-top: 20px;
+  padding-bottom: 10px;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  padding-bottom: 10px;
 }
 
 #workspaces {
-  background: #16161d;
-  font-size: 20pt;
+  background: bg-dark-primary;
+  font-size: 15pt;
+  padding-top: 10px;
   padding-bottom: 10px;
   border-radius: 0px;
+  border-width: 0px;
 }
 
 #workspaces button {
-  color: #dcd7ba;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  color: fg-secondary;
+  background: bg-dark-primary;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-width: 0px;
 }
 
 #workspaces button.active,
 #workspaces button.focused {
-  color: #7e9cd8;
+  color: accent-primary;
 }
 
 #workspaces button.urgent {
-  color: #e6c384;
+  color: warning;
 }
 
 #custom-spotify {
-  background: #16161d;
-  color: #d27e99;
+  background: bg-dark-primary;
+  color: green;
   padding-bottom: 20px;
   font-size: 20pt;
   border-radius: 0px;
@@ -73,7 +89,7 @@ tooltip label {
 #clock.date,
 #clock.time-icon,
 #clock.time {
-  background: #1f1f28;
+  background: bg-primary;
   border-radius: 0px;
 }
 
@@ -86,65 +102,69 @@ tooltip label {
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 20pt;
-  color: #7aa89f;
+  color: cyan;
 }
 
 #pulseaudio.icon {
   padding-top: 10px;
-  color: #c0a36e;
   font-size: 20pt;
+  color: yellow;
+}
+
+#pulseaudio.icon.muted {
+  color: red;
 }
 
 #pulseaudio.percentage {
   padding-top: 5px;
   padding-bottom: 10px;
   font-size: 13pt;
-  color: #dcd7ba;
+}
+
+#pulseaudio.percentage.muted {
+  color: red;
 }
 
 #battery.icon {
   padding-top: 10px;
   font-size: 20pt;
-  color: #98bb6c;
+  color: green;
 }
 
 #battery.percentage {
   padding-top: 5px;
   padding-bottom: 10px;
   font-size: 13pt;
-  color: #dcd7ba;
 }
 
 #custom-vpn {
   padding-top: 10px;
   padding-bottom: 10px;
-  color: #9cabca;
   font-size: 20pt;
+  color: bright-green;
 }
 
 #clock.calendar-icon {
   padding-top: 10px;
   font-size: 20pt;
-  color: #957fb8;
+  color: magenta;
 }
 
 #clock.day {
   padding-top: 5px;
   font-size: 13pt;
-  color: #dcd7ba;
 }
 
 #clock.date {
   padding-top: 1px;
   font-size: 13pt;
   padding-bottom: 10px;
-  color: #dcd7ba;
 }
 
 #clock.time-icon {
   padding-top: 10px;
   font-size: 20pt;
-  color: #7fb4ca;
+  color: accent-primary;
 }
 
 #clock.time {
@@ -153,5 +173,4 @@ tooltip label {
   font-size: 13pt;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  color: #dcd7ba;
 }
