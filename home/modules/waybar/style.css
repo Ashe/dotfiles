@@ -1,142 +1,157 @@
-/***********/
-/* General */
-/***********/
-
 * {
-  /* `otf-font-awesome` is required to be installed for icons */
-  color: fg-primary;
-  font-family: Ubuntu, sans-serif;
-  font-size: 18px;
-  min-height: 0;
-  background-color: rgba(0, 0, 0, 0);
-  border: none;
-  border-radius: 0;
+  padding-left: 3px;
+  padding-right: 3px;
 }
 
 window#waybar {
-  margin-left: 2px;
-  padding: 16px 8px;
-  background-color: bg-primary;
-  color: fg-primary;
-  transition-property: background-color;
-  transition-duration: .5s;
+  background: transparent;
+  color: #dcd7ba;
 }
 
-.widget {
-  color: fg-primary;
-  padding: 8px 0px;
-}
-
-#backlight,
-#battery,
-#clock,
-clock.day,
-clock.date,
-#cpu,
-#custom-media,
-#disk,
-#idle_inhibitor,
-#memory,
-#mode,
-#mpd,
-#network,
-#pulseaudio,
-#temperature,
-#tray,
-#workspaces,
-#custom-notifications,
-#custom-browser,
-#custom-discord,
-#custom-filebrowser,
-#custom-menu,
-#custom-spotify-shortcut,
-#custom-terminal {
-  padding: 15px 0px;
-}
-
-#custom-spotify-monitor,
-#custom-spotify-metadata,
-#custom-spotify-prev,
-#custom-spotify-play-pause,
-#custom-spotify-next {
-  padding: 5px 0px;
-}
-
-#custom-spotify-metadata {
-  padding-top: 15px;
-}
-
-#custom-spotify-next {
-  padding-bottom: 15px;
-}
-
-tooltip,
-#tray menu {
-  background: bg-secondary;
-  border: 1px solid bg-bright-secondary;
+tooltip {
+  background: #1f1f28;
+  border-radius: 15px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #7e9cd8;
+  font-size: 13pt;
 }
 
 tooltip label {
+  padding: 7px;
+}
+
+#custom-home {
   color: fg-primary;
+  background: #16161d;
+  font-size: 30pt;
+  padding-top: 20px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding-bottom: 10px;
 }
 
-/***********/
-/* Colours */
-/***********/
-
-#clock,
-clock.day,
-clock.date {
-  color: fg-primary;
-  padding: 5px 0px;
+#workspaces {
+  background: #16161d;
+  font-size: 20pt;
+  padding-bottom: 10px;
+  border-radius: 0px;
 }
 
-#pulseaudio {
-  color: yellow;
+#workspaces button {
+  color: #dcd7ba;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
-#pulseaudio.muted {
-  color: red;
+
+#workspaces button.active,
+#workspaces button.focused {
+  color: #7e9cd8;
+}
+
+#workspaces button.urgent {
+  color: #e6c384;
+}
+
+#custom-spotify {
+  background: #16161d;
+  color: #d27e99;
+  padding-bottom: 20px;
+  font-size: 20pt;
+  border-radius: 0px;
+}
+
+#tray,
+#network,
+#pulseaudio.icon,
+#pulseaudio.percentage,
+#battery.icon,
+#battery.percentage,
+#custom-vpn,
+#clock.calendar-icon,
+#clock.day,
+#clock.date,
+#clock.time-icon,
+#clock.time {
+  background: #1f1f28;
+  border-radius: 0px;
+}
+
+#tray {
+  padding-top: 20px;
+  padding-bottom: 10px;
 }
 
 #network {
-  color: blue;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 20pt;
+  color: #7aa89f;
 }
 
-#cpu {
-  color: magenta;
+#pulseaudio.icon {
+  padding-top: 10px;
+  color: #c0a36e;
+  font-size: 20pt;
 }
 
-#custom-menu {
-  color: cyan;
+#pulseaudio.percentage {
+  padding-top: 5px;
+  padding-bottom: 10px;
+  font-size: 13pt;
+  color: #dcd7ba;
 }
 
-#custom-terminal {
-  color: magenta;
+#battery.icon {
+  padding-top: 10px;
+  font-size: 20pt;
+  color: #98bb6c;
 }
 
-#custom-filebrowser {
-  color: yellow;
+#battery.percentage {
+  padding-top: 5px;
+  padding-bottom: 10px;
+  font-size: 13pt;
+  color: #dcd7ba;
 }
 
-#custom-browser {
-  color: red;
+#custom-vpn {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #9cabca;
+  font-size: 20pt;
 }
 
-#custom-discord {
-  color: blue;
+#clock.calendar-icon {
+  padding-top: 10px;
+  font-size: 20pt;
+  color: #957fb8;
 }
 
-#custom-notifications {
-  color: white;
-  padding: 5px 0px 15px;
+#clock.day {
+  padding-top: 5px;
+  font-size: 13pt;
+  color: #dcd7ba;
 }
 
-#mpd,
-#custom-spotify-shortcut,
-#custom-spotify-monitor,
-#custom-spotify-metadata,
-#custom-spotify-prev,
-#custom-spotify-play-pause,
-#custom-spotify-next {
-  color: green;
+#clock.date {
+  padding-top: 1px;
+  font-size: 13pt;
+  padding-bottom: 10px;
+  color: #dcd7ba;
+}
+
+#clock.time-icon {
+  padding-top: 10px;
+  font-size: 20pt;
+  color: #7fb4ca;
+}
+
+#clock.time {
+  padding-top: 5px;
+  padding-bottom: 20px;
+  font-size: 13pt;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  color: #dcd7ba;
 }
