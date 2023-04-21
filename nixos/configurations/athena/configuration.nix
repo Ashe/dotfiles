@@ -197,6 +197,9 @@ _: { config, lib, pkgs, ... }:
     gnome.at-spi2-core.enable = true;
   };
 
+  # Allow swaylock to work correctly
+  security.pam.services.swaylock = {};
+
   # Open ports in the firewall.
   networking.firewall = {
     enable = true;

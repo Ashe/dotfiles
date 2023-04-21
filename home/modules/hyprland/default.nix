@@ -23,6 +23,9 @@ inputs : { config, lib, pkgs, theme, ... }:
       );
     };
 
+    # Allow swaylock to lock computer
+    swaylock.enable = true;
+
     # Extra wayland-specific home configuration
     home = {
 
