@@ -12,6 +12,7 @@ inputs : {
   obs-studio = import ./obs-studio inputs;
   starship = import ./starship inputs;
   sway = import ./sway inputs;
+  swayidle = import ./swayidle inputs;
   swaylock = import ./swaylock inputs;
   sway-notification-center = import ./sway-notification-center inputs;
   themes = import ./themes inputs;
