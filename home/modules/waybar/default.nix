@@ -110,7 +110,7 @@ _: { config, lib, pkgs, theme, ... }:
         network = {
           format-wifi = "";
           format-ethernet = "󰈀";
-          format-linked = "{ifname} (No IP) 󰈁";
+          format-linked = "󰈁";
           format-disconnected = "󰈂";
           tooltip-format-ethernet = "󰈀 {ifname}";
           tooltip-format-wifi = " {essid} ({signalStrength})";
