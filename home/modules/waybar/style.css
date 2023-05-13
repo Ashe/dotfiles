@@ -1,18 +1,18 @@
 * {
   padding-left: 3px;
   padding-right: 3px;
+  margin: 0;
 }
 
 button {
-    border: none;
-    border-radius: 0;
-
+  border: none;
+  border-radius: 0;
 }
 
 button:hover {
-    box-shadow: inherit;
-    text-shadow: inherit;
-    background: inherit;
+  box-shadow: inherit;
+  text-shadow: inherit;
+  background: inherit;
 }
 
 window#waybar {
@@ -36,7 +36,8 @@ tooltip label {
 #custom-home {
   color: fg-primary;
   background: bg-dark-primary;
-  font-size: 40pt;
+  font-size: 15pt;
+  padding-left: 0px;
   padding-top: 20px;
   padding-bottom: 10px;
   border-top-left-radius: 15px;
@@ -101,13 +102,15 @@ tooltip label {
 #network {
   padding-top: 10px;
   padding-bottom: 10px;
-  font-size: 20pt;
+  font-size: 15pt;
+  padding-left: 0px;
   color: cyan;
 }
 
 #pulseaudio.icon {
   padding-top: 10px;
-  font-size: 20pt;
+  font-size: 15pt;
+  padding-left: 0px;
   color: yellow;
 }
 
@@ -127,7 +130,8 @@ tooltip label {
 
 #battery.icon {
   padding-top: 10px;
-  font-size: 20pt;
+  font-size: 15pt;
+  padding-left: 0px;
   color: green;
 }
 
@@ -140,13 +144,15 @@ tooltip label {
 #custom-vpn {
   padding-top: 10px;
   padding-bottom: 10px;
-  font-size: 20pt;
+  font-size: 15pt;
+  padding-left: 0px;
   color: bright-green;
 }
 
 #clock.calendar-icon {
   padding-top: 10px;
-  font-size: 20pt;
+  font-size: 15pt;
+  padding-left: 0px;
   color: magenta;
 }
 
@@ -163,7 +169,8 @@ tooltip label {
 
 #clock.time-icon {
   padding-top: 10px;
-  font-size: 20pt;
+  font-size: 15pt;
+  padding-left: 0px;
   color: accent-primary;
 }
 
