@@ -54,7 +54,6 @@
       audacity
       blender
       bottles
-      chromium
       discord
       godot
       gthumb
