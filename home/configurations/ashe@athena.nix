@@ -50,9 +50,7 @@
       self.packages.x86_64-linux.scripts
 
       # Programs
-      anki-bin
       audacity
-      blender
       bottles
       discord
       godot
