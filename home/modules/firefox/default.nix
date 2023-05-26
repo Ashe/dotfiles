@@ -43,7 +43,6 @@ _: { config, lib, pkgs, ... }:
 
         # Profile extensions
         extensions = with config.nur.repos.rycee.firefox-addons; [
-          betterttv
           bitwarden
           protondb-for-steam
           ublock-origin
