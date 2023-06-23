@@ -102,6 +102,17 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc="Half-page down" })
 -- Set up text replacement macro
 vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc="Substitute" })
 
+-- Improve navigation keybindings, especially in terminal mode
+vim.keymap.set({"n", "t"}, "<C-w>h", "<C-\\><C-n><C-w>h", { desc="Move focus left" })
+vim.keymap.set({"n", "t"}, "<C-h>", "<C-\\><C-n><C-w>h", { desc="Move focus left" })
+vim.keymap.set({"n", "t"}, "<C-w>j", "<C-\\><C-n><C-w>j", { desc="Move focus down" })
+vim.keymap.set({"n", "t"}, "<C-j>", "<C-\\><C-n><C-w>j", { desc="Move focus down" })
+vim.keymap.set({"n", "t"}, "<C-w>k", "<C-\\><C-n><C-w>k", { desc="Move focus up" })
+vim.keymap.set({"n", "t"}, "<C-k>", "<C-\\><C-n><C-w>k", { desc="Move focus up" })
+vim.keymap.set({"n", "t"}, "<C-w>l", "<C-\\><C-n><C-w>l", { desc="Move focus right" })
+vim.keymap.set({"n", "t"}, "<C-l>", "<C-\\><C-n><C-w>l", { desc="Move focus right" })
+vim.keymap.set("t", "<C-w>w", "<C-\\><C-n>", { desc="Unfocus terminal" })
+
 ----------------------------------
 -- Appearance
 ----------------------------------
