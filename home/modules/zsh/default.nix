@@ -15,7 +15,7 @@ _: { config, lib, pkgs, ... }:
 
       # Enable zsh features
       enableCompletion = true;
-      enableSyntaxHighlighting = true;
+      syntaxHighlighting.enable = true;
       enableVteIntegration = true;
 
       # Install plugins
