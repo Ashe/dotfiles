@@ -118,11 +118,6 @@
   # Configure services
   services = {
 
-    # Enable dropbox
-    dropbox = {
-      enable = true;
-    };
-
     # Enable gammastep
     gammastep = {
       enable = true;

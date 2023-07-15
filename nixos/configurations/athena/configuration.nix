@@ -11,6 +11,7 @@ _: { config, lib, pkgs, ... }:
 
   nix.flakes.enable = true;
   hyprland.enable = true;
+  dropbox.enable = true;
   jellyfin.enable = true;
   mullvad.enable = true;
   steam.enable = true;
@@ -203,8 +204,6 @@ _: { config, lib, pkgs, ... }:
   # Open ports in the firewall.
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 17500 ];
-    allowedUDPPorts = [ 17500 ];
     allowedUDPPortRanges = [
       { from = 32768; to = 60999; }
     ];
