@@ -130,7 +130,7 @@ _: { config, lib, pkgs, ... }:
   fonts = {
 
     # Download font packages
-    fonts = with pkgs; [
+    packages = with pkgs; [
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
       dina-font
       font-awesome
@@ -144,7 +144,7 @@ _: { config, lib, pkgs, ... }:
     ];
 
     # Enable default fonts
-    enableDefaultFonts = true;
+    enableDefaultPackages = true;
 
     # Configure default fonts
     fontconfig = {
