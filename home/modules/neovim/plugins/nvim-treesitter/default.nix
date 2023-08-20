@@ -7,9 +7,9 @@
     # Install plugins related to treesitter
     plugins = with pkgs.vimPlugins; [
 
-      # Install nvim-treesitter
+      # Install nvim-treesitter with all grammars
       {
-        plugin = nvim-treesitter;
+        plugin = nvim-treesitter.withAllGrammars;
         type = "lua";
         config = builtins.readFile ./config.lua;
       }

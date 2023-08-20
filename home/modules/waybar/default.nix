@@ -30,7 +30,7 @@ _: { config, lib, pkgs, theme, ... }:
       enable = true;
 
       # Enable experimental features
-      package = pkgs.waybar.overrideAttrs (oa: { mesonFlags = oa.mesonFlags ++ [ "-Dexperimental=true" ]; });
+      package = pkgs.waybar-hyprland;
 
       # Configure Waybar
       settings = [{

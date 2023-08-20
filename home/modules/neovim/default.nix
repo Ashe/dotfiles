@@ -15,9 +15,9 @@ _: { config, lib, pkgs, theme, ... }:
       withPython3 = true;
 
       # General configuration for neovim
-      extraConfig = builtins.replaceStrings
+      extraLuaConfig = builtins.replaceStrings
           ["<colourscheme>"] [theme.data.neovim.name]
-          (builtins.readFile ./config.vim);
+          (builtins.readFile ./config.lua);
 
       # Install colourscheme
       plugins = [

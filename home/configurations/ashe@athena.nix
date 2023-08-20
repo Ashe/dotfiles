@@ -53,7 +53,6 @@
       audacity
       bottles
       discord
-      godot
       gthumb
       mpv
       neofetch
