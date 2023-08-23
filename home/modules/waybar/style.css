@@ -78,6 +78,15 @@ tooltip label {
   border-radius: 0px;
 }
 
+#taskbar {
+  background: bg-dark-primary;
+  font-size: 15pt;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 0px;
+  border-width: 0px;
+}
+
 #tray,
 #network,
 #pulseaudio.icon,

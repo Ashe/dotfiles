@@ -45,6 +45,7 @@ _: { config, lib, pkgs, theme, ... }:
         modules-center = [
           "custom/home"
           "wlr/workspaces"
+          "wlr/taskbar"
           "custom/spotify"
           "tray"
           "network"
@@ -84,6 +85,13 @@ _: { config, lib, pkgs, theme, ... }:
           on-click-backward = "hyprctl dispatch workspace e-1";
           on-click-forward = "hyprctl dispatch workspace e+1";
           tooltip = "AA";
+        };
+
+        # Taskbar module
+        "wlr/taskbar" = {
+          on-click = "minimize-raise";
+          on-click-middle = "close";
+          tooltip-format = "{title}";
         };
 
         # Spotify module
