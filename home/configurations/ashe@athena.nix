@@ -104,9 +104,6 @@
     # Enable lazygit client
     lazygit.enable = true;
 
-    # Enable nix-index file database for nixpkgs
-    nix-index.enable = true;
-
     # Fuzzy file finding
     fzf.enable = true;
 

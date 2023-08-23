@@ -18,6 +18,13 @@ _: { config, lib, pkgs, ... }:
       syntaxHighlighting.enable = true;
       enableVteIntegration = true;
 
+      # Configure shell aliases for zsh
+      shellAliases = {
+
+        # Run things with XWayland easily
+        run-with-xwayland = "env -u WAYLAND_DISPLAY";
+      };
+
       # Install plugins
       plugins = [
 
