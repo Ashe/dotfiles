@@ -29,9 +29,6 @@ _: { config, lib, pkgs, theme, ... }:
       # Install waybar
       enable = true;
 
-      # Enable experimental features
-      package = pkgs.waybar-hyprland;
-
       # Configure Waybar
       settings = [{
 

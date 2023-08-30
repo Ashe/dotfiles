@@ -33,7 +33,6 @@ local on_attach = function(client, bufnr)
   nmap('gd', vim.lsp.buf.definition, 'Goto Definition')
   nmap('K', vim.lsp.buf.hover, 'Hover documentation')
   nmap('gi', vim.lsp.buf.implementation, 'Goto Implementation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   which_key.register({ c = { name = "Code.." } }, { prefix = "<leader>" })
   nmap('<leader>cs', vim.lsp.buf.signature_help, 'Signature Documentation')
