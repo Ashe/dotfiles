@@ -88,10 +88,8 @@ local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
 -- Move to previous/next
-map('n', '<S-Tab>', '<Cmd>BufferPrevious<CR>', opts)
 map('n', '<A-h>', '<Cmd>BufferPrevious<CR>', opts)
 map('n', '<A-p>', '<Cmd>BufferPrevious<CR>', opts)
-map('n', '<Tab>', '<Cmd>BufferNext<CR>', opts)
 map('n', '<A-l>', '<Cmd>BufferNext<CR>', opts)
 map('n', '<A-n>', '<Cmd>BufferNext<CR>', opts)
 -- Re-order to previous/next

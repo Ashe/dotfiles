@@ -71,10 +71,10 @@ vim.opt.fillchars = {
 vim.g.mapleader = " "
 
 -- Reload neovim config
-vim.keymap.set("n", "<leader><S-BS>", ":so ~/.config/nvim/init.lua<CR>", { desc="Reload config" })
+vim.keymap.set("n", "<leader><S-BS>", "<Cmd>so ~/.config/nvim/init.lua<CR>", { desc="Reload config" })
 
 -- Save file with leader-w
-vim.keymap.set("n", "<leader>w", ":w<CR>", { desc="Save file" })
+vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc="Save file" })
 
 -- Copy to clipboard
 vim.opt.clipboard:append { "unnamed", "unnamedplus" }
@@ -90,8 +90,8 @@ vim.keymap.set({"n", "v"}, "<leader>d", "\"_d", { desc="Void delete" })
 vim.keymap.set("n", "<leader>D", "\"_dd", { desc="Void line to void" })
 
 -- Move block up and down
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc="Move block up" })
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc="Move block down" })
+vim.keymap.set("v", "K", "<Cmd>m '<-2<CR>gv=gv", { desc="Move block up" })
+vim.keymap.set("v", "J", "<Cmd>m '>+1<CR>gv=gv", { desc="Move block down" })
 
 -- Keep cursor in middle of screen when half-page-jumping
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc="Half-page up" })
@@ -100,7 +100,7 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc="Half-page down" })
 -- Set up text replacement macro
 vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc="Substitute" })
 
--- Improve navigation keybindings, especially in terminal mode
+-- Improve window navigation keybindings, especially in terminal mode
 vim.keymap.set({"n", "t"}, "<C-w>h", "<C-\\><C-n><C-w>h", { desc="Move focus left" })
 vim.keymap.set({"n", "t"}, "<C-h>", "<C-\\><C-n><C-w>h", { desc="Move focus left" })
 vim.keymap.set({"n", "t"}, "<C-w>j", "<C-\\><C-n><C-w>j", { desc="Move focus down" })
@@ -110,6 +110,17 @@ vim.keymap.set({"n", "t"}, "<C-k>", "<C-\\><C-n><C-w>k", { desc="Move focus up" 
 vim.keymap.set({"n", "t"}, "<C-w>l", "<C-\\><C-n><C-w>l", { desc="Move focus right" })
 vim.keymap.set({"n", "t"}, "<C-l>", "<C-\\><C-n><C-w>l", { desc="Move focus right" })
 vim.keymap.set("t", "<C-w>w", "<C-\\><C-n>", { desc="Unfocus terminal" })
+
+-- Tab navigation
+vim.keymap.set("n", "<Tab>", "<Cmd>tabnext<CR>", { desc="Next tab" })
+vim.keymap.set("n", "<S-Tab>", "<Cmd>tabprevious<CR>", { desc="Next tab" })
+vim.keymap.set("n", "<C-Backspace>", "<Cmd>tabclose<CR>", { desc="Close tab" })
+vim.keymap.set("n", "<leader><Tab>n", "<Cmd>tab split<CR>", { desc="New tab" })
+vim.keymap.set("n", "<leader><Tab><Backspace>", "<Cmd>tabclose<CR>", { desc="Close tab" })
+vim.keymap.set("n", "<leader><Tab>o", "<Cmd>tabonly<CR>", { desc="Close other tabs" })
+vim.keymap.set({"n", "t"}, "<C-Tab>n", "<Cmd>tab split<CR>", { desc="New tab" })
+vim.keymap.set({"n", "t"}, "<C-Tab><Backspace>", "<Cmd>tabclose<CR>", { desc="Close tab" })
+vim.keymap.set({"n", "t"}, "<C-Tab>o", "<Cmd>tabonly<CR>", { desc="Close other tabs" })
 
 ----------------------------------
 -- Appearance
