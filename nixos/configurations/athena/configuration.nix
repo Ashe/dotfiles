@@ -53,16 +53,10 @@ _: { config, lib, pkgs, ... }:
 
     # Configure opengl
     opengl = {
+
+      # Enable vulkan
       driSupport = true;
       driSupport32Bit = true;
-      extraPackages = with pkgs; [
-        amdvlk
-        rocm-opencl-icd
-        rocm-opencl-runtime
-      ];
-      extraPackages32 = with pkgs; [
-        driversi686Linux.amdvlk
-      ];
     };
 
     # Enable bluetooth
@@ -104,6 +98,7 @@ _: { config, lib, pkgs, ... }:
       ranger
 
       # System tools
+      corectrl
       dex
       dosfstools
       gparted
@@ -115,6 +110,7 @@ _: { config, lib, pkgs, ... }:
       wlr-randr
 
       # Miscellaneous
+      amdgpu_top
       gnome.adwaita-icon-theme
       (inxi.override { withRecommends = true; })
       jq
@@ -122,6 +118,7 @@ _: { config, lib, pkgs, ... }:
       mtools
       pciutils
       pulseaudio-ctl
+      vulkan-tools
       xdg-utils
     ];
   };

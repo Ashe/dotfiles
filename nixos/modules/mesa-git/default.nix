@@ -30,12 +30,6 @@ inputs : { config, lib, pkgs, ... }:
       driSupport32Bit = true;
       package = (mesa.overrideAttrs attrs).drivers;
       package32 = (pkgsi686Linux.mesa.overrideAttrs attrs).drivers;
-      extraPackages = with pkgs; [
-        amdvlk
-      ];
-      extraPackages32 = with pkgs; [
-        driversi686Linux.amdvlk
-      ];
     };
 
     # Force RADV drivers
