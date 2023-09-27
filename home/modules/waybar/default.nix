@@ -41,7 +41,7 @@ _: { config, lib, pkgs, theme, ... }:
         # Center modules
         modules-center = [
           "custom/home"
-          "wlr/workspaces"
+          "hyprland/workspaces"
           "wlr/taskbar"
           "custom/spotify"
           "tray"
@@ -68,7 +68,7 @@ _: { config, lib, pkgs, theme, ... }:
         };
 
         # Workspace module
-        "wlr/workspaces" = {
+        "hyprland/workspaces" = {
           format = "{icon}";
           format-icons = {
             default = "";
