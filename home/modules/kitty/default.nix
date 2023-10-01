@@ -51,6 +51,13 @@ _: { config, lib, pkgs, theme, ... }:
 
         # Layouts
         "ctrl+shift+e" = "next_layout";
+
+        # Zoom
+        "ctrl+shift+equal" = "change_font_size all +2.0";
+        "ctrl+shift+plus" = "change_font_size all +2.0";
+        "ctrl+shift+kp_add" = "change_font_size all +2.0";
+        "ctrl+shift+minus" = "change_font_size all -2.0";
+        "ctrl+shift+kp_subtract" = "change_font_size all -2.0";
       };
     };
 
