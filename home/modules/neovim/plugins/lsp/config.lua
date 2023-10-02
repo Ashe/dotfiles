@@ -6,48 +6,50 @@
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { noremap=true, silent=true, desc="Show errors" })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { noremap=true, silent=true, desc="Go to previous diagnositic" })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { noremap=true, silent=true, desc="Go to next diagnostic" })
+vim.keymap.set('n', '<leader>q', require('telescope.builtin').loclist, { noremap=true, silent=true, desc = 'Open error list' })
 
--- Use an on_attach function to only map the following keys
+-- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
 
-  -- Function that lets us more easily define mappings specific for LSP items
-  -- It sets the mode, buffer and description for us each time
-  local nmap = function(keys, func, desc)
-    vim.keymap.set('n', keys, func, {
-      noremap=true, silent=true, buffer = bufnr, desc = desc
-    })
-  end
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
 
-  -- General mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  nmap('gD', vim.lsp.buf.declaration, 'Goto Declaration')
-  nmap('gd', vim.lsp.buf.definition, 'Goto Definition')
-  nmap('K', vim.lsp.buf.hover, 'Hover documentation')
-  nmap('gi', vim.lsp.buf.implementation, 'Goto Implementation')
+    -- General shortcuts
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = ev.buf, desc = "Goto declaration" })
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = ev.buf, desc = "Goto definition" })
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = ev.buf, desc = "Hover documentation" })
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = ev.buf, desc = "Goto implementation" })
+    vim.keymap.set('n', '<leader>D', require('telescope.builtin').lsp_type_definitions, { buffer = ev.buf, desc = 'Type definitions' })
 
-  which_key.register({ c = { name = "Code.." } }, { prefix = "<leader>" })
-  nmap('<leader>cs', vim.lsp.buf.signature_help, 'Signature Documentation')
-  nmap('<leader>cr', vim.lsp.buf.rename, 'Rename symbol')
-  nmap('<leader>cd', vim.lsp.buf.type_definition, 'Type Definition')
-  nmap('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
-  nmap('<leader>cf', vim.lsp.buf.formatting, 'Format Code')
+    -- Code shortcuts
+    require('which-key').register({ c = { name = "Code.." } }, { prefix = "<leader>" })
+    vim.keymap.set('n', '<leader>cs', vim.lsp.buf.signature_help, { buffer = ev.buf, desc = 'Signature documentation' })
+    vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, { buffer = ev.buf, desc = 'Rename symbol' })
+    vim.keymap.set('n', '<leader>cd', require('telescope.builtin').lsp_type_definitions, { buffer = ev.buf, desc = 'Type definitions' })
+    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = ev.buf, desc = 'Code action' })
+    vim.keymap.set('n', '<leader>cf', function() vim.lsp.buf.format { async = true } end, { buffer = ev.buf, desc = 'Format code' })
 
-  -- Telescope mappings
-  nmap('gr', require('telescope.builtin').lsp_references, 'References')
-  nmap('<leader>fR', require('telescope.builtin').lsp_references, 'References')
-  nmap('gs', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
-  nmap('<leader>fs', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
-end
+    -- Workspaces
+    require('which-key').register({ w = { name = "Workspaces.." } }, { prefix = "<leader>c" })
+    vim.keymap.set('n', '<space>cwa', vim.lsp.buf.add_workspace_folder, { buffer = ev.buf, desc = "Add workspace folder" })
+    vim.keymap.set('n', '<space>cwr', vim.lsp.buf.remove_workspace_folder, { buffer = ev.buf, desc = "Remove workspace folder" })
+    vim.keymap.set('n', '<space>cwl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, { buffer = ev.buf, desc = "List workspace folders" })
 
+    -- Telescope mappings
+    vim.keymap.set('n', '<leader>fr', require('telescope.builtin').lsp_references, { buffer = ev.buf, desc = 'References' })
+    vim.keymap.set('n', '<leader>fs', require('telescope.builtin').lsp_document_symbols, { buffer = ev.buf, desc = 'Document symbols' })
+    vim.keymap.set('n', '<leader>ft', require('telescope.builtin').lsp_type_definitions, { buffer = ev.buf, desc = 'Type definitions' })
+  end,
+})
 
 -- Servers
 

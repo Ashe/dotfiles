@@ -2,8 +2,7 @@
 -- which-key
 ----------------------------------
 
-local which_key = require('which-key')
-which_key.setup({
+require('which-key').setup({
 
   plugins = {
 
@@ -52,7 +51,8 @@ which_key.setup({
 
   -- Add operators that will trigger motion and text object completion
   -- to enable all native operators, set the preset / operators plugin above
-  operators = { gc = "Comments" },
+  operators = {
+  },
   key_labels = {
     -- override the label used to display some keys. It doesn't effect WK in any other way.
     -- For example:
@@ -141,7 +141,7 @@ which_key.setup({
   -- Disable the WhichKey popup for certain buf types and file types.
 
 
-  -- Disabled by deafult for Telescope
+  -- Disabled by default for Telescope
   disable = {
     buftypes = {},
     filetypes = { "TelescopePrompt" },

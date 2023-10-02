@@ -112,6 +112,7 @@ vim.keymap.set({"n", "t"}, "<C-l>", "<C-\\><C-n><C-w>l", { desc="Move focus righ
 vim.keymap.set("t", "<C-w>w", "<C-\\><C-n>", { desc="Unfocus terminal" })
 
 -- Tab navigation
+require('which-key').register({ ["<Tab>"] = { name = "Tabs.." } }, { prefix = "<leader>" })
 vim.keymap.set("n", "<Tab>", "<Cmd>tabnext<CR>", { desc="Next tab" })
 vim.keymap.set("n", "<S-Tab>", "<Cmd>tabprevious<CR>", { desc="Next tab" })
 vim.keymap.set("n", "<C-Backspace>", "<Cmd>tabclose<CR>", { desc="Close tab" })
