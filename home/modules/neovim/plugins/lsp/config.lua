@@ -28,9 +28,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = ev.buf, desc = "Goto definition" })
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = ev.buf, desc = "Hover documentation" })
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = ev.buf, desc = "Goto implementation" })
+    vim.keymap.set('n', '<C-n>', require('telescope.builtin').lsp_dynamic_workspace_symbols, { buffer = ev.buf, desc = 'All symbols' })
     vim.keymap.set('n', '<leader>D', require('telescope.builtin').lsp_type_definitions, { buffer = ev.buf, desc = 'Type definitions' })
 
-    -- Code shortcuts
+    -- 'Code' mappings
     require('which-key').register({ c = { name = "Code.." } }, { prefix = "<leader>" })
     vim.keymap.set('n', '<leader>cs', vim.lsp.buf.signature_help, { buffer = ev.buf, desc = 'Signature documentation' })
     vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, { buffer = ev.buf, desc = 'Rename symbol' })
@@ -38,15 +39,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = ev.buf, desc = 'Code action' })
     vim.keymap.set('n', '<leader>cf', function() vim.lsp.buf.format { async = true } end, { buffer = ev.buf, desc = 'Format code' })
 
-    -- Workspaces
+    -- 'Code-workspace' mappings
     require('which-key').register({ w = { name = "Workspaces.." } }, { prefix = "<leader>c" })
-    vim.keymap.set('n', '<space>cwa', vim.lsp.buf.add_workspace_folder, { buffer = ev.buf, desc = "Add workspace folder" })
-    vim.keymap.set('n', '<space>cwr', vim.lsp.buf.remove_workspace_folder, { buffer = ev.buf, desc = "Remove workspace folder" })
-    vim.keymap.set('n', '<space>cwl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, { buffer = ev.buf, desc = "List workspace folders" })
+    vim.keymap.set('n', '<leader>cwa', vim.lsp.buf.add_workspace_folder, { buffer = ev.buf, desc = "Add workspace folder" })
+    vim.keymap.set('n', '<leader>cwr', vim.lsp.buf.remove_workspace_folder, { buffer = ev.buf, desc = "Remove workspace folder" })
+    vim.keymap.set('n', '<leader>cwl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, { buffer = ev.buf, desc = "List workspace folders" })
 
-    -- Telescope mappings
+    -- 'Find' mappings
     vim.keymap.set('n', '<leader>fr', require('telescope.builtin').lsp_references, { buffer = ev.buf, desc = 'References' })
     vim.keymap.set('n', '<leader>fs', require('telescope.builtin').lsp_document_symbols, { buffer = ev.buf, desc = 'Document symbols' })
+    vim.keymap.set('n', '<leader>fS', require('telescope.builtin').lsp_dynamic_workspace_symbols, { buffer = ev.buf, desc = 'All symbols' })
     vim.keymap.set('n', '<leader>ft', require('telescope.builtin').lsp_type_definitions, { buffer = ev.buf, desc = 'Type definitions' })
   end,
 })

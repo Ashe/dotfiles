@@ -89,10 +89,6 @@ vim.keymap.set({"n", "v"}, "<leader>p", "\"+p", { desc="Paste after" })
 vim.keymap.set({"n", "v"}, "<leader>d", "\"_d", { desc="Void delete" })
 vim.keymap.set("n", "<leader>D", "\"_dd", { desc="Void line to void" })
 
--- Move block up and down
-vim.keymap.set("v", "K", "<Cmd>m '<-2<CR>gv=gv", { desc="Move block up" })
-vim.keymap.set("v", "J", "<Cmd>m '>+1<CR>gv=gv", { desc="Move block down" })
-
 -- Keep cursor in middle of screen when half-page-jumping
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc="Half-page up" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc="Half-page down" })
