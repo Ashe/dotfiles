@@ -16,21 +16,19 @@ _: { config, lib, pkgs, ... }:
       ];
     };
 
-    ## Manage fcitx configuration */
-    #xdg.configFile.fcitx = {
-      #source = ./config;
-      #target = "fcitx/config";
-    #};
+    # Manage fcitx configuration */
+    xdg.configFile.fcitx = {
+      source = ./config;
+      target = "fcitx5/config";
+    };
 #
-    ## Install fcitx configuration tool */
-    #home.packages = [
-      #pkgs.fcitx-configtool
-    #];
-#
-    ## Tell programs to use fcitx as input method */
-    #home.sessionVariables = {
-      #GTK_IM_MODULE = "fcitx";
-      #QT_IM_MODULE = "fcitx";
-    #};
+    # Tell programs to use fcitx as input method */
+    home.sessionVariables = {
+      GTK_IM_MODULE = "fcitx";
+      QT_IM_MODULE = "fcitx";
+      XMODIFIERS ="@im=fcitx";
+      SDL_IM_MODULE = "fcitx";
+      GLFW_IM_MODULE = "ibus";
+    };
   };
 }
