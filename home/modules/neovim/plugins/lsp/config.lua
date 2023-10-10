@@ -9,7 +9,7 @@
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { noremap=true, silent=true, desc="Show errors" })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { noremap=true, silent=true, desc="Go to previous diagnositic" })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { noremap=true, silent=true, desc="Go to next diagnostic" })
-vim.keymap.set('n', '<leader>q', require('telescope.builtin').loclist, { noremap=true, silent=true, desc = 'Open error list' })
+vim.keymap.set('n', '<leader>q', function () vim.diagnostic.setloclist({ open = false }); require('telescope.builtin').loclist() end, { noremap=true, silent=true, desc = 'Open error list' })
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -72,6 +72,9 @@ local servers = {
 
   -- GDScript
   'gdscript',
+
+  -- GLSL
+  'glslls',
 
   -- Haskell
   'hls',

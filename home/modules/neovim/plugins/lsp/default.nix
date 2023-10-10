@@ -31,6 +31,9 @@
     # CMake
     cmake-language-server
 
+    # GLSL
+    glslls
+
     # Java
     java-language-server
 

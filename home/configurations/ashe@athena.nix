@@ -58,6 +58,7 @@
       neofetch
       neovide
       nicotine-plus
+      libresprite
       logseq
       qbittorrent
       ranger
