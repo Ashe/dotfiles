@@ -37,9 +37,6 @@ inputs : { config, lib, pkgs, ... }:
 
         # Colour picker
         hyprpicker
-
-        # Wallpaper setter
-        swaybg
       ];
 
       # Specify desktop environment environment variables

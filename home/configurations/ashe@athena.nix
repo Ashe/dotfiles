@@ -5,6 +5,7 @@
   # Custom modules #
   ##################
 
+  themes.enable = true;
   btop.enable = true;
   fcitx.enable = true;
   firefox.enable = true;
