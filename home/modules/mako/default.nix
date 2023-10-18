@@ -1,4 +1,4 @@
-_: { config, lib, theme, ... }:
+_: { config, lib, ... }:
 
 {
   # Add options for mako notification system
@@ -42,12 +42,6 @@ _: { config, lib, theme, ... }:
 
       # Font
       font = "sans-serif 12";
-
-      # Colours
-      backgroundColor = theme.colourscheme.bg-primary;
-      borderColor = theme.colourscheme.accent-primary;
-      progressColor = theme.colourscheme.fg-primary;
-      textColor = theme.colourscheme.fg-primary;
     };
   };
 }

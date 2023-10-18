@@ -1,4 +1,4 @@
-_: { config, lib, pkgs, theme, ... }:
+_: { config, lib, pkgs, ... }:
 
 {
   # Add options for swayidle, system for handling time-outs

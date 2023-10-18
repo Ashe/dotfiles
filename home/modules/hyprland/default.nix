@@ -1,4 +1,4 @@
-inputs : { config, lib, pkgs, theme, ... }:
+inputs : { config, lib, pkgs, ... }:
 
 {
   # Add options for hyprland, a wayland window manager
@@ -16,11 +16,7 @@ inputs : { config, lib, pkgs, theme, ... }:
     # Enable and configure hyprland
     wayland.windowManager.hyprland = {
       enable = true;
-      extraConfig = let f = (a : b :  builtins.replaceStrings (builtins.attrNames b) (builtins.attrValues b) a); in f (
-        builtins.readFile ./hyprland.conf) (theme.colourscheme // {
-          "<wallpaper>" = theme.wallpaper;
-        }
-      );
+      extraConfig = builtins.readFile ./hyprland.conf;
     };
 
     # Allow swaylock to lock computer

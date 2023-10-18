@@ -1,4 +1,4 @@
-_: { config, lib, pkgs, theme, ... }:
+_: { config, lib, pkgs, ... }:
 
 {
   # Add options for swaylock, lock screen for wayland
@@ -40,38 +40,6 @@ _: { config, lib, pkgs, theme, ... }:
         effect-blur = "7x5";
         effect-vignette = "0.5:0.5";
         fade-in = 0.2;
-
-        # Inside colours
-        inside-color = theme.colourscheme.bg-dark-primary;
-        inside-ver-color = theme.colourscheme.bg-dark-primary;
-        inside-clear-color = theme.colourscheme.bg-dark-primary;
-        inside-caps-lock-color = theme.colourscheme.bg-dark-primary;
-        inside-wrong-color = theme.colourscheme.bg-dark-primary;
-
-        # Ring colours
-        ring-color = "00000000";
-        ring-ver-color = "00000000";
-        ring-clear-color = "00000000";
-        ring-caps-lock-color = "00000000";
-        ring-wrong-color = "00000000";
-
-        # Line colours
-        line-color = "00000000";
-        line-ver-color = theme.colourscheme.bg-secondary;
-        line-clear-color = "00000000";
-        line-caps-lock-color = theme.colourscheme.warning;
-        line-wrong-color = theme.colourscheme.alert;
-
-        # Text colours
-        text-color = theme.colourscheme.fg-primary;
-        text-ver-color = theme.colourscheme.fg-primary;
-        text-clear-color = theme.colourscheme.fg-primary;
-        text-caps-lock-color = theme.colourscheme.fg-primary;
-        text-wrong-color = theme.colourscheme.fg-primary;
-
-        # Key colour
-        separator-color = "00000000";
-        key-hl-color = theme.colourscheme.accent-primary;
       };
     };
   };

@@ -1,4 +1,4 @@
-_: { config, lib, pkgs, theme, ... }:
+_: { config, lib, pkgs, ... }:
 
 {
   # Add options for neovim text editor
@@ -15,14 +15,7 @@ _: { config, lib, pkgs, theme, ... }:
       withPython3 = true;
 
       # General configuration for neovim
-      extraLuaConfig = builtins.replaceStrings
-          ["<colourscheme>"] [theme.data.neovim.name]
-          (builtins.readFile ./config.lua);
-
-      # Install colourscheme
-      plugins = [
-        theme.data.neovim.package
-      ];
+      extraLuaConfig = builtins.readFile ./config.lua;
     };
   };
 

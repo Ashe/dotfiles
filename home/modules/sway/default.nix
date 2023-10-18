@@ -1,8 +1,7 @@
-_: { config, lib, pkgs, theme, ... }:
+_: { config, lib, pkgs, ... }:
 
 let
   cfg = config.wayland.windowManager.sway;
-  colours = theme.colourscheme;
 in
 {
   # Add options for sway window manager
@@ -36,7 +35,6 @@ in
         output = {
           DP-2 = {
             mode = "5120x1440";
-            bg = "${theme.wallpaper} fill";
           };
         };
 
@@ -154,45 +152,6 @@ in
           # Send programs to scratchpad
           "${cfg.config.modifier}+Shift+minus" = "move scratchpad";
           "${cfg.config.modifier}+minus" = "scratchpad show";
-        };
-
-        # Configure colours
-        colors = {
-          unfocused = {
-            background = colours.bg-primary;
-            border = colours.bg-secondary;
-            childBorder = "";
-            indicator = colours.bg-secondary;
-            text = colours.fg-secondary;
-          };
-          focused = {
-            background = colours.accent-primary;
-            border = colours.accent-primary;
-            childBorder = "";
-            indicator = colours.warning;
-            text = colours.fg-bright-primary;
-          };
-          focusedInactive = {
-            background = colours.bg-primary;
-            border = colours.bg-secondary;
-            childBorder = "";
-            indicator = colours.bg-primary;
-            text = colours.fg-secondary;
-          };
-          urgent = {
-            background = colours.bg-primary;
-            border = colours.alert;
-            childBorder = "";
-            indicator = colours.accent-primary;
-            text = colours.fg-secondary;
-          };
-          placeholder = {
-            background = colours.fg-primary;
-            border = colours.bg-primary;
-            childBorder = "";
-            indicator = colours.accent-primary;
-            text = colours.fg-secondary;
-          };
         };
       };
     };

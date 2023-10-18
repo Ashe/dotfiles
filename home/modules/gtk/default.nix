@@ -1,4 +1,4 @@
-_: { config, lib, pkgs, theme, ... }:
+_: { config, lib, pkgs, ... }:
 
 {
   # Add options for gtk, toolkit for gnome
@@ -12,9 +12,6 @@ _: { config, lib, pkgs, theme, ... }:
 
       # Enable GTK customisation
       enable = true;
-
-      # Set theme
-      theme = theme.data.gtk;
 
       # Set icon theme
       iconTheme = {

@@ -1,4 +1,4 @@
-_: { config, pkgs, lib, theme, ... }:
+_: { config, pkgs, lib, ... }:
 
 {
   # Add options for sway-notification-center, a notification manager for wayland
@@ -20,11 +20,8 @@ _: { config, pkgs, lib, theme, ... }:
 
     # Manage sway notification center styling
     xdg.configFile.swaync-style = {
+      source = ./style.css;
       target = "swaync/style.css";
-      text = builtins.replaceStrings
-        (builtins.attrNames theme.colourscheme)
-        (builtins.attrValues theme.colourscheme)
-        (builtins.readFile ./style.css);
     };
   };
 }

@@ -1,4 +1,4 @@
-_: { config, lib, pkgs, theme, ... }:
+_: { config, lib, pkgs, ... }:
 
 {
   # Add options for waybar, a bar utility for wayland
@@ -191,10 +191,7 @@ _: { config, lib, pkgs, theme, ... }:
       }];
 
       # Appearance
-      style = builtins.replaceStrings
-        (builtins.attrNames theme.colourscheme)
-        (builtins.attrValues theme.colourscheme)
-        (builtins.readFile ./style.css);
+      style = builtins.readFile ./style.css;
     };
   };
 }

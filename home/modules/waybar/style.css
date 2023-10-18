@@ -15,17 +15,10 @@ button:hover {
   background: inherit;
 }
 
-window#waybar {
-  background: transparent;
-  color: fg-primary;
-}
-
 tooltip {
-  background: bg-primary;
   border-radius: 15px;
   border-width: 2px;
   border-style: solid;
-  border-color: bg-secondary;
   font-size: 13pt;
 }
 
@@ -34,8 +27,6 @@ tooltip label {
 }
 
 #custom-home {
-  color: fg-primary;
-  background: bg-dark-primary;
   font-size: 15pt;
   padding-left: 0px;
   padding-top: 20px;
@@ -45,7 +36,6 @@ tooltip label {
 }
 
 #workspaces {
-  background: bg-dark-primary;
   font-size: 15pt;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -54,8 +44,6 @@ tooltip label {
 }
 
 #workspaces button {
-  color: fg-secondary;
-  background: bg-dark-primary;
   padding-top: 5px;
   padding-bottom: 5px;
   border-width: 0px;
@@ -63,23 +51,18 @@ tooltip label {
 
 #workspaces button.active,
 #workspaces button.focused {
-  color: accent-primary;
 }
 
 #workspaces button.urgent {
-  color: warning;
 }
 
 #custom-spotify {
-  background: bg-dark-primary;
-  color: green;
   padding-bottom: 20px;
   font-size: 20pt;
   border-radius: 0px;
 }
 
 #taskbar {
-  background: bg-dark-primary;
   font-size: 15pt;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -99,7 +82,6 @@ tooltip label {
 #clock.date,
 #clock.time-icon,
 #clock.time {
-  background: bg-primary;
   border-radius: 0px;
 }
 
@@ -113,18 +95,15 @@ tooltip label {
   padding-bottom: 10px;
   font-size: 15pt;
   padding-left: 0px;
-  color: cyan;
 }
 
 #pulseaudio.icon {
   padding-top: 10px;
   font-size: 15pt;
   padding-left: 0px;
-  color: yellow;
 }
 
 #pulseaudio.icon.muted {
-  color: red;
 }
 
 #pulseaudio.percentage {
@@ -134,14 +113,12 @@ tooltip label {
 }
 
 #pulseaudio.percentage.muted {
-  color: red;
 }
 
 #battery.icon {
   padding-top: 10px;
   font-size: 15pt;
   padding-left: 0px;
-  color: green;
 }
 
 #battery.percentage {
@@ -155,14 +132,12 @@ tooltip label {
   padding-bottom: 10px;
   font-size: 15pt;
   padding-left: 0px;
-  color: bright-green;
 }
 
 #clock.calendar-icon {
   padding-top: 10px;
   font-size: 15pt;
   padding-left: 0px;
-  color: magenta;
 }
 
 #clock.day {
@@ -180,7 +155,6 @@ tooltip label {
   padding-top: 10px;
   font-size: 15pt;
   padding-left: 0px;
-  color: accent-primary;
 }
 
 #clock.time {

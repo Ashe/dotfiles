@@ -1,6 +1,6 @@
 inputs: let pkgs = inputs.nixpkgs.legacyPackages; in {
 
-  # Linux scripts
+  # User-made packages
   x86_64-linux = {
 
     # Bundle scripts and add to path

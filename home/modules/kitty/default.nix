@@ -1,4 +1,4 @@
-_: { config, lib, pkgs, theme, ... }:
+_: { config, lib, pkgs, ... }:
 
 {
   # Add options for kitty terminal emulator
@@ -19,14 +19,12 @@ _: { config, lib, pkgs, theme, ... }:
         size = 12;
       };
 
-      # Set colourscheme
-      theme = theme.data.kitty.name;
-
       # Kitty settings
       settings = {
 
         # Wipe default keybindings
         "clear_all_shortcuts" = "yes";
+
       };
 
       # Keybindings

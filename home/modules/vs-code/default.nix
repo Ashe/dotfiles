@@ -1,4 +1,4 @@
-_: { config, lib, pkgs, theme, ... }:
+_: { config, lib, pkgs, ... }:
 
 {
   # Add options for vs-code, a text editor
@@ -16,9 +16,6 @@ _: { config, lib, pkgs, theme, ... }:
       # Install extensions
       extensions = with pkgs.vscode-extensions; [
 
-        # Theme
-        theme.data.vs-code.package
-
         # Utility
         ms-vsliveshare.vsliveshare
         shardulm94.trailing-spaces
@@ -35,7 +32,6 @@ _: { config, lib, pkgs, theme, ... }:
 
       # Set up user settings
       userSettings = {
-        "workbench.colorTheme" = theme.data.vs-code.name;
         "workbench.startupEditor" = "none";
         "editor.fontFamily" = "'FiraCode Nerd Font', monospace";
         "window.zoomLevel" = 1;
