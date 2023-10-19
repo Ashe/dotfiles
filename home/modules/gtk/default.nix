@@ -19,5 +19,10 @@ _: { config, lib, pkgs, ... }:
         size = 12;
       };
     };
+
+    # Set environment variables
+    home.sessionVariables = {
+      GDK_BACKEND = "wayland";
+    };
   };
 }
