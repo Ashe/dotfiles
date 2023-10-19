@@ -17,11 +17,8 @@ _: { config, lib, pkgs, ... }:
     };
 
     # Manage fcitx configuration */
-    xdg.configFile.fcitx = {
-      source = ./config;
-      target = "fcitx5/config";
-    };
-#
+    xdg.configFile."fcitx/config".source = ./config;
+
     # Tell programs to use fcitx as input method */
     home.sessionVariables = {
       GTK_IM_MODULE = "fcitx";

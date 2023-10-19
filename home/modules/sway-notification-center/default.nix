@@ -13,15 +13,7 @@ _: { config, pkgs, lib, ... }:
     ];
 
     # Manage sway notification center settings
-    xdg.configFile.swaync-settings = {
-      source = ./config.json;
-      target = "swaync/config.json";
-    };
-
-    # Manage sway notification center styling
-    xdg.configFile.swaync-style = {
-      source = ./style.css;
-      target = "swaync/style.css";
-    };
+    xdg.configFile."swaync/config.json".source = ./config.json;
+    xdg.configFile."swaync/style.css".source = ./style.css;
   };
 }

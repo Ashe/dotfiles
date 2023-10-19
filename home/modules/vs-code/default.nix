@@ -29,18 +29,22 @@ _: { config, lib, pkgs, ... }:
         ms-dotnettools.csharp
         yzhang.markdown-all-in-one
       ];
+    };
 
-      # Set up user settings
-      userSettings = {
-        "workbench.startupEditor" = "none";
-        "editor.fontFamily" = "'FiraCode Nerd Font', monospace";
-        "window.zoomLevel" = 1;
-        "editor.wordWrap" = "wordWrapColumn";
-        "explorer.confirmDelete" = false;
-        "git.confirmSync" = false;
-        "window.menuBarVisibility" = "toggle";
-        "editor.tabSize" = 2;
-      };
+    # Add config file for VS Code
+    xdg.configFile."Code/User/settings.json" = {
+      text = ''
+        {
+          "editor.fontFamily": "'FiraCode Nerd Font', monospace",
+          "editor.tabSize": 2,
+          "editor.wordWrap": "wordWrapColumn",
+          "explorer.confirmDelete": false,
+          "git.confirmSync": false,
+          "window.menuBarVisibility": "toggle",
+          "window.zoomLevel": 1,
+          "workbench.startupEditor": "none",
+        }
+      '';
     };
   };
 }

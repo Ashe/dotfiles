@@ -8,10 +8,7 @@ _: { config, lib, pkgs, ... }:
   config = lib.mkIf config.waybar.enable {
 
     # Place additional files in .config/waybar/extra
-    xdg.configFile.waybar = {
-      source = ./extra;
-      target = "waybar/extra";
-    };
+    xdg.configFile."waybar/extra".source = ./extra;
 
     # Install extra programs for use with waybar
     home.packages = with pkgs; [

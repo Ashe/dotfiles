@@ -8,10 +8,7 @@ inputs : { config, lib, pkgs, ... }:
   config = lib.mkIf config.hyprland.enable {
 
     # Place additional files in .config/hyprland/extra
-    xdg.configFile.sway = {
-      source = ./extra;
-      target = "hyprland/extra";
-    };
+    xdg.configFile."hyprland/extra".source = ./extra;
 
     # Enable and configure hyprland
     wayland.windowManager.hyprland = {

@@ -11,10 +11,7 @@ in
   config = lib.mkIf config.sway.enable {
 
     # Place additional files in .config/sway
-    xdg.configFile.sway = {
-      source = ./extra;
-      target = "sway/extra";
-    };
+    xdg.configFile."sway/extra".source = ./extra;
 
     # Configure sway for Wayland
     wayland.windowManager.sway = {

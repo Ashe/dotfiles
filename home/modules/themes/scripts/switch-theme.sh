@@ -69,6 +69,14 @@ else
 fi
 
 
+# Convenience function to lookup names for theme data
+lookup_theme_data() {
+  local search_string="$1"
+  local field_number="$2"
+  awk -v search="$search_string" -F '|' '$1 == search { print $'"$field_number"' }' "$ThemeData"
+}
+
+
 # Swwwallpaper
 getWall=`grep '^1|' $ThemeCtl | cut -d '|' -f 3`
 getWall=`eval echo $getWall`
@@ -92,11 +100,18 @@ if command -v kitty &>/dev/null; then
 fi
 
 
+# VS Code
+if command -v code &>/dev/null; then
+  vs_code_theme=$(lookup_theme_data "$ThemeSet" 2)
+  if [ -n "$vs_code_theme" ]; then
+    cat "$ConfDir/Code/User/base_settings.json" | head -n -1 > "$ConfDir/Code/User/settings.json"
+    echo "  \"workbench.colorTheme\": \"${vs_code_theme}\"," >> "$ConfDir/Code/User/settings.json"
+    echo "}" >> "$ConfDir/Code/User/settings.json"
+  fi
+fi
+
+
 # @TODO: Finish this
-
-
-# # Code
-# sed -i "/workbench.colorTheme/c\    \"workbench.colorTheme\": \"${ThemeSet}\"," $ConfDir/Code/User/settings.json
 
 # # Qt5ct
 # sed -i "/^color_scheme_path=/c\color_scheme_path=$ConfDir/qt5ct/colors/${ThemeSet}.conf" $ConfDir/qt5ct/qt5ct.conf
