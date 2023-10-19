@@ -10,6 +10,7 @@ inputs : {
   mangohud = import ./mangohud inputs;
   neovim = import ./neovim inputs;
   obs-studio = import ./obs-studio inputs;
+  qt = import ./qt inputs;
   starship = import ./starship inputs;
   sway = import ./sway inputs;
   swayidle = import ./swayidle inputs;

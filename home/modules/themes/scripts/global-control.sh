@@ -15,9 +15,10 @@ ThemeData="$ThemeDir/theme-data.conf"
 CacheDir="$HOME/.cache/themes"
 mkdir -p $CacheDir
 
-# Theme var
-gtkTheme=`gsettings get org.gnome.desktop.interface gtk-theme | sed "s/'//g"`
-gtkMode=`gsettings get org.gnome.desktop.interface color-scheme | sed "s/'//g" | awk -F '-' '{print $2}'`
+# # Theme var
+# @TODO: FIX THIS, gsettings doesn't work on nix
+# gtkTheme=`gsettings get org.gnome.desktop.interface gtk-theme | sed "s/'//g"`
+# gtkMode=`gsettings get org.gnome.desktop.interface color-scheme | sed "s/'//g" | awk -F '-' '{print $2}'`
 
 # Hypr var
 hypr_border=`hyprctl -j getoption decoration:rounding | jq '.int'`

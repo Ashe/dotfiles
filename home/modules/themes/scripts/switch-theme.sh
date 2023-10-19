@@ -98,16 +98,38 @@ icon_theme=$(lookup_theme_data "$ThemeSet" 3)
 
 
 # Gtk3
+gtk_dir="$ConfDir/gtk-3.0/"
 gtk_theme=$(lookup_theme_data "$ThemeSet" 2)
-if [ -n "$gtk_theme" ] && [ -n "$icon_theme" ]; then
-  cat "$ConfDir/gtk-3.0/base_settings.ini" > "$ConfDir/gtk-3.0/settings.ini"
-  echo "gtk-theme-name=${gtk_theme}" >> "$ConfDir/gtk-3.0/settings.ini"
-  echo "gtk-icon-theme-name=${icon_theme}" >> "$ConfDir/gtk-3.0/settings.ini"
+if [ -e "$gtk_dir/base_settings.ini" ] && [ -n "$gtk_theme" ] && [ -n "$icon_theme" ]; then
+  # @TODO: Prefer dark?
+  cat "$gtk_dir/base_settings.ini" > "$gtk_dir/settings.ini"
+  echo "gtk-theme-name=${gtk_theme}" >> "$gtk_dir/settings.ini"
+  echo "gtk-icon-theme-name=${icon_theme}" >> "$gtk_dir/settings.ini"
   # Flatpak GTK
   if command -v flatpak &>/dev/null; then
     flatpak --user override --env=GTK_THEME="${gtk_theme}"
     flatpak --user override --env=ICON_THEME="${icon_theme}"
   fi
+fi
+
+
+# Qt5ct
+qt_dir="$ConfDir/qt5ct/"
+if [ -e "$qt_dir/base_qt5ct.conf" ] && [ -n "$icon_theme" ]; then
+  cat "$qt_dir/base_qt5ct.conf" > "$qt_dir/qt5ct.conf"
+  echo "" >> "$qt_dir/qt5ct.conf"
+  echo "[Appearance]" >> "$qt_dir/qt5ct.conf"
+  echo "color_scheme_path=$ThemeDir/config/qt5ct/${ThemeSet}.conf" >> "$qt_dir/qt5ct.conf"
+  echo "icon_theme=$icon_theme" >> "$qt_dir/qt5ct.conf"
+  echo "custom_palette=true" >> "$qt_dir/qt5ct.conf"
+  echo "standard_dialogs=default" >> "$qt_dir/qt5ct.conf"
+  echo "style=kvantum" >> "$qt_dir/qt5ct.conf"
+fi
+
+
+# Kvantum
+if command -v kvantummanager &>/dev/null; then
+  kvantummanager --set ${ThemeSet}
 fi
 
 
@@ -127,25 +149,17 @@ fi
 
 # VS Code
 if command -v code &>/dev/null; then
+  vs_code_dir="$ConfDir/Code/User"
   vs_code_theme=$(lookup_theme_data "$ThemeSet" 4)
-  if [ -n "$vs_code_theme" ]; then
-    cat "$ConfDir/Code/User/base_settings.json" | head -n -1 > "$ConfDir/Code/User/settings.json"
-    echo "  \"workbench.colorTheme\": \"${vs_code_theme}\"," >> "$ConfDir/Code/User/settings.json"
-    echo "}" >> "$ConfDir/Code/User/settings.json"
+  if [ -e "$vs_code_dir/base_settings.json" ] && [ -n "$vs_code_theme" ]; then
+    cat "$vs_code_dir/base_settings.json" | head -n -1 > "$vs_code_dir/settings.json"
+    echo "  \"workbench.colorTheme\": \"${vs_code_theme}\"," >> "$vs_code_dir/settings.json"
+    echo "}" >> "$vs_code_dir/settings.json"
   fi
 fi
 
 
 # @TODO: Finish this
-
-# # Qt5ct
-# sed -i "/^color_scheme_path=/c\color_scheme_path=$ConfDir/qt5ct/colors/${ThemeSet}.conf" $ConfDir/qt5ct/qt5ct.conf
-# sed -i "/^icon_theme=/c\icon_theme=${IconSet}" $ConfDir/qt5ct/qt5ct.conf
-#
-#
-#
-#
-#
 #
 # # Rofi & Waybar
 # ${ScrDir}/swwwallbash.sh $getWall

@@ -31,7 +31,7 @@ _: { config, lib, pkgs, xdg, ... }: let
   add-themes = (dir: (extension:
     lib.mkMerge (lib.lists.forEach theme-list (theme: {
       xdg.configFile."themes/config/${dir}/${theme.name}${extension}" = {
-        source = ./${dir}/${theme.name}${extension};
+        source = ./config/${dir}/${theme.name}${extension};
       };
     })
   )));
@@ -79,12 +79,26 @@ in {
       };
     })))
 
-    # Enable gtk themes
+    # Install gtk themes
     (lib.mkIf config.gtk.enable {
       xdg.configFile."gtk-3.0/settings.ini" = {
         target = "gtk-3.0/base_settings.ini";
       };
     })
+
+    # Install qt themes
+    (lib.mkIf config.qt.enable (lib.mkMerge [(add-themes "qt5ct" ".conf") {
+      xdg.configFile."qt5ct/qt5ct.conf" = {
+        target = "qt5ct/base_qt5ct.conf";
+      };
+    }]))
+
+    # Install kvantum themes
+    (lib.mkMerge (lib.lists.forEach theme-list (theme: {
+      xdg.configFile."Kvantum/${theme.name}" = {
+        source = ./config/kvantum/${theme.name};
+      };
+    })))
 
     # Enable themes for hyprland
     (lib.mkIf config.hyprland.enable (lib.mkMerge [(add-themes "hyprland" ".conf") {

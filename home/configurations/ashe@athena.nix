@@ -17,6 +17,7 @@
   mangohud.enable = true;
   neovim.enable = true;
   obs-studio.enable = true;
+  qt.config.enable = true;
   starship.enable = true;
   vs-code.enable = true;
   waybar.enable = true;
