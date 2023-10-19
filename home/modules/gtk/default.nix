@@ -1,23 +1,17 @@
 _: { config, lib, pkgs, ... }:
 
 {
-  # Add options for gtk, toolkit for gnome
+  # Add options for Gtk, toolkit for gnome
   options.gtk.config.enable = lib.mkEnableOption "gtk.config";
 
-  # Configure gtk if desired
+  # Configure Gtk if desired
   config = lib.mkIf config.gtk.config.enable {
 
-    # Configure GTK
+    # Configure Gtk
     gtk = {
 
-      # Enable GTK customisation
+      # Enable Gtk configuration
       enable = true;
-
-      # Set icon theme
-      iconTheme = {
-        name = "Papirus";
-        package = pkgs.papirus-icon-theme;
-      };
 
       # Set font
       font = {

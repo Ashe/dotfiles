@@ -195,6 +195,15 @@ _: { config, lib, pkgs, ... }:
     gnome.at-spi2-core.enable = true;
   };
 
+  # Enable portals
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+    ];
+  };
+
   # Allow swaylock to work correctly
   security.pam.services.swaylock = {};
 

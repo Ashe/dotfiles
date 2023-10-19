@@ -93,6 +93,31 @@ if [ $? -ne 0 ] ; then
 fi
 
 
+# Icons
+icon_theme=$(lookup_theme_data "$ThemeSet" 3)
+
+
+# Gtk3
+gtk_theme=$(lookup_theme_data "$ThemeSet" 2)
+if [ -n "$gtk_theme" ] && [ -n "$icon_theme" ]; then
+  cat "$ConfDir/gtk-3.0/base_settings.ini" > "$ConfDir/gtk-3.0/settings.ini"
+  echo "gtk-theme-name=${gtk_theme}" >> "$ConfDir/gtk-3.0/settings.ini"
+  echo "gtk-icon-theme-name=${icon_theme}" >> "$ConfDir/gtk-3.0/settings.ini"
+  # Flatpak GTK
+  if command -v flatpak &>/dev/null; then
+    flatpak --user override --env=GTK_THEME="${gtk_theme}"
+    flatpak --user override --env=ICON_THEME="${icon_theme}"
+  fi
+fi
+
+
+# Hyprland
+if command -v hyprctl &>/dev/null; then
+  ln -fs $ThemeDir/config/hyprland/${ThemeSet}.conf $ThemeDir/hyprland.conf
+  hyprctl reload
+fi
+
+
 # Kitty
 if command -v kitty &>/dev/null; then
   ln -fs $ThemeDir/config/kitty/${ThemeSet}.conf $ThemeDir/kitty.conf
@@ -102,7 +127,7 @@ fi
 
 # VS Code
 if command -v code &>/dev/null; then
-  vs_code_theme=$(lookup_theme_data "$ThemeSet" 2)
+  vs_code_theme=$(lookup_theme_data "$ThemeSet" 4)
   if [ -n "$vs_code_theme" ]; then
     cat "$ConfDir/Code/User/base_settings.json" | head -n -1 > "$ConfDir/Code/User/settings.json"
     echo "  \"workbench.colorTheme\": \"${vs_code_theme}\"," >> "$ConfDir/Code/User/settings.json"
@@ -115,23 +140,11 @@ fi
 
 # # Qt5ct
 # sed -i "/^color_scheme_path=/c\color_scheme_path=$ConfDir/qt5ct/colors/${ThemeSet}.conf" $ConfDir/qt5ct/qt5ct.conf
-# IconSet=`awk -F "'" '$0 ~ /gsettings set org.gnome.desktop.interface icon-theme/{print $2}' $ConfDir/hypr/themes/${ThemeSet}.conf`
 # sed -i "/^icon_theme=/c\icon_theme=${IconSet}" $ConfDir/qt5ct/qt5ct.conf
 #
 #
-# # Gtk3
-# sed -i "/^gtk-theme-name=/c\gtk-theme-name=${ThemeSet}" $ConfDir/gtk-3.0/settings.ini
-# sed -i "/^gtk-icon-theme-name=/c\gtk-icon-theme-name=${IconSet}" $ConfDir/gtk-3.0/settings.ini
 #
 #
-# # Flatpak GTK
-# flatpak --user override --env=GTK_THEME="${ThemeSet}"
-# flatpak --user override --env=ICON_THEME="${IconSet}"
-#
-#
-# # Hyprland
-# ln -fs $ConfDir/hypr/themes/${ThemeSet}.conf $ConfDir/hypr/themes/theme.conf
-# hyprctl reload
 #
 #
 # # Rofi & Waybar
