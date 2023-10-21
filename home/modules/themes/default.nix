@@ -45,7 +45,7 @@ in {
 
     # General configuration
     {
-      # Copy scripts
+      # Copy scripts and other data
       xdg.configFile."themes/scripts".source = ./scripts;
 
       # Create theme data file
@@ -69,6 +69,9 @@ in {
 
         # Allows access to 'kvantummanager' for configuring QT
         libsForQt5.qtstyleplugin-kvantum
+
+        # Allows for json parsing
+        jq
       ];
     }
 
@@ -104,6 +107,13 @@ in {
     (lib.mkIf config.hyprland.enable (lib.mkMerge [(add-themes "hyprland" ".conf") {
       wayland.windowManager.hyprland.extraConfig = ''
         source=~/.config/themes/hyprland.conf
+      '';
+    }]))
+
+    # Enable themes for rofi application switcher
+    (lib.mkIf config.rofi.enable (lib.mkMerge [(add-themes "rofi" ".rasi") {
+      xdg.configFile."rofi/extra-config.rasi".text = ''
+        @theme "~/.config/themes/rofi.rasi"
       '';
     }]))
 

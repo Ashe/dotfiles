@@ -11,6 +11,7 @@ inputs : {
   neovim = import ./neovim inputs;
   obs-studio = import ./obs-studio inputs;
   qt = import ./qt inputs;
+  rofi = import ./rofi inputs;
   starship = import ./starship inputs;
   sway = import ./sway inputs;
   swayidle = import ./swayidle inputs;

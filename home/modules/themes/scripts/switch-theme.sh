@@ -10,12 +10,12 @@ while getopts "npst" option ; do
   case $option in
 
   n ) # Set next theme
-    ThemeSet=`head -1 $ThemeCtl | cut -d '|' -f 2` #default value
+    current_theme=`head -1 $ThemeCtl | cut -d '|' -f 2` #default value
     flg=0
     while read line
     do
       if [ $flg -eq 1 ] ; then
-        ThemeSet=`echo $line | cut -d '|' -f 2`
+        current_theme=`echo $line | cut -d '|' -f 2`
         break
       elif [ `echo $line | cut -d '|' -f 1` -eq 1 ] ; then
         flg=1
@@ -24,12 +24,12 @@ while getopts "npst" option ; do
     export xtrans="grow" ;;
 
   p ) # Set previous theme
-    ThemeSet=`tail -1 $ThemeCtl | cut -d '|' -f 2` #default value
+    current_theme=`tail -1 $ThemeCtl | cut -d '|' -f 2` #default value
     flg=0
     while read line
     do
       if [ $flg -eq 1 ] ; then
-        ThemeSet=`echo $line | cut -d '|' -f 2`
+        current_theme=`echo $line | cut -d '|' -f 2`
         break
       elif [ `echo $line | cut -d '|' -f 1` -eq 1 ] ; then
         flg=1
@@ -39,7 +39,7 @@ while getopts "npst" option ; do
 
   s ) # Set selected theme
     shift $((OPTIND -1))
-    ThemeSet=$1 ;;
+    current_theme=$1 ;;
 
   t ) # Display tooltip
     echo ""
@@ -57,34 +57,29 @@ done
 
 
 # Update theme control
-if [ `cat $ThemeCtl | awk -F '|' -v thm=$ThemeSet '{if($2==thm) print$2}' | wc -w` -ne 1 ] ; then
-  echo "Unknown theme selected: $ThemeSet"
+if [ `cat $ThemeCtl | awk -F '|' -v thm=$current_theme '{if($2==thm) print$2}' | wc -w` -ne 1 ] ; then
+  echo "Unknown theme selected: $current_theme"
   echo "Available themes are:"
   cat $ThemeCtl | cut -d '|' -f 2
   exit 1
 else
-  echo "Selected theme: $ThemeSet"
+  echo "Selected theme: $current_theme"
   sed -i "s/^1/0/g" $ThemeCtl
-  awk -F '|' -v thm=$ThemeSet '{OFS=FS} {if($2==thm) $1=1; print$0}' $ThemeCtl > "$CacheDir/tmp" && mv "$CacheDir/tmp" $ThemeCtl
+  awk -F '|' -v thm=$current_theme '{OFS=FS} {if($2==thm) $1=1; print$0}' $ThemeCtl > "$cache_dir/tmp" && mv "$cache_dir/tmp" $ThemeCtl
 fi
 
 
-# Convenience function to lookup names for theme data
-lookup_theme_data() {
-  local search_string="$1"
-  local field_number="$2"
-  awk -v search="$search_string" -F '|' '$1 == search { print $'"$field_number"' }' "$ThemeData"
-}
+# Ensure variables are correct
+source ${ScrDir}/global-control.sh
 
 
 # Swwwallpaper
 getWall=`grep '^1|' $ThemeCtl | cut -d '|' -f 3`
 getWall=`eval echo $getWall`
 getName=`basename $getWall`
-mkdir -p "$ConfDir/swww"
-ln -fs $getWall $ConfDir/swww/wall.set
-ln -fs $CacheDir/${ThemeSet}/${getName}.rofi $ConfDir/swww/wall.rofi
-ln -fs $CacheDir/${ThemeSet}/${getName}.blur $ConfDir/swww/wall.blur
+ln -fs $getWall $ThemeDir/wallpapers/wall.set
+ln -fs $cache_dir/${current_theme}/${getName}.rofi $ThemeDir/wallpapers/wall.rofi
+ln -fs $cache_dir/${current_theme}/${getName}.blur $ThemeDir/wallpapers/wall.blur
 ${ScrDir}/switch-wallpaper.sh
 
 if [ $? -ne 0 ] ; then
@@ -93,13 +88,9 @@ if [ $? -ne 0 ] ; then
 fi
 
 
-# Icons
-icon_theme=$(lookup_theme_data "$ThemeSet" 3)
-
-
 # Gtk3
 gtk_dir="$ConfDir/gtk-3.0/"
-gtk_theme=$(lookup_theme_data "$ThemeSet" 2)
+gtk_theme=$(lookup_theme_data "$current_theme" 2)
 if [ -e "$gtk_dir/base_settings.ini" ] && [ -n "$gtk_theme" ] && [ -n "$icon_theme" ]; then
   # @TODO: Prefer dark?
   cat "$gtk_dir/base_settings.ini" > "$gtk_dir/settings.ini"
@@ -119,7 +110,7 @@ if [ -e "$qt_dir/base_qt5ct.conf" ] && [ -n "$icon_theme" ]; then
   cat "$qt_dir/base_qt5ct.conf" > "$qt_dir/qt5ct.conf"
   echo "" >> "$qt_dir/qt5ct.conf"
   echo "[Appearance]" >> "$qt_dir/qt5ct.conf"
-  echo "color_scheme_path=$ThemeDir/config/qt5ct/${ThemeSet}.conf" >> "$qt_dir/qt5ct.conf"
+  echo "color_scheme_path=$ThemeDir/config/qt5ct/${current_theme}.conf" >> "$qt_dir/qt5ct.conf"
   echo "icon_theme=$icon_theme" >> "$qt_dir/qt5ct.conf"
   echo "custom_palette=true" >> "$qt_dir/qt5ct.conf"
   echo "standard_dialogs=default" >> "$qt_dir/qt5ct.conf"
@@ -129,20 +120,20 @@ fi
 
 # Kvantum
 if command -v kvantummanager &>/dev/null; then
-  kvantummanager --set ${ThemeSet}
+  kvantummanager --set ${current_theme}
 fi
 
 
 # Hyprland
 if command -v hyprctl &>/dev/null; then
-  ln -fs $ThemeDir/config/hyprland/${ThemeSet}.conf $ThemeDir/hyprland.conf
+  ln -fs $ThemeDir/config/hyprland/${current_theme}.conf $ThemeDir/hyprland.conf
   hyprctl reload
 fi
 
 
 # Kitty
 if command -v kitty &>/dev/null; then
-  ln -fs $ThemeDir/config/kitty/${ThemeSet}.conf $ThemeDir/kitty.conf
+  ln -fs $ThemeDir/config/kitty/${current_theme}.conf $ThemeDir/kitty.conf
   pkill kitty --signal SIGUSR1
 fi
 
@@ -150,7 +141,7 @@ fi
 # VS Code
 if command -v code &>/dev/null; then
   vs_code_dir="$ConfDir/Code/User"
-  vs_code_theme=$(lookup_theme_data "$ThemeSet" 4)
+  vs_code_theme=$(lookup_theme_data "$current_theme" 4)
   if [ -e "$vs_code_dir/base_settings.json" ] && [ -n "$vs_code_theme" ]; then
     cat "$vs_code_dir/base_settings.json" | head -n -1 > "$vs_code_dir/settings.json"
     echo "  \"workbench.colorTheme\": \"${vs_code_theme}\"," >> "$vs_code_dir/settings.json"
@@ -159,7 +150,7 @@ if command -v code &>/dev/null; then
 fi
 
 
-# @TODO: Finish this
-#
-# # Rofi & Waybar
-# ${ScrDir}/swwwallbash.sh $getWall
+# Rofi
+if command -v rofi &>/dev/null; then
+  ln -fs $ThemeDir/config/rofi/${current_theme}.rasi $ThemeDir/rofi.rasi
+fi

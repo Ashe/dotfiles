@@ -18,6 +18,7 @@
   neovim.enable = true;
   obs-studio.enable = true;
   qt.config.enable = true;
+  rofi.enable = true;
   starship.enable = true;
   vs-code.enable = true;
   waybar.enable = true;
@@ -38,7 +39,7 @@
     sessionVariables = {
 
       # Programs to use
-      MENU = "wofi --show drun -w 3 -i -I";
+      MENU = "~/.config/rofi/scripts/launch-rofi.sh drun";
       BROWSER = "firefox";
       EDITOR = "neovide";
       FILE = "ranger";
@@ -66,6 +67,8 @@
       ranger
       scanmem
       slack
+      wlogout
+      xwayland
 
       # Utilities
       mpc_cli
@@ -75,9 +78,6 @@
       vulkan-tools
       wdisplays
       wl-clipboard
-      wlogout
-      wofi
-      xwayland
       youtube-dl
     ];
   };

@@ -12,29 +12,28 @@ Wall_Update()
   local x_wall=$1
   local x_update=${x_wall/$HOME/"~"}
   cacheImg=`echo $x_wall | awk -F '/' '{print $NF}'`
-  $ScrDir/swwwallbash.sh $x_wall
 
-  if [ ! -d ${CacheDir}/${curTheme} ] ; then
-    mkdir -p ${CacheDir}/${curTheme}
+  if [ ! -d ${cache_dir}/${curTheme} ] ; then
+    mkdir -p ${cache_dir}/${curTheme}
   fi
 
-  if [ ! -f "${CacheDir}/${curTheme}/${cacheImg}" ] ; then
-    convert -strip $x_wall -thumbnail 500x500^ -gravity center -extent 500x500 ${CacheDir}/${curTheme}/${cacheImg}
+  if [ ! -f "${cache_dir}/${curTheme}/${cacheImg}" ] ; then
+    convert -strip $x_wall -thumbnail 500x500^ -gravity center -extent 500x500 ${cache_dir}/${curTheme}/${cacheImg}
   fi
 
-  if [ ! -f "${CacheDir}/${curTheme}/${cacheImg}.rofi" ] ; then
-    #convert -strip -resize 1000 -unsharp 0x1+1.0+0 $x_wall ${CacheDir}/${curTheme}/rofi.${cacheImg}
-    convert -strip -resize 2000 -gravity center -extent 2000 -quality 90 $x_wall ${CacheDir}/${curTheme}/${cacheImg}.rofi
+  if [ ! -f "${cache_dir}/${curTheme}/${cacheImg}.rofi" ] ; then
+    #convert -strip -resize 1000 -unsharp 0x1+1.0+0 $x_wall ${cache_dir}/${curTheme}/rofi.${cacheImg}
+    convert -strip -resize 2000 -gravity center -extent 2000 -quality 90 $x_wall ${cache_dir}/${curTheme}/${cacheImg}.rofi
   fi
 
-  if [ ! -f "${CacheDir}/${curTheme}/${cacheImg}.blur" ] ; then
-    convert -strip -scale 10% -blur 0x3 -resize 100% $x_wall ${CacheDir}/${curTheme}/${cacheImg}.blur
+  if [ ! -f "${cache_dir}/${curTheme}/${cacheImg}.blur" ] ; then
+    convert -strip -scale 10% -blur 0x3 -resize 100% $x_wall ${cache_dir}/${curTheme}/${cacheImg}.blur
   fi
 
   sed -i "/^1|/c\1|${curTheme}|${x_update}" $ctlFile
   ln -fs $x_wall $wallSet
-  ln -fs ${CacheDir}/${curTheme}/${cacheImg}.rofi $wallRfi
-  ln -fs ${CacheDir}/${curTheme}/${cacheImg}.blur $wallBlr
+  ln -fs ${cache_dir}/${curTheme}/${cacheImg}.rofi $wallRfi
+  ln -fs ${cache_dir}/${curTheme}/${cacheImg}.blur $wallBlr
 }
 
 Wall_Change()
@@ -70,7 +69,7 @@ Wall_Set()
     --transition-fps 60 \
     --invert-y \
     --transition-pos "$( hyprctl cursorpos )"
-  }
+}
 
 
 # Set variables
@@ -78,9 +77,9 @@ Wall_Set()
 ScrDir=`dirname $(realpath $0)`
 source $ScrDir/global-control.sh
 ctlFile="$ThemeCtl"
-wallSet="$HOME/.config/swww/wall.set"
-wallBlr="$HOME/.config/swww/wall.blur"
-wallRfi="$HOME/.config/swww/wall.rofi"
+wallSet="$ThemeDir/wallpapers/wall.set"
+wallBlr="$ThemeDir/wallpapers/wall.blur"
+wallRfi="$ThemeDir/wallpapers/wall.rofi"
 ctlLine=`grep '^1|' $ctlFile`
 
 if [  `echo $ctlLine | wc -w` -ne "1" ] ; then
@@ -95,10 +94,9 @@ wallName=`echo $fullPath | awk -F '/' '{print $NF}'`
 wallPath=`echo $fullPath | sed "s/\/$wallName//g"`
 
 if [ ! -f  $wallPath/$wallName ] ; then
-  if [ -d $HOME/.config/swww/$curTheme ] ; then
-    wallPath="$HOME/.config/swww/$curTheme"
+  if [ -d $ThemeDir/wallpapers/$curTheme ] ; then
+    wallPath="$ThemeDir/wallpapers/$curTheme"
     fullPath=`ls $wallPath/* | head -1`
-    Wall_Update $fullPath
   else
     echo "ERROR: wallpaper $wallPath/$wallName not found..."
     exit 1
@@ -112,24 +110,24 @@ Wallist=(`ls $wallPath/*`)
 
 while getopts "nps" option ; do
   case $option in
-    n ) # set next wallpaper
+    n ) # Set next wallpaper
       xtrans="grow"
       Wall_Change n ;;
-    p ) # set previous wallpaper
+    p ) # Set previous wallpaper
       xtrans="outer"
       Wall_Change p ;;
-    s ) # set input wallpaper
+    s ) # Set input wallpaper
       shift $((OPTIND -1))
       if [ -f $1 ] ; then
         Wall_Update $1
-        fi ;;
-      * ) # invalid option
-        echo "n : set next wall"
-        echo "p : set previous wall"
-        echo "s : set input wallpaper"
-        exit 1 ;;
-    esac
-  done
+      fi ;;
+    * ) # Invalid option
+      echo "n : set next wall"
+      echo "p : set previous wall"
+      echo "s : set input wallpaper"
+      exit 1 ;;
+  esac
+done
 
 
 # Check swww daemon and set wall
@@ -137,6 +135,11 @@ while getopts "nps" option ; do
 swww query
 if [ $? -eq 1 ] ; then
   swww init
+fi
+
+
+if [ "$#" -eq 0 ]; then
+  Wall_Update $fullPath
 fi
 
 Wall_Set

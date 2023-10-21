@@ -1,5 +1,14 @@
 #!/usr/bin/env sh
 
+
+# Convenience function to lookup names for theme data
+lookup_theme_data() {
+  local search_string="$1"
+  local field_number="$2"
+  awk -v search="$search_string" -F '|' '$1 == search { print $'"$field_number"' }' "$ThemeData"
+}
+
+
 # Configuration directory
 ConfDir="$HOME/.config"
 ThemeDir="$ConfDir/themes"
@@ -12,13 +21,14 @@ source $ThemeDir/scripts/initialise.sh
 EnableWallDcol=0
 ThemeCtl="$control_file"
 ThemeData="$ThemeDir/theme-data.conf"
-CacheDir="$HOME/.cache/themes"
-mkdir -p $CacheDir
+cache_dir="$HOME/.cache/themes"
+mkdir -p $cache_dir
 
-# # Theme var
-# @TODO: FIX THIS, gsettings doesn't work on nix
-# gtkTheme=`gsettings get org.gnome.desktop.interface gtk-theme | sed "s/'//g"`
-# gtkMode=`gsettings get org.gnome.desktop.interface color-scheme | sed "s/'//g" | awk -F '-' '{print $2}'`
+
+current_theme=$(grep '^1|' $ThemeCtl | awk -F '|' '{print $2}')
+icon_theme=$(lookup_theme_data "$current_theme" 3)
+gtk_theme=$(lookup_theme_data "$current_theme" 2)
+
 
 # Hypr var
 hypr_border=`hyprctl -j getoption decoration:rounding | jq '.int'`

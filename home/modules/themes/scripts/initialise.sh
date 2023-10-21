@@ -33,7 +33,7 @@ if [ ! -f "$control_file" ]; then
       theme_name=$(basename "$theme_dir")
 
       # Append the line to the destination file
-      echo "${first_part}|${theme_name}|${first_file}" >> "$destination"
+      echo "${first_part}|${theme_name}|${first_file}" >> "$control_file"
     fi
   done
 fi
