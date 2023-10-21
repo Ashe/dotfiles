@@ -1,0 +1,41 @@
+{
+  /////////////
+  // General //
+  /////////////
+
+  "name": "float",
+  "layer": "top",
+  "position": "bottom",
+  "mode": "dock",
+  "height": 75,
+  "exclusive": false,
+  "passthrough": true,
+  "gtk-layer-shell": true,
+  "margin-right": 10,
+  "margin-bottom": 10,
+
+  /////////////
+  // Modules //
+  /////////////
+
+  "modules-right": [
+    "custom/padd",
+    "custom/l_end",
+    "hyprland/workspaces",
+    "custom/r_end",
+    "custom/l_end",
+    "tray",
+    "battery",
+    "network",
+    "bluetooth",
+    "pulseaudio",
+    "pulseaudio#microphone",
+    "clock",
+    "custom/power",
+    "custom/bar-switch",
+    "custom/theme-switch",
+    "custom/wallpaper-switch",
+    "custom/r_end",
+    "custom/padd",
+  ],
+}

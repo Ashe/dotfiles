@@ -77,9 +77,9 @@ Wall_Set()
 ScrDir=`dirname $(realpath $0)`
 source $ScrDir/global-control.sh
 ctlFile="$ThemeCtl"
-wallSet="$ThemeDir/wallpapers/wall.set"
-wallBlr="$ThemeDir/wallpapers/wall.blur"
-wallRfi="$ThemeDir/wallpapers/wall.rofi"
+wallSet="$ThemeDir/wall.set"
+wallBlr="$ThemeDir/wall.blur"
+wallRfi="$ThemeDir/wall.rofi"
 ctlLine=`grep '^1|' $ctlFile`
 
 if [  `echo $ctlLine | wc -w` -ne "1" ] ; then
@@ -122,9 +122,9 @@ while getopts "nps" option ; do
         Wall_Update $1
       fi ;;
     * ) # Invalid option
-      echo "n : set next wall"
-      echo "p : set previous wall"
-      echo "s : set input wallpaper"
+      echo "n : set next wallpaper"
+      echo "p : set previous wallpaper"
+      echo "s : set wallpaper from parameter"
       exit 1 ;;
   esac
 done

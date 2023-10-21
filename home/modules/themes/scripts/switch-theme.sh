@@ -77,9 +77,9 @@ source ${ScrDir}/global-control.sh
 getWall=`grep '^1|' $ThemeCtl | cut -d '|' -f 3`
 getWall=`eval echo $getWall`
 getName=`basename $getWall`
-ln -fs $getWall $ThemeDir/wallpapers/wall.set
-ln -fs $cache_dir/${current_theme}/${getName}.rofi $ThemeDir/wallpapers/wall.rofi
-ln -fs $cache_dir/${current_theme}/${getName}.blur $ThemeDir/wallpapers/wall.blur
+ln -fs $getWall $ThemeDir/wall.set
+ln -fs $cache_dir/${current_theme}/${getName}.rofi $ThemeDir/wall.rofi
+ln -fs $cache_dir/${current_theme}/${getName}.blur $ThemeDir/wall.blur
 ${ScrDir}/switch-wallpaper.sh
 
 if [ $? -ne 0 ] ; then
@@ -131,6 +131,19 @@ if command -v hyprctl &>/dev/null; then
 fi
 
 
+# Waybar
+if command -v waybar &>/dev/null; then
+  ln -fs $ThemeDir/config/waybar/${current_theme}.css $ConfDir/waybar/theme.css
+  ${ConfDir}/waybar/scripts/switch-waybar.sh
+fi
+
+
+# Rofi
+if command -v rofi &>/dev/null; then
+  ln -fs $ThemeDir/config/rofi/${current_theme}.rasi $ThemeDir/rofi.rasi
+fi
+
+
 # Kitty
 if command -v kitty &>/dev/null; then
   ln -fs $ThemeDir/config/kitty/${current_theme}.conf $ThemeDir/kitty.conf
@@ -147,10 +160,4 @@ if command -v code &>/dev/null; then
     echo "  \"workbench.colorTheme\": \"${vs_code_theme}\"," >> "$vs_code_dir/settings.json"
     echo "}" >> "$vs_code_dir/settings.json"
   fi
-fi
-
-
-# Rofi
-if command -v rofi &>/dev/null; then
-  ln -fs $ThemeDir/config/rofi/${current_theme}.rasi $ThemeDir/rofi.rasi
 fi

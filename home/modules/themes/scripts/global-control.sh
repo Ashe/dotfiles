@@ -18,7 +18,6 @@ mkdir -p $ThemeDir
 source $ThemeDir/scripts/initialise.sh
 
 # Wallpaper var
-EnableWallDcol=0
 ThemeCtl="$control_file"
 ThemeData="$ThemeDir/theme-data.conf"
 cache_dir="$HOME/.cache/themes"

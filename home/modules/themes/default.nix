@@ -72,6 +72,9 @@ in {
 
         # Allows for json parsing
         jq
+
+        # Allows for substitution of variables
+        envsubst
       ];
     }
 
@@ -114,6 +117,13 @@ in {
     (lib.mkIf config.rofi.enable (lib.mkMerge [(add-themes "rofi" ".rasi") {
       xdg.configFile."rofi/extra-config.rasi".text = ''
         @theme "~/.config/themes/rofi.rasi"
+      '';
+    }]))
+
+    # Enable themes for waybar
+    (lib.mkIf config.waybar.enable (lib.mkMerge [(add-themes "waybar" ".css") {
+      xdg.configFile."waybar/extra-style.css".text = ''
+        @import "theme.css";
       '';
     }]))
 
