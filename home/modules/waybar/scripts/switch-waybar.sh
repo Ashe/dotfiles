@@ -160,9 +160,21 @@ done
 # Generate new config after changes made
 
 Regenerate_Config
+bar_type=$(grep -oP '"name": "\K[^"]+' "$config_path")
+
+
+# Manage hyprland rules
+
+if command -v hyprctl &>/dev/null; then
+  hyprctl keyword layerrule unset,waybar
+  if [ "$bar_type" != "float" ]; then
+    hyprctl keyword layerrule blur,waybar
+  fi
+fi
 
 
 # Restart waybar
 
 pkill waybar
+sleep 0.1
 waybar > /dev/null 2>&1 &

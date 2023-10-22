@@ -41,8 +41,8 @@ tooltip {
   border-radius: 9px;
   padding-left: 6px;
   padding-right: 6px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 6px;
+  margin-bottom: 6px;
   color: @main-fg;
   animation: gradient_f 20s ease-in infinite;
   transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);
@@ -74,8 +74,8 @@ tooltip {
   border-radius: 9px;
   padding-left: 6px;
   padding-right: 6px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 6px;
+  margin-bottom: 6px;
   color: @wb-color;
   animation: gradient_f 20s ease-in infinite;
   transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);

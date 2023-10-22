@@ -191,6 +191,7 @@
     "exec": "echo ; echo 󱂩 Switch between bars",
     "on-click": "~/.config/waybar/scripts/switch-waybar.sh -n",
     "on-click-right": "~/.config/waybar/scripts/switch-waybar.sh -p",
+    "on-click-middle": "~/.config/waybar/scripts/switch-waybar.sh",
     "interval" : 86400,
     "tooltip": true
   },
