@@ -7,13 +7,13 @@
 
   themes.enable = true;
   btop.enable = true;
+  dunst.enable = true;
   fcitx.enable = true;
   firefox.enable = true;
   gtk.config.enable = true;
   hyprland.enable = true;
   kanshi.enable = true;
   kitty.enable = true;
-  mako.enable = true;
   mangohud.enable = true;
   neovim.enable = true;
   obs-studio.enable = true;
@@ -39,11 +39,14 @@
     sessionVariables = {
 
       # Programs to use
-      MENU = "~/.config/rofi/scripts/launch-rofi.sh drun";
+      MENU = "~/.config/rofi/scripts/launch-rofi.sh";
       BROWSER = "firefox";
       EDITOR = "neovide";
       FILE = "ranger";
       FILEGUI = "nautilus";
+
+      # Other
+      USER_LOGO = "~/.dotfiles/img/nix-logo.png";
     };
 
     # Packages to install

@@ -1,5 +1,6 @@
 inputs : {
   btop = import ./btop inputs;
+  dunst = import ./dunst inputs;
   fcitx = import ./fcitx inputs;
   firefox = import ./firefox inputs;
   gtk = import ./gtk inputs;

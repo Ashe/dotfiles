@@ -24,9 +24,9 @@ cache_dir="$HOME/.cache/themes"
 mkdir -p $cache_dir
 
 
-current_theme=$(grep '^1|' $ThemeCtl | awk -F '|' '{print $2}')
-icon_theme=$(lookup_theme_data "$current_theme" 3)
-gtk_theme=$(lookup_theme_data "$current_theme" 2)
+export current_theme=$(grep '^1|' $ThemeCtl | awk -F '|' '{print $2}')
+export icon_theme=$(lookup_theme_data "$current_theme" 3)
+export gtk_theme=$(lookup_theme_data "$current_theme" 2)
 
 
 # Hypr var

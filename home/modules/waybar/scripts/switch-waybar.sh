@@ -101,7 +101,6 @@ export i_task="16"
 theme_control="$HOME/.config/themes/scripts/global-control.sh"
 if [ -f "$theme_control" ]; then
   source "$theme_control"
-  export i_theme=$icon_theme
 fi
 
 

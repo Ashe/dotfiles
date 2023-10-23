@@ -10,5 +10,5 @@ if [[ "$(cd $dotfiles; git status --porcelain)" ]]; then
   notify-send "Dotfiles have unsaved changes" \
     "Check if things are stable and commit changes when possible." \
     -u critical \
-    --icon="$dotfiles/img/nix-logo.png"
+    --icon="$USER_LOGO"
 fi

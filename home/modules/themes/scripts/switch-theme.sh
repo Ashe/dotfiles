@@ -6,7 +6,7 @@ source ${ScrDir}/global-control.sh
 
 
 # Evaluate options
-while getopts "npst" option ; do
+while getopts "npsti" option ; do
   case $option in
 
   n ) # Set next theme
@@ -46,11 +46,15 @@ while getopts "npst" option ; do
     echo "󰆊 Next/Previous Theme"
     exit 0 ;;
 
+  i ) # Don't restart window manager
+    ignore_restart=1 ;;
+
   * ) # Invalid option
-    echo "n : set next theme"
-    echo "p : set previous theme"
-    echo "s : set theme from parameter"
-    echo "t : display tooltip"
+    echo "n : Set next theme"
+    echo "p : Set previous theme"
+    echo "s : Set theme from parameter"
+    echo "t : Display tooltip"
+    echo "i : Ignore window-manager restart"
     exit 1 ;;
   esac
 done
@@ -124,23 +128,23 @@ if command -v kvantummanager &>/dev/null; then
 fi
 
 
-# Hyprland
-if command -v hyprctl &>/dev/null; then
-  ln -fs $ThemeDir/config/hyprland/${current_theme}.conf $ThemeDir/hyprland.conf
-  hyprctl reload
-fi
-
-
 # Waybar
 if command -v waybar &>/dev/null; then
   ln -fs $ThemeDir/config/waybar/${current_theme}.css $ConfDir/waybar/theme.css
-  ${ConfDir}/waybar/scripts/switch-waybar.sh
 fi
 
 
 # Rofi
 if command -v rofi &>/dev/null; then
   ln -fs $ThemeDir/config/rofi/${current_theme}.rasi $ThemeDir/rofi.rasi
+fi
+
+
+# Dunst
+if command -v dunst &>/dev/null; then
+  cat "$ConfDir/dunst/base_dunstrc" | envsubst > "$ConfDir/dunst/dunstrc"
+  echo "" >> "$ConfDir/dunst/dunstrc"
+  cat "$ThemeDir/config/dunst/${current_theme}" | envsubst >> "$ConfDir/dunst/dunstrc"
 fi
 
 
@@ -159,5 +163,14 @@ if command -v code &>/dev/null; then
     cat "$vs_code_dir/base_settings.json" | head -n -1 > "$vs_code_dir/settings.json"
     echo "  \"workbench.colorTheme\": \"${vs_code_theme}\"," >> "$vs_code_dir/settings.json"
     echo "}" >> "$vs_code_dir/settings.json"
+  fi
+fi
+
+
+# Hyprland
+if command -v hyprctl &>/dev/null; then
+  ln -fs $ThemeDir/config/hyprland/${current_theme}.conf $ThemeDir/hyprland.conf
+  if [ -z $ignore_restart ]; then
+    hyprctl reload
   fi
 fi

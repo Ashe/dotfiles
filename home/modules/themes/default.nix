@@ -106,10 +106,10 @@ in {
       };
     })))
 
-    # Enable themes for hyprland
-    (lib.mkIf config.hyprland.enable (lib.mkMerge [(add-themes "hyprland" ".conf") {
-      wayland.windowManager.hyprland.extraConfig = ''
-        source=~/.config/themes/hyprland.conf
+    # Enable themes for waybar
+    (lib.mkIf config.waybar.enable (lib.mkMerge [(add-themes "waybar" ".css") {
+      xdg.configFile."waybar/extra-style.css".text = ''
+        @import "theme.css";
       '';
     }]))
 
@@ -120,11 +120,11 @@ in {
       '';
     }]))
 
-    # Enable themes for waybar
-    (lib.mkIf config.waybar.enable (lib.mkMerge [(add-themes "waybar" ".css") {
-      xdg.configFile."waybar/extra-style.css".text = ''
-        @import "theme.css";
-      '';
+    # Enable themes for dunst
+    (lib.mkIf config.waybar.enable (lib.mkMerge [(add-themes "dunst" "") {
+      xdg.configFile."dunst/dunstrc" = {
+        target = "dunst/base_dunstrc";
+      };
     }]))
 
     # Enable themes for kitty terminal
@@ -140,6 +140,18 @@ in {
         target = "Code/User/base_settings.json";
       };
     })
+
+    # Enable themes for hyprland
+    (lib.mkIf config.hyprland.enable (lib.mkMerge [(add-themes "hyprland" ".conf") {
+      wayland.windowManager.hyprland.extraConfig = ''
+
+        # Reset theme
+        exec = ~/.config/themes/scripts/switch-theme.sh -i
+
+        # Change hyprland colourscheme
+        source=~/.config/themes/hyprland.conf
+      '';
+    }]))
 
   ]);
 }
