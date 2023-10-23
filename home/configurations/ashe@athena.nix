@@ -58,6 +58,7 @@
       # Programs
       audacity
       bottles
+      chatterino2
       discord
       gthumb
       mpv
