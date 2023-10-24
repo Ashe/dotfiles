@@ -22,6 +22,7 @@
   starship.enable = true;
   vs-code.enable = true;
   waybar.enable = true;
+  wlogout.enable = true;
   xdg.config.enable = true;
   zsh.enable = true;
 
@@ -39,7 +40,8 @@
     sessionVariables = {
 
       # Programs to use
-      MENU = "~/.config/rofi/scripts/launch-rofi.sh";
+      MENU_CMD = "~/.config/rofi/scripts/launch-rofi.sh";
+      EXIT_CMD = "~/.config/wlogout/scripts/launch-wlogout.sh";
       BROWSER = "firefox";
       EDITOR = "neovide";
       FILE = "ranger";

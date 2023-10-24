@@ -21,6 +21,7 @@ inputs : {
   themes = import ./themes inputs;
   vs-code = import ./vs-code inputs;
   waybar = import ./waybar inputs;
+  wlogout = import ./wlogout inputs;
   xdg = import ./xdg inputs;
   zsh = import ./zsh inputs;
 }

@@ -106,12 +106,15 @@ in {
       };
     })))
 
+    # Enable css themes
+    (add-themes "css" ".css")
+
     # Enable themes for waybar
-    (lib.mkIf config.waybar.enable (lib.mkMerge [(add-themes "waybar" ".css") {
+    (lib.mkIf config.waybar.enable {
       xdg.configFile."waybar/extra-style.css".text = ''
         @import "theme.css";
       '';
-    }]))
+    })
 
     # Enable themes for rofi application switcher
     (lib.mkIf config.rofi.enable (lib.mkMerge [(add-themes "rofi" ".rasi") {
@@ -126,6 +129,13 @@ in {
         target = "dunst/base_dunstrc";
       };
     }]))
+
+    # Enable themes for wlogout
+    (lib.mkIf config.wlogout.enable {
+      xdg.configFile."wlogout/extra-style.css".text = ''
+        @import "theme.css";
+      '';
+    })
 
     # Enable themes for kitty terminal
     (lib.mkIf config.kitty.enable (lib.mkMerge [(add-themes "kitty" ".conf") {

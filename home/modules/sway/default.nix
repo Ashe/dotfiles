@@ -75,8 +75,8 @@ in
 
           # Basics
           "${cfg.config.modifier}+Shift+w" = "kill";
-          "${cfg.config.modifier}+space" = "exec $MENU";
-          "${cfg.config.modifier}+Escape" = "exec wlogout";
+          "${cfg.config.modifier}+space" = "exec $MENU_CMD";
+          "${cfg.config.modifier}+Escape" = "exec $EXIT_CMD";
           "${cfg.config.modifier}+BackSpace" = "reload";
           "${cfg.config.modifier}+Control+Shift+BackSpace" =
             "exec /home/ashe/.config/sway/extra/exit-sway.sh";

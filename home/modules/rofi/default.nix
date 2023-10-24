@@ -15,6 +15,7 @@ _: { config, lib, pkgs, ... }:
 
     # Configure rofi
     xdg.configFile."rofi/config.rasi".text = builtins.readFile ./config.rasi;
+    xdg.configFile."rofi/extra-config.rasi".text = '''';
 
     # Copy scripts folder
     xdg.configFile."rofi/scripts".source = ./scripts;

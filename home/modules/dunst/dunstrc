@@ -226,7 +226,7 @@
     ### Misc/Advanced ###
 
     # dmenu path.
-    dmenu = $MENU -dmenu -p dunst:
+    dmenu = $MENU_CMD -dmenu -p dunst:
 
     # Browser for opening urls in context menu.
     browser = xdg-open

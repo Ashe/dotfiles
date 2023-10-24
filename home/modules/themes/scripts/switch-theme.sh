@@ -130,7 +130,7 @@ fi
 
 # Waybar
 if command -v waybar &>/dev/null; then
-  ln -fs $ThemeDir/config/waybar/${current_theme}.css $ConfDir/waybar/theme.css
+  ln -fs $ThemeDir/config/css/${current_theme}.css $ConfDir/waybar/theme.css
 fi
 
 
@@ -145,6 +145,12 @@ if command -v dunst &>/dev/null; then
   cat "$ConfDir/dunst/base_dunstrc" | envsubst > "$ConfDir/dunst/dunstrc"
   echo "" >> "$ConfDir/dunst/dunstrc"
   cat "$ThemeDir/config/dunst/${current_theme}" | envsubst >> "$ConfDir/dunst/dunstrc"
+fi
+
+
+# wlogout
+if command -v wlogout &>/dev/null; then
+  ln -fs $ThemeDir/config/css/${current_theme}.css $ConfDir/wlogout/theme.css
 fi
 
 

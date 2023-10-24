@@ -18,6 +18,7 @@ _: { config, lib, pkgs, ... }:
       # Copy configurations
       xdg.configFile."waybar/configs".source = ./configs;
       xdg.configFile."waybar/modules.jsonc".source = ./modules.jsonc;
+      xdg.configFile."waybar/extra-style.css".text = '''';
 
       # Copy scripts
       xdg.configFile."waybar/scripts".source = ./scripts;
