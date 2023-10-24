@@ -25,6 +25,8 @@ Regenerate_Config()
   echo "Generating config: '$current_config'."
   local current_config_path="$configs_dir/$current_config.jsonc"
   if [ -f "$current_config_path" ]; then
+    export MATCH_1='$1'
+    export MATCH_2='$2'
     echo "//$current_config" > "$config_path"
     echo "{" >> "$config_path"
     sed '1d;$d' "$current_config_path" | envsubst >> "$config_path"
