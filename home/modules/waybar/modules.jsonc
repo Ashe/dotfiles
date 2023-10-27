@@ -205,7 +205,8 @@
   "custom/power": {
     "format": "{}",
     "exec": "echo ; echo  Logout",
-    "on-click": "~/.config/hypr/scripts/logoutlaunch.sh 2",
+    "on-click": "$EXIT_CMD",
+    "on-click-right": "$MENU_CMD -show drun",
     "interval" : 86400, // once every day
     "tooltip": true
   },

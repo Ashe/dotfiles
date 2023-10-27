@@ -20,10 +20,10 @@
   "modules-left": [
     "custom/padd",
     "custom/l_end",
+    "custom/power",
     "custom/bar-switch",
     "custom/theme-switch",
     "custom/wallpaper-switch",
-    "custom/power",
     "clock",
     "pulseaudio",
     "pulseaudio#microphone",
