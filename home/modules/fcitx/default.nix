@@ -17,7 +17,7 @@ _: { config, lib, pkgs, ... }:
     };
 
     # Manage fcitx configuration */
-    xdg.configFile."fcitx/config".source = ./config;
+    xdg.configFile."fcitx5/config".source = ./config;
 
     # Tell programs to use fcitx as input method */
     home.sessionVariables = {
