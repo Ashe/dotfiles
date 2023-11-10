@@ -3,6 +3,21 @@ _: { config, lib, pkgs, xdg, ... }: let
   # Data for all themes
   themes = {
 
+    catppuccin-mocha = {
+      name = "Catppuccin-Mocha";
+      gtk = { theme = "Catppuccin-Mocha"; package = pkgs.catppuccin-gtk; };
+      icon = { theme = "Tela-circle-dracula"; package = pkgs.tela-circle-icon-theme; };
+      vs-code-theme = "Catppuccin Mocha";
+    };
+
+    cyberpunk-edge = {
+      name = "Cyberpunk-Edge";
+      # TODO: Fix this when cyberpunk-edge available
+      gtk = { theme = "Tokyonight-Dark-B"; package = pkgs.tokyo-night-gtk; };
+      icon = { theme = "Tela-circle-yellow"; package = pkgs.tela-circle-icon-theme; };
+      vs-code-theme = "cyberpunk2077";
+    };
+
     rose-pine = {
       name = "Rose-Pine";
       gtk = { theme = "rose-pine"; package = pkgs.rose-pine-gtk-theme; };

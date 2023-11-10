@@ -1,14 +1,14 @@
-[urgency_critical]
-    background = "#ebac52"
-    foreground = "#1e1e2e"
-    frame_color = "#fda26a"
-
 [urgency_low]
-    background = "#575279"
-    foreground = "#f8f5f2"
-    frame_color = "#575279"
+background = "#575279"
+foreground = "#f8f5f2"
+frame_color = "#575279"
 
 [urgency_normal]
-    background = "#3f3540"
-    foreground = "#ecc6b0"
-    frame_color = "#ecc6b0"
+background = "#3f3540"
+foreground = "#ecc6b0"
+frame_color = "#ecc6b0"
+
+[urgency_critical]
+background = "#ebac52"
+foreground = "#1e1e2e"
+frame_color = "#fda26a"

@@ -180,3 +180,8 @@ if command -v hyprctl &>/dev/null; then
     hyprctl reload
   fi
 fi
+
+# Send notification if not restarting
+if [ -z $ignore_restart ]; then
+  notify-send --icon="$getWall" -t 5000 "Theme" "$current_theme"
+fi

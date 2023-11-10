@@ -95,7 +95,7 @@
     "format-muted": " --",
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
     "on-click-right": "pavucontrol",
-    "tooltip-format": "{icon} {desc} {volume}%",
+    "tooltip-format": "{icon} {desc} // {volume}%",
     "scroll-step": 1,
     "format-icons": {
       "default": ["", ""]
