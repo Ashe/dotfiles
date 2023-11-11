@@ -216,7 +216,7 @@
     "exec": "echo ; echo 󰟡 Switch themes",
     "on-click": "~/.config/themes/scripts/switch-theme.sh -n",
     "on-click-right": "~/.config/themes/scripts/switch-theme.sh -p",
-    "on-click-middle": "sleep 0.1 && ~/.config/themes/scripts/select-theme.sh",
+    "on-click-middle": "sleep 0.1 && ~/.config/themes/scripts/switch-theme.sh",
     "interval" : 86400, // once every day
     "tooltip": true
   },
@@ -226,7 +226,7 @@
     "exec": "echo ; echo 󰆊 Switch wallpapers",
     "on-click": "~/.config/themes/scripts/switch-wallpaper.sh -n",
     "on-click-right": "~/.config/themes/scripts/switch-wallpaper.sh -p",
-    "on-click-middle": "sleep 0.1 && ~/.config/themes/scripts/select-wallpaper.sh",
+    "on-click-middle": "sleep 0.1 && ~/.config/themes/scripts/switch-wallpaper.sh",
     "interval" : 86400, // once every day
     "tooltip": true
   },
