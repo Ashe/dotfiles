@@ -34,7 +34,6 @@ _: { config, lib, pkgs, ... }:
     # Start waybar with hyprland
     (lib.mkIf config.hyprland.enable {
       wayland.windowManager.hyprland.extraConfig = ''
-
         # Reload waybar
         exec = ~/.config/waybar/scripts/switch-waybar.sh
       '';

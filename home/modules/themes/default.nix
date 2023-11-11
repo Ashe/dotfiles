@@ -169,7 +169,6 @@ in {
     # Enable themes for hyprland
     (lib.mkIf config.hyprland.enable (lib.mkMerge [(add-themes "hyprland" ".conf") {
       wayland.windowManager.hyprland.extraConfig = ''
-
         # Reset theme
         exec = ~/.config/themes/scripts/switch-theme.sh -i
 

@@ -32,7 +32,6 @@ _: { config, lib, pkgs, ... }:
     # Start dunst with hyprland
     (lib.mkIf config.hyprland.enable {
       wayland.windowManager.hyprland.extraConfig = ''
-
         # Reload dunst
         exec = ~/.config/dunst/scripts/start-dunst.sh
       '';

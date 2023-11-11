@@ -23,7 +23,6 @@ inputs : { config, lib, pkgs, ... }:
     #
     (lib.mkIf config.hyprland.enable {
       wayland.windowManager.hyprland.extraConfig = ''
-
         # Reload kanshi
         exec = kanshi
       '';

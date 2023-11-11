@@ -34,7 +34,6 @@ _: { config, lib, pkgs, ... }:
     # Start fcitx on startup
     (lib.mkIf config.hyprland.enable {
       wayland.windowManager.hyprland.extraConfig = ''
-
         # Start fcitx
         exec-once = fcitx5
       '';
