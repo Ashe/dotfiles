@@ -22,7 +22,6 @@ Wall_Update()
   fi
 
   if [ ! -f "${cache_dir}/${curTheme}/${cacheImg}.rofi" ] ; then
-    #convert -strip -resize 1000 -unsharp 0x1+1.0+0 $x_wall ${cache_dir}/${curTheme}/rofi.${cacheImg}
     convert -strip -resize 2000 -gravity center -extent 2000 -quality 90 $x_wall ${cache_dir}/${curTheme}/${cacheImg}.rofi
   fi
 
@@ -49,7 +48,6 @@ Wall_Change()
       elif [ $x_switch == 'p' ] ; then
         nextIndex=$(( i - 1 ))
       fi
-
       Wall_Update ${Wallist[nextIndex]}
       break
     fi

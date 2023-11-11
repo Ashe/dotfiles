@@ -90,6 +90,9 @@ in {
 
         # Allows for substitution of variables
         envsubst
+
+        # Allows for editing of images
+        imagemagick
       ];
     }
 
