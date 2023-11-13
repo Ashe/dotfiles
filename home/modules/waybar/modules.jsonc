@@ -164,6 +164,8 @@
       "(.*) - YouTube(.*)": "󰗃 $MATCH_1",
       "(.*) — Mozilla Firefox": "󰈹 $MATCH_1",
       "(.*)Mozilla Firefox": "󰈹 Firefox",
+      "(.*) — (.*)Floorp": "󰈹 $MATCH_1",
+      "(.*)Floorp": "󰈹 Firefox",
       "(.*) - Visual Studio Code": "󰨞 $MATCH_1",
       "(.*)Visual Studio Code": "󰨞 VS Code",
       "(.*)(Chatterino.*)": " Chatterino",

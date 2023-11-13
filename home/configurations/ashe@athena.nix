@@ -12,7 +12,6 @@
   firefox.enable = true;
   gtk.config.enable = true;
   hyprland.enable = true;
-  #kanshi.enable = true; TODO: Do I need this?
   kitty.enable = true;
   mangohud.enable = true;
   neovim.enable = true;
@@ -62,6 +61,7 @@
       bottles
       chatterino2
       discord
+      floorp
       gthumb
       mpv
       neofetch
