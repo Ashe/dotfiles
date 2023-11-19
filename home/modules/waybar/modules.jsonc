@@ -95,7 +95,7 @@
     "format-muted": " --",
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
     "on-click-right": "pavucontrol",
-    "tooltip-format": "{icon} {desc} // {volume}%",
+    "tooltip-format": "{icon} {volume}% - {desc}",
     "scroll-step": 1,
     "format-icons": {
       "default": ["", ""]
@@ -110,7 +110,7 @@
     "on-click-right": "pavucontrol -t 4",
     "on-scroll-up": "pactl set-source-volume 0 +1%",
     "on-scroll-down": "pactl set-source-volume 0 -1%",
-    "tooltip-format": "{format_source} {source_desc} // {source_volume}%",
+    "tooltip-format": " {source_volume}% - {source_desc}",
     "scroll-step": 1
   },
 
