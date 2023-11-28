@@ -9,6 +9,7 @@ inputs : {
   kitty = import ./kitty inputs;
   mako = import ./mako inputs;
   mangohud = import ./mangohud inputs;
+  mpv = import ./mpv inputs;
   neovim = import ./neovim inputs;
   obs-studio = import ./obs-studio inputs;
   qt = import ./qt inputs;

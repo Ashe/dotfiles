@@ -14,6 +14,7 @@
   hyprland.enable = true;
   kitty.enable = true;
   mangohud.enable = true;
+  mpv.enable = true;
   neovim.enable = true;
   obs-studio.enable = true;
   qt.config.enable = true;
@@ -63,7 +64,6 @@
       discord
       floorp
       gthumb
-      mpv
       neofetch
       neovide
       nicotine-plus
