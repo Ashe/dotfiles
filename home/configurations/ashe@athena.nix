@@ -62,7 +62,7 @@
       bottles
       chatterino2
       discord
-      floorp
+      godot_4
       gthumb
       neofetch
       neovide
@@ -73,7 +73,6 @@
       ranger
       scanmem
       slack
-      wlogout
       xwayland
 
       # Utilities

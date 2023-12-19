@@ -65,7 +65,6 @@ _: { config, lib, pkgs, ... }:
 
   # Enable sound
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
 
   # User configurations
   users.users = {
@@ -117,7 +116,6 @@ _: { config, lib, pkgs, ... }:
       libnotify
       mtools
       pciutils
-      pulseaudio-ctl
       vulkan-tools
       xdg-utils
     ];
@@ -186,7 +184,12 @@ _: { config, lib, pkgs, ... }:
     openssh.enable = true;
 
     # Enable Pipewire for a/v (used for screensharing)
-    pipewire.enable = true;
+    pipewire = {
+      enable = true;
+      audio.enable = true;
+      pulse.enable = true;
+      wireplumber.enable = true;
+    };
 
     # Enable CUPS to print documents
     printing.enable = true;

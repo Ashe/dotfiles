@@ -91,9 +91,9 @@ in
           "Print" = "exec screenshot.sh &";
 
           # Multimedia
-          XF86AudioRaiseVolume = "exec pulseaudio-ctl up";
-          XF86AudioLowerVolume = "exec pulseaudio-ctl down";
-          XF86AudioMute = "exec pulseaudio-ctl mute";
+          XF86AudioRaiseVolume = "exec pactl set-sink-volume @DEFAULT_SINK@ 0 +1%";
+          XF86AudioLowerVolume = "exec pactl set-sink-volume @DEFAULT_SINK@ 0 -1%";
+          XF86AudioMute = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
           XF86AudioPlay = "exec mpc toggle";
           XF86AudioPrev = "exec mpc prev";
           XF86AudioNext = "exec mpc next";

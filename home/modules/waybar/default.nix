@@ -27,7 +27,7 @@ _: { config, lib, pkgs, ... }:
       home.packages = with pkgs; [
 
         # For controlling volume via pactl
-        pulseaudio-ctl
+        pulseaudio
       ];
     }
 

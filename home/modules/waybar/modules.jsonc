@@ -114,6 +114,30 @@
     "scroll-step": 1
   },
 
+  "wireplumber": {
+    "format": "{icon} {volume}",
+    "format-muted": " --",
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click-right": "pavucontrol",
+    "tooltip-format": "{icon} {volume}% - {desc}",
+    "scroll-step": 1,
+    "format-icons": {
+      "default": ["", ""]
+    }
+  },
+
+  "wireplumber#microphone": {
+    "format": "{format_source}",
+    "format-source": " {volume}",
+    "format-source-muted": " --",
+    "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+    "on-click-right": "pavucontrol -t 4",
+    "on-scroll-up": "pactl set-source-volume 0 +1%",
+    "on-scroll-down": "pactl set-source-volume 0 -1%",
+    "tooltip-format": " {source_volume}% - {source_desc}",
+    "scroll-step": 1
+  },
+
   "tray": {
     "icon-size": 18,
     "spacing": 8
