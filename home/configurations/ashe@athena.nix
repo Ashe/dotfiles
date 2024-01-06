@@ -73,6 +73,7 @@
       ranger
       scanmem
       slack
+      vesktop
       xwayland
 
       # Utilities
@@ -95,7 +96,7 @@
 
     # Permit specific insecure packages
     permittedInsecurePackages = [
-      "electron-13.6.9"
+      "electron-25.9.0"
     ];
   };
 

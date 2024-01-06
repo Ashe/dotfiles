@@ -183,6 +183,8 @@
       "(.*)Steam": "󰓓 Steam",
       "(.*) (.*) - NVIM": " $MATCH_1",
       "(.*)- Discord": "󰙯 $MATCH_1",
+      "• Discord [|] (.*)": "󰙯 $MATCH_1",
+      "[(](.*)[)] Discord [|] (.*)": "󰙯 $MATCH_2 ($MATCH_1)",
       "(.*)- Slack": " $MATCH_1",
       "(.*) - Twitch(.*)": " $MATCH_1",
       "(.*) - YouTube(.*)": "󰗃 $MATCH_1",

@@ -16,6 +16,9 @@ inputs : { config, lib, pkgs, ... }:
     # - dconf
     # - xwayland
     # and adding a proper Desktop Entry to your Display Manager
-    programs.hyprland.enable = true;
+    programs.hyprland = {
+      enable = true;
+      portalPackage = inputs.hyprland-portal.packages."x86_64-linux".xdg-desktop-portal-hyprland;
+    };
   };
 }

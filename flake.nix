@@ -11,6 +11,7 @@
       flake = false;
     };
     hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-portal.url = "github:hyprwm/xdg-desktop-portal-hyprland";
   };
   outputs = inputs: {
 

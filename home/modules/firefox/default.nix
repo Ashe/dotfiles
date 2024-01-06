@@ -14,7 +14,7 @@ _: { config, lib, pkgs, ... }:
       enable = true;
 
       # Use nightly version of firefox
-      package = with pkgs; firefox-wayland;
+      package = pkgs.firefox-wayland;
 
       # Configure user profiles
       profiles.ashe = {
