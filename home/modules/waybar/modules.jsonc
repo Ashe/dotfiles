@@ -195,6 +195,8 @@
       "(.*) - Visual Studio Code": "󰨞 $MATCH_1",
       "(.*)Visual Studio Code": "󰨞 VS Code",
       "(.*)(Chatterino.*)": " Chatterino",
+      "Bitwig Studio": "󰎆 Bitwig Studio",
+      "Bitwig Studio - (.*)": "󰎆 $MATCH_1",
     },
     "max-length": 1000,
   },
