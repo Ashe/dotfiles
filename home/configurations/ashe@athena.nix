@@ -8,7 +8,6 @@
   themes.enable = true;
   btop.enable = true;
   dunst.enable = true;
-  fcitx.enable = true;
   firefox.enable = true;
   gtk.config.enable = true;
   hyprland.enable = true;
