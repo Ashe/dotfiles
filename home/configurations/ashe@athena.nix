@@ -80,10 +80,11 @@
       playerctl
       rnix-lsp
       slurp
+      tagger
       vulkan-tools
       wdisplays
       wl-clipboard
-      youtube-dl
+      yt-dlp
     ];
   };
 
