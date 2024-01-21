@@ -181,6 +181,7 @@
       "(.*) — Dolphin": "󰉋 $MATCH_1",
       "(.*)Spotify": "󰓇 Spotify",
       "(.*)Steam": "󰓓 Steam",
+      "(.*) - mpv": " $MATCH_1",
       "(.*) (.*) - NVIM": " $MATCH_1",
       "(.*)- Discord": "󰙯 $MATCH_1",
       "• Discord [|] (.*)": "󰙯 $MATCH_1",
