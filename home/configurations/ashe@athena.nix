@@ -6,6 +6,7 @@
   ##################
 
   themes.enable = true;
+  audio-plugins.enable = true;
   btop.enable = true;
   dunst.enable = true;
   firefox.enable = true;

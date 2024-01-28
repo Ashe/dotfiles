@@ -5,7 +5,7 @@ _: { config, lib, pkgs, ... }:
   options.qt.config.enable = lib.mkEnableOption "qt.config";
 
   # Configure qt if desired
-  config = lib.mkIf config.gtk.config.enable {
+  config = lib.mkIf config.qt.config.enable {
 
     # Enable qt configuration
     qt.enable = true;
