@@ -1,5 +1,4 @@
 inputs : {
-  audio-plugins = import ./audio-plugins inputs;
   btop = import ./btop inputs;
   dunst = import ./dunst inputs;
   fcitx = import ./fcitx inputs;
