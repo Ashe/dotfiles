@@ -63,6 +63,7 @@
       discord
       godot_4
       gthumb
+      magic-wormhole-rs
       neofetch
       neovide
       nicotine-plus
