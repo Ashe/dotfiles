@@ -38,7 +38,26 @@
   "clock": {
     "format": "{:%I:%M %p 󰃭 %a %d}",
     "format-alt": "{:%H:%M  %b %Y}",
-    "tooltip-format": "<tt><big>{calendar}</big></tt>"
+    "tooltip-format": "{calendar}",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+      },
+    },
+    "actions":  {
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down",
+    },
   },
 
   "cpu": {
@@ -52,8 +71,10 @@
     "format": "{icon}",
     "format-icons": {
       "activated": "󰥔",
-      "deactivated": ""
-    }
+      "deactivated": "",
+    },
+    "tooltip-format-activated": "󰥔 Idle inhibitor active",
+    "tooltip-format-deactivated": " Idle inhibitor not active",
   },
 
   "memory": {
@@ -77,6 +98,17 @@
     },
     // "ignored-players": ["firefox"]
     "max-length": 1000
+  },
+
+  "gamemode": {
+    "format": "{glyph}",
+    "format-alt": "{glyph} {count}",
+    "glyph": "󰖺",
+    "hide-not-running": true,
+    "tooltip-format": "󰖺 Gamemode active - {count} games",
+    "use-icon": false,
+    "icon-size": 0,
+    "icon-spacing": 0,
   },
 
   "network": {
