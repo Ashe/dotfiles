@@ -1,37 +1,29 @@
 inputs: { config, lib, ... }:
 
 {
-  # Add options for nix package manager
-  options.nix = {
-
-    # Allows for specification of whether flakes should be enabled
-    flakes.enable = lib.mkEnableOption "nix flakes";
-
-    # Allows for extension of unfree packages
-    allowedUnfree = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [];
-      description = ''
-        Allows for unfree packages by their name.
-      '';
-    };
-  };
+  # Add options for configuring nix package manager
+  options.nix.config.enable = lib.mkEnableOption "nix.config";
 
   # Add extra configuration for nix if desired
-  config = lib.mkMerge [
+  config = lib.mkIf config.nix.config.enable {
+    nix = {
 
-    # Enable flakes if desired
-    (lib.mkIf config.nix.flakes.enable {
-      nix = {
-        settings.experimental-features = "nix-command flakes";
-        registry.nixpkgs.flake = inputs.nixpkgs;
+      # Configure nix
+      settings = {
+
+        # Enable flakes and 'nix' command
+        experimental-features = "nix-command flakes";
+
+        # Deduplicate and optimize nix store
+        auto-optimise-store = true;
       };
-    })
 
-    # Specify unfree packages
-    (lib.mkIf (config.nix.allowedUnfree != []) {
-      nixpkgs.config.allowUnfreePredicate = pkg:
-        builtins.elem (lib.getName pkg) config.nix.allowedUnfree;
-    })
-  ];
+      # Add each flake input as a registry, making nix3 commands consistent with flake
+      #registry.nixpkgs.flake = inputs.nixpkgs;
+      registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+
+      # Additionally, add inputs to system's legacy channels to make legacy nix commands consistent
+      nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
+    };
+  };
 }

@@ -9,7 +9,7 @@ inputs: { config, lib, pkgs, ... }:
   # Custom modules #
   ##################
 
-  nix.flakes.enable = true;
+  nix.config.enable = true;
   hyprland.enable = true;
   dropbox.enable = true;
   jellyfin.enable = true;
@@ -151,12 +151,8 @@ inputs: { config, lib, pkgs, ... }:
     };
   };
 
-  # Configure nixpkgs
-  nixpkgs.config = {
-
-    # Allow proprietary software
-    allowUnfree = true;
-  };
+  # Allow proprietary software
+  nixpkgs.config.allowUnfree = true;
 
   # Configure system-wide programs
   programs = {
