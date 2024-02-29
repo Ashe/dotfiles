@@ -13,6 +13,11 @@ _: { config, lib, pkgs, ... }:
       # Enable mpv
       enable = true;
 
+      # Configure mpv
+      config = {
+        auto-window-resize = false;
+      };
+
       # Install custom scripts
       scripts = with pkgs; [
         mpvScripts.uosc
