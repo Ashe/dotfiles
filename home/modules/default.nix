@@ -1,5 +1,6 @@
 inputs : {
   btop = import ./btop inputs;
+  daw-plugins = import ./daw-plugins inputs;
   dunst = import ./dunst inputs;
   fcitx = import ./fcitx inputs;
   firefox = import ./firefox inputs;

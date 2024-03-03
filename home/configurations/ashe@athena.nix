@@ -7,6 +7,7 @@
 
   themes.enable = true;
   btop.enable = true;
+  daw-plugins.enable = true;
   dunst.enable = true;
   firefox.enable = true;
   gtk.config.enable = true;
