@@ -69,7 +69,7 @@ inputs: { config, lib, pkgs, ... }:
   # User configurations
   users.users = {
     ashe = {
-      description = "Ashley Smith";
+      description = "Ashley Rose";
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" ];
       shell = pkgs.zsh;
@@ -216,6 +216,18 @@ inputs: { config, lib, pkgs, ... }:
 
   # Get location from geoclue
   location.provider = "geoclue2";
+
+  # Fix for dualsense controller
+  services.udev = {
+    enable = true;
+    extraRules = ''
+      # Disable DS4 touchpad acting as mouse
+      # USB
+      ATTRS{name}=="Sony Interactive Entertainment Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+      # Bluetooth
+      ATTRS{name}=="Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+    '';
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
