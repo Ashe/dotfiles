@@ -38,7 +38,7 @@
     java-language-server
 
     # Nix
-    rnix-lsp
+    nixd
   ];
 
   # Add language server specific files to global ignore list

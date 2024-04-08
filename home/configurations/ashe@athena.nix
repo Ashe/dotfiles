@@ -80,7 +80,6 @@
       # Utilities
       mpc_cli
       playerctl
-      rnix-lsp
       slurp
       tagger
       vulkan-tools

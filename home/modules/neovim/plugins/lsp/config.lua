@@ -80,7 +80,7 @@ local servers = {
   'hls',
 
   -- Nix
-  'rnix',
+  'nixd',
 
   -- Rust
   'rust_analyzer',
