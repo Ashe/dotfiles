@@ -32,7 +32,7 @@ _: { config, lib, pkgs, ... }:
         }
         {
           label = "suspend";
-          action = "swaylock && systemctl suspend";
+          action = "systemctl suspend && swaylock";
           text = "Suspend";
           keybind = "u";
         }
