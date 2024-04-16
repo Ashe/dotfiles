@@ -12,6 +12,7 @@
     };
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-portal.url = "github:hyprwm/xdg-desktop-portal-hyprland";
+    lobster.url = "github:justchokingaround/lobster";
   };
   outputs = inputs: {
 

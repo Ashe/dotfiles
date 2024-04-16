@@ -1,4 +1,4 @@
-{ self, ... } : { config, lib, pkgs, ... }:
+inputs: { config, lib, pkgs, ... }:
 
 {
   ##################
@@ -54,10 +54,12 @@
     # Packages to install
     packages = with pkgs; [
 
-      # Custom packages
-      self.packages.x86_64-linux.scripts
+      # Flake packages
+      inputs.self.packages."x86_64-linux".scripts
+      inputs.lobster.packages."x86_64-linux".lobster
 
       # Programs
+      ani-cli
       audacity
       bottles
       chatterino2
