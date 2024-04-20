@@ -1,4 +1,4 @@
-inputs: { config, lib, ... }:
+{ inputs, config, lib, ... }:
 
 {
   # Add options for configuring nix package manager

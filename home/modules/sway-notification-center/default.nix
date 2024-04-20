@@ -1,4 +1,4 @@
-_: { config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Add options for sway-notification-center, a notification manager for wayland

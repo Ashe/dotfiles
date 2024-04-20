@@ -1,4 +1,4 @@
-inputs : { config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   # Add options for kanshi, a service for managing monitors

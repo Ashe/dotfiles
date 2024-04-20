@@ -6,7 +6,8 @@ let
 
 in inputs.home-manager.lib.homeManagerConfiguration {
   pkgs = inputs.nixpkgs.legacyPackages.${system};
-  modules = builtins.attrValues self.homeModules ++ [
+  extraSpecialArgs = { inherit inputs; };
+  modules = self.homeModules ++ [
     config-file
     inputs.nur.nixosModules.nur
     inputs.hyprland.homeManagerModules.default

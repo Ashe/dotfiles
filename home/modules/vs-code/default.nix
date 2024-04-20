@@ -1,4 +1,4 @@
-_: { config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   # Add options for vs-code, a text editor

@@ -1,4 +1,4 @@
-_: { config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   # Add options for dropbox, a cloud service for file storage

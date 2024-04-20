@@ -18,11 +18,11 @@
 
     # System configurations and modules
     nixosConfigurations = import ./nixos/configurations inputs;
-    nixosModules = import ./nixos/modules inputs;
+    nixosModules = import ./nixos/modules;
 
     # Home-manager configurations and modules
     homeConfigurations = import ./home/configurations inputs;
-    homeModules = import ./home/modules inputs;
+    homeModules = import ./home/modules;
 
     # Custom library functions
     lib = import ./lib inputs;

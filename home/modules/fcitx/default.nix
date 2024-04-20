@@ -1,4 +1,4 @@
-_: { config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   # Add options for fcitx, a utility for changing keyboard language

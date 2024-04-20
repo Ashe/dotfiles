@@ -1,4 +1,4 @@
-_: { config, lib, ... }:
+{ config, lib, ... }:
 
 {
   # Add options for mako notification system

@@ -1,4 +1,4 @@
-inputs : { config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 {
   # Add options for hyprland, a wayland window manager

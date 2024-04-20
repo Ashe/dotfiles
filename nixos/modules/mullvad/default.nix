@@ -1,4 +1,4 @@
-_: { config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 {
   # Add options for mullvad, a vpn

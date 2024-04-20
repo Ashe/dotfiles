@@ -1,3 +1,3 @@
-{ self, ... } @ inputs: {
+{ self, ... } : {
   athena = self.lib.mkSystem "athena";
 }

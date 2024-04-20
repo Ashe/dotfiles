@@ -1,4 +1,4 @@
-inputs : { config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 {
   # Add options for whether to build mesa GPU drivers from master git branch

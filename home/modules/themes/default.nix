@@ -1,4 +1,4 @@
-_: { config, lib, pkgs, xdg, ... }: let
+{ config, lib, pkgs, xdg, ... }: let
 
   # Data for all themes
   themes = {
