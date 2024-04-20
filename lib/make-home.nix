@@ -14,10 +14,8 @@ in inputs.home-manager.lib.homeManagerConfiguration {
       home = {
         username = user;
         homeDirectory = home-directory;
-        packages = [
-          inputs.home-manager.packages.${system}.home-manager
-        ];
       };
+      programs.home-manager.enable = true;
       programs.git.enable = inputs.nixpkgs.lib.mkDefault true;
     }
   ];
