@@ -20,6 +20,11 @@ in inputs.nixpkgs.lib.nixosSystem {
         enable = inputs.nixpkgs.lib.mkDefault true;
         generateCaches = true;
       };
+      environment.systemPackages = with inputs.nixpkgs.legacyPackages."x86_64-linux"; [
+        git
+        magic-wormhole-rs
+        netcat
+      ];
     }
   ];
 }

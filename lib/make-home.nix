@@ -14,6 +14,10 @@ in inputs.home-manager.lib.homeManagerConfiguration {
       home = {
         username = user;
         homeDirectory = home-directory;
+        packages = with inputs.nixpkgs.legacyPackages."x86_64-linux"; [
+          magic-wormhole-rs
+          netcat
+        ];
       };
       programs.home-manager.enable = true;
       programs.git.enable = inputs.nixpkgs.lib.mkDefault true;

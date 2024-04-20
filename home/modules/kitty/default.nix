@@ -63,5 +63,10 @@ _: { config, lib, pkgs, ... }:
     home.sessionVariables = {
       TERMINAL = "kitty";
     };
+
+    # Install kitty-specific packages
+    home.packages = with pkgs; [
+      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    ];
   };
 }
