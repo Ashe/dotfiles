@@ -61,6 +61,7 @@ inputs: { config, lib, pkgs, ... }:
       # Programs
       ani-cli
       audacity
+      bat
       bottles
       chatterino2
       discord
