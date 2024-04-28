@@ -1,7 +1,7 @@
 { self, ... } @ inputs: user: host: system:
 
 let
-  config-file = import "${self}/home/configurations/${user}@${host}.nix" inputs;
+  config-file = import "${self}/home/configurations/${user}@${host}.nix";
   home-directory = "/home/${user}";
 
 in inputs.home-manager.lib.homeManagerConfiguration {
