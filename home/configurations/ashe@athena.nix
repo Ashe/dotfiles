@@ -62,6 +62,7 @@
       ani-cli
       audacity
       bat
+      blanket
       bottles
       chatterino2
       discord
