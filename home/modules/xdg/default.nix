@@ -29,6 +29,7 @@
           "application/x-compressed-tar" = ["org.gnome.Nautilus.desktop"];
           "application/x-xz-compressed-tar" = ["org.gnome.Nautilus.desktop"];
           "application/json" = ["neovide.desktop"];
+          "application/pdf" = ["firefox.desktop"];
 
           # Directories
           "inode/directory" = ["org.gnome.Nautilus.desktop"];

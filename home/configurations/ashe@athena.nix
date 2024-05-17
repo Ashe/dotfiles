@@ -66,6 +66,7 @@
       bottles
       chatterino2
       discord
+      gnome.gnome-sound-recorder
       godot_4
       gthumb
       magic-wormhole-rs
