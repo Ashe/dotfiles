@@ -20,6 +20,10 @@ in inputs.home-manager.lib.homeManagerConfiguration {
           netcat
         ];
       };
+      nix = {
+        package = inputs.nixpkgs.legacyPackages.${system}.nix;
+        settings.experimental-features = [ "nix-command" "flakes" ];
+      };
       programs.home-manager.enable = true;
       programs.git.enable = inputs.nixpkgs.lib.mkDefault true;
     }

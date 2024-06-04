@@ -26,6 +26,7 @@ in inputs.nixpkgs.lib.nixosSystem {
         magic-wormhole-rs
         netcat
       ];
+      nix.settings.experimental-features = [ "nix-command" "flakes" ];
     }
   ];
 }
