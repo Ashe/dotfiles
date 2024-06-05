@@ -89,17 +89,4 @@
     # Cheat sheets
     navi.enable = true;
   };
-
-  # Configure services
-  services = {
-
-    # Enable gammastep
-    gammastep = {
-      enable = true;
-      provider = "manual";
-      tray = true;
-      latitude = 51.509;
-      longitude = -0.126;
-    };
-  };
 }

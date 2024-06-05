@@ -167,6 +167,14 @@
   # Configure system-wide services
   services = {
 
+    # Enable KDE
+    xserver.enable = true;
+    desktopManager.plasma6.enable = true;
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
+
     # Enable bluetooth support and device management (via bluetooth manager)
     blueman.enable = true;
 
