@@ -20,16 +20,6 @@
     # Home variables
     stateVersion = "22.11";
 
-    # Set environment variables
-    sessionVariables = {
-
-      # Programs to use
-      BROWSER = "firefox";
-      EDITOR = "neovide";
-      FILE = "ranger";
-      FILEGUI = "dolphin";
-    };
-
     # Packages to install
     packages = with pkgs; [
 
@@ -88,18 +78,5 @@
 
     # Cheat sheets
     navi.enable = true;
-  };
-
-  # Configure services
-  services = {
-
-    # Enable gammastep
-    gammastep = {
-      enable = true;
-      provider = "manual";
-      tray = true;
-      latitude = 51.509;
-      longitude = -0.126;
-    };
   };
 }
