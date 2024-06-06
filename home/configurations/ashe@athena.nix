@@ -5,25 +5,18 @@
   # Custom modules #
   ##################
 
-  themes.enable = true;
   btop.enable = true;
   daw-plugins.enable = true;
-  dunst.enable = true;
   firefox.enable = true;
   gtk.config.enable = true;
-  hyprland.enable = true;
   kitty.enable = true;
   mangohud.enable = true;
   mpv.enable = true;
   neovim.enable = true;
   obs-studio.enable = true;
-  qt.config.enable = true;
   rofi.enable = true;
   starship.enable = true;
   vs-code.enable = true;
-  waybar.enable = true;
-  wlogout.enable = true;
-  xdg.config.enable = true;
   zsh.enable = true;
 
   ##################

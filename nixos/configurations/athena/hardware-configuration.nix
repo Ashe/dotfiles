@@ -16,13 +16,6 @@
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback
     ];
-    kernelPatches = [
-      {
-        # Fix compatibility issues between Samsung Odyssey G9 and AMD 6900XT GPU
-        name = "samsung-drm";
-        patch = ./samsung-drm.patch;
-      }
-    ];
   };
 
   fileSystems."/" =
