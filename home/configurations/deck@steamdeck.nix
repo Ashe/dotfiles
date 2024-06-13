@@ -44,7 +44,9 @@
       ranger
       scanmem
       slack
+      streamlink-twitch-gui-bin
       vesktop
+      vlc
     ];
   };
 
