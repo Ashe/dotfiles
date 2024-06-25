@@ -30,7 +30,6 @@
       # Programs
       ani-cli
       bat
-      blanket
       bottles
       chatterino2
       discord
@@ -80,5 +79,24 @@
 
     # Cheat sheets
     navi.enable = true;
+
+    # Private youtube browsing
+    freetube.enable = true;
+
+    # Enable fd, an alternative to fidn
+    fd.enable = true;
+  };
+
+  # Configure services
+  services = {
+
+    # Enable amberol music player
+    amberol.enable = true;
+
+    # Enable blanket for soothing noises
+    blanket.enable = true;
+
+    # Enable flameshot screenshot program
+    flameshot.enable = true;
   };
 }
