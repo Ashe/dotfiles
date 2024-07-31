@@ -22,6 +22,7 @@
       sha256 = "0g5yk54766vrmxz26l3j9qnkjifjis3z2izgpsfnczhw243dmxz9";
     })
   ];
+  nixGL.prefix = "${inputs.nixgl.packages."x86_64-linux".nixGLIntel}/bin/nixGLIntel";
 
   # Configure user experience
   home = {
@@ -42,7 +43,6 @@
       bat
       bottles
       chatterino2
-      cool-retro-term
       discord
       gnome.gnome-sound-recorder
       godot_4
