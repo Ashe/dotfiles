@@ -13,7 +13,7 @@
         -- nvim-comment
         ----------------------------------
 
-        require('which-key').register({ c = { name = "Comment.." } }, { prefix = "g" })
+        require('which-key').add({{ "gc", group = "Comment.." }})
 
         require('nvim_comment').setup({
 

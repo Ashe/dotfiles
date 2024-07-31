@@ -49,18 +49,6 @@ require('which-key').setup({
     },
   },
 
-  -- Add operators that will trigger motion and text object completion
-  -- to enable all native operators, set the preset / operators plugin above
-  operators = {
-  },
-  key_labels = {
-    -- override the label used to display some keys. It doesn't effect WK in any other way.
-    -- For example:
-    -- ["<space>"] = "SPC",
-    -- ["<cr>"] = "RET",
-    -- ["<tab>"] = "TAB",
-  },
-
   icons = {
 
     -- Symbol used in the command line area that shows your active key combo
@@ -73,16 +61,7 @@ require('which-key').setup({
     group = "+ ",
   },
 
-  popup_mappings = {
-
-    -- Binding to scroll down inside the popup
-    scroll_down = '<c-d>',
-
-    -- Binding to scroll up inside the popup
-    scroll_up = '<c-u>',
-  },
-
-  window = {
+  win = {
     -- None, single, double, shadow
     border = "single",
 
@@ -112,34 +91,11 @@ require('which-key').setup({
     align = "left",
   },
 
-  -- Enable this to hide mappings for which you didn't specify a label
-  ignore_missing = false,
-
-  -- Hide mapping boilerplate
-  hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "},
-
   -- Show help message on the command line when the popup is visible
   show_help = true,
 
   -- Show the currently pressed key and its label as a message in the command line
   show_keys = true,
-
-  -- Automatically setup triggers
-  triggers = "auto",
-
-  -- -- or specify a list manually
-  -- triggers = {"<leader>"}
-  --
-  triggers_blacklist = {
-
-    -- List of mode / prefixes that should never be hooked by WhichKey
-    -- this is mostly relevant for key maps that start with a native binding
-    -- Most people should not need to change this
-    i = { "j", "k" },
-    v = { "j", "k" },
-  },
-  -- Disable the WhichKey popup for certain buf types and file types.
-
 
   -- Disabled by default for Telescope
   disable = {

@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>D', require('telescope.builtin').lsp_type_definitions, { buffer = ev.buf, desc = 'Type definitions' })
 
     -- 'Code' mappings
-    require('which-key').register({ c = { name = "Code.." } }, { prefix = "<leader>" })
+    require('which-key').add({{ "<leader>c", group = "Code.." }})
     vim.keymap.set('n', '<leader>cs', vim.lsp.buf.signature_help, { buffer = ev.buf, desc = 'Signature documentation' })
     vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, { buffer = ev.buf, desc = 'Rename symbol' })
     vim.keymap.set('n', '<leader>cd', require('telescope.builtin').lsp_type_definitions, { buffer = ev.buf, desc = 'Type definitions' })
@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>cf', function() vim.lsp.buf.format { async = true } end, { buffer = ev.buf, desc = 'Format code' })
 
     -- 'Code-workspace' mappings
-    require('which-key').register({ w = { name = "Workspaces.." } }, { prefix = "<leader>c" })
+    require('which-key').add({{ "<leader>cw", group = "Workspaces.." }})
     vim.keymap.set('n', '<leader>cwa', vim.lsp.buf.add_workspace_folder, { buffer = ev.buf, desc = "Add workspace folder" })
     vim.keymap.set('n', '<leader>cwr', vim.lsp.buf.remove_workspace_folder, { buffer = ev.buf, desc = "Remove workspace folder" })
     vim.keymap.set('n', '<leader>cwl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, { buffer = ev.buf, desc = "List workspace folders" })

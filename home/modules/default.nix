@@ -23,6 +23,7 @@
   (import ./themes)
   (import ./vs-code)
   (import ./waybar)
+  (import ./wezterm)
   (import ./wlogout)
   (import ./xdg)
   (import ./zsh)

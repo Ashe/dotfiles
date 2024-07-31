@@ -1,4 +1,4 @@
-{ inputs, config, lib, pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   ##################
@@ -8,11 +8,20 @@
   neovim.enable = true;
   starship.enable = true;
   vs-code.enable = true;
+  wezterm.enable = true;
   zsh.enable = true;
 
   ##################
   # Configurations #
   ##################
+
+  # TODO: Remove this when issue 5355 is merged
+  imports = [
+    (builtins.fetchurl {
+      url = "https://raw.githubusercontent.com/Smona/home-manager/nixgl-compat/modules/misc/nixgl.nix";
+      sha256 = "0g5yk54766vrmxz26l3j9qnkjifjis3z2izgpsfnczhw243dmxz9";
+    })
+  ];
 
   # Configure user experience
   home = {
@@ -25,6 +34,7 @@
 
       # Flake packages
       inputs.self.packages."x86_64-linux".scripts
+      inputs.nixgl.packages."x86_64-linux".nixGLIntel
       inputs.lobster.packages."x86_64-linux".lobster
 
       # Programs
@@ -32,6 +42,7 @@
       bat
       bottles
       chatterino2
+      cool-retro-term
       discord
       gnome.gnome-sound-recorder
       godot_4
@@ -46,6 +57,7 @@
       streamlink-twitch-gui-bin
       vesktop
       vlc
+      zoom
     ];
   };
 

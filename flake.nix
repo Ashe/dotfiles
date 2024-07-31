@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
+    nixgl.url = "github:nix-community/nixGL";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
