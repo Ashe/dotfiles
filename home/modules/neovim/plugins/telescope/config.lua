@@ -51,7 +51,7 @@ vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = "Search buffer
 vim.keymap.set('n', '<C-p>', project_files, { desc = "Project files" })
 vim.keymap.set('n', '<C-S-p>', builtin.builtin, { desc = "Telescope builtins" })
 
-require('which-key').add({{ "<leader>f", group = "find.." }})
+require('which-key').add({{ "<leader>f", group = "Find.." }})
 vim.keymap.set('n', '<leader>fT', builtin.builtin, { desc = "Telescope builtins" })
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Files" })
 vim.keymap.set('n', '<leader>fR', builtin.oldfiles, { desc = "Recent files" })
@@ -60,7 +60,7 @@ vim.keymap.set('n', '<leader>fG', builtin.registers, { desc = "Registers" })
 vim.keymap.set('n', '<leader>fc', builtin.command_history, { desc = "Command history" })
 vim.keymap.set('n', '<leader>f/', builtin.search_history, { desc = "Search history" })
 
-require('which-key').add({ { "<leader>fv", group = "Vim.." }})
+require('which-key').add({{ "<leader>fv", group = "Vim.." }})
 vim.keymap.set('n', '<leader>fvc', builtin.commands, { desc = "Commands" })
 vim.keymap.set('n', '<leader>fvk', builtin.keymaps, { desc = "Keymaps" })
 vim.keymap.set('n', '<leader>fvo', builtin.vim_options, { desc = "Options" })

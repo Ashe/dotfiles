@@ -31,7 +31,6 @@ vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 
 -- Relative line numbers
-vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- Autocomplete interface
@@ -120,18 +119,11 @@ vim.keymap.set({"n", "t"}, "<C-Tab><Backspace>", "<Cmd>tabclose<CR>", { desc="Cl
 vim.keymap.set({"n", "t"}, "<C-Tab>o", "<Cmd>tabonly<CR>", { desc="Close other tabs" })
 
 ----------------------------------
--- Appearance
-----------------------------------
-
-local ok, _ = pcall(vim.cmd, 'colorscheme <colourscheme>')
-if not ok then
-  vim.cmd 'colorscheme default'
-end
-
-----------------------------------
 -- Plugin-preparation
 ----------------------------------
 
 -- nvim-tree: Disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- End of config.lua

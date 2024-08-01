@@ -10,7 +10,6 @@
   ##################
 
   nix.config.enable = true;
-  hyprland.enable = true;
   dropbox.enable = true;
   jellyfin.enable = true;
   mullvad.enable = true;

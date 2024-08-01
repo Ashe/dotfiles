@@ -4,6 +4,16 @@
 
 require('which-key').setup({
 
+  -- Configure which-key options
+  opts = {
+
+    -- Configure when to show which-key
+    triggers = {
+      { "<auto>", mode = "nixsotc" },
+      { "<leader>", mode = { "n", "v" }},
+    },
+  },
+
   plugins = {
 
     -- Shows a list of your marks on ' and `
@@ -11,15 +21,6 @@ require('which-key').setup({
 
     -- Shows your registers on " in NORMAL or <C-r> in INSERT mode
     registers = true,
-
-    spelling = {
-
-      -- Enabling this will show WhichKey when pressing z= to select spelling suggestions
-      enabled = false,
-
-      -- How many suggestions should be shown in the list?
-      suggestions = 20,
-    },
 
     -- The presets plugin:
     -- * Adds help for a bunch of default keybindings in Neovim
@@ -49,6 +50,7 @@ require('which-key').setup({
     },
   },
 
+  -- Configure which-key icons
   icons = {
 
     -- Symbol used in the command line area that shows your active key combo
@@ -62,21 +64,10 @@ require('which-key').setup({
   },
 
   win = {
-    -- None, single, double, shadow
     border = "single",
-
-    -- Bottom, top
-    position = "bottom",
-
-    -- Extra window margin [top, right, bottom, left]
-    margin = { 1, 0, 1, 0 },
-
-    -- Extra window padding [top, right, bottom, left]
-    padding = { 2, 2, 2, 2 },
-
-    winblend = 0
   },
 
+  -- Configure the which-key window layout
   layout = {
     -- Min and max height of the columns
     height = { min = 4, max = 25 },
@@ -102,4 +93,9 @@ require('which-key').setup({
     buftypes = {},
     filetypes = { "TelescopePrompt" },
   },
+
+  -- Prevent visual mode mappings
+  defer = function(ctx)
+    return ctx.mode == "v" or ctx.mode == "V" or ctx.mode == "<C-V>"
+  end,
 })

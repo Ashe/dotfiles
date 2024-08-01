@@ -13,12 +13,6 @@
         type = "lua";
         config = builtins.readFile ./config.lua;
       }
-
-      # Install nvim-treesitter-textobjects
-      {
-        plugin = nvim-treesitter-textobjects;
-        type = "lua";
-      }
     ];
   };
 

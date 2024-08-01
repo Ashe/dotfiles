@@ -8,15 +8,13 @@
   btop.enable = true;
   daw-plugins.enable = true;
   firefox.enable = true;
-  gtk.config.enable = true;
-  kitty.enable = true;
   mangohud.enable = true;
   mpv.enable = true;
   neovim.enable = true;
   obs-studio.enable = true;
-  rofi.enable = true;
   starship.enable = true;
   vs-code.enable = true;
+  wezterm.enable = true;
   zsh.enable = true;
 
   ##################

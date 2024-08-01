@@ -13,7 +13,6 @@ in inputs.nixpkgs.lib.nixosSystem {
     config-file
     bootloader
     hardware
-    inputs.hyprland.nixosModules.default
     {
       networking.hostName = name;
       system.configurationRevision = self.rev or "dirty";

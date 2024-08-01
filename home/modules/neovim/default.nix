@@ -22,9 +22,6 @@
   # Import plugins with customisation
   imports = [
 
-    # Dashboard splash screen
-    ./plugins/dashboard
-
     # Tabs
     ./plugins/barbar
 
@@ -70,10 +67,13 @@
     # Zen mode
     ./plugins/true-zen
 
-    # Suggestions and completions for wildmenu
+    # Wilder
     ./plugins/wilder
 
     # Key suggestions
     ./plugins/which-key
+
+    # Tokyo night theme
+    ./plugins/tokyo-night
   ];
 }

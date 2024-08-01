@@ -7,16 +7,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    mesa-git = {
-      url = "git+https://gitlab.freedesktop.org/mesa/mesa?ref=main";
-      flake = false;
-    };
-    hyprland = {
-      type = "git";
-      url = "https://github.com/hyprwm/Hyprland";
-      submodules = true;
-    };
-    hyprland-portal.url = "github:hyprwm/xdg-desktop-portal-hyprland";
     lobster.url = "github:justchokingaround/lobster";
   };
   outputs = inputs: {
