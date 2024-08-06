@@ -58,6 +58,9 @@
       vesktop
       vlc
       zoom
+
+      # Utilities
+      xclip
     ];
   };
 
