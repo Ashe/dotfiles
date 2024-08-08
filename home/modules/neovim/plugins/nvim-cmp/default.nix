@@ -19,6 +19,9 @@
 
       # Install nvim-treesitter integrations for cmp
       cmp-treesitter
+
+      # Install fancy icons for cmp
+      lspkind-nvim
     ];
   };
 }
