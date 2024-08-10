@@ -95,10 +95,7 @@
     # Cheat sheets
     navi.enable = true;
 
-    # Private youtube browsing
-    freetube.enable = true;
-
-    # Enable fd, an alternative to fidn
+    # Enable fd, an alternative to find
     fd.enable = true;
   };
 
