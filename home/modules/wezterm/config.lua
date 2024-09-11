@@ -5,6 +5,7 @@ return {
   font = wezterm.font "FiraCode Nerd Font",
   font_size = 14.0,
   color_scheme = "Tokyo Night",
+  front_end = "WebGpu",
 
   -- Disable fancy tab bar
   use_fancy_tab_bar = false,

@@ -5,6 +5,7 @@
   # Custom modules #
   ##################
 
+  daw-plugins.enable = true;
   neovim.enable = true;
   starship.enable = true;
   vs-code.enable = true;
@@ -41,10 +42,11 @@
       # Programs
       ani-cli
       bat
+      bitwig-studio
       bottles
       chatterino2
       discord
-      gnome.gnome-sound-recorder
+      gnome-sound-recorder
       godot_4
       magic-wormhole-rs
       neofetch
