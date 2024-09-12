@@ -31,6 +31,7 @@ vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 
 -- Relative line numbers
+vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- Autocomplete interface
