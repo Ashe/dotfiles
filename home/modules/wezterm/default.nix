@@ -11,14 +11,12 @@
     programs.wezterm = {
       enable = true;
       extraConfig = builtins.readFile ./config.lua;
-
-      # TODO: Remove this once nixgl is in home-manager (5355)
       package = (config.lib.nixGL.wrap pkgs.wezterm);
     };
 
     # Install wezterm-specific packages
     home.packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      nerd-fonts.fira-code
     ];
   };
 }

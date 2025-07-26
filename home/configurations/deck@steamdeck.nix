@@ -9,21 +9,17 @@
   neovim.enable = true;
   starship.enable = true;
   vs-code.enable = true;
+  wallpaper-engine.enable = true;
   wezterm.enable = true;
+  zen-browser.enable = true;
   zsh.enable = true;
 
   ##################
   # Configurations #
   ##################
 
-  # TODO: Remove this when issue 5355 is merged
-  imports = [
-    (builtins.fetchurl {
-      url = "https://raw.githubusercontent.com/Smona/home-manager/nixgl-compat/modules/misc/nixgl.nix";
-      sha256 = "01dkfr9wq3ib5hlyq9zq662mp0jl42fw3f6gd2qgdf8l8ia78j7i";
-    })
-  ];
-  nixGL.prefix = "${inputs.nixgl.packages."x86_64-linux".nixGLIntel}/bin/nixGLIntel";
+  # Enable the use of nixGL
+  nixGL.packages = inputs.nixgl.packages;
 
   # Configure user experience
   home = {
@@ -48,6 +44,7 @@
       discord
       gnome-sound-recorder
       godot_4
+      heroic
       magic-wormhole-rs
       neofetch
       nicotine-plus
@@ -55,7 +52,6 @@
       qbittorrent
       ranger
       scanmem
-      slack
       streamlink-twitch-gui-bin
       vesktop
       vlc
@@ -113,4 +109,7 @@
     # Enable flameshot screenshot program
     flameshot.enable = true;
   };
+
+  # Enable discovery of fonts
+  fonts.fontconfig.enable = true;
 }

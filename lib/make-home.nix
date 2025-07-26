@@ -9,7 +9,8 @@ in inputs.home-manager.lib.homeManagerConfiguration {
   extraSpecialArgs = { inherit inputs; };
   modules = self.homeModules ++ [
     config-file
-    inputs.nur.nixosModules.nur
+    inputs.nur.modules.homeManager.default
+    inputs.zen-browser.homeModules.default
     {
       home = {
         username = user;

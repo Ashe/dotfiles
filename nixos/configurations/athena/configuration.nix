@@ -125,7 +125,7 @@
 
     # Download font packages
     packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      nerd-fonts.fira-code
       dina-font
       font-awesome
       noto-fonts

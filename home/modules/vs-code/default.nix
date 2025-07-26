@@ -13,22 +13,26 @@
       # Enable VS Code
       enable = true;
 
-      # Install extensions
-      extensions = with pkgs.vscode-extensions; [
+      # Setup default profile
+      profiles.default = {
 
-        # Utility
-        ms-vsliveshare.vsliveshare
-        shardulm94.trailing-spaces
-        vscodevim.vim
-        xaver.clang-format
+        # Install extensions
+        extensions = with pkgs.vscode-extensions; [
 
-        # Languages
-        bbenoist.nix
-        haskell.haskell
-        ms-vscode.cpptools
-        ms-dotnettools.csharp
-        yzhang.markdown-all-in-one
-      ];
+          # Utility
+          ms-vsliveshare.vsliveshare
+          shardulm94.trailing-spaces
+          vscodevim.vim
+          xaver.clang-format
+
+          # Languages
+          bbenoist.nix
+          haskell.haskell
+          ms-vscode.cpptools
+          ms-dotnettools.csharp
+          yzhang.markdown-all-in-one
+        ];
+      };
     };
 
     # Add config file for VS Code
