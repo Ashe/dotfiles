@@ -1,0 +1,16 @@
+[
+  (import ./btop)
+  (import ./daw-plugins)
+  (import ./firefox)
+  (import ./ghostty)
+  (import ./mangohud)
+  (import ./mpv)
+  (import ./neovim)
+  (import ./obs-studio)
+  (import ./starship)
+  (import ./vs-code)
+  (import ./wallpaper-engine)
+  (import ./wezterm)
+  (import ./zen-browser)
+  (import ./zsh)
+]
