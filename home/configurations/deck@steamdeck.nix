@@ -9,7 +9,6 @@
   neovim.enable = true;
   starship.enable = true;
   vs-code.enable = true;
-  wallpaper-engine.enable = true;
   wezterm.enable = true;
   zen-browser.enable = true;
   zsh.enable = true;
