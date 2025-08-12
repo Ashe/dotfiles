@@ -8,15 +8,7 @@
     plugins = with pkgs.vimPlugins; [{
       plugin = nvim-surround;
       type = "lua";
-      config = ''
-        ----------------------------------
-        -- nvim-surround
-        ----------------------------------
-
-        require('nvim-surround').setup({
-          -- Configuration here, or leave empty to use defaults
-        })
-      '';
+      config = builtins.readFile ./config.lua;
     }];
   };
 }
