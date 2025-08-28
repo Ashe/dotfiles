@@ -10,6 +10,9 @@ return {
   -- Disable fancy tab bar
   use_fancy_tab_bar = false,
 
+  -- Disable sounds
+  audible_bell = "Disabled",
+
   -- Customise keybindings
   keys = {
 
