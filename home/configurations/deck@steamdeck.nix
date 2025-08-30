@@ -44,10 +44,10 @@
       gnome-sound-recorder
       godot_4
       heroic
+      libresprite
       magic-wormhole-rs
       neofetch
       nicotine-plus
-      libresprite
       qbittorrent
       ranger
       scanmem
