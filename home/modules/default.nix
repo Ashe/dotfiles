@@ -6,6 +6,7 @@
   (import ./mangohud)
   (import ./mpv)
   (import ./neovim)
+  (import ./nixgl)
   (import ./obs-studio)
   (import ./starship)
   (import ./vs-code)

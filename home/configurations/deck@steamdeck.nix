@@ -5,19 +5,25 @@
   # Custom modules #
   ##################
 
+  nixgl.enable = true;
   neovim.enable = true;
   starship.enable = true;
   vs-code.enable = true;
   wezterm.enable = true;
-  zen-browser.enable = true;
   zsh.enable = true;
 
   ##################
   # Configurations #
   ##################
 
-  # Enable the use of nixGL
-  nixGL.packages = inputs.nixgl.packages;
+  # NixGL wrapped packages
+  nixgl.packages = with pkgs; [
+    discord
+    godot_4
+    vesktop
+    vlc
+    zoom
+  ];
 
   # Configure user experience
   home = {
@@ -30,17 +36,13 @@
 
       # Flake packages
       inputs.self.packages."x86_64-linux".scripts
-      inputs.nixgl.packages."x86_64-linux".nixGLIntel
-      inputs.lobster.packages."x86_64-linux".lobster
 
       # Programs
       ani-cli
       bat
       bottles
       chatterino2
-      discord
       gnome-sound-recorder
-      godot_4
       heroic
       libresprite
       magic-wormhole-rs
@@ -50,9 +52,6 @@
       ranger
       scanmem
       streamlink-twitch-gui-bin
-      vesktop
-      vlc
-      zoom
 
       # Utilities
       xclip
