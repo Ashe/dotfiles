@@ -20,6 +20,7 @@
   nixgl.packages = with pkgs; [
     discord
     godot_4
+    obs-studio
     vesktop
     vlc
     zoom
