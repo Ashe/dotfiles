@@ -18,6 +18,9 @@
 
   # NixGL wrapped packages
   nixgl.packages = with pkgs; [
+
+    inputs.self.packages."x86_64-linux".firebot
+
     discord
     godot_4
     obs-studio
