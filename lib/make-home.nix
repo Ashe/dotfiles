@@ -21,11 +21,12 @@ in inputs.home-manager.lib.homeManagerConfiguration {
         ];
       };
       nix = {
-        package = inputs.nixpkgs.legacyPackages.${system}.nix;
+        package = inputs.nixpkgs.legacyPackages.${system}.lixPackageSets.stable.lix;
         settings.experimental-features = [ "nix-command" "flakes" ];
       };
       programs.home-manager.enable = true;
       programs.git.enable = inputs.nixpkgs.lib.mkDefault true;
+      programs.nix-your-shell.enable = inputs.nixpkgs.lib.mkDefault true;
     }
   ];
 }

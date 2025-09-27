@@ -55,7 +55,9 @@
       qbittorrent
       ranger
       scanmem
+      streamlink
       streamlink-twitch-gui-bin
+      tray-tui
 
       # Utilities
       xclip
@@ -99,9 +101,6 @@
 
   # Configure services
   services = {
-
-    # Enable amberol music player
-    amberol.enable = true;
 
     # Enable blanket for soothing noises
     blanket.enable = true;
