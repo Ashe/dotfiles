@@ -7,6 +7,8 @@
 
   nixgl.enable = true;
   neovim.enable = true;
+  obs-studio.enable = true;
+  obsidian.enable = true;
   starship.enable = true;
   vs-code.enable = true;
   wezterm.enable = true;
@@ -23,7 +25,6 @@
 
     discord
     godot_4
-    obs-studio
     vesktop
     vlc
     zoom

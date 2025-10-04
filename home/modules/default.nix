@@ -8,6 +8,7 @@
   (import ./neovim)
   (import ./nixgl)
   (import ./obs-studio)
+  (import ./obsidian)
   (import ./starship)
   (import ./vs-code)
   (import ./wallpaper-engine)
