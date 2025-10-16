@@ -53,6 +53,7 @@
       magic-wormhole-rs
       neofetch
       nicotine-plus
+      openseeface
       qbittorrent
       ranger
       scanmem
