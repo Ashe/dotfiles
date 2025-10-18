@@ -23,9 +23,11 @@
 
     inputs.self.packages."x86_64-linux".firebot
 
-    discord
+    (discord.override {
+      withOpenASAR = true;
+      withVencord = true;
+    })
     godot_4
-    vesktop
     vlc
     zoom
   ];
