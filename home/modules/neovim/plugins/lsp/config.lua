@@ -57,7 +57,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- Setup lspconfig
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local lspconfig = require('lspconfig')
 local lsp_flags = {
   -- This is the default in Nvim 0.7+
   debounce_text_changes = 150,
@@ -87,23 +86,26 @@ local servers = {
 }
 
 -- Congigure all servers
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+for _, server in ipairs(servers) do
+  vim.lsp.enable(server, {
     flags = lsp_flags,
     on_attach = on_attach,
     capabilities = capabilities
-  }
+  })
 end
 
 -- Bespoke configurations
 
 -- Java
-lspconfig.java_language_server.setup {
-  cmd = {"java-language-server"}
-}
+vim.lsp.enable('java_language_server', {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = {"java-language-server"},
+})
 
 -- C#
-lspconfig.omnisharp.setup {
+vim.lsp.enable('omnisharp', {
+  on_attach = on_attach,
+  capabilities = capabilities,
   cmd = { "dotnet", "<omnisharp>/lib/omnisharp-roslyn/OmniSharp.dll" },
-  root_dir = lspconfig.util.root_pattern(".sln",".git",".csproj")
-}
+})
