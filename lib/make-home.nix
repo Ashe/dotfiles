@@ -26,6 +26,7 @@ in inputs.home-manager.lib.homeManagerConfiguration {
       };
       programs.home-manager.enable = true;
       programs.git.enable = inputs.nixpkgs.lib.mkDefault true;
+      programs.nh.enable = true;
       programs.nix-your-shell.enable = inputs.nixpkgs.lib.mkDefault true;
     }
   ];
