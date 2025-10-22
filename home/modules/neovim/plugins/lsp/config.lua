@@ -69,6 +69,9 @@ local servers = {
   -- Cmake
   'cmake',
 
+  -- Dart
+  'dartls',
+
   -- GDScript
   'gdscript',
 
