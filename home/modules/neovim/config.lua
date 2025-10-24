@@ -85,6 +85,12 @@ vim.keymap.set("n", "<leader>Y", "\"+yg_", { desc="Copy rest" })
 vim.keymap.set({"n", "v"}, "<leader>P", "\"+P", { desc="Paste before" })
 vim.keymap.set({"n", "v"}, "<leader>p", "\"+p", { desc="Paste after" })
 
+-- Jump between marks
+vim.api.nvim_set_keymap('n', "<C-i>", "<C-i>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', "<C-o>", "<C-o>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', "<C-I>", "<C-i>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', "<C-O>", "<C-o>", { noremap = true, silent = true })
+
 -- Delete into the void
 vim.keymap.set({"n", "v"}, "<leader>d", "\"_d", { desc="Void delete" })
 vim.keymap.set("n", "<leader>D", "\"_dd", { desc="Void line to void" })
