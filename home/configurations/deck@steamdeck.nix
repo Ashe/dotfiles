@@ -85,8 +85,10 @@
 
     # Configure git
     git = {
-      userName  = "ashe";
-      userEmail = "git@aas.sh";
+      settings.user = {
+        name  = "ashe";
+        email = "git@aas.sh";
+      };
       lfs.enable = true;
     };
 

@@ -100,13 +100,6 @@
   # Configure programs
   programs = {
 
-    # Configure git
-    git = {
-      userName  = "ashe";
-      userEmail = "git@aas.sh";
-      lfs.enable = true;
-    };
-
     # Enable lazygit client
     lazygit.enable = true;
 
