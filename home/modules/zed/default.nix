@@ -47,7 +47,12 @@
 
     # Install zed-specific packages
     home.packages = with pkgs; [
+
+      # Font used in config
       nerd-fonts.fira-code
+
+      # Nix language server
+      nil
     ];
   };
 }
