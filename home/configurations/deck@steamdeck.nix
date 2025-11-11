@@ -10,8 +10,8 @@
   obs-studio.enable = true;
   obsidian.enable = true;
   starship.enable = true;
-  vs-code.enable = true;
   wezterm.enable = true;
+  zed.enable = true;
   zsh.enable = true;
 
   ##################

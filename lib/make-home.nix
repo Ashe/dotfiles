@@ -6,7 +6,10 @@ let
 
 in inputs.home-manager.lib.homeManagerConfiguration {
   pkgs = inputs.nixpkgs.legacyPackages.${system};
-  extraSpecialArgs = { inherit inputs; };
+  extraSpecialArgs = {
+    inherit inputs;
+    shared-lib = import ./shared;
+  };
   modules = self.homeModules ++ [
     config-file
     inputs.nur.modules.homeManager.default

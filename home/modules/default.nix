@@ -13,6 +13,7 @@
   (import ./vs-code)
   (import ./wallpaper-engine)
   (import ./wezterm)
+  (import ./zed)
   (import ./zen-browser)
   (import ./zsh)
 ]

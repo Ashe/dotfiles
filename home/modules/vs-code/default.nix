@@ -35,6 +35,11 @@
       };
     };
 
+    # Install vs-code-specific packages
+    home.packages = with pkgs; [
+      nerd-fonts.fira-code
+    ];
+
     # Add config file for VS Code
     xdg.configFile."Code/User/settings.json" = {
       text = ''

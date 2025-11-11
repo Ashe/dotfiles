@@ -1,0 +1,64 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    // Root bindings for anywhere
+    "context": "Workspace",
+    "bindings": {
+      // Tab navigation
+      "alt-p": "vim::GoToPreviousTab",
+      "alt-h": "vim::GoToPreviousTab",
+      "alt-n": "vim::GoToTab",
+      "alt-l": "vim::GoToTab",
+
+      // Close tabs
+      "alt-backspace": "pane::CloseActiveItem"
+    }
+  },
+  {
+    // Editor bindings while in normal mode
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      // Leader keybindings
+      "space w": "workspace::Save",
+
+      // Switch between source and header files
+      "alt-o": "editor::SwitchSourceHeader"
+    }
+  },
+  {
+    // Editor bindings while in any mode
+    "context": "(Editor && mode == full)",
+    "bindings": {
+      // Make CTRL-F perform a replace (it can also do regular find)
+      // In vim we have / anyway so CTRL-F by default is redundant
+      "ctrl-f": "buffer_search::DeployReplace",
+
+      // Multi-line editing
+      "alt-j": "editor::AddSelectionBelow",
+      "alt-k": "editor::AddSelectionAbove"
+    }
+  },
+  {
+    "context": "Workspace || Editor",
+    "bindings": {
+      // Copy/paste
+      "ctrl-c": "editor::Copy",
+      "ctrl-v": "editor::Paste",
+
+      // Easy pane navigation anywhere
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-l": "workspace::ActivatePaneRight",
+
+      // Switch between source and header files
+      "shift-alt-o": "workspace::ToggleLeftDock"
+    }
+  }
+]
