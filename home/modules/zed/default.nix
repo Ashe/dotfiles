@@ -40,6 +40,7 @@
         "neocmake"
         "nix"
         "scss"
+        "toml"
       ];
     };
 
