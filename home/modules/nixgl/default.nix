@@ -19,7 +19,10 @@
   config = lib.mkIf config.nixgl.enable {
 
     # Enable the use of nixGL
-    nixGL.packages = inputs.nixgl.packages;
+    targets.genericLinux.nixGL = {
+      packages = inputs.nixgl.packages;
+      vulkan.enable = true;
+    };
 
     # Install nixGL and wrap specified packages
     home.packages = lib.forEach config.nixgl.packages (p: config.lib.nixGL.wrap p) ++ [
