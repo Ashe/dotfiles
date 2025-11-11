@@ -32,6 +32,7 @@
         "basher"
         "clojure"
         "gdscript"
+        "git-firefly"
         "haskell"
         "html"
         "latex"
