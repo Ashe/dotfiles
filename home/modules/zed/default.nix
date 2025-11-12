@@ -42,6 +42,7 @@
         "nix"
         "scss"
         "toml"
+        "xml"
       ];
     };
 
