@@ -1,10 +1,26 @@
 {
-  "hard_tabs": false,
-  "buffer_font_family": "FiraCode Nerd Font",
+  // Configure the editor for vim
   "vim_mode": true,
+  "relative_line_numbers": true,
+
+  // Don't complete brackets automatically
+  "use_autoclose": false,
+
+  // Show easy-access code actions button in top bar
+  "toolbar": {
+    "code_actions": true
+  },
+
+  // Continue showing signature tooltips after auto-completions
+  "show_signature_help_after_edits": true,
+
+  // Font settings
+  "buffer_font_family": "FiraCode Nerd Font",
+  "buffer_font_size": 15,
   "ui_font_family": ".SystemUIFont",
   "ui_font_size": 16,
-  "buffer_font_size": 15,
+
+  // Theme settings
   "theme": {
     "mode": "system",
     "light": "Tokyo Night Light",
