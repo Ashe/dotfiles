@@ -6,6 +6,7 @@
   ##################
 
   nixgl.enable = true;
+  fastfetch.enable = true;
   neovim.enable = true;
   obs-studio.enable = true;
   obsidian.enable = true;
@@ -53,7 +54,6 @@
       heroic
       libresprite
       magic-wormhole-rs
-      neofetch
       nicotine-plus
       openseeface
       qbittorrent

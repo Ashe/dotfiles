@@ -1,6 +1,7 @@
 [
   (import ./btop)
   (import ./daw-plugins)
+  (import ./fastfetch)
   (import ./firefox)
   (import ./ghostty)
   (import ./mangohud)
