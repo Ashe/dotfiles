@@ -45,10 +45,6 @@
     # Packages to install
     packages = with pkgs; [
 
-      # Flake packages
-      inputs.self.packages."x86_64-linux".scripts
-      inputs.lobster.packages."x86_64-linux".lobster
-
       # Programs
       ani-cli
       audacity

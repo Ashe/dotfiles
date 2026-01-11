@@ -42,9 +42,6 @@
     # Packages to install
     packages = with pkgs; [
 
-      # Flake packages
-      inputs.self.packages."x86_64-linux".scripts
-
       # Programs
       ani-cli
       bat
