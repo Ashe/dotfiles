@@ -6,6 +6,7 @@
   ##################
 
   nixgl.enable = true;
+  btop.enable = true;
   fastfetch.enable = true;
   neovim.enable = true;
   obs-studio.enable = true;
