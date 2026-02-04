@@ -90,8 +90,9 @@
       lfs.enable = true;
     };
 
-    # Enable lazygit client
+    # Git and JJ TUIs
     lazygit.enable = true;
+    jjui.enable = true;
 
     # Fuzzy file finding
     fzf.enable = true;

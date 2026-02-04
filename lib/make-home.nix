@@ -27,10 +27,13 @@ in inputs.home-manager.lib.homeManagerConfiguration {
         package = inputs.nixpkgs.legacyPackages.${system}.lixPackageSets.stable.lix;
         settings.experimental-features = [ "nix-command" "flakes" ];
       };
-      programs.home-manager.enable = true;
-      programs.git.enable = inputs.nixpkgs.lib.mkDefault true;
-      programs.nh.enable = true;
-      programs.nix-your-shell.enable = inputs.nixpkgs.lib.mkDefault true;
+      programs = {
+        home-manager.enable = true;
+        git.enable = inputs.nixpkgs.lib.mkDefault true;
+        jujutsu.enable = inputs.nixpkgs.lib.mkDefault true;
+        nh.enable = true;
+        nix-your-shell.enable = inputs.nixpkgs.lib.mkDefault true;
+      };
     }
   ];
 }
