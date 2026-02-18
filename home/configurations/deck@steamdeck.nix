@@ -1,6 +1,10 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 
 {
+
+  # This is a non-nixos system
+  targets.genericLinux.enable = true;
+
   ##################
   # Custom modules #
   ##################
