@@ -2,7 +2,7 @@
 -- nvim-treesitter
 ----------------------------------
 
-require('nvim-treesitter.configs').setup({
+require('nvim-treesitter').setup {
 
   -- Enable syntax highlighting
   highlight = { enable = true },
@@ -17,4 +17,4 @@ require('nvim-treesitter.configs').setup({
       node_decremental = '<c-backspace>',
     },
   },
-})
+}

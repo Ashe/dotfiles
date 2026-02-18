@@ -22,9 +22,6 @@
 
   # NixGL wrapped packages
   nixgl.packages = with pkgs; [
-
-    inputs.self.packages."x86_64-linux".firebot
-
     (discord.override {
       withOpenASAR = true;
       withVencord = true;
@@ -49,11 +46,9 @@
       bottles
       chatterino2
       gnome-sound-recorder
-      heroic
       libresprite
       magic-wormhole-rs
       nicotine-plus
-      openseeface
       qbittorrent
       ranger
       scanmem
@@ -90,8 +85,7 @@
       lfs.enable = true;
     };
 
-    # Git and JJ TUIs
-    lazygit.enable = true;
+    # JJ terminal ui client
     jjui.enable = true;
 
     # Fuzzy file finding

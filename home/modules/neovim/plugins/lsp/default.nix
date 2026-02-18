@@ -25,17 +25,11 @@
     # C / C++
     ccls
 
-    # C-sharp
-    omnisharp-roslyn
-
     # CMake
     cmake-language-server
 
     # GLSL
     glslls
-
-    # Java
-    java-language-server
 
     # Nix
     nixd

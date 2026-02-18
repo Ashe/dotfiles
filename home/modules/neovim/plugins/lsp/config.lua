@@ -98,17 +98,3 @@ for _, server in ipairs(servers) do
 end
 
 -- Bespoke configurations
-
--- Java
-vim.lsp.enable('java_language_server', {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = {"java-language-server"},
-})
-
--- C#
-vim.lsp.enable('omnisharp', {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = { "dotnet", "<omnisharp>/lib/omnisharp-roslyn/OmniSharp.dll" },
-})

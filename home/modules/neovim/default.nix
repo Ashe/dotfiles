@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 {
   # Add options for neovim text editor
@@ -15,12 +15,15 @@
       withPython3 = true;
 
       # General configuration for neovim
-      extraLuaConfig = builtins.readFile ./config.lua;
+      initLua = builtins.readFile ./config.lua;
     };
   };
 
   # Import plugins with customisation
   imports = [
+
+    # Lua utilities
+    ./plugins/plenary
 
     # Tabs
     ./plugins/barbar
