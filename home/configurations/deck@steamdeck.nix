@@ -89,7 +89,13 @@
       lfs.enable = true;
     };
 
-    # JJ terminal ui client
+    # Configure jj vcs
+    jujutsu.settings.user = {
+      name = "ashe";
+      email = "git@aas.sh";
+    };
+
+    # Terminal UI client for jj
     jjui.enable = true;
 
     # Fuzzy file finding
