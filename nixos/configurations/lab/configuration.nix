@@ -6,13 +6,17 @@
   # Custom modules #
   ##################
 
+  server = {
+    ip = "192.168.1.198";
+    domain = "lab";
+  };
+
   nix.config.enable = true;
+  adguard.enable = true;
   cockpit.enable = true;
   jellyfin.enable = true;
-  tailscale = {
-    enable = true;
-    subnetRoutes = [ "192.168.1.0/24" ];
-  };
+  tailscale.enable = true;
+  tailscale.subnetRouter = true;
 
   ##################
   # Configurations #

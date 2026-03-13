@@ -1,5 +1,7 @@
 {
   nix = import ./nix;
+  server = import ./server;
+  adguard = import ./adguard;
   cockpit = import ./cockpit;
   dropbox = import ./dropbox;
   jellfyin = import ./jellyfin;

@@ -3,19 +3,15 @@
 {
   options.tailscale = {
     enable = lib.mkEnableOption "tailscale";
-    subnetRoutes = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [];
-      description = "Subnets to advertise via Tailscale";
-    };
+    subnetRouter = lib.mkEnableOption "subnet router";
   };
 
   config = lib.mkIf config.tailscale.enable {
     services.tailscale = {
       enable = true;
-      useRoutingFeatures = lib.mkIf (config.tailscale.subnetRoutes != []) "server";
-      extraUpFlags = lib.mkIf (config.tailscale.subnetRoutes != []) [
-        "--advertise-routes=${lib.concatStringsSep "," config.tailscale.subnetRoutes}"
+      useRoutingFeatures = lib.mkIf config.tailscale.subnetRouter "server";
+      extraUpFlags = lib.mkIf config.tailscale.subnetRouter [
+        "--advertise-routes=${lib.concatStringsSep "." (lib.take 3 (lib.splitString "." config.server.ip))}.0/24"
       ];
     };
 
