@@ -3,8 +3,7 @@
 let
   config-folder = "${self}/nixos/configurations/${name}";
   config-file = import "${config-folder}/configuration.nix";
-  bootloader = "${config-folder}/bootloader.nix";
-  hardware = "${config-folder}/hardware-configuration.nix";
+  hardware-file = "${config-folder}/hardware-configuration.nix";
 
 in inputs.nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
@@ -14,19 +13,13 @@ in inputs.nixpkgs.lib.nixosSystem {
   };
   modules = self.nixosModules ++ [
     config-file
-    bootloader
-    hardware
+    hardware-file
     {
       networking.hostName = name;
       system.configurationRevision = self.rev or "dirty";
-      documentation.man = {
-        enable = inputs.nixpkgs.lib.mkDefault true;
-        generateCaches = true;
-      };
       environment.systemPackages = with inputs.nixpkgs.legacyPackages."x86_64-linux"; [
         git
-        magic-wormhole-rs
-        netcat
+        jujutsu
       ];
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
     }
