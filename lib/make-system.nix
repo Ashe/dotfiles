@@ -11,17 +11,20 @@ in inputs.nixpkgs.lib.nixosSystem {
     inherit inputs;
     shared-lib = import ./shared;
   };
-  modules = self.nixosModules ++ [
+  modules = (builtins.attrValues self.nixosModules) ++ [
     config-file
     hardware-file
     {
       networking.hostName = name;
       system.configurationRevision = self.rev or "dirty";
       environment.systemPackages = with inputs.nixpkgs.legacyPackages."x86_64-linux"; [
-        git
         jujutsu
       ];
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
+      programs = {
+        git.enable = inputs.nixpkgs.lib.mkDefault true;
+        nh.enable = inputs.nixpkgs.lib.mkDefault true;
+      };
     }
   ];
 }

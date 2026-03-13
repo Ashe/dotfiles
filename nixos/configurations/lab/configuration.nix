@@ -1,6 +1,17 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
+
+  ##################
+  # Custom modules #
+  ##################
+
+  nix.config.enable = true;
+
+  ##################
+  # Configurations #
+  ##################
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -23,10 +34,6 @@
   users.users.ashe = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-      git
-      jj
-    ];
   };
 
   # Enable the OpenSSH daemon.
