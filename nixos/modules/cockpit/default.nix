@@ -9,6 +9,14 @@
       enable = true;
       openFirewall = true;
       port = 9090;
+      settings.WebService = {
+        # Cockpit rejects websocket connections from origins not in this list.
+        # Includes direct access URL and Caddy subdomain if enabled.
+        Origins = lib.mkForce (
+          let domain = "cockpit.${config.server.domain}";
+          in "http://${domain} https://${domain} https://${config.server.domain}:9090"
+        );
+      };
     };
 
     # Expose cockpit web ui via caddy
