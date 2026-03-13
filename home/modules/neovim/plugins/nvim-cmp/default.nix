@@ -1,27 +1,22 @@
 { pkgs, ... }:
 
 {
-  # Configure neovim
-  programs.neovim = {
+  programs.neovim.plugins = with pkgs.vimPlugins; [
 
-    # Install plugins related to cmp
-    plugins = with pkgs.vimPlugins; [
+    # Install nvim-cmp plugin
+    {
+      plugin = nvim-cmp;
+      type = "lua";
+      config = builtins.readFile ./config.lua;
+    }
 
-      # Install nvim-cmp plugin
-      {
-        plugin = nvim-cmp;
-        type = "lua";
-        config = builtins.readFile ./config.lua;
-      }
+    # Install lsp integrations for cmp
+    cmp-nvim-lsp
 
-      # Install lsp integrations for cmp
-      cmp-nvim-lsp
+    # Install nvim-treesitter integrations for cmp
+    cmp-treesitter
 
-      # Install nvim-treesitter integrations for cmp
-      cmp-treesitter
-
-      # Install fancy icons for cmp
-      lspkind-nvim
-    ];
-  };
+    # Install fancy icons for cmp
+    lspkind-nvim
+  ];
 }

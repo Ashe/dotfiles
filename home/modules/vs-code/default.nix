@@ -1,16 +1,11 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Add options for vs-code, a text editor
   options.vs-code.enable = lib.mkEnableOption "vs-code";
 
-  # Install vs-code if desired
   config = lib.mkIf config.vs-code.enable {
 
-    # Configure Visual Studio Code
     programs.vscode = {
-
-      # Enable VS Code
       enable = true;
 
       # Setup default profile

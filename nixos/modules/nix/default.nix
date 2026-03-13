@@ -1,10 +1,8 @@
 { inputs, config, lib, ... }:
 
 {
-  # Add options for configuring nix package manager
   options.nix.config.enable = lib.mkEnableOption "nix.config";
 
-  # Add extra configuration for nix if desired
   config = lib.mkIf config.nix.config.enable {
     nix = {
 

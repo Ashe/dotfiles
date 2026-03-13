@@ -1,21 +1,16 @@
 { pkgs, ... }:
 
 {
-  # Configure neovim
-  programs.neovim = {
+  programs.neovim.plugins = with pkgs.vimPlugins; [
 
-    # Install plugins related to nvim-tree plugin
-    plugins = with pkgs.vimPlugins; [
+    # Install nvim-tree
+    {
+      plugin = nvim-tree-lua;
+      type = "lua";
+      config = builtins.readFile ./config.lua;
+    }
 
-      # Install nvim-tree
-      {
-        plugin = nvim-tree-lua;
-        type = "lua";
-        config = builtins.readFile ./config.lua;
-      }
-
-      # Install devicons to improve appearance
-      nvim-web-devicons
-    ];
-  };
+    # Install devicons to improve appearance
+    nvim-web-devicons
+  ];
 }

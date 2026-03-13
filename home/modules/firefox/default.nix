@@ -1,10 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Add options for firefox web browser
   options.firefox.enable = lib.mkEnableOption "firefox";
 
-  # Install firefox if desired
   config = lib.mkIf config.firefox.enable {
 
     # Configure Firefox web browser

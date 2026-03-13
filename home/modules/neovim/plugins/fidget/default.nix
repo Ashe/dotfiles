@@ -1,20 +1,15 @@
 { pkgs, ... }:
 
 {
-  # Configure neovim
-  programs.neovim = {
+  programs.neovim.plugins = with pkgs.vimPlugins; [{
+    plugin = fidget-nvim;
+    type = "lua";
+    config = ''
+      ----------------------------------
+      -- fidget
+      ----------------------------------
 
-    # Install fidget for nvim
-    plugins = with pkgs.vimPlugins; [{
-      plugin = fidget-nvim;
-      type = "lua";
-      config = ''
-        ----------------------------------
-        -- fidget
-        ----------------------------------
-
-        require('fidget').setup({})
-      '';
-    }];
-  };
+      require('fidget').setup({})
+    '';
+  }];
 }

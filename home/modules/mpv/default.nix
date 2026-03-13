@@ -1,13 +1,9 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Add options for mpv media player
   options.mpv.enable = lib.mkEnableOption "mpv";
 
-  # Install mpv if desired
   config = lib.mkIf config.mpv.enable {
-
-    # Configure mpv media player
     programs.mpv = {
 
       # Enable mpv

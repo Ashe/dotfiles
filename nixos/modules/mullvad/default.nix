@@ -1,10 +1,8 @@
 { inputs, config, lib, pkgs, ... }:
 
 {
-  # Add options for mullvad, a vpn
   options.mullvad.enable = lib.mkEnableOption "mullvad";
 
-  # Install mullvad if desired
   config = lib.mkIf config.mullvad.enable {
 
     # Enable mullvad

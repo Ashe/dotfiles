@@ -1,16 +1,11 @@
 { config, lib, ... }:
 
 {
-  # Add options for btop system monitor
   options.btop.enable = lib.mkEnableOption "btop";
 
-  # Install btop if desired
   config = lib.mkIf config.btop.enable {
 
-    # Configure btop
     programs.btop = {
-
-      # Enable btop
       enable = true;
 
       # Configuration for btop

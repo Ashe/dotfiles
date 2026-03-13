@@ -1,13 +1,10 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Add options for obsidian note taking software
   options.obsidian.enable = lib.mkEnableOption "obsidian";
 
-  # Install obsidian if desired
   config = lib.mkIf config.obsidian.enable {
 
-    # Configure obsidian
     programs.obsidian = {
       enable = true;
       package = (config.lib.nixGL.wrap pkgs.obsidian);

@@ -1,10 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Add options for wezterm terminal emulator
   options.wezterm.enable = lib.mkEnableOption "wezterm";
 
-  # Install wezterm if desired
   config = lib.mkIf config.wezterm.enable {
 
     # Configure wezterm

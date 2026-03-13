@@ -2,7 +2,7 @@
 ## Generated using nixos-generate-config, configured for hardware usage ##
 ##########################################################################
 
-{ config, lib, pkgs, modulesPath, ... }:
+{ config, lib, modulesPath, ... }:
 
 {
   imports = [

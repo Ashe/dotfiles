@@ -1,23 +1,18 @@
 { pkgs, ... }:
 
 {
-  # Configure neovim
-  programs.neovim = {
+  programs.neovim.plugins = with pkgs.vimPlugins; [
 
-    # Install plugins related to lsp
-    plugins = with pkgs.vimPlugins; [
-
-      # Install nvim-lspconfig plugin
-      {
-        plugin = nvim-lspconfig;
-        type = "lua";
-        config = builtins.replaceStrings
-          [ "<omnisharp>" ]
-          [ "${pkgs.omnisharp-roslyn}" ]
-          (builtins.readFile ./config.lua);
-      }
-    ];
-  };
+    # Install nvim-lspconfig plugin
+    {
+      plugin = nvim-lspconfig;
+      type = "lua";
+      config = builtins.replaceStrings
+        [ "<omnisharp>" ]
+        [ "${pkgs.omnisharp-roslyn}" ]
+        (builtins.readFile ./config.lua);
+    }
+  ];
 
   # Install language servers
   home.packages = with pkgs; [

@@ -1,10 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Add options for ghostty, a terminal emulator
   options.ghostty.enable = lib.mkEnableOption "ghostty";
 
-  # Install ghostty if desired
   config = lib.mkIf config.ghostty.enable {
 
     # Configure ghostty
@@ -19,7 +17,7 @@
       # Enable vim key configuration
       installVimSyntax = true;
 
-      #
+      # Additional settings for ghostty
       settings = {
         theme = "tokyonight";
 

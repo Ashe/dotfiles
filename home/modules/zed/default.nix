@@ -1,10 +1,8 @@
 { config, lib, shared-lib, pkgs, ... }:
 
 {
-  # Add options for zed text editor
   options.zed.enable = lib.mkEnableOption "zed";
 
-  # Install zed if desired
   config = lib.mkIf config.zed.enable {
 
     # Configure zed

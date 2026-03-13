@@ -1,7 +1,6 @@
 { pkgs, ... }:
 
 {
-  # Configure neovim
   programs.neovim = {
 
     # Install plugins related to telescope

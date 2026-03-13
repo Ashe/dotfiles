@@ -1,10 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Add options for dropbox, a cloud service for file storage
   options.dropbox.enable = lib.mkEnableOption "dropbox";
 
-  # Install dropbox if desired
   config = lib.mkIf config.dropbox.enable {
 
     # Install command line interface for interacting with dropbox

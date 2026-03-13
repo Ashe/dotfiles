@@ -1,10 +1,8 @@
 { config, lib, ... }:
 
 {
-  # Add options for neovim text editor
   options.neovim.enable = lib.mkEnableOption "neovim";
 
-  # Install neovim if desired
   config = lib.mkIf config.neovim.enable {
 
     # Configure neovim
