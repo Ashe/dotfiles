@@ -32,7 +32,6 @@
     })
     godot_4
     vlc
-    zoom
   ];
 
   # Configure user experience
