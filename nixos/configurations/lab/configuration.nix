@@ -7,6 +7,12 @@
   ##################
 
   nix.config.enable = true;
+  cockpit.enable = true;
+  jellyfin.enable = true;
+  tailscale = {
+    enable = true;
+    subnetRoutes = [ "192.168.1.0/24" ];
+  };
 
   ##################
   # Configurations #
@@ -38,6 +44,11 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # TODO: UDP GRO forwarding warning from Tailscale on enp2s0
+  # Known NixOS issue, fix is unreliable - revisit later
+  # https://tailscale.com/s/ethtool-config-udp-gro
+  # https://github.com/NixOS/nixpkgs/issues/411980
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

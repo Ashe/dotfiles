@@ -1,7 +1,9 @@
 {
   nix = import ./nix;
+  cockpit = import ./cockpit;
   dropbox = import ./dropbox;
-  mullvad = import ./mullvad;
   jellfyin = import ./jellyfin;
+  mullvad = import ./mullvad;
   steam = import ./steam;
+  tailscale = import ./tailscale;
 }
