@@ -13,6 +13,7 @@
 
   nix.config.enable = true;
   adguard.enable = true;
+  caddy.enable = true;
   cockpit.enable = true;
   jellyfin.enable = true;
   tailscale.enable = true;
