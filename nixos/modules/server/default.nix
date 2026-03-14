@@ -11,5 +11,10 @@
       type = lib.types.str;
       description = "Local domain name for this server";
     };
+    publicDomain = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = "Public-facing domain for externally exposed services e.g. aas.sh";
+    };
   };
 }

@@ -20,6 +20,6 @@
     };
 
     # Expose cockpit web ui via caddy
-    caddy.services.cockpit = { port = 9090; tls = true; };
+    caddy.services.cockpit = { port = 9090; backendProtocol = "https"; };
   };
 }
