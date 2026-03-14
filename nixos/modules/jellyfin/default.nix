@@ -1,16 +1,67 @@
 { config, lib, ... }:
 
 {
-  options.jellyfin.enable = lib.mkEnableOption "jellyfin";
-  config = lib.mkIf config.jellyfin.enable {
+  options.jellyfin = {
+    enable = lib.mkOption {
+      type = lib.types.nullOr (lib.types.enum [ "local" "public" ]);
+      default = null;
+      description = "How Jellyfin is exposed. null disables it, local restricts to tailnet/LAN, public additionally exposes via the server's public domain.";
+    };
+    mediaPath = lib.mkOption {
+      type = lib.types.path;
+      default = "/data/media";
+      description = "Host path to mount as the media library inside the container";
+    };
+  };
 
-    # Configure jellyfin, a media server for streaming movies, TV and music
-    services.jellyfin = {
+  config = lib.mkIf (config.jellyfin.enable != null) {
+
+    # Dedicated user for rootless Podman
+    users.users.jellyfin = {
+      isSystemUser = true;
+      group = "jellyfin";
+      home = "/var/lib/jellyfin";
+      createHome = true;
+      # subUidRanges/subGidRanges provide the UID space needed for
+      # container user namespace mapping
+      subUidRanges = [{ startUid = 100000; count = 65536; }];
+      subGidRanges = [{ startGid = 100000; count = 65536; }];
+      # Persist session after logout
+      linger = true;
+    };
+    users.groups.jellyfin = {};
+
+    # Ensure media path exists on the host and is owned by the jellyfin user
+    systemd.tmpfiles.rules = [
+      "d ${config.jellyfin.mediaPath} 0755 jellyfin jellyfin -"
+    ];
+
+    virtualisation.podman = {
       enable = true;
-      openFirewall = true;
+      # Clean up unused images/containers periodically
+      autoPrune.enable = true;
     };
 
+    virtualisation.oci-containers.backend = "podman";
+    virtualisation.oci-containers.containers.jellyfin = {
+      image = "docker.io/jellyfin/jellyfin:latest";
+      ports = [ "8096:8096" ];
+      volumes = [
+        "/var/lib/jellyfin:/config"
+        "${config.jellyfin.mediaPath}:/media:ro"
+      ];
+      extraOptions = [ "--pull=newer" ];
+      # Have a non-root user run podman
+      podman.user = "jellyfin";
+    };
+
+    # Allow jellyfin to be accessed through the firewall
+    networking.firewall.allowedTCPPorts = [ 8096 ];
+
     # Expose jellyfin via caddy
-    caddy.services.jellyfin = { port = 8096; };
+    caddy.services.jellyfin = {
+      port = 8096;
+      public = config.jellyfin.enable == "public";
+    };
   };
 }

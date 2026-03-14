@@ -17,7 +17,7 @@
   adguard.enable = true;
   caddy.enable = true;
   cockpit.enable = true;
-  jellyfin.enable = true;
+  jellyfin.enable = "local";
   tailscale.enable = true;
   tailscale.subnetRouter = true;
 
