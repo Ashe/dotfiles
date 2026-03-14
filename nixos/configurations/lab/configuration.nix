@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, ... }:
 
 {
 
@@ -10,6 +10,8 @@
     ip = "192.168.1.198";
     domain = "lab";
   };
+
+  agenix.secrets = "${inputs.self}/secrets/lab";
 
   nix.config.enable = true;
   adguard.enable = true;

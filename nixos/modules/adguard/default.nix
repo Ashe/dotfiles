@@ -1,15 +1,18 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   options.adguard.enable = lib.mkEnableOption "adguard";
 
   config = lib.mkIf config.adguard.enable {
+
+    # Enable adguard, a DNS that also blocks adverts
     services.adguardhome = {
       enable = true;
       openFirewall = true;
       port = 3000;
-      mutableSettings = false;
+      mutableSettings = true;
       settings = {
+
         dns = {
           bind_hosts = [ "0.0.0.0" ];
           port = 53;
@@ -32,6 +35,7 @@
             "https://dns.google/dns-query"
           ];
         };
+
         filtering = {
           rewrites_enabled = true;
           rewrites = [
@@ -49,6 +53,25 @@
         };
       };
     };
+
+    # Patch AdGuard's mutable config with the admin password before it starts.
+    # Only writes users if they aren't already present, avoiding clobbering
+    # any changes AdGuard has written back to its own config file.
+    age.secrets.adguard-key.mode = "0444";
+    systemd.services.adguardhome.preStart = lib.mkIf (builtins.hasAttr "adguard-key" config.age.secrets) (
+      let
+        adguardConfig = "/var/lib/AdGuardHome/AdGuardHome.yaml";
+        secretPath = config.age.secrets.adguard-key.path;
+      in
+      ''
+        if [ -f ${adguardConfig} ] && ! ${pkgs.gnugrep}/bin/grep -q "^users:" ${adguardConfig}; then
+          hash=$(cat ${secretPath})
+          echo "users:" >> ${adguardConfig}
+          echo "  - name: admin" >> ${adguardConfig}
+          echo "    password: $hash" >> ${adguardConfig}
+        fi
+      ''
+    );
 
     # Expose AdGuard's web ui via caddy
     caddy.services.adguard = { port = 3000; };

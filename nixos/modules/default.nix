@@ -1,6 +1,7 @@
 {
   nix = import ./nix;
   server = import ./server;
+  agenix = import ./agenix;
   adguard = import ./adguard;
   caddy = import ./caddy;
   cockpit = import ./cockpit;
