@@ -11,4 +11,6 @@ in
   # For each machine directory, declare the expected secrets
   foldl (acc: dir: acc // {
     "${dir}/adguard-key.age".publicKeys = [ (readKey dir) ];
+    "${dir}/crowdsec-bouncer-key.age".publicKeys = [ (readKey dir) ];
+    "${dir}/crowdsec-enrollment-key.age".publicKeys = [ (readKey dir) ];
   }) {} dirs

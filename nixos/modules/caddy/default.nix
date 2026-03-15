@@ -32,11 +32,14 @@
     services.caddy = let
 
       # Generate a vhost config for a given service and domain
-      mkVhost = { name, svc, domain, tls }: lib.nameValuePair
-      "${name}.${domain}"
-      {
+      # Also log all requests as JSON so CrowdSec can read them via journald
+      mkVhost = { name, svc, domain, tls }: lib.nameValuePair "${name}.${domain}" {
         extraConfig = ''
           ${lib.optionalString tls "tls internal"}
+          log {
+            output stdout
+            format json
+          }
           reverse_proxy ${svc.backendProtocol}://127.0.0.1:${toString svc.port} {
             ${lib.optionalString (svc.backendProtocol == "https") ''
               transport http {
@@ -72,18 +75,49 @@
     # Without it, certificate generation fails silently
     systemd.services.caddy.path = [ pkgs.nssTools ];
 
-    # Display an error if something tries to make a public virtual host
-    # when no public domain has been configured
-    assertions =
-      lib.mapAttrsToList (name: svc: {
-        assertion = !svc.public || config.server.publicDomain != null;
-        message = ''
-          caddy: service '${name}' has public = true, but server.publicDomain is not set.
-              Either:
-                  A: Set '${name}.public = false', or
-                  B: Set server.publicDomain (see server module).
-        '';
-      })
-    config.caddy.services;
+    # Allow crowdsec to monitor caddy's logs for threats
+    crowdsec.collections = [ "crowdsecurity/caddy" ];
+    crowdsec.acquisitions.caddy = {
+      journalmatch = "_SYSTEMD_UNIT=caddy.service";
+      type = "syslog";
+    };
+
+    assertions = lib.flatten [
+      (lib.mapAttrsToList (name: svc: [
+        # Public service but no publicDomain set
+        {
+          assertion = !svc.public || config.server.publicDomain != null;
+          message = ''
+            caddy: service '${name}' has public = true, but server.publicDomain is not set.
+                Either:
+                    A: Set 'server.publicDomain' (see server module), or
+                    B: Set 'caddy.services.${name}.public = false'.
+          '';
+        }
+
+        # Public service but crowdsec not enabled
+        {
+          assertion = !svc.public || config.crowdsec.enable;
+          message = ''
+            caddy: service '${name}' has public = true, but crowdsec is not enabled.
+                Either:
+                    A: Enable crowdsec before exposing '${name}' publicly, or
+                    B: Set 'caddy.services.${name}.public = false'.
+          '';
+        }
+
+        # Public service but no matching crowdsec acquisition registered
+        {
+          assertion = !svc.public || builtins.hasAttr name config.crowdsec.acquisitions;
+          message = ''
+            caddy: service '${name}' has public = true, but no crowdsec acquisition named '${name}' exists.
+                Either:
+                    A: Create the 'crowdsec.acquisitions.${name}' source in the '${name}' module, or
+                    B: Set 'caddy.services.${name}.public = false'.
+          '';
+        }
+
+      ]) config.caddy.services)
+    ];
   };
 }

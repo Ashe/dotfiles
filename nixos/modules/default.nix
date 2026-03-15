@@ -5,6 +5,7 @@
   adguard = import ./adguard;
   caddy = import ./caddy;
   cockpit = import ./cockpit;
+  crowdsec = import ./crowdsec;
   dropbox = import ./dropbox;
   jellfyin = import ./jellyfin;
   mullvad = import ./mullvad;

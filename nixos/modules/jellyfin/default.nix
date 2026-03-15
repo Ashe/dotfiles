@@ -63,5 +63,12 @@
       port = 8096;
       public = config.jellyfin.enable == "public";
     };
+
+    # Allow crowdsec to monitor jellyfin's logs for threats
+    crowdsec.collections = [ "LePresidente/jellyfin" ];
+    crowdsec.acquisitions.jellyfin = {
+      journalmatch = "_SYSTEMD_UNIT=podman-jellyfin.service";
+      type = "jellyfin";
+    };
   };
 }
