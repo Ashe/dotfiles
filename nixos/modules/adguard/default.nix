@@ -8,7 +8,8 @@
     # Enable adguard, a DNS that also blocks adverts
     services.adguardhome = {
       enable = true;
-      openFirewall = true;
+      openFirewall = false;
+      host = "127.0.0.1";
       port = 3000;
       mutableSettings = true;
       settings = {
