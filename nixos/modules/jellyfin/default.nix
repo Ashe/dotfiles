@@ -45,7 +45,7 @@
     virtualisation.oci-containers.backend = "podman";
     virtualisation.oci-containers.containers.jellyfin = {
       image = "docker.io/jellyfin/jellyfin:latest";
-      ports = [ "8096:8096" ];
+      ports = [ "127.0.0.1:8096:8096" ];
       volumes = [
         "/var/lib/jellyfin:/config"
         "${config.jellyfin.mediaPath}:/media:ro"
@@ -54,9 +54,6 @@
       # Have a non-root user run podman
       podman.user = "jellyfin";
     };
-
-    # Allow jellyfin to be accessed through the firewall
-    networking.firewall.allowedTCPPorts = [ 8096 ];
 
     # Expose jellyfin via caddy
     caddy.services.jellyfin = {
