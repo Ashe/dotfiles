@@ -9,6 +9,7 @@
   server = {
     ip = "192.168.1.198";
     domain = "lab";
+    publicDomain = "aas.sh";
   };
 
   agenix.secrets = "${inputs.self}/secrets/lab";
@@ -18,7 +19,7 @@
   caddy.enable = true;
   cockpit.enable = true;
   crowdsec.enable = true;
-  jellyfin.enable = "local";
+  jellyfin.enable = "public";
   tailscale.enable = true;
   tailscale.subnetRouter = true;
 
