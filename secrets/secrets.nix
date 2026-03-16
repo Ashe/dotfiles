@@ -13,4 +13,8 @@ in
     "${dir}/adguard-key.age".publicKeys = [ (readKey dir) ];
     "${dir}/crowdsec-bouncer-key.age".publicKeys = [ (readKey dir) ];
     "${dir}/crowdsec-enrollment-key.age".publicKeys = [ (readKey dir) ];
+    "${dir}/gluetun-addresses.age".publicKeys = [ (readKey dir) ];
+    "${dir}/gluetun-id.age".publicKeys = [ (readKey dir) ];
+    "${dir}/gluetun-key.age".publicKeys = [ (readKey dir) ];
+    "${dir}/qbittorrent-key.age".publicKeys = [ (readKey dir) ];
   }) {} dirs
