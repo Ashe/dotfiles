@@ -33,7 +33,7 @@
 
     # Ensure media path exists on the host and is owned by the jellyfin user
     systemd.tmpfiles.rules = [
-      "d ${config.jellyfin.mediaPath} 0755 jellyfin jellyfin -"
+      "d ${config.jellyfin.mediaPath} 1777 root root -"
     ];
 
     virtualisation.podman = {

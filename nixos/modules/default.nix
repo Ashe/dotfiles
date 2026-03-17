@@ -3,6 +3,7 @@
   server = import ./server;
   agenix = import ./agenix;
   adguard = import ./adguard;
+  arrstack = import ./arrstack;
   caddy = import ./caddy;
   cockpit = import ./cockpit;
   crowdsec = import ./crowdsec;

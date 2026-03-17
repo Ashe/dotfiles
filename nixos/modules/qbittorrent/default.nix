@@ -27,17 +27,12 @@
 
     # Ensure directories exist
     systemd.tmpfiles.rules = [
-      # Recursively fix ownership of qbittorrent home
-      # Rootless podman creates subdirectories with remapped UIDs on first run
-      "Z /var/lib/qbittorrent - qbittorrent qbittorrent -"
-      # Downloads
-      "d /data/downloads 0755 qbittorrent qbittorrent -"
-      "d /data/downloads/complete 0755 qbittorrent qbittorrent -"
-      "d /data/downloads/incomplete 0755 qbittorrent qbittorrent -"
-      # Media
-      "d /data/media/movies 0755 qbittorrent qbittorrent -"
-      "d /data/media/shows 0755 qbittorrent qbittorrent -"
-      "d /data/media/music 0755 qbittorrent qbittorrent -"
+      # Ensure qbittorrent home exists
+      "d /var/lib/qbittorrent 0700 qbittorrent qbittorrent -"
+      # Ensure downloads folder is accessible by other modules
+      "d /data/downloads 1777 root root -"
+      "d /data/downloads/complete 1777 root root -"
+      "d /data/downloads/incomplete 1777 root root -"
     ];
 
     # Secrets must be world-readable so the rootless container can access them
@@ -96,7 +91,7 @@
             config.age.secrets.gluetun-key.path
           ];
         # Only the web UI port is exposed — all other traffic goes through the VPN
-        ports = [ "127.0.0.1:8090:8090" ];
+        ports = [ "127.0.0.1:8090:8090" "${config.server.ip}:8090:8090" ];
         podman.user = "qbittorrent";
       };
 
@@ -116,7 +111,6 @@
         volumes = [
           "/var/lib/qbittorrent:/config"
           "/data/downloads:/downloads"
-          "/data/media:/media"
         ];
         dependsOn = [ "gluetun" ];
         podman.user = "qbittorrent";

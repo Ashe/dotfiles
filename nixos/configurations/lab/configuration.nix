@@ -16,6 +16,7 @@
 
   nix.config.enable = true;
   adguard.enable = true;
+  arrstack.enable = true;
   caddy.enable = true;
   cockpit.enable = true;
   crowdsec.enable = true;
