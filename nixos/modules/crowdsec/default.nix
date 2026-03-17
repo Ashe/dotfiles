@@ -94,10 +94,17 @@
         general.api.server.enable = true;
         lapi.credentialsFile = "/var/lib/crowdsec/local_api_credentials.yaml";
         capi.credentialsFile = "/var/lib/crowdsec/online_api_credentials.yaml";
-
-        # Point to agenix secret if provided
-        console.tokenFile = lib.mkIf (builtins.hasAttr "crowdsec-enrollment-key" config.age.secrets)
-          config.age.secrets.crowdsec-enrollment-key.path;
+        console = {
+          tokenFile = lib.mkIf (builtins.hasAttr "crowdsec-enrollment-key" config.age.secrets)
+            config.age.secrets.crowdsec-enrollment-key.path;
+          configuration = {
+            share_manual_decisions = true;
+            share_tainted = true;
+            share_custom = true;
+            share_context = true;
+            console_management = false;
+          };
+        };
       };
     };
 
@@ -111,7 +118,8 @@
     };
 
     # Ensure the bouncer is always registered
-    systemd.services.crowdsec-bouncer-register = {
+    systemd.services.crowdsec-bouncer-register = lib.mkIf
+        (builtins.hasAttr "crowdsec-bouncer-key" config.age.secrets) {
       description = "Register CrowdSec firewall bouncer";
       after = [ "crowdsec.service" ];
       wantedBy = [ "multi-user.target" ];
@@ -120,6 +128,26 @@
         ExecStart = pkgs.writeShellScript "crowdsec-bouncer-register" ''
           if ! /run/current-system/sw/bin/cscli bouncers list | grep -q firewall-bouncer; then
             /run/current-system/sw/bin/cscli bouncers add firewall-bouncer --key $(cat ${config.age.secrets.crowdsec-bouncer-key.path})
+          fi
+        '';
+      };
+    };
+
+    # Ensure we are enrolled to crowdsec console
+    systemd.services.crowdsec-console-enroll = lib.mkIf
+      (builtins.hasAttr "crowdsec-enrollment-key" config.age.secrets)
+    {
+      description = "Enroll CrowdSec instance in console";
+      after = [ "crowdsec.service" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = pkgs.writeShellScript "crowdsec-console-enroll" ''
+          if [ ! -f /var/lib/crowdsec/console.yaml ]; then
+            /run/current-system/sw/bin/cscli console enroll \
+              --name ${config.server.domain} \
+              $(cat ${config.age.secrets.crowdsec-enrollment-key.path}) || true
+            touch /var/lib/crowdsec/console.yaml
           fi
         '';
       };
