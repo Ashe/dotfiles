@@ -22,7 +22,6 @@
   jellyfin.enable = "public";
   qbittorrent.enable = true;
   tailscale.enable = true;
-  tailscale.subnetRouter = true;
 
   ##################
   # Configurations #
