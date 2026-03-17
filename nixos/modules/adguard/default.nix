@@ -74,6 +74,18 @@
       ''
     );
 
+    # Allow LAN devices to query AdGuard DNS
+    networking.firewall = {
+      allowedTCPPorts = [ 53 ];
+      allowedUDPPorts = [ 53 ];
+      extraCommands = let
+        subnet = "${lib.concatStringsSep "." (lib.take 3 (lib.splitString "." config.server.ip))}.0/24";
+      in ''
+        iptables -A nixos-fw -p udp -s ${subnet} --dport 53 -j nixos-fw-accept
+        iptables -A nixos-fw -p tcp -s ${subnet} --dport 53 -j nixos-fw-accept
+      '';
+    };
+
     # Expose AdGuard's web ui via caddy
     caddy.services.adguard = { port = 3000; };
   };
