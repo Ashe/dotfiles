@@ -8,6 +8,7 @@
     radarr = lib.mkEnableOption "radarr (movies)" // { default = true; };
     prowlarr = lib.mkEnableOption "prowlarr (indexer manager)" // { default = true; };
     flaresolverr = lib.mkEnableOption "flaresolverr (Cloudflare bypass)" // { default = true; };
+    configarr = lib.mkEnableOption "configarr (TRaSH Guide sync)" // { default = true; };
   };
 
   config = lib.mkIf config.arrstack.enable {
@@ -44,9 +45,19 @@
     ]
     ++ lib.optionals config.arrstack.flaresolverr [
       "d /var/lib/arrstack/flaresolverr 0777 arrstack arrstack -"
+    ]
+    ++ lib.optionals config.arrstack.configarr [
+      "d /var/lib/arrstack/configarr 0755 arrstack arrstack -"
+      "d /var/lib/arrstack/configarr/repos 0755 arrstack arrstack -"
     ];
 
+    # Secrets must be world-readable so the rootless container can access them
+    age.secrets = lib.mkIf (config.arrstack.configarr && config.agenix.secrets != null && builtins.pathExists "${config.agenix.secrets}/configarr-secrets.age") {
+      configarr-secrets.mode = "0444";
+    };
+
     systemd.services = lib.mkMerge [
+
       # Create shared Podman network so containers can reach each other by name
       {
         arrstack-network = {
@@ -61,6 +72,7 @@
           };
         };
       }
+
       # Ensure all containers start after the network is created
       (lib.mkIf config.arrstack.prowlarr {
         podman-prowlarr.after = [ "arrstack-network.service" ];
@@ -78,7 +90,45 @@
         podman-flaresolverr.after = [ "arrstack-network.service" ];
         podman-flaresolverr.requires = [ "arrstack-network.service" ];
       })
+
+      # Configarr — one-shot job to sync TRaSH Guide configs to Sonarr/Radarr
+      (lib.mkIf (config.arrstack.configarr && config.agenix.secrets != null && builtins.pathExists "${config.agenix.secrets}/configarr-secrets.age") {
+        configarr = {
+          description = "configarr: sync TRaSH Guide configurations to Sonarr/Radarr";
+          after = [ "arrstack-network.service" "network-online.target" ]
+            ++ lib.optionals config.arrstack.sonarr [ "podman-sonarr.service" ]
+            ++ lib.optionals config.arrstack.radarr [ "podman-radarr.service" ];
+          wants = [ "network-online.target" ];
+          requires = [ "arrstack-network.service" ];
+          serviceConfig = {
+            Type = "oneshot";
+            User = "arrstack";
+            StandardOutput = "journal";
+            StandardError = "journal";
+            ExecStart = "${config.virtualisation.podman.package}/bin/podman run --rm"
+              + " --name=configarr --network=arrstack --pull=newer --log-driver=journald"
+              + " -e CONFIG_LOCATION=/app/config.yml"
+              + " -e SECRETS_LOCATION=/app/secrets.yml"
+              + " -v ${./configarr.yml}:/app/config.yml:ro"
+              + " -v ${config.age.secrets.configarr-secrets.path}:/app/secrets.yml:ro"
+              + " -v /var/lib/arrstack/configarr/repos:/app/repos"
+              + " ghcr.io/raydak-labs/configarr:latest";
+          };
+        };
+      })
     ];
+
+    # Routinely sync *arr stack customisations
+    systemd.timers = lib.mkIf (config.arrstack.configarr && config.agenix.secrets != null && builtins.pathExists "${config.agenix.secrets}/configarr-secrets.age") {
+      configarr = {
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnBootSec = "5min";
+          OnUnitActiveSec = "6h";
+          Unit = "configarr.service";
+        };
+      };
+    };
 
     virtualisation.oci-containers.containers = lib.mkMerge [
 

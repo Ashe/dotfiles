@@ -1,2 +1,5 @@
+# Ignore claude code
+.claude/
+
 # Ignore build results
 result
