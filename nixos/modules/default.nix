@@ -8,7 +8,7 @@
   cockpit = import ./cockpit;
   crowdsec = import ./crowdsec;
   dropbox = import ./dropbox;
-  jellfyin = import ./jellyfin;
+  jellyfin = import ./jellyfin;
   mullvad = import ./mullvad;
   qbittorrent = import ./qbittorrent;
   steam = import ./steam;
