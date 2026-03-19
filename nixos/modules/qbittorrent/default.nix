@@ -29,6 +29,8 @@
     systemd.tmpfiles.rules = [
       # Ensure qbittorrent home exists
       "d /var/lib/qbittorrent 0700 qbittorrent qbittorrent -"
+      # Separate config subdir so the container doesn't pollute $HOME
+      "d /var/lib/qbittorrent/config 0700 qbittorrent qbittorrent -"
       # Ensure downloads folder is accessible by other modules
       "d /data/downloads 1777 root root -"
       "d /data/downloads/complete 1777 root root -"
@@ -47,7 +49,7 @@
       serviceConfig.PermissionsStartOnly = true;
       preStart = lib.mkIf (builtins.hasAttr "qbittorrent-key" config.age.secrets)
         (let
-          cfg = "/var/lib/qbittorrent/qBittorrent/qBittorrent.conf";
+          cfg = "/var/lib/qbittorrent/config/qBittorrent/qBittorrent.conf";
           secretPath = config.age.secrets.qbittorrent-key.path;
         in ''
           if [ ! -f ${cfg} ]; then
@@ -109,7 +111,7 @@
           WEBUI_PORT = "8090";
         };
         volumes = [
-          "/var/lib/qbittorrent:/config"
+          "/var/lib/qbittorrent/config:/config"
           "/data/downloads:/downloads"
         ];
         dependsOn = [ "gluetun" ];
