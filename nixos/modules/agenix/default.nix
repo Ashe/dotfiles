@@ -12,7 +12,7 @@
   config = lib.mkIf (config.agenix.secrets != null) {
 
     # Make the agenix CLI available so you can encrypt/re-encrypt secrets on the server
-    environment.systemPackages = [ inputs.agenix.packages.${pkgs.system}.default ];
+    environment.systemPackages = [ inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default ];
 
     # Scan the secrets directory and auto-register every .age file with agenix.
     # Each secret becomes available at /run/agenix/<name> at boot, e.g.
