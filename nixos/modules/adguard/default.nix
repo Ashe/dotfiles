@@ -86,7 +86,10 @@
       '';
     };
 
+    # Monitor AdGuard availability via uptime-kuma
+    uptime-kuma.monitors.adguard = { port = 3000; };
+
     # Expose AdGuard's web ui via caddy
-    caddy.services.adguard = { port = 3000; };
+    caddy.services.adguard.port = 3000;
   };
 }

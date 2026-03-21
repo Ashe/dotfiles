@@ -68,6 +68,9 @@
       ];
     };
 
+    # Monitor caddy availability via uptime-kuma
+    uptime-kuma.monitors.caddy = { type = "port"; port = 2019; };
+
     # Allow HTTP and HTTPS traffic through the firewall
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 

@@ -22,6 +22,7 @@
   crowdsec.enable = true;
   jellyfin.enable = "public";
   tailscale.enable = true;
+  uptime-kuma.enable = true;
 
   ##################
   # Configurations #

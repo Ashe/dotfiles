@@ -274,7 +274,12 @@
             config.age.secrets.gluetun-id.path
             config.age.secrets.gluetun-key.path
           ];
-          ports = [ "127.0.0.1:8090:8090" "${config.server.ip}:8090:8090" ];
+          ports = [
+            "127.0.0.1:8090:8090"
+            "${config.server.ip}:8090:8090"
+            # HTTP control server, used for health monitoring
+            "127.0.0.1:8000:8000"
+          ];
           podman.user = "arrstack";
         };
 
@@ -306,6 +311,17 @@
       (lib.mkIf config.arrstack.sonarr      { sonarr      = { port = 8989; }; })
       (lib.mkIf config.arrstack.radarr      { radarr      = { port = 7878; }; })
       (lib.mkIf config.arrstack.qbittorrent { qbittorrent = { port = 8090; }; })
+    ];
+
+    # Monitor arrstack service availability via uptime-kuma
+    uptime-kuma.monitors = lib.mkMerge [
+      (lib.mkIf config.arrstack.prowlarr    { prowlarr.port    = 9696; })
+      (lib.mkIf config.arrstack.sonarr      { sonarr.port      = 8989; })
+      (lib.mkIf config.arrstack.radarr      { radarr.port      = 7878; })
+      (lib.mkIf config.arrstack.qbittorrent {
+        gluetun = { type = "port"; port = 8000; };
+        qbittorrent.port = 8090;
+      })
     ];
   };
 }

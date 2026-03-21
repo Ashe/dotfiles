@@ -61,6 +61,9 @@
       public = config.jellyfin.enable == "public";
     };
 
+    # Monitor jellyfin availability via uptime-kuma
+    uptime-kuma.monitors.jellyfin = { port = 8096; };
+
     # Allow crowdsec to monitor jellyfin's logs for threats
     crowdsec.collections = [ "LePresidente/jellyfin" ];
     crowdsec.acquisitions.jellyfin = {

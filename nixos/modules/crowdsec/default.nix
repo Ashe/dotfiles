@@ -108,6 +108,9 @@
       };
     };
 
+    # Monitor crowdsec availability via uptime-kuma
+    uptime-kuma.monitors.crowdsec = { type = "port"; port = 8080; };
+
     # Enable firewall bouncer to enforce crowdsec ban decisions
     services.crowdsec-firewall-bouncer = lib.mkIf
       (builtins.hasAttr "crowdsec-bouncer-key" config.age.secrets)

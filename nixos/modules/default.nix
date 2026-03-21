@@ -12,4 +12,5 @@
   mullvad = import ./mullvad;
   steam = import ./steam;
   tailscale = import ./tailscale;
+  uptime-kuma = import ./uptime-kuma;
 }

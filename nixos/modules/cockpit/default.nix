@@ -26,7 +26,13 @@
       listenStreams = lib.mkForce [ "" "127.0.0.1:${toString config.services.cockpit.port}" ];
     };
 
+    # Monitor cockpit availability via uptime-kuma
+    uptime-kuma.monitors.cockpit = { type = "port"; port = 9090; };
+
     # Expose cockpit web ui via caddy
-    caddy.services.cockpit = { port = 9090; backendProtocol = "https"; };
+    caddy.services.cockpit = {
+      backendProtocol = "https";
+      port = 9090;
+    };
   };
 }
