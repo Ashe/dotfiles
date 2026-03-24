@@ -104,6 +104,9 @@
 
     # Enable fd, an alternative to find
     fd.enable = true;
+
+    # Enable claude code
+    claude-code.enable = true;
   };
 
   # Configure services
