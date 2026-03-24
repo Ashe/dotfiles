@@ -47,9 +47,15 @@
   {
     "context": "Workspace || Editor",
     "bindings": {
-      // Copy/paste
+      // Copy/paste/cut/select-all
       "ctrl-c": "editor::Copy",
       "ctrl-v": "editor::Paste",
+      "ctrl-x": "editor::Cut",
+      "ctrl-a": "editor::SelectAll",
+
+      // Undo/redo
+      "ctrl-z": "editor::Undo",
+      "ctrl-shift-z": "editor::Redo",
 
       // Easy pane navigation anywhere
       "ctrl-h": "workspace::ActivatePaneLeft",
