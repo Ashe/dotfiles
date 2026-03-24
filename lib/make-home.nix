@@ -2,7 +2,8 @@
 
 let
   config-file = import "${self}/home/configurations/${user}@${host}.nix";
-  home-directory = "/home/${user}";
+  isDarwin = inputs.nixpkgs.lib.hasSuffix "darwin" system;
+  home-directory = if isDarwin then "/Users/${user}" else "/home/${user}";
 
 in inputs.home-manager.lib.homeManagerConfiguration {
   pkgs = inputs.nixpkgs.legacyPackages.${system};
@@ -18,7 +19,7 @@ in inputs.home-manager.lib.homeManagerConfiguration {
       home = {
         username = user;
         homeDirectory = home-directory;
-        packages = with inputs.nixpkgs.legacyPackages."x86_64-linux"; [
+        packages = with inputs.nixpkgs.legacyPackages.${system}; [
           magic-wormhole-rs
           netcat
         ];
