@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   ##################
@@ -18,6 +18,17 @@
   ##################
 
   home = {
+
+    sessionVariables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
+
+    packages = with pkgs; [
+      bat
+    ];
+
+    # Do not change this
     stateVersion = "25.05";
   };
 }
