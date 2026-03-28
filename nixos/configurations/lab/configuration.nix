@@ -20,6 +20,7 @@
   caddy.enable = true;
   cockpit.enable = true;
   crowdsec.enable = true;
+  ddclient.porkbun.enable = true;
   jellyfin.enable = "public";
   tailscale.enable = true;
   uptime-kuma.enable = true;

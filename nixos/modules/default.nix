@@ -7,6 +7,7 @@
   caddy = import ./caddy;
   cockpit = import ./cockpit;
   crowdsec = import ./crowdsec;
+  ddclient = import ./ddclient;
   dropbox = import ./dropbox;
   jellyfin = import ./jellyfin;
   mullvad = import ./mullvad;
