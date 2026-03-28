@@ -9,7 +9,7 @@ let
       let
         fields = { inherit (monitor) type interval; name = monitor.name; }
           // lib.optionalAttrs (monitor.type == "http") {
-            url = "http://${monitor.hostname}:${toString monitor.port}";
+            url = "http://${monitor.hostname}:${toString monitor.port}${monitor.path}";
           }
           // lib.optionalAttrs (monitor.type == "port") {
             inherit (monitor) hostname port;
@@ -45,6 +45,11 @@ in
           hostname = lib.mkOption {
             type = lib.types.str;
             default = "127.0.0.1";
+          };
+          path = lib.mkOption {
+            type = lib.types.str;
+            default = "";
+            description = "URL path appended to the HTTP monitor URL (e.g. \"/myservice\").";
           };
           interval = lib.mkOption {
             type = lib.types.int;
