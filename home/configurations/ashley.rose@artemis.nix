@@ -25,6 +25,7 @@
     };
 
     packages = with pkgs; [
+      awscli2
       bat
       gnupg
     ];
