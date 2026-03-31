@@ -26,6 +26,7 @@
 
     packages = with pkgs; [
       bat
+      gnupg
     ];
 
     # Do not change this
