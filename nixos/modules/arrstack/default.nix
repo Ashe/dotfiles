@@ -4,17 +4,20 @@
   options.arrstack = {
     enable = lib.mkEnableOption "arrstack";
 
-    sonarr       = lib.mkEnableOption "sonarr (TV shows)"                       // { default = true; };
-    radarr       = lib.mkEnableOption "radarr (movies)"                         // { default = true; };
-    prowlarr     = lib.mkEnableOption "prowlarr (indexer manager)"              // { default = true; };
-    flaresolverr = lib.mkEnableOption "flaresolverr (Cloudflare bypass)"        // { default = true; };
-    configarr    = lib.mkEnableOption "configarr (TRaSH Guide sync)"            // { default = true; };
-    qbittorrent  = lib.mkEnableOption "qbittorrent (torrent client with VPN)"  // { default = true; };
+    sonarr = lib.mkEnableOption "sonarr (TV shows)" // { default = true; };
+    radarr = lib.mkEnableOption "radarr (movies)" // { default = true; };
+    prowlarr = lib.mkEnableOption "prowlarr (indexer manager)" // { default = true; };
+    flaresolverr = lib.mkEnableOption "flaresolverr (Cloudflare bypass)" // { default = true; };
+    configarr = lib.mkEnableOption "configarr (TRaSH Guide sync)" // { default = true; };
+    qbittorrent = lib.mkEnableOption "qbittorrent (torrents with VPN)" // { default = true; };
 
     vpnProvider = lib.mkOption {
       type = lib.types.str;
       default = "mullvad";
-      description = "VPN provider for Gluetun. See https://github.com/qdm12/gluetun-wiki for supported providers.";
+      description = ''
+        VPN provider for Gluetun.
+        See https://github.com/qdm12/gluetun-wiki for supported providers.
+      '';
     };
   };
 
@@ -124,12 +127,35 @@
       #   sudo systemctl restart podman-qbittorrent
       (lib.mkIf config.arrstack.qbittorrent {
         podman-qbittorrent = {
+          # Ensure gluetun container is started before qbittorrent (dependsOn
+          # in the OCI config handles container ordering, but we also need the
+          # VPN to actually be established before qbittorrent binds to the
+          # network interface — otherwise DHT finds 0 peers on boot).
+          after    = [ "podman-gluetun.service" ];
+          requires = [ "podman-gluetun.service" ];
           serviceConfig.PermissionsStartOnly = true;
           preStart =
             let
               cfg = "/var/lib/arrstack/qbittorrent/config/qBittorrent/qBittorrent.conf";
               secretPath = config.age.secrets.qbittorrent-key.path;
             in ''
+              # Wait up to 120 s for Gluetun's VPN to be healthy
+              echo "Waiting for Gluetun VPN to be healthy..."
+              _vpn_ready=0
+              for _i in $(seq 60); do
+                if runuser -u arrstack -- ${config.virtualisation.podman.package}/bin/podman exec gluetun /gluetun-entrypoint healthcheck 2>/dev/null; then
+                  _vpn_ready=1
+                  break
+                fi
+                echo "Gluetun not ready yet, retrying..."
+                sleep 2
+              done
+              if [ "$_vpn_ready" = "1" ]; then
+                echo "Gluetun VPN is healthy, starting qBittorrent"
+              else
+                echo "Warning: Gluetun VPN did not become healthy within 120s, starting qBittorrent anyway"
+              fi
+
               if [ ! -f ${cfg} ]; then
                 cp ${./qBittorrent.conf} ${cfg}
                 cat ${secretPath} >> ${cfg}
@@ -277,7 +303,7 @@
           ports = [
             "127.0.0.1:8090:8090"
             "${config.server.ip}:8090:8090"
-            # HTTP control server, used for health monitoring
+            # HTTP control server — used for VPN status polling
             "127.0.0.1:8000:8000"
           ];
           podman.user = "arrstack";
