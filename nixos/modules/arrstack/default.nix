@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   options.arrstack = {
@@ -143,7 +143,7 @@
               echo "Waiting for Gluetun VPN to be healthy..."
               _vpn_ready=0
               for _i in $(seq 60); do
-                if runuser -u arrstack -- ${config.virtualisation.podman.package}/bin/podman exec gluetun /gluetun-entrypoint healthcheck 2>/dev/null; then
+                if ${pkgs.curl}/bin/curl -sf http://127.0.0.1:8000/v1/publicip/ip; then
                   _vpn_ready=1
                   break
                 fi
@@ -292,6 +292,7 @@
             VPN_TYPE = "wireguard";
             HTTPPROXY = "off";
             SHADOWSOCKS = "off";
+            HTTP_CONTROL_SERVER_AUTH_DEFAULT_ROLE = "{\"auth\":\"none\"}";
             # Allow access to local network even through the VPN
             FIREWALL_OUTBOUND_SUBNETS = "192.168.1.0/24";
           };
@@ -345,7 +346,7 @@
       (lib.mkIf config.arrstack.sonarr      { sonarr.port      = 8989; })
       (lib.mkIf config.arrstack.radarr      { radarr.port      = 7878; })
       (lib.mkIf config.arrstack.qbittorrent {
-        gluetun = { type = "port"; port = 8000; };
+        gluetun = { type = "http"; port = 8000; path = "/v1/publicip/ip"; };
         qbittorrent.port = 8090;
       })
     ];
