@@ -21,6 +21,7 @@
   cockpit.enable = true;
   crowdsec.enable = true;
   ddclient.porkbun.enable = true;
+  homepage.enable = true;
   jellyfin.enable = "public";
   tailscale.enable = true;
   uptime-kuma.enable = true;

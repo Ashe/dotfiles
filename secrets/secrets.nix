@@ -17,6 +17,7 @@ in
     "${dir}/gluetun-addresses.age".publicKeys = [ (readKey dir) ];
     "${dir}/gluetun-id.age".publicKeys = [ (readKey dir) ];
     "${dir}/gluetun-key.age".publicKeys = [ (readKey dir) ];
+    "${dir}/homepage-secrets.age".publicKeys = [ (readKey dir) ];
     "${dir}/qbittorrent-key.age".publicKeys = [ (readKey dir) ];
     "${dir}/configarr-secrets.age".publicKeys = [ (readKey dir) ];
     "${dir}/uptime-kuma-credentials.age".publicKeys = [ (readKey dir) ];
