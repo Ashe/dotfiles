@@ -31,6 +31,7 @@ in inputs.home-manager.lib.homeManagerConfiguration {
       programs = {
         home-manager.enable = true;
         git.enable = inputs.nixpkgs.lib.mkDefault true;
+        git.signing.format = null;
         jujutsu.enable = inputs.nixpkgs.lib.mkDefault true;
         nh.enable = inputs.nixpkgs.lib.mkDefault true;
         nix-your-shell.enable = inputs.nixpkgs.lib.mkDefault true;

@@ -23,6 +23,7 @@ in inputs.nixpkgs.lib.nixosSystem {
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
       programs = {
         git.enable = inputs.nixpkgs.lib.mkDefault true;
+        git.signing.format = null;
         nh.enable = inputs.nixpkgs.lib.mkDefault true;
       };
     }

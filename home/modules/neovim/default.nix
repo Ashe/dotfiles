@@ -11,6 +11,7 @@
       vimAlias = true;
       vimdiffAlias = true;
       withPython3 = true;
+      withRuby = false;
 
       # General configuration for neovim
       initLua = builtins.readFile ./config.lua;
