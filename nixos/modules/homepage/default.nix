@@ -200,6 +200,17 @@
                 };
               };
             })
+            (lib.optional config.arrstack.qbittorrent {
+              Caddy = {
+                icon = "caddy.png";
+                description = "Reverse proxy";
+                ping = "http://127.0.0.1:2019";
+                widget = {
+                  type = "caddy";
+                  url = "http://127.0.0.1:2019";
+                };
+              };
+            })
             (lib.optional config.crowdsec.enable {
               CrowdSec = {
                 icon = "crowdsec.png";
