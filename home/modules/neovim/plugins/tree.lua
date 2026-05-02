@@ -1,10 +1,5 @@
-----------------------------------
--- nvim-tree
-----------------------------------
-
 -- Empty setup using defaults
 require('nvim-tree').setup()
-
 
 -- Keybindings
 

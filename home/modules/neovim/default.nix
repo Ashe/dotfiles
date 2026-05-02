@@ -1,81 +1,94 @@
-{ config, lib, ... }:
-
 {
-  options.neovim.enable = lib.mkEnableOption "neovim";
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-  config = lib.mkIf config.neovim.enable {
+# Plugins to enable in novim
+let
+  pluginDefs = import ./plugins.nix { inherit pkgs lib; };
+in
+{
+  options = {
 
-    # Configure neovim
-    programs.neovim = {
-      enable = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-      withPython3 = true;
-      withRuby = false;
+    # Option to enable neovim
+    neovim.enable = lib.mkEnableOption "neovim";
 
-      # General configuration for neovim
-      initLua = builtins.readFile ./config.lua;
-    };
+    # Option to enable individual plugin configurations
+    neovim.plugins = lib.mapAttrs (name: _: {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Enable the neovim plugin ${name}";
+      };
+    }) pluginDefs;
   };
 
-  # Import plugins with customisation
-  imports = [
+  config = lib.mkIf config.neovim.enable (
+    lib.mkMerge (
+      [
+        {
+          # Install neovim
+          programs.neovim = {
+            enable = true;
+            vimAlias = true;
+            vimdiffAlias = true;
+            withPython3 = true;
+            withRuby = false;
 
-    # Lua utilities
-    ./plugins/plenary
+            # General neovim configuration
+            initLua = builtins.readFile ./config.lua;
 
-    # Tabs
-    ./plugins/barbar
+            # Install plugin dependencies and expose to neovim
+            extraPackages = lib.concatLists (
+              lib.mapAttrsToList (
+                name: def: if config.neovim.plugins.${name}.enable then def.extraPackages or [ ] else [ ]
+              ) pluginDefs
+            );
+          };
+        }
+      ]
+      ++ lib.mapAttrsToList (
+        name: def:
 
-    # LSP configuring
-    ./plugins/lsp
+        # Install and configure enabled plugins
+        lib.mkIf config.neovim.plugins.${name}.enable {
+          programs.neovim.plugins = map (p: { plugin = p; }) (def.extraPlugins or [ ]) ++ [
+            {
+              plugin = def.package;
+              type = "lua";
+              config =
+                let
 
-    # Syntax highlighting
-    ./plugins/nvim-treesitter
+                  # Build a nice header comment per plugin
+                  comment = ''
 
-    # Completion
-    ./plugins/nvim-cmp
+                    -------------------------------------
+                    -- ${name}
+                    -------------------------------------
 
-    # Motion
-    ./plugins/leap
+                  '';
 
-    # Commenting
-    ./plugins/nvim-comment
+                  # Build the body from either:
+                  #   A: Enabling `require`
+                  #   B: Providing `extraConfig`
+                  #   C: Nothing, defaults to reading a file at ./plugins/PLUGIN.lua
+                  body =
+                    if def ? extraConfig then
+                      def.extraConfig
+                    else if def ? require && def.require then
+                      "require('${name}')"
+                    else
+                      builtins.readFile ./plugins/${name}.lua;
 
-    # Surrounding
-    ./plugins/nvim-surround
-
-    # Whitespace trimming
-    ./plugins/trim
-
-    # File browsing
-    ./plugins/nvim-tree
-
-    # File searching
-    ./plugins/telescope
-
-    # Git integration
-    ./plugins/gitsigns
-
-    # Status line
-    ./plugins/lualine
-
-    # Cursor line
-    ./plugins/cursorline
-
-    # Progress visualisation
-    ./plugins/fidget
-
-    # Zen mode
-    ./plugins/true-zen
-
-    # Wilder
-    ./plugins/wilder
-
-    # Key suggestions
-    ./plugins/which-key
-
-    # Tokyo night theme
-    ./plugins/tokyo-night
-  ];
+                  # Finalise plugin config content
+                in
+                comment + body;
+            }
+          ];
+        }
+      ) pluginDefs
+    )
+  );
 }
