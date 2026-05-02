@@ -67,6 +67,9 @@ with pkgs.vimPlugins;
     ];
   };
 
+  # Diagnostics
+  trouble.package = trouble-nvim;
+
   # Motion
   leap = {
     package = leap-nvim;
@@ -97,6 +100,7 @@ with pkgs.vimPlugins;
     package = telescope-nvim;
     extraPlugins = [
       nvim-web-devicons # Icons
+      trouble-nvim # Multipurpose display window
     ];
     extraPackages = with pkgs; [
       ripgrep # Live grepping

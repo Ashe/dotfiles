@@ -1,3 +1,4 @@
+local open_with_trouble = require('trouble.sources.telescope').open
 require('telescope').setup({
 
     -- Change default mappings when in window
@@ -5,6 +6,10 @@ require('telescope').setup({
         mappings = {
 
             i = {
+
+                -- Send results to trouble
+                ['<C-t>'] = open_with_trouble,
+
                 -- Preview window mappings for insert mode
                 ["<C-f>"] = false,
                 ["<C-u>"] = "preview_scrolling_up",
@@ -15,6 +20,9 @@ require('telescope').setup({
                 ["<C-l>"] = "preview_scrolling_right",
             },
             n = {
+                -- Send results to trouble
+                ['<C-t>'] = open_with_trouble,
+
                 -- Preview window mappings for normal mode
                 ["<C-f>"] = false,
                 ["<C-u>"] = "preview_scrolling_up",
@@ -30,19 +38,19 @@ require('telescope').setup({
 
 
 -- Keybindings
+local builtin = require('telescope.builtin')
 
 -- git_files, but falls back to find_files if not in a git repo
 project_files = function()
     local opts = {}
     vim.fn.system('git rev-parse --is-inside-work-tree')
     if vim.v.shell_error == 0 then
-        require('telescope.builtin').git_files(opts)
+        builtin.git_files(opts)
     else
-        require('telescope.builtin').find_files(opts)
+        builtin.find_files(opts)
     end
 end
 
-local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = "Search buffers" })
 vim.keymap.set('n', '<C-p>', project_files, { desc = "Project files" })
 vim.keymap.set('n', '<C-S-p>', builtin.builtin, { desc = "Telescope builtins" })
@@ -52,6 +60,7 @@ vim.keymap.set('n', '<leader>fT', builtin.builtin, { desc = "Telescope builtins"
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Files" })
 vim.keymap.set('n', '<leader>fR', builtin.oldfiles, { desc = "Recent files" })
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Live grep" })
+vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = "Diagnostics" })
 vim.keymap.set('n', '<leader>fG', builtin.registers, { desc = "Registers" })
 vim.keymap.set('n', '<leader>fc', builtin.command_history, { desc = "Command history" })
 vim.keymap.set('n', '<leader>f/', builtin.search_history, { desc = "Search history" })
