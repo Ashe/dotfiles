@@ -5,7 +5,7 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'treesitter' },
-        { name = 'path' },
+        { name = 'fuzzy_path' },
         { name = 'buffer' },
     }),
     window = {
@@ -38,8 +38,7 @@ cmp.setup.cmdline('/', {
 cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-        { name = 'path' },
         { name = 'cmdline' },
-        { name = 'cmdline_history' },
+        { name = 'fuzzy_path' },
     })
 })

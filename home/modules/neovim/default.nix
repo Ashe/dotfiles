@@ -5,7 +5,7 @@
   ...
 }:
 
-# Plugins to enable in novim
+# Plugins to enable in neovim
 let
   pluginDefs = import ./plugins.nix { inherit pkgs lib; };
 in
