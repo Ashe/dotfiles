@@ -71,46 +71,26 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- Servers
 
--- Setup lspconfig
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local lsp_flags = {
-    -- This is the default in Nvim 0.7+
+-- Set default capabilities for all LSP servers
+vim.lsp.config('*', {
+  capabilities = require('cmp_nvim_lsp').default_capabilities(),
+  flags = {
     debounce_text_changes = 150,
-}
-local servers = {
+  },
+})
 
-    -- C / C++
-    'ccls',
-
-    -- Cmake
-    'cmake',
-
-    -- Dart
-    'dartls',
-
-    -- GDScript
-    'gdscript',
-
-    -- GLSL
-    'glslls',
-
-    -- Haskell
-    'hls',
-
-    -- Nix
-    'nixd',
-
-    -- Rust
-    'rust_analyzer',
-}
-
--- Congigure all servers
-for _, server in ipairs(servers) do
-    vim.lsp.enable(server, {
-        flags = lsp_flags,
-        on_attach = on_attach,
-        capabilities = capabilities
-    })
-end
-
--- Bespoke configurations
+-- Potential servers to look for
+vim.lsp.enable({
+  'ccls',
+  'cmake',
+  'dartls',
+  'gdscript',
+  'glslls',
+  'gleam',
+  'hls',
+  'nixd',
+  'rust_analyzer',
+  'taplo',
+  'lua_ls',
+  'marksman',
+})
