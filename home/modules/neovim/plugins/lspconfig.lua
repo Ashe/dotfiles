@@ -3,17 +3,6 @@ require('inc_rename').setup({})
 
 -- Keybindings
 
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { noremap = true, silent = true, desc = "Show errors" })
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev,
-    { noremap = true, silent = true, desc = "Go to previous diagnositic" })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { noremap = true, silent = true, desc = "Go to next diagnostic" })
-vim.keymap.set('n', '<leader>q',
-    function()
-        vim.diagnostic.setloclist({ open = false }); require('telescope.builtin').loclist()
-    end, { noremap = true, silent = true, desc = 'Open error list' })
-
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -73,24 +62,24 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- Set default capabilities for all LSP servers
 vim.lsp.config('*', {
-  capabilities = require('cmp_nvim_lsp').default_capabilities(),
-  flags = {
-    debounce_text_changes = 150,
-  },
+    capabilities = require('cmp_nvim_lsp').default_capabilities(),
+    flags = {
+        debounce_text_changes = 150,
+    },
 })
 
 -- Potential servers to look for
 vim.lsp.enable({
-  'ccls',
-  'cmake',
-  'dartls',
-  'gdscript',
-  'glslls',
-  'gleam',
-  'hls',
-  'nixd',
-  'rust_analyzer',
-  'taplo',
-  'lua_ls',
-  'marksman',
+    'ccls',
+    'cmake',
+    'dartls',
+    'gdscript',
+    'glslls',
+    'gleam',
+    'hls',
+    'nixd',
+    'rust_analyzer',
+    'taplo',
+    'lua_ls',
+    'marksman',
 })

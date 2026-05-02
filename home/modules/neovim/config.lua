@@ -51,16 +51,16 @@ vim.opt.signcolumn = "yes"
 -- Change decorative characters
 -- Also prevent '~' from showing on blank lines
 vim.opt.fillchars = {
-  horiz = '━',
-  horizup = '┻',
-  horizdown = '┳',
-  vert = '┃',
-  vertleft  = '┫',
-  vertright = '┣',
-  verthoriz = '╋',
-  fold = ' ',
-  eob = ' ',
-  msgsep = '‾'
+    horiz     = '━',
+    horizup   = '┻',
+    horizdown = '┳',
+    vert      = '┃',
+    vertleft  = '┫',
+    vertright = '┣',
+    verthoriz = '╋',
+    fold      = ' ',
+    eob       = ' ',
+    msgsep    = '‾'
 }
 
 ----------------------------------
@@ -71,19 +71,19 @@ vim.opt.fillchars = {
 vim.g.mapleader = " "
 
 -- Reload neovim config
-vim.keymap.set("n", "<leader><S-BS>", "<Cmd>so ~/.config/nvim/init.lua<CR>", { desc="Reload config" })
+vim.keymap.set("n", "<leader><S-BS>", "<Cmd>so ~/.config/nvim/init.lua<CR>", { desc = "Reload config" })
 
 -- Save file with leader-w
-vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc="Save file" })
+vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "Save file" })
 
 -- Copy to clipboard
 vim.opt.clipboard:append { "unnamed", "unnamedplus" }
-vim.keymap.set({"n", "v"}, "<leader>y", "\"+y", { desc="Copy" })
-vim.keymap.set("n", "<leader>Y", "\"+yg_", { desc="Copy rest" })
+vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y", { desc = "Copy" })
+vim.keymap.set("n", "<leader>Y", "\"+yg_", { desc = "Copy rest" })
 
 -- Paste from clipboard
-vim.keymap.set({"n", "v"}, "<leader>P", "\"+P", { desc="Paste before" })
-vim.keymap.set({"n", "v"}, "<leader>p", "\"+p", { desc="Paste after" })
+vim.keymap.set({ "n", "v" }, "<leader>P", "\"+P", { desc = "Paste before" })
+vim.keymap.set({ "n", "v" }, "<leader>p", "\"+p", { desc = "Paste after" })
 
 -- Jump between marks
 vim.api.nvim_set_keymap('n', "<C-i>", "<C-i>", { noremap = true, silent = true })
@@ -92,38 +92,43 @@ vim.api.nvim_set_keymap('n', "<C-I>", "<C-i>", { noremap = true, silent = true }
 vim.api.nvim_set_keymap('n', "<C-O>", "<C-o>", { noremap = true, silent = true })
 
 -- Delete into the void
-vim.keymap.set({"n", "v"}, "<leader>d", "\"_d", { desc="Void delete" })
-vim.keymap.set("n", "<leader>D", "\"_dd", { desc="Void line to void" })
+vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d", { desc = "Void delete" })
+vim.keymap.set("n", "<leader>D", "\"_dd", { desc = "Void line to void" })
 
 -- Keep cursor in middle of screen when half-page-jumping
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc="Half-page up" })
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc="Half-page down" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half-page up" })
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half-page down" })
 
 -- Set up text replacement macro
-vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc="Substitute" })
+vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Substitute" })
 
 -- Improve window navigation keybindings, especially in terminal mode
-vim.keymap.set({"n", "t"}, "<C-w>h", "<C-\\><C-n><C-w>h", { desc="Move focus left" })
-vim.keymap.set({"n", "t"}, "<C-h>", "<C-\\><C-n><C-w>h", { desc="Move focus left" })
-vim.keymap.set({"n", "t"}, "<C-w>j", "<C-\\><C-n><C-w>j", { desc="Move focus down" })
-vim.keymap.set({"n", "t"}, "<C-j>", "<C-\\><C-n><C-w>j", { desc="Move focus down" })
-vim.keymap.set({"n", "t"}, "<C-w>k", "<C-\\><C-n><C-w>k", { desc="Move focus up" })
-vim.keymap.set({"n", "t"}, "<C-k>", "<C-\\><C-n><C-w>k", { desc="Move focus up" })
-vim.keymap.set({"n", "t"}, "<C-w>l", "<C-\\><C-n><C-w>l", { desc="Move focus right" })
-vim.keymap.set({"n", "t"}, "<C-l>", "<C-\\><C-n><C-w>l", { desc="Move focus right" })
-vim.keymap.set("t", "<C-w>w", "<C-\\><C-n>", { desc="Unfocus terminal" })
+vim.keymap.set({ "n", "t" }, "<C-w>h", "<C-\\><C-n><C-w>h", { desc = "Move focus left" })
+vim.keymap.set({ "n", "t" }, "<C-h>", "<C-\\><C-n><C-w>h", { desc = "Move focus left" })
+vim.keymap.set({ "n", "t" }, "<C-w>j", "<C-\\><C-n><C-w>j", { desc = "Move focus down" })
+vim.keymap.set({ "n", "t" }, "<C-j>", "<C-\\><C-n><C-w>j", { desc = "Move focus down" })
+vim.keymap.set({ "n", "t" }, "<C-w>k", "<C-\\><C-n><C-w>k", { desc = "Move focus up" })
+vim.keymap.set({ "n", "t" }, "<C-k>", "<C-\\><C-n><C-w>k", { desc = "Move focus up" })
+vim.keymap.set({ "n", "t" }, "<C-w>l", "<C-\\><C-n><C-w>l", { desc = "Move focus right" })
+vim.keymap.set({ "n", "t" }, "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Move focus right" })
+vim.keymap.set("t", "<C-w>w", "<C-\\><C-n>", { desc = "Unfocus terminal" })
 
 -- Tab navigation
-require('which-key').add({{ "<leader><Tab>", group = "Tabs.." }})
-vim.keymap.set("n", "<Tab>", "<Cmd>tabnext<CR>", { desc="Next tab" })
-vim.keymap.set("n", "<S-Tab>", "<Cmd>tabprevious<CR>", { desc="Next tab" })
-vim.keymap.set("n", "<C-Backspace>", "<Cmd>tabclose<CR>", { desc="Close tab" })
-vim.keymap.set("n", "<leader><Tab>n", "<Cmd>tab split<CR>", { desc="New tab" })
-vim.keymap.set("n", "<leader><Tab><Backspace>", "<Cmd>tabclose<CR>", { desc="Close tab" })
-vim.keymap.set("n", "<leader><Tab>o", "<Cmd>tabonly<CR>", { desc="Close other tabs" })
-vim.keymap.set({"n", "t"}, "<C-Tab>n", "<Cmd>tab split<CR>", { desc="New tab" })
-vim.keymap.set({"n", "t"}, "<C-Tab><Backspace>", "<Cmd>tabclose<CR>", { desc="Close tab" })
-vim.keymap.set({"n", "t"}, "<C-Tab>o", "<Cmd>tabonly<CR>", { desc="Close other tabs" })
+require('which-key').add({ { "<leader><Tab>", group = "Tabs.." } })
+vim.keymap.set("n", "<Tab>", "<Cmd>tabnext<CR>", { desc = "Next tab" })
+vim.keymap.set("n", "<S-Tab>", "<Cmd>tabprevious<CR>", { desc = "Next tab" })
+vim.keymap.set("n", "<C-Backspace>", "<Cmd>tabclose<CR>", { desc = "Close tab" })
+vim.keymap.set("n", "<leader><Tab>n", "<Cmd>tab split<CR>", { desc = "New tab" })
+vim.keymap.set("n", "<leader><Tab><Backspace>", "<Cmd>tabclose<CR>", { desc = "Close tab" })
+vim.keymap.set("n", "<leader><Tab>o", "<Cmd>tabonly<CR>", { desc = "Close other tabs" })
+vim.keymap.set({ "n", "t" }, "<C-Tab>n", "<Cmd>tab split<CR>", { desc = "New tab" })
+vim.keymap.set({ "n", "t" }, "<C-Tab><Backspace>", "<Cmd>tabclose<CR>", { desc = "Close tab" })
+vim.keymap.set({ "n", "t" }, "<C-Tab>o", "<Cmd>tabonly<CR>", { desc = "Close other tabs" })
+
+-- Diagnostics
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Next diagnostic" })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Show diagnostic" })
 
 ----------------------------------
 -- Plugin-preparation
