@@ -48,9 +48,9 @@
     "context": "Workspace || Editor",
     "bindings": {
       // Copy/paste/cut/select-all
-      "ctrl-c": "editor::Copy",
-      "ctrl-v": "editor::Paste",
-      "ctrl-x": "editor::Cut",
+      "ctrl-shift-c": "editor::Copy",
+      "ctrl-shift-v": "editor::Paste",
+      "ctrl-shift-x": "editor::Cut",
       "ctrl-a": "editor::SelectAll",
 
       // Undo/redo

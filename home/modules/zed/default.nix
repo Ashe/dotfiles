@@ -1,4 +1,10 @@
-{ config, lib, shared-lib, pkgs, ... }:
+{
+  config,
+  lib,
+  shared-lib,
+  pkgs,
+  ...
+}:
 
 {
   options.zed.enable = lib.mkEnableOption "zed";
@@ -11,8 +17,8 @@
       # Install zed
       enable = true;
       package = (config.lib.nixGL.wrap pkgs.zed-editor);
-      userSettings = shared-lib.fromJsonFile ./settings.json;
-      userKeymaps = shared-lib.fromJsonFile ./keymap.json;
+      userSettings = shared-lib.fromJsonFile ./settings.jsonc;
+      userKeymaps = shared-lib.fromJsonFile ./keymap.jsonc;
 
       # Allow for mutable configurations
       mutableUserSettings = true;
@@ -42,16 +48,16 @@
         "toml"
         "xml"
       ];
+
+      # Install zed-specific packages
+      extraPackages = with pkgs; [
+
+        # Font used in config
+        nerd-fonts.fira-code
+
+        # Nix language server
+        nixd
+      ];
     };
-
-    # Install zed-specific packages
-    home.packages = with pkgs; [
-
-      # Font used in config
-      nerd-fonts.fira-code
-
-      # Nix language server
-      nil
-    ];
   };
 }
