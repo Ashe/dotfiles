@@ -20,6 +20,9 @@ with pkgs.vimPlugins;
     ];
   };
 
+  # Terminal
+  toggleterm.package = toggleterm-nvim;
+
   # Language servers
   lspconfig = {
     package = nvim-lspconfig;
