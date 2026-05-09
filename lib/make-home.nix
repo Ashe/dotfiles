@@ -1,11 +1,13 @@
-{ self, ... } @ inputs: user: host: system:
+{ self, ... }@inputs:
+user: host: system:
 
 let
   config-file = import "${self}/home/configurations/${user}@${host}.nix";
   isDarwin = inputs.nixpkgs.lib.hasSuffix "darwin" system;
   home-directory = if isDarwin then "/Users/${user}" else "/home/${user}";
 
-in inputs.home-manager.lib.homeManagerConfiguration {
+in
+inputs.home-manager.lib.homeManagerConfiguration {
   pkgs = inputs.nixpkgs.legacyPackages.${system};
   extraSpecialArgs = {
     inherit inputs;
@@ -26,7 +28,10 @@ in inputs.home-manager.lib.homeManagerConfiguration {
       };
       nix = {
         package = inputs.nixpkgs.legacyPackages.${system}.lixPackageSets.stable.lix;
-        settings.experimental-features = [ "nix-command" "flakes" ];
+        settings.experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
       };
       programs = {
         home-manager.enable = true;

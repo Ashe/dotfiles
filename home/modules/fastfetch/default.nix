@@ -1,4 +1,9 @@
-{ config, lib, shared-lib, ... }:
+{
+  config,
+  lib,
+  shared-lib,
+  ...
+}:
 
 {
   options.fastfetch.enable = lib.mkEnableOption "fastfetch";

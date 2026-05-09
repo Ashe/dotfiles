@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   options.adguard.enable = lib.mkEnableOption "adguard";
@@ -59,35 +64,41 @@
     # Only writes users if they aren't already present, avoiding clobbering
     # any changes AdGuard has written back to its own config file.
     age.secrets.adguard-key.mode = "0444";
-    systemd.services.adguardhome.preStart = lib.mkIf (builtins.hasAttr "adguard-key" config.age.secrets) (
-      let
-        adguardConfig = "/var/lib/AdGuardHome/AdGuardHome.yaml";
-        secretPath = config.age.secrets.adguard-key.path;
-      in
-      ''
-        if [ -f ${adguardConfig} ] && ! ${pkgs.gnugrep}/bin/grep -q "^users:" ${adguardConfig}; then
-          hash=$(cat ${secretPath})
-          echo "users:" >> ${adguardConfig}
-          echo "  - name: admin" >> ${adguardConfig}
-          echo "    password: $hash" >> ${adguardConfig}
-        fi
-      ''
-    );
+    systemd.services.adguardhome.preStart =
+      lib.mkIf (builtins.hasAttr "adguard-key" config.age.secrets)
+        (
+          let
+            adguardConfig = "/var/lib/AdGuardHome/AdGuardHome.yaml";
+            secretPath = config.age.secrets.adguard-key.path;
+          in
+          ''
+            if [ -f ${adguardConfig} ] && ! ${pkgs.gnugrep}/bin/grep -q "^users:" ${adguardConfig}; then
+              hash=$(cat ${secretPath})
+              echo "users:" >> ${adguardConfig}
+              echo "  - name: admin" >> ${adguardConfig}
+              echo "    password: $hash" >> ${adguardConfig}
+            fi
+          ''
+        );
 
     # Allow LAN devices to query AdGuard DNS
     networking.firewall = {
       allowedTCPPorts = [ 53 ];
       allowedUDPPorts = [ 53 ];
-      extraCommands = let
-        subnet = "${lib.concatStringsSep "." (lib.take 3 (lib.splitString "." config.server.ip))}.0/24";
-      in ''
-        iptables -A nixos-fw -p udp -s ${subnet} --dport 53 -j nixos-fw-accept
-        iptables -A nixos-fw -p tcp -s ${subnet} --dport 53 -j nixos-fw-accept
-      '';
+      extraCommands =
+        let
+          subnet = "${lib.concatStringsSep "." (lib.take 3 (lib.splitString "." config.server.ip))}.0/24";
+        in
+        ''
+          iptables -A nixos-fw -p udp -s ${subnet} --dport 53 -j nixos-fw-accept
+          iptables -A nixos-fw -p tcp -s ${subnet} --dport 53 -j nixos-fw-accept
+        '';
     };
 
     # Monitor AdGuard availability via uptime-kuma
-    uptime-kuma.monitors.adguard = { port = 3000; };
+    uptime-kuma.monitors.adguard = {
+      port = 3000;
+    };
 
     # Expose AdGuard's web ui via caddy
     caddy.services.adguard.port = 3000;

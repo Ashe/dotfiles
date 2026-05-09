@@ -1,11 +1,13 @@
-{ self, ... } @ inputs: name:
+{ self, ... }@inputs:
+name:
 
 let
   config-folder = "${self}/nixos/configurations/${name}";
   config-file = import "${config-folder}/configuration.nix";
   hardware-file = "${config-folder}/hardware-configuration.nix";
 
-in inputs.nixpkgs.lib.nixosSystem {
+in
+inputs.nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   specialArgs = {
     inherit inputs;
@@ -20,7 +22,10 @@ in inputs.nixpkgs.lib.nixosSystem {
       environment.systemPackages = with inputs.nixpkgs.legacyPackages."x86_64-linux"; [
         jujutsu
       ];
-      nix.settings.experimental-features = [ "nix-command" "flakes" ];
+      nix.settings.experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       programs = {
         git.enable = inputs.nixpkgs.lib.mkDefault true;
         nh.enable = inputs.nixpkgs.lib.mkDefault true;

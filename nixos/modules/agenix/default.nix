@@ -1,4 +1,10 @@
-{ inputs, pkgs, config, lib, ... }:
+{
+  inputs,
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 {
   imports = [ inputs.agenix.nixosModules.default ];
@@ -17,14 +23,11 @@
     # Scan the secrets directory and auto-register every .age file with agenix.
     # Each secret becomes available at /run/agenix/<name> at boot, e.g.
     # password.age -> /run/agenix/password
-    age.secrets =
-      lib.optionalAttrs (config.agenix.secrets != null)
-        (lib.mapAttrs'
-          (name: _: lib.nameValuePair
-            (lib.removeSuffix ".age" name)
-            { file = "${config.agenix.secrets}/${name}"; })
-          (lib.filterAttrs
-            (name: _: lib.hasSuffix ".age" name)
-            (builtins.readDir config.agenix.secrets)));
+    age.secrets = lib.optionalAttrs (config.agenix.secrets != null) (
+      lib.mapAttrs' (
+        name: _:
+        lib.nameValuePair (lib.removeSuffix ".age" name) { file = "${config.agenix.secrets}/${name}"; }
+      ) (lib.filterAttrs (name: _: lib.hasSuffix ".age" name) (builtins.readDir config.agenix.secrets))
+    );
   };
 }

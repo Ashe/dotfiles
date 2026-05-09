@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   options.steam.enable = lib.mkEnableOption "steam";
@@ -27,16 +32,17 @@
     # Override Steam package to provide extra libraries for games
     nixpkgs.config.packageOverrides = pkgs: {
       steam = pkgs.steam.override {
-        extraPkgs = pkgs: with pkgs; [
-          libgdiplus
-          libpng
-          libpulseaudio
-          libvorbis
-          xorg.libXcursor
-          xorg.libXi
-          xorg.libXinerama
-          xorg.libXScrnSaver
-        ];
+        extraPkgs =
+          pkgs: with pkgs; [
+            libgdiplus
+            libpng
+            libpulseaudio
+            libvorbis
+            xorg.libXcursor
+            xorg.libXi
+            xorg.libXinerama
+            xorg.libXScrnSaver
+          ];
       };
     };
 

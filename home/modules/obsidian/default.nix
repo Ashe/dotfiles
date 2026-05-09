@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   options.obsidian.enable = lib.mkEnableOption "obsidian";
@@ -24,32 +29,40 @@
 
         # Keybindings
         hotkeys = {
-          "editor:insert-link" = [];
-          "command-palette:open" = [{
-            key = "K";
-            modifiers = [
-              "Mod"
-            ];
-          }];
-          "switcher:open" = [{
-            key = "P";
-            modifiers = [
-              "Mod"
-            ];
-          }];
-          "app:toggle-left-sidebar" = [{
-            key = "O";
-            modifiers = [
-              "Mod"
-            ];
-          }];
-          "app:toggle-right-sidebar" = [{
-            key = "O";
-            modifiers = [
-              "Mod"
-              "Shift"
-            ];
-          }];
+          "editor:insert-link" = [ ];
+          "command-palette:open" = [
+            {
+              key = "K";
+              modifiers = [
+                "Mod"
+              ];
+            }
+          ];
+          "switcher:open" = [
+            {
+              key = "P";
+              modifiers = [
+                "Mod"
+              ];
+            }
+          ];
+          "app:toggle-left-sidebar" = [
+            {
+              key = "O";
+              modifiers = [
+                "Mod"
+              ];
+            }
+          ];
+          "app:toggle-right-sidebar" = [
+            {
+              key = "O";
+              modifiers = [
+                "Mod"
+                "Shift"
+              ];
+            }
+          ];
         };
       };
 

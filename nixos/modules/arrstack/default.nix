@@ -1,15 +1,32 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   options.arrstack = {
     enable = lib.mkEnableOption "arrstack";
 
-    sonarr = lib.mkEnableOption "sonarr (TV shows)" // { default = true; };
-    radarr = lib.mkEnableOption "radarr (movies)" // { default = true; };
-    prowlarr = lib.mkEnableOption "prowlarr (indexer manager)" // { default = true; };
-    flaresolverr = lib.mkEnableOption "flaresolverr (Cloudflare bypass)" // { default = true; };
-    configarr = lib.mkEnableOption "configarr (TRaSH Guide sync)" // { default = true; };
-    qbittorrent = lib.mkEnableOption "qbittorrent (torrents with VPN)" // { default = true; };
+    sonarr = lib.mkEnableOption "sonarr (TV shows)" // {
+      default = true;
+    };
+    radarr = lib.mkEnableOption "radarr (movies)" // {
+      default = true;
+    };
+    prowlarr = lib.mkEnableOption "prowlarr (indexer manager)" // {
+      default = true;
+    };
+    flaresolverr = lib.mkEnableOption "flaresolverr (Cloudflare bypass)" // {
+      default = true;
+    };
+    configarr = lib.mkEnableOption "configarr (TRaSH Guide sync)" // {
+      default = true;
+    };
+    qbittorrent = lib.mkEnableOption "qbittorrent (torrents with VPN)" // {
+      default = true;
+    };
 
     vpnProvider = lib.mkOption {
       type = lib.types.str;
@@ -31,11 +48,21 @@
       group = "arrstack";
       home = "/var/lib/arrstack";
       createHome = true;
-      subUidRanges = [{ startUid = 231072; count = 65536; }];
-      subGidRanges = [{ startGid = 231072; count = 65536; }];
+      subUidRanges = [
+        {
+          startUid = 231072;
+          count = 65536;
+        }
+      ];
+      subGidRanges = [
+        {
+          startGid = 231072;
+          count = 65536;
+        }
+      ];
       linger = true;
     };
-    users.groups.arrstack = {};
+    users.groups.arrstack = { };
 
     # Ensure config directories exist
     systemd.tmpfiles.rules = [
@@ -75,14 +102,21 @@
 
     # Secrets must be world-readable so the rootless container can access them
     age.secrets = lib.mkMerge [
-      (lib.mkIf (config.arrstack.configarr && config.agenix.secrets != null && builtins.pathExists "${config.agenix.secrets}/configarr-secrets.age") {
-        configarr-secrets.mode = "0444";
-      })
+      (lib.mkIf
+        (
+          config.arrstack.configarr
+          && config.agenix.secrets != null
+          && builtins.pathExists "${config.agenix.secrets}/configarr-secrets.age"
+        )
+        {
+          configarr-secrets.mode = "0444";
+        }
+      )
       (lib.mkIf config.arrstack.qbittorrent {
         gluetun-addresses.mode = "0444";
-        gluetun-id.mode        = "0444";
-        gluetun-key.mode       = "0444";
-        qbittorrent-key.mode   = "0444";
+        gluetun-id.mode = "0444";
+        gluetun-key.mode = "0444";
+        qbittorrent-key.mode = "0444";
       })
     ];
 
@@ -131,14 +165,15 @@
           # in the OCI config handles container ordering, but we also need the
           # VPN to actually be established before qbittorrent binds to the
           # network interface — otherwise DHT finds 0 peers on boot).
-          after    = [ "podman-gluetun.service" ];
+          after = [ "podman-gluetun.service" ];
           requires = [ "podman-gluetun.service" ];
           serviceConfig.PermissionsStartOnly = true;
           preStart =
             let
               cfg = "/var/lib/arrstack/qbittorrent/config/qBittorrent/qBittorrent.conf";
               secretPath = config.age.secrets.qbittorrent-key.path;
-            in ''
+            in
+            ''
               # Wait up to 120 s for Gluetun's VPN to be healthy
               echo "Waiting for Gluetun VPN to be healthy..."
               _vpn_ready=0
@@ -171,43 +206,61 @@
       })
 
       # Configarr — one-shot job to sync TRaSH Guide configs to Sonarr/Radarr
-      (lib.mkIf (config.arrstack.configarr && config.agenix.secrets != null && builtins.pathExists "${config.agenix.secrets}/configarr-secrets.age") {
-        configarr = {
-          description = "configarr: sync TRaSH Guide configurations to Sonarr/Radarr";
-          after = [ "arrstack-network.service" "network-online.target" ]
+      (lib.mkIf
+        (
+          config.arrstack.configarr
+          && config.agenix.secrets != null
+          && builtins.pathExists "${config.agenix.secrets}/configarr-secrets.age"
+        )
+        {
+          configarr = {
+            description = "configarr: sync TRaSH Guide configurations to Sonarr/Radarr";
+            after = [
+              "arrstack-network.service"
+              "network-online.target"
+            ]
             ++ lib.optionals config.arrstack.sonarr [ "podman-sonarr.service" ]
             ++ lib.optionals config.arrstack.radarr [ "podman-radarr.service" ];
-          wants = [ "network-online.target" ];
-          requires = [ "arrstack-network.service" ];
-          serviceConfig = {
-            Type = "oneshot";
-            User = "arrstack";
-            StandardOutput = "journal";
-            StandardError = "journal";
-            ExecStart = "${config.virtualisation.podman.package}/bin/podman run --rm"
-              + " --name=configarr --network=arrstack --pull=newer --log-driver=journald"
-              + " -e CONFIG_LOCATION=/app/config.yml"
-              + " -e SECRETS_LOCATION=/app/secrets.yml"
-              + " -v ${./configarr.yml}:/app/config.yml:ro"
-              + " -v ${config.age.secrets.configarr-secrets.path}:/app/secrets.yml:ro"
-              + " -v /var/lib/arrstack/configarr/repos:/app/repos"
-              + " ghcr.io/raydak-labs/configarr:latest";
+            wants = [ "network-online.target" ];
+            requires = [ "arrstack-network.service" ];
+            serviceConfig = {
+              Type = "oneshot";
+              User = "arrstack";
+              StandardOutput = "journal";
+              StandardError = "journal";
+              ExecStart =
+                "${config.virtualisation.podman.package}/bin/podman run --rm"
+                + " --name=configarr --network=arrstack --pull=newer --log-driver=journald"
+                + " -e CONFIG_LOCATION=/app/config.yml"
+                + " -e SECRETS_LOCATION=/app/secrets.yml"
+                + " -v ${./configarr.yml}:/app/config.yml:ro"
+                + " -v ${config.age.secrets.configarr-secrets.path}:/app/secrets.yml:ro"
+                + " -v /var/lib/arrstack/configarr/repos:/app/repos"
+                + " ghcr.io/raydak-labs/configarr:latest";
+            };
           };
-        };
-      })
+        }
+      )
     ];
 
     # Routinely sync *arr stack customisations
-    systemd.timers = lib.mkIf (config.arrstack.configarr && config.agenix.secrets != null && builtins.pathExists "${config.agenix.secrets}/configarr-secrets.age") {
-      configarr = {
-        wantedBy = [ "timers.target" ];
-        timerConfig = {
-          OnBootSec = "5min";
-          OnUnitActiveSec = "6h";
-          Unit = "configarr.service";
+    systemd.timers =
+      lib.mkIf
+        (
+          config.arrstack.configarr
+          && config.agenix.secrets != null
+          && builtins.pathExists "${config.agenix.secrets}/configarr-secrets.age"
+        )
+        {
+          configarr = {
+            wantedBy = [ "timers.target" ];
+            timerConfig = {
+              OnBootSec = "5min";
+              OnUnitActiveSec = "6h";
+              Unit = "configarr.service";
+            };
+          };
         };
-      };
-    };
 
     virtualisation.oci-containers.containers = lib.mkMerge [
 
@@ -223,7 +276,10 @@
           volumes = [
             "/var/lib/arrstack/prowlarr:/config"
           ];
-          extraOptions = [ "--pull=newer" "--network=arrstack" ];
+          extraOptions = [
+            "--pull=newer"
+            "--network=arrstack"
+          ];
           podman.user = "arrstack";
         };
       })
@@ -243,7 +299,10 @@
             # /data/torrents (qBittorrent) to /data/media (library).
             "/data:/data"
           ];
-          extraOptions = [ "--pull=newer" "--network=arrstack" ];
+          extraOptions = [
+            "--pull=newer"
+            "--network=arrstack"
+          ];
           podman.user = "arrstack";
         };
       })
@@ -263,7 +322,10 @@
             # /data/torrents (qBittorrent) to /data/media (library).
             "/data:/data"
           ];
-          extraOptions = [ "--pull=newer" "--network=arrstack" ];
+          extraOptions = [
+            "--pull=newer"
+            "--network=arrstack"
+          ];
           podman.user = "arrstack";
         };
       })
@@ -273,7 +335,11 @@
         flaresolverr = {
           image = "ghcr.io/flaresolverr/flaresolverr:latest";
           ports = [ "127.0.0.1:8191:8191" ];
-          extraOptions = [ "--pull=newer" "--network=arrstack" "--user=0:0" ];
+          extraOptions = [
+            "--pull=newer"
+            "--network=arrstack"
+            "--user=0:0"
+          ];
           podman.user = "arrstack";
         };
       })
@@ -334,19 +400,39 @@
 
     # Expose web UIs via Caddy (local only)
     caddy.services = lib.mkMerge [
-      (lib.mkIf config.arrstack.prowlarr    { prowlarr    = { port = 9696; }; })
-      (lib.mkIf config.arrstack.sonarr      { sonarr      = { port = 8989; }; })
-      (lib.mkIf config.arrstack.radarr      { radarr      = { port = 7878; }; })
-      (lib.mkIf config.arrstack.qbittorrent { qbittorrent = { port = 8090; }; })
+      (lib.mkIf config.arrstack.prowlarr {
+        prowlarr = {
+          port = 9696;
+        };
+      })
+      (lib.mkIf config.arrstack.sonarr {
+        sonarr = {
+          port = 8989;
+        };
+      })
+      (lib.mkIf config.arrstack.radarr {
+        radarr = {
+          port = 7878;
+        };
+      })
+      (lib.mkIf config.arrstack.qbittorrent {
+        qbittorrent = {
+          port = 8090;
+        };
+      })
     ];
 
     # Monitor arrstack service availability via uptime-kuma
     uptime-kuma.monitors = lib.mkMerge [
-      (lib.mkIf config.arrstack.prowlarr    { prowlarr.port    = 9696; })
-      (lib.mkIf config.arrstack.sonarr      { sonarr.port      = 8989; })
-      (lib.mkIf config.arrstack.radarr      { radarr.port      = 7878; })
+      (lib.mkIf config.arrstack.prowlarr { prowlarr.port = 9696; })
+      (lib.mkIf config.arrstack.sonarr { sonarr.port = 8989; })
+      (lib.mkIf config.arrstack.radarr { radarr.port = 7878; })
       (lib.mkIf config.arrstack.qbittorrent {
-        gluetun = { type = "http"; port = 8000; path = "/v1/publicip/ip"; };
+        gluetun = {
+          type = "http";
+          port = 8000;
+          path = "/v1/publicip/ip";
+        };
         qbittorrent.port = 8090;
       })
     ];

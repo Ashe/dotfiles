@@ -1,4 +1,9 @@
-{ inputs, config, lib, ... }:
+{
+  inputs,
+  config,
+  lib,
+  ...
+}:
 
 {
   # Add options for NixGL, a wrapper to allow programs to use graphics hardware
@@ -11,7 +16,7 @@
     packages = lib.mkOption {
       description = "Packages to wrap";
       type = lib.types.listOf lib.types.package;
-      default = [];
+      default = [ ];
     };
   };
 

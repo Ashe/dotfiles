@@ -3,7 +3,12 @@
 {
   options.jellyfin = {
     enable = lib.mkOption {
-      type = lib.types.nullOr (lib.types.enum [ "local" "public" ]);
+      type = lib.types.nullOr (
+        lib.types.enum [
+          "local"
+          "public"
+        ]
+      );
       default = null;
       description = "How Jellyfin is exposed. null disables it, local restricts to tailnet/LAN, public additionally exposes via the server's public domain.";
     };
@@ -24,12 +29,22 @@
       createHome = true;
       # subUidRanges/subGidRanges provide the UID space needed for
       # container user namespace mapping
-      subUidRanges = [{ startUid = 100000; count = 65536; }];
-      subGidRanges = [{ startGid = 100000; count = 65536; }];
+      subUidRanges = [
+        {
+          startUid = 100000;
+          count = 65536;
+        }
+      ];
+      subGidRanges = [
+        {
+          startGid = 100000;
+          count = 65536;
+        }
+      ];
       # Persist session after logout
       linger = true;
     };
-    users.groups.jellyfin = {};
+    users.groups.jellyfin = { };
 
     # Ensure media path exists on the host and is owned by the jellyfin user
     systemd.tmpfiles.rules = [
@@ -62,7 +77,7 @@
     };
 
     # Monitor jellyfin availability via uptime-kuma
-    uptime-kuma.monitors.jellyfin = { port = 8096; };
+    uptime-kuma.monitors.jellyfin.port = 8096;
 
     # Allow crowdsec to monitor jellyfin's logs for threats
     crowdsec.collections = [ "LePresidente/jellyfin" ];

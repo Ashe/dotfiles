@@ -1,4 +1,9 @@
-{ inputs, config, lib, ... }:
+{
+  inputs,
+  config,
+  lib,
+  ...
+}:
 
 {
   options.nix.config.enable = lib.mkEnableOption "nix.config";
@@ -10,7 +15,10 @@
       settings = {
 
         # Enable flakes and 'nix' command
-        experimental-features = ["nix-command" "flakes"];
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
 
         # Deduplicate and optimize nix store
         auto-optimise-store = true;
