@@ -8,12 +8,16 @@ let
   # Find all subdirectories of secrets/ — each represents a machine
   dirs = attrNames (filterAttrs (_: type: type == "directory") (readDir ./.));
 in
-  # For each machine directory, declare the expected secrets
-  foldl (acc: dir: acc // {
+# For each machine directory, declare the expected secrets
+foldl (
+  acc: dir:
+  acc
+  // {
     "${dir}/adguard-key.age".publicKeys = [ (readKey dir) ];
     "${dir}/crowdsec-bouncer-key.age".publicKeys = [ (readKey dir) ];
     "${dir}/crowdsec-enrollment-key.age".publicKeys = [ (readKey dir) ];
     "${dir}/ddclient-porkbun.age".publicKeys = [ (readKey dir) ];
+    "${dir}/freshrss-secrets.age".publicKeys = [ (readKey dir) ];
     "${dir}/gluetun-addresses.age".publicKeys = [ (readKey dir) ];
     "${dir}/gluetun-id.age".publicKeys = [ (readKey dir) ];
     "${dir}/gluetun-key.age".publicKeys = [ (readKey dir) ];
@@ -21,4 +25,5 @@ in
     "${dir}/qbittorrent-key.age".publicKeys = [ (readKey dir) ];
     "${dir}/configarr-secrets.age".publicKeys = [ (readKey dir) ];
     "${dir}/uptime-kuma-credentials.age".publicKeys = [ (readKey dir) ];
-  }) {} dirs
+  }
+) { } dirs

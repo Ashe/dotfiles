@@ -9,6 +9,7 @@
   crowdsec = import ./crowdsec;
   ddclient = import ./ddclient;
   dropbox = import ./dropbox;
+  freshrss = import ./freshrss;
   homepage = import ./homepage;
   jellyfin = import ./jellyfin;
   mullvad = import ./mullvad;

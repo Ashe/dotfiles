@@ -27,10 +27,21 @@
           "Media" = {
             style = "row";
             columns = 2;
-            "Jellyfin" = { header = false; style = "column"; columns = 1; };
-            "Arr" = { header = false; style = "row"; columns = 2; };
+            "Jellyfin" = {
+              header = false;
+              style = "column";
+              columns = 1;
+            };
+            "Arr" = {
+              header = false;
+              style = "row";
+              columns = 2;
+            };
           };
-          "System"   = { style = "row"; columns = 3; };
+          "System" = {
+            style = "row";
+            columns = 3;
+          };
         };
         quicklaunch = {
           showSearchSuggestions = true;
@@ -78,9 +89,11 @@
               "Jellyfin" = lib.optional (config.jellyfin.enable != null) {
                 Jellyfin = {
                   icon = "jellyfin.png";
-                  href = if config.jellyfin.enable == "public"
-                    then "https://jellyfin.${config.server.publicDomain}"
-                    else "https://jellyfin.${config.server.domain}";
+                  href =
+                    if config.jellyfin.enable == "public" then
+                      "https://jellyfin.${config.server.publicDomain}"
+                    else
+                      "https://jellyfin.${config.server.domain}";
                   description = "Media server";
                   ping = "http://127.0.0.1:8096";
                   widget = {
@@ -99,62 +112,66 @@
               };
             }
             {
-              "Arr" = if config.arrstack.enable then (lib.flatten [
-                (lib.optional config.arrstack.sonarr {
-                  Sonarr = {
-                    icon = "sonarr.png";
-                    href = "https://sonarr.${config.server.domain}";
-                    description = "TV show management";
-                    ping = "http://127.0.0.1:8989";
-                    widget = {
-                      type = "sonarr";
-                      url = "http://127.0.0.1:8989";
-                      key = "{{HOMEPAGE_VAR_SONARR_KEY}}";
-                      enableQueue = true;
-                    };
-                  };
-                })
-                (lib.optional config.arrstack.radarr {
-                  Radarr = {
-                    icon = "radarr.png";
-                    href = "https://radarr.${config.server.domain}";
-                    description = "Movie management";
-                    ping = "http://127.0.0.1:7878";
-                    widget = {
-                      type = "radarr";
-                      url = "http://127.0.0.1:7878";
-                      key = "{{HOMEPAGE_VAR_RADARR_KEY}}";
-                    };
-                  };
-                })
-                (lib.optional config.arrstack.prowlarr {
-                  Prowlarr = {
-                    icon = "prowlarr.png";
-                    href = "https://prowlarr.${config.server.domain}";
-                    description = "Indexer management";
-                    ping = "http://127.0.0.1:9696";
-                    widget = {
-                      type = "prowlarr";
-                      url = "http://127.0.0.1:9696";
-                      key = "{{HOMEPAGE_VAR_PROWLARR_KEY}}";
-                    };
-                  };
-                })
-                (lib.optional config.arrstack.qbittorrent {
-                  qBittorrent = {
-                    icon = "qbittorrent.png";
-                    href = "https://qbittorrent.${config.server.domain}";
-                    description = "Torrent client (VPN)";
-                    ping = "http://127.0.0.1:8090";
-                    widget = {
-                      type = "qbittorrent";
-                      url = "http://127.0.0.1:8090";
-                      username = "{{HOMEPAGE_VAR_QBITTORRENT_USER}}";
-                      password = "{{HOMEPAGE_VAR_QBITTORRENT_PASS}}";
-                    };
-                  };
-                })
-              ]) else [];
+              "Arr" =
+                if config.arrstack.enable then
+                  (lib.flatten [
+                    (lib.optional config.arrstack.sonarr {
+                      Sonarr = {
+                        icon = "sonarr.png";
+                        href = "https://sonarr.${config.server.domain}";
+                        description = "TV show management";
+                        ping = "http://127.0.0.1:8989";
+                        widget = {
+                          type = "sonarr";
+                          url = "http://127.0.0.1:8989";
+                          key = "{{HOMEPAGE_VAR_SONARR_KEY}}";
+                          enableQueue = true;
+                        };
+                      };
+                    })
+                    (lib.optional config.arrstack.radarr {
+                      Radarr = {
+                        icon = "radarr.png";
+                        href = "https://radarr.${config.server.domain}";
+                        description = "Movie management";
+                        ping = "http://127.0.0.1:7878";
+                        widget = {
+                          type = "radarr";
+                          url = "http://127.0.0.1:7878";
+                          key = "{{HOMEPAGE_VAR_RADARR_KEY}}";
+                        };
+                      };
+                    })
+                    (lib.optional config.arrstack.prowlarr {
+                      Prowlarr = {
+                        icon = "prowlarr.png";
+                        href = "https://prowlarr.${config.server.domain}";
+                        description = "Indexer management";
+                        ping = "http://127.0.0.1:9696";
+                        widget = {
+                          type = "prowlarr";
+                          url = "http://127.0.0.1:9696";
+                          key = "{{HOMEPAGE_VAR_PROWLARR_KEY}}";
+                        };
+                      };
+                    })
+                    (lib.optional config.arrstack.qbittorrent {
+                      qBittorrent = {
+                        icon = "qbittorrent.png";
+                        href = "https://qbittorrent.${config.server.domain}";
+                        description = "Torrent client (VPN)";
+                        ping = "http://127.0.0.1:8090";
+                        widget = {
+                          type = "qbittorrent";
+                          url = "http://127.0.0.1:8090";
+                          username = "{{HOMEPAGE_VAR_QBITTORRENT_USER}}";
+                          password = "{{HOMEPAGE_VAR_QBITTORRENT_PASS}}";
+                        };
+                      };
+                    })
+                  ])
+                else
+                  [ ];
             }
           ];
         }
@@ -200,7 +217,7 @@
                 };
               };
             })
-            (lib.optional config.arrstack.qbittorrent {
+            (lib.optional config.caddy.enable {
               Caddy = {
                 icon = "caddy.png";
                 description = "Reverse proxy";
@@ -208,6 +225,20 @@
                 widget = {
                   type = "caddy";
                   url = "http://127.0.0.1:2019";
+                };
+              };
+            })
+            (lib.optional config.freshrss.enable {
+              FreshRSS = {
+                icon = "freshrss.png";
+                href = "https://freshrss.${config.server.domain}";
+                description = "RSS aggregator";
+                ping = "http://127.0.0.1:8088";
+                widget = {
+                  type = "freshrss";
+                  url = "http://127.0.0.1:8088/api/greader.php";
+                  username = "{{HOMEPAGE_VAR_FRESHRSS_USER}}";
+                  password = "{{HOMEPAGE_VAR_FRESHRSS_API_PASS}}";
                 };
               };
             })
@@ -233,14 +264,24 @@
     };
 
     # Allow access to secrets
-    age.secrets = lib.mkIf (config.agenix.secrets != null && builtins.pathExists "${config.agenix.secrets}/homepage-secrets.age") {
-      homepage-secrets.mode = "0444";
-    };
+    age.secrets =
+      lib.mkIf
+        (
+          config.agenix.secrets != null && builtins.pathExists "${config.agenix.secrets}/homepage-secrets.age"
+        )
+        {
+          homepage-secrets.mode = "0444";
+        };
 
     # Pass secrets via systemd EnvironmentFile
-    systemd.services.homepage-dashboard = lib.mkIf (config.agenix.secrets != null && builtins.pathExists "${config.agenix.secrets}/homepage-secrets.age") {
-      serviceConfig.EnvironmentFile = config.age.secrets.homepage-secrets.path;
-    };
+    systemd.services.homepage-dashboard =
+      lib.mkIf
+        (
+          config.agenix.secrets != null && builtins.pathExists "${config.agenix.secrets}/homepage-secrets.age"
+        )
+        {
+          serviceConfig.EnvironmentFile = config.age.secrets.homepage-secrets.path;
+        };
 
     # Expose homepage via caddy
     caddy.services.homepage.port = 3020;

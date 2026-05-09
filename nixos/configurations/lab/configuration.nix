@@ -21,6 +21,7 @@
   cockpit.enable = true;
   crowdsec.enable = true;
   ddclient.porkbun.enable = true;
+  freshrss.enable = true;
   homepage.enable = true;
   jellyfin.enable = "public";
   tailscale.enable = true;
@@ -30,10 +31,10 @@
   # Configurations #
   ##################
 
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
