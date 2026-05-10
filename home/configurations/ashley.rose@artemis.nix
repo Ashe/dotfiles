@@ -28,9 +28,6 @@
       bat
       gnupg
     ];
-
-    # Do not change this
-    stateVersion = "25.05";
   };
 
   # Fuzzy file finding

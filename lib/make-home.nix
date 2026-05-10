@@ -21,6 +21,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
       home = {
         username = user;
         homeDirectory = home-directory;
+        stateVersion = "26.05";
         packages = with inputs.nixpkgs.legacyPackages.${system}; [
           magic-wormhole-rs
           netcat

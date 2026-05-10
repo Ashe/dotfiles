@@ -36,9 +36,6 @@
   # Configure user experience
   home = {
 
-    # Home variables
-    stateVersion = "22.11";
-
     # Packages to install
     packages = with pkgs; [
 
