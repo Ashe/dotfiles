@@ -16,6 +16,7 @@
   obsidian.enable = true;
   starship.enable = true;
   wezterm.enable = true;
+  yazi.enable = true;
   zed.enable = true;
   zsh.enable = true;
 
@@ -49,7 +50,6 @@
       magic-wormhole-rs
       nicotine-plus
       qbittorrent
-      ranger
       scanmem
       streamlink
       streamlink-twitch-gui-bin

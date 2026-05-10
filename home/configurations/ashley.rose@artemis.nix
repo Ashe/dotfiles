@@ -10,6 +10,7 @@
   neovim.enable = true;
   starship.enable = true;
   wezterm.enable = true;
+  yazi.enable = true;
   zsh.enable = true;
 
   ##################

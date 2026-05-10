@@ -14,6 +14,7 @@
   (import ./vs-code)
   (import ./wallpaper-engine)
   (import ./wezterm)
+  (import ./yazi)
   (import ./zed)
   (import ./zen-browser)
   (import ./zsh)
