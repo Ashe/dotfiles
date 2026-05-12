@@ -68,6 +68,31 @@
             '';
           };
 
+        # Hosts that are available by default when caddy is enabled
+        defaultHosts = {
+
+          # Expose internal certificate so that caddy can easily be trusted
+          "cert.${config.server.domain}" = {
+            extraConfig =
+              let
+                outputFile = "${config.server.domain}-ca.crt";
+              in
+              ''
+                tls internal
+                redir / /${outputFile} 302
+                route /${outputFile} {
+                    header Content-Type application/x-pem-file
+                    header Content-Disposition 'attachment; filename="${outputFile}"'
+                    rewrite * /root.crt
+                    file_server {
+                      root /var/lib/caddy/.local/share/caddy/pki/authorities/local/
+                    }
+                }
+                respond / 404
+              '';
+          };
+        };
+
         # All services get an internal vhost
         localVirtualHosts = lib.mapAttrs' (
           name: svc:
@@ -92,6 +117,7 @@
       {
         enable = true;
         virtualHosts = lib.mkMerge [
+          defaultHosts
           localVirtualHosts
           (lib.optionalAttrs (config.server.publicDomain != null) publicVirtualHosts)
         ];
@@ -109,9 +135,22 @@
       443
     ];
 
-    # certutil is required to install internal root cert when using tls internal
-    # Without it, certificate generation fails silently
-    systemd.services.caddy.path = [ pkgs.nssTools ];
+    systemd.services.caddy =
+      let
+        caddyDataDir = "/var/lib/caddy/.local/share/caddy";
+        caddyPkiDir = "${caddyDataDir}/pki/authorities/local";
+      in
+      {
+        # Ensure the PKI directory exists with proper permissions
+        preStart = ''
+          mkdir -p ${caddyPkiDir}
+          chown -R caddy:caddy ${caddyDataDir}
+        '';
+
+        # certutil is required to install internal root cert when using tls internal
+        # Without it, certificate generation fails silently
+        path = [ pkgs.nssTools ];
+      };
 
     # Allow crowdsec to monitor caddy's logs for threats
     crowdsec.collections = [ "crowdsecurity/caddy" ];
