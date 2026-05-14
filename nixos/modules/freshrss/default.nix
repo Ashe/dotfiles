@@ -31,6 +31,9 @@
       description = ''
         Feeds to declaratively seed on first deploy, grouped by category.
         Defaults to ./feeds.nix; override per-server to use a different list.
+        To redeploy the seed, do:
+          rm /var/lib/freshrss/data/.feeds-seeded
+          systemctl restart freshrss-seed-feeds.service
       '';
     };
   };

@@ -1,4 +1,14 @@
 {
+  "News" = [
+    {
+      name = "BBC News";
+      url = "https://feeds.bbci.co.uk/news/uk/rss.xml";
+    }
+    {
+      name = "Sky News";
+      url = "http://feeds.skynews.com/feeds/rss/home.xml";
+    }
+  ];
   "Tech" = [
     {
       name = "Ars Technica";
@@ -21,14 +31,36 @@
       url = "https://www.citationneeded.news/rss";
     }
   ];
+  "Science" = [
+    {
+      name = "Space.com";
+      url = "https://www.space.com/feeds/all";
+    }
+    {
+      name = "Science News";
+      url = "https://sciencenews.org/feed";
+    }
+    {
+      name = "Nature";
+      url = "https://www.nature.com/nature.rss";
+    }
+  ];
   "Gaming" = [
+    {
+      name = "Gaming on Linux";
+      url = "https://www.gamingonlinux.com/article_rss.php?newsonly";
+    }
     {
       name = "Boiling Steam";
       url = "https://boilingsteam.com/feed/";
     }
     {
-      name = "Steam News";
-      url = "https://store.steampowered.com/feeds/news/";
+      name = "PC Gamer";
+      url = "https://www.pcgamer.com/feeds/articletype/news/";
+    }
+    {
+      name = "Eurogamer";
+      url = "https://www.eurogamer.net/feed/news";
     }
   ];
   "Programming" = [
@@ -43,6 +75,30 @@
     {
       name = "Haskell Discourse";
       url = "https://discourse.haskell.org/c/announcements.rss";
+    }
+  ];
+  "Otaku" = [
+    {
+      name = "Honey's Anime";
+      url = "https://honeysanime.com/feed/";
+    }
+    {
+      name = "Anime Herald";
+      url = "https://www.animeherald.com/feed/";
+    }
+    {
+      name = "Anime Corner";
+      url = "https://animecorner.me/feed";
+    }
+  ];
+  "Lifestyle" = [
+    {
+      name = "Self";
+      url = "https://www.self.com/feed/rss";
+    }
+    {
+      name = "Allure";
+      url = "https://allure.com/feed/rss";
     }
   ];
 }
