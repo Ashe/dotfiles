@@ -40,9 +40,7 @@
 
   config = lib.mkIf config.arrstack.enable {
 
-    # Dedicated user for rootless Podman
-    # All containers use PUID=991 which maps to the same host UID,
-    # this is required to create hardlinks between files and save space
+    # Define a shared user and group for modules that access the same filesystem
     users.users.arrstack = {
       isSystemUser = true;
       group = "arrstack";
@@ -64,23 +62,19 @@
     };
     users.groups.arrstack = { };
 
-    # Ensure config directories exist
+    # Setup data directories
     systemd.tmpfiles.rules = [
-      "Z /var/lib/arrstack - arrstack arrstack -"
-      "d /data/media 1777 root root -"
-      "d /data/media/movies 1777 root root -"
-      "d /data/media/shows 1777 root root -"
-      "d /data/media/anime 1777 root root -"
-      "d /data/media/music 1777 root root -"
+      "d /data/media 0755 arrstack arrstack -"
+      "d /data/media/movies 0755 arrstack arrstack -"
+      "d /data/media/shows 0755 arrstack arrstack -"
+      "d /data/media/anime 0755 arrstack arrstack -"
+      "d /data/media/music 0755 arrstack arrstack -"
     ]
     ++ lib.optionals config.arrstack.sonarr [
-      "d /var/lib/arrstack/sonarr 0777 arrstack arrstack -"
+      "d /var/lib/arrstack/sonarr 0750 arrstack arrstack -"
     ]
     ++ lib.optionals config.arrstack.radarr [
-      "d /var/lib/arrstack/radarr 0777 arrstack arrstack -"
-    ]
-    ++ lib.optionals config.arrstack.prowlarr [
-      "d /var/lib/arrstack/prowlarr 0777 arrstack arrstack -"
+      "d /var/lib/arrstack/radarr 0750 arrstack arrstack -"
     ]
     ++ lib.optionals config.arrstack.flaresolverr [
       "d /var/lib/arrstack/flaresolverr 0777 arrstack arrstack -"
@@ -90,9 +84,9 @@
       "d /var/lib/arrstack/configarr/repos 0755 arrstack arrstack -"
     ]
     ++ lib.optionals config.arrstack.qbittorrent [
-      "d /data/torrents 1777 root root -"
-      "d /data/torrents/complete 1777 root root -"
-      "d /data/torrents/incomplete 1777 root root -"
+      "d /data/torrents 0755 arrstack arrstack -"
+      "d /data/torrents/complete 0755 arrstack arrstack -"
+      "d /data/torrents/incomplete 0755 arrstack arrstack -"
       "d /var/lib/arrstack/qbittorrent 0700 arrstack arrstack -"
       "d /var/lib/arrstack/qbittorrent/config 0700 arrstack arrstack -"
       # Inner dirs owned by the mapped container UID (232062) for atomic writes
@@ -100,7 +94,7 @@
       "d /var/lib/arrstack/qbittorrent/config/qBittorrent/BT_backup 0755 232062 232062 -"
     ];
 
-    # Secrets must be world-readable so the rootless container can access them
+    # Ensure configarr and qbittorrent secrets are world-readable
     age.secrets = lib.mkMerge [
       (lib.mkIf
         (
@@ -120,9 +114,42 @@
       })
     ];
 
+    # Sonarr — TV show management and automatic downloading
+    services.sonarr = lib.mkIf config.arrstack.sonarr {
+      enable = true;
+      user = "arrstack";
+      group = "arrstack";
+      dataDir = "/var/lib/arrstack/sonarr";
+    };
+
+    # Radarr — movie management and automatic downloading
+    services.radarr = lib.mkIf config.arrstack.radarr {
+      enable = true;
+      user = "arrstack";
+      group = "arrstack";
+      dataDir = "/var/lib/arrstack/radarr";
+    };
+
+    # Prowlarr — indexer manager that syncs indexers to Sonarr/Radarr
+    services.prowlarr = lib.mkIf config.arrstack.prowlarr {
+      enable = true;
+    };
+
     systemd.services = lib.mkMerge [
 
-      # Create shared Podman network so containers can reach each other by name
+      # Disable PrivateUsers for sonarr and radarr
+      # PrivateUsers breaks hardlinks with qbittorrent container files (UID 991)
+      # because from inside the namespace, those files appear to be owned by an
+      # unmapped foreign UID. All other hardening options remain intact.
+      (lib.mkIf config.arrstack.sonarr {
+        sonarr.serviceConfig.PrivateUsers = lib.mkForce false;
+      })
+
+      (lib.mkIf config.arrstack.radarr {
+        radarr.serviceConfig.PrivateUsers = lib.mkForce false;
+      })
+
+      # Create shared podman network for containers
       {
         arrstack-network = {
           description = "Create arrstack Podman network";
@@ -137,25 +164,13 @@
         };
       }
 
-      # Ensure all containers start after the network is created
-      (lib.mkIf config.arrstack.prowlarr {
-        podman-prowlarr.after = [ "arrstack-network.service" ];
-        podman-prowlarr.requires = [ "arrstack-network.service" ];
-      })
-      (lib.mkIf config.arrstack.sonarr {
-        podman-sonarr.after = [ "arrstack-network.service" ];
-        podman-sonarr.requires = [ "arrstack-network.service" ];
-      })
-      (lib.mkIf config.arrstack.radarr {
-        podman-radarr.after = [ "arrstack-network.service" ];
-        podman-radarr.requires = [ "arrstack-network.service" ];
-      })
+      # Flaresolverr starts after the network is ready
       (lib.mkIf config.arrstack.flaresolverr {
         podman-flaresolverr.after = [ "arrstack-network.service" ];
         podman-flaresolverr.requires = [ "arrstack-network.service" ];
       })
 
-      # Seed qBittorrent.conf on first start only — runtime changes are preserved.
+      # Seed qBittorrent.conf on first start only — runtime changes are preserved
       # To re-seed after updating qBittorrent.conf:
       #   sudo rm /var/lib/arrstack/qbittorrent/config/qBittorrent/qBittorrent.conf
       #   sudo systemctl restart podman-qbittorrent
@@ -216,13 +231,11 @@
           configarr = {
             description = "configarr: sync TRaSH Guide configurations to Sonarr/Radarr";
             after = [
-              "arrstack-network.service"
               "network-online.target"
             ]
-            ++ lib.optionals config.arrstack.sonarr [ "podman-sonarr.service" ]
-            ++ lib.optionals config.arrstack.radarr [ "podman-radarr.service" ];
+            ++ lib.optionals config.arrstack.sonarr [ "sonarr.service" ]
+            ++ lib.optionals config.arrstack.radarr [ "radarr.service" ];
             wants = [ "network-online.target" ];
-            requires = [ "arrstack-network.service" ];
             serviceConfig = {
               Type = "oneshot";
               User = "arrstack";
@@ -230,7 +243,7 @@
               StandardError = "journal";
               ExecStart =
                 "${config.virtualisation.podman.package}/bin/podman run --rm"
-                + " --name=configarr --network=arrstack --pull=newer --log-driver=journald"
+                + " --name=configarr --network=host --pull=newer --log-driver=journald"
                 + " -e CONFIG_LOCATION=/app/config.yml"
                 + " -e SECRETS_LOCATION=/app/secrets.yml"
                 + " -v ${./configarr.yml}:/app/config.yml:ro"
@@ -263,72 +276,6 @@
         };
 
     virtualisation.oci-containers.containers = lib.mkMerge [
-
-      # Prowlarr — indexer manager that syncs indexers to Sonarr/Radarr
-      (lib.mkIf config.arrstack.prowlarr {
-        prowlarr = {
-          image = "docker.io/linuxserver/prowlarr:latest";
-          ports = [ "127.0.0.1:9696:9696" ];
-          environment = {
-            PUID = "991";
-            PGID = "989";
-          };
-          volumes = [
-            "/var/lib/arrstack/prowlarr:/config"
-          ];
-          extraOptions = [
-            "--pull=newer"
-            "--network=arrstack"
-          ];
-          podman.user = "arrstack";
-        };
-      })
-
-      # Sonarr — TV show management and automatic downloading
-      (lib.mkIf config.arrstack.sonarr {
-        sonarr = {
-          image = "docker.io/linuxserver/sonarr:latest";
-          ports = [ "127.0.0.1:8989:8989" ];
-          environment = {
-            PUID = "991";
-            PGID = "989";
-          };
-          volumes = [
-            "/var/lib/arrstack/sonarr:/config"
-            # Single /data mount so Sonarr can hardlink from
-            # /data/torrents (qBittorrent) to /data/media (library).
-            "/data:/data"
-          ];
-          extraOptions = [
-            "--pull=newer"
-            "--network=arrstack"
-          ];
-          podman.user = "arrstack";
-        };
-      })
-
-      # Radarr — movie management and automatic downloading
-      (lib.mkIf config.arrstack.radarr {
-        radarr = {
-          image = "docker.io/linuxserver/radarr:latest";
-          ports = [ "127.0.0.1:7878:7878" ];
-          environment = {
-            PUID = "991";
-            PGID = "989";
-          };
-          volumes = [
-            "/var/lib/arrstack/radarr:/config"
-            # Single /data mount so Radarr can hardlink from
-            # /data/torrents (qBittorrent) to /data/media (library).
-            "/data:/data"
-          ];
-          extraOptions = [
-            "--pull=newer"
-            "--network=arrstack"
-          ];
-          podman.user = "arrstack";
-        };
-      })
 
       # FlareSolverr — proxy that solves Cloudflare challenges for Prowlarr
       (lib.mkIf config.arrstack.flaresolverr {
@@ -368,8 +315,8 @@
             config.age.secrets.gluetun-key.path
           ];
           ports = [
+            # WebUI accessible only via Caddy on localhost
             "127.0.0.1:8090:8090"
-            "${config.server.ip}:8090:8090"
             # HTTP control server — used for VPN status polling
             "127.0.0.1:8000:8000"
           ];
@@ -400,26 +347,10 @@
 
     # Expose web UIs via Caddy (local only)
     caddy.services = lib.mkMerge [
-      (lib.mkIf config.arrstack.prowlarr {
-        prowlarr = {
-          port = 9696;
-        };
-      })
-      (lib.mkIf config.arrstack.sonarr {
-        sonarr = {
-          port = 8989;
-        };
-      })
-      (lib.mkIf config.arrstack.radarr {
-        radarr = {
-          port = 7878;
-        };
-      })
-      (lib.mkIf config.arrstack.qbittorrent {
-        qbittorrent = {
-          port = 8090;
-        };
-      })
+      (lib.mkIf config.arrstack.prowlarr { prowlarr.port = 9696; })
+      (lib.mkIf config.arrstack.sonarr { sonarr.port = 8989; })
+      (lib.mkIf config.arrstack.radarr { radarr.port = 7878; })
+      (lib.mkIf config.arrstack.qbittorrent { qbittorrent.port = 8090; })
     ];
 
     # Monitor arrstack service availability via uptime-kuma
