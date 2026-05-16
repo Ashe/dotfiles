@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 
@@ -32,7 +31,7 @@
         Feeds to declaratively seed on first deploy, grouped by category.
         Defaults to ./feeds.nix; override per-server to use a different list.
         To redeploy the seed, do:
-          rm /var/lib/freshrss/data/.feeds-seeded
+          rm /var/lib/freshrss/.feeds-seeded
           systemctl restart freshrss-seed-feeds.service
       '';
     };
@@ -40,150 +39,50 @@
 
   config = lib.mkIf config.freshrss.enable {
 
-    users.users.freshrss = {
-      isSystemUser = true;
-      group = "freshrss";
-      home = "/var/lib/freshrss";
-      createHome = true;
-      subUidRanges = [
-        {
-          startUid = 100000;
-          count = 65536;
-        }
-      ];
-      subGidRanges = [
-        {
-          startGid = 100000;
-          count = 65536;
-        }
-      ];
-      linger = true;
-    };
-    users.groups.freshrss = { };
-
-    virtualisation.podman = {
+    services.freshrss = {
       enable = true;
-      autoPrune.enable = true;
-    };
+      defaultUser = "admin";
+      language = "en";
+      authType = "form";
+      baseUrl = "https://${config.server.domain}";
+      webserver = "caddy";
+      # Required non-null string; the generated vhost is neutralised below.
+      virtualHost = "_freshrss-unused";
 
-    virtualisation.oci-containers.backend = "podman";
-    virtualisation.oci-containers.containers.freshrss = {
-      image = "docker.io/freshrss/freshrss:latest";
-      ports = [ "127.0.0.1:8088:80" ];
-      volumes = [
-        "/var/lib/freshrss/data:/var/www/FreshRSS/data"
-        "/var/lib/freshrss/extensions:/var/www/FreshRSS/extensions"
-      ];
-      environment = {
-        TZ = "Europe/London";
-        CRON_MIN = "13,43";
-        TRUSTED_PROXY = "127.0.0.1/8";
-        # FRESHRSS_INSTALL and FRESHRSS_USER are only consumed on the very
-        # first run (when data/config.php doesn't exist yet). Safe to leave
-        # declared permanently — subsequent boots ignore them.
-        FRESHRSS_INSTALL = lib.concatStringsSep " " [
-          "--api-enabled"
-          "--auth-type form"
-          "--base-url https://${config.server.domain}"
-          "--default-user admin"
-          "--language en"
-        ];
-      };
-      environmentFiles = lib.optional (
+      passwordFile = lib.mkIf (
         config.agenix.secrets != null && builtins.pathExists "${config.agenix.secrets}/freshrss-secrets.age"
       ) config.age.secrets.freshrss-secrets.path;
-      extraOptions = [ "--pull=newer" ];
-      podman.user = "freshrss";
     };
 
-    # freshrss-secrets.age should export:
-    # FRESHRSS_USER=--user admin --password <pass> --api-password <api-pass>
+    # Ensure credentials are accessible
     age.secrets.freshrss-secrets =
       lib.mkIf
         (
           config.agenix.secrets != null && builtins.pathExists "${config.agenix.secrets}/freshrss-secrets.age"
         )
         {
-          mode = "0440";
+          mode = "0444";
           owner = "freshrss";
+          group = "freshrss";
         };
 
-    # Seed declared feeds via OPML on first deploy only (sentinel guards re-runs).
-    # Runs after the container is up and the install has completed.
-    systemd.services.freshrss-seed-feeds = lib.mkIf (config.freshrss.feeds != { }) {
-      description = "Seed declarative FreshRSS feeds via OPML (once)";
-      after = [ "podman-freshrss.service" ];
-      requires = [ "podman-freshrss.service" ];
-      wantedBy = [ "multi-user.target" ];
-      script =
-        let
-          opmlFile = pkgs.writeText "freshrss-seed.opml" ''
-            <?xml version="1.0" encoding="UTF-8"?>
-            <opml version="2.0">
-              <head><title>Declarative seed feeds</title></head>
-              <body>
-            ${lib.concatStringsSep "\n" (
-              lib.mapAttrsToList (category: feeds: ''
-                    <outline text="${category}" title="${category}">
-                ${lib.concatStringsSep "\n" (
-                  map (feed: ''
-                    <outline type="rss" text="${feed.name}" title="${feed.name}" xmlUrl="${feed.url}" />
-                  '') feeds
-                )}
-                    </outline>
-              '') config.freshrss.feeds
-            )}
-              </body>
-            </opml>
-          '';
-        in
-        ''
-          SENTINEL=/var/lib/freshrss/data/.feeds-seeded
-          if [ ! -f "$SENTINEL" ]; then
-            echo "Waiting for FreshRSS to be ready..."
-            attempt=0
-            max_attempts=30
-            until ${pkgs.podman}/bin/podman exec freshrss \
-              php /var/www/FreshRSS/cli/health.php 2>/dev/null; do
-              attempt=$((attempt + 1))
-              if [ "$attempt" -ge "$max_attempts" ]; then
-                echo "FreshRSS did not become ready after $max_attempts attempts, giving up."
-                exit 1
-              fi
-              echo "Attempt $attempt/$max_attempts: not ready yet, retrying in 2 seconds..."
-              sleep 2
-            done
-            ${pkgs.podman}/bin/podman cp ${opmlFile} freshrss:/tmp/seed.opml
-            ${pkgs.podman}/bin/podman exec freshrss \
-              php /var/www/FreshRSS/cli/import-for-user.php \
-                --user admin \
-                --filename /tmp/seed.opml
-            ${pkgs.podman}/bin/podman exec freshrss \
-            php /var/www/FreshRSS/cli/actualize-user.php \
-            --user admin
-            touch "$SENTINEL"
-            echo "Feeds seeded successfully!"
-          else
-            echo "Feeds already seeded, skipping."
-          fi
-        '';
-      serviceConfig = {
-        Type = "oneshot";
-        User = "freshrss";
-        RemainAfterExit = true;
-      };
+    # The module creates a Caddy vhost at virtualHost and sets listen.owner = caddy.user.
+    # We override the pool to listen on TCP so our caddy abstraction can reach it by port,
+    # and we nullify the generated vhost so it doesn't serve anything.
+    services.phpfpm.pools.freshrss.settings = {
+      "listen" = lib.mkForce "127.0.0.1:8088";
+      "listen.owner" = lib.mkForce "";
+      "listen.group" = lib.mkForce "";
+      "listen.mode" = lib.mkForce "";
     };
 
-    # Ensure the freshrss data directories exist
-    systemd.tmpfiles.rules = [
-      "d /var/lib/freshrss/data       0750 freshrss freshrss -"
-      "d /var/lib/freshrss/extensions 0750 freshrss freshrss -"
-    ];
+    # Neutralise the vhost the module generated — we use caddy.services below instead.
+    services.caddy.virtualHosts."_freshrss-unused" = lib.mkForce { };
 
-    # Expose freshRSS via caddy
+    # Expose FreshRSS via caddy
     caddy.services.freshrss.port = 8088;
 
-    # Monitor freshRSS availability via uptime-kuma
+    # Monitor FreshRSS availability via uptime-kuma
     uptime-kuma.monitors.freshrss.port = 8088;
 
     # Create homepage entry for freshRSS
