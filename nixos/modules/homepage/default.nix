@@ -258,6 +258,14 @@
                 ping = "http://127.0.0.1:9090";
               };
             })
+            (lib.optional (config.forgejo.enable != null) {
+              Forgejo = {
+                icon = "forgejo.png";
+                href = "https://${config.forgejo.subdomain}.${config.server.domain}";
+                description = "Software forge";
+                ping = "http://127.0.0.1:3030";
+              };
+            })
           ];
         }
       ];

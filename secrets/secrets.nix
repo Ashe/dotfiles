@@ -17,6 +17,7 @@ foldl (
     "${dir}/crowdsec-bouncer-key.age".publicKeys = [ (readKey dir) ];
     "${dir}/crowdsec-enrollment-key.age".publicKeys = [ (readKey dir) ];
     "${dir}/ddclient-porkbun.age".publicKeys = [ (readKey dir) ];
+    "${dir}/forgejo-credentials.age".publicKeys = [ (readKey dir) ];
     "${dir}/freshrss-secrets.age".publicKeys = [ (readKey dir) ];
     "${dir}/gluetun-addresses.age".publicKeys = [ (readKey dir) ];
     "${dir}/gluetun-id.age".publicKeys = [ (readKey dir) ];

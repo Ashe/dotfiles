@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 
 {
 
@@ -21,6 +21,7 @@
   cockpit.enable = true;
   crowdsec.enable = true;
   ddclient.porkbun.enable = true;
+  forgejo.enable = "local";
   freshrss.enable = true;
   homepage.enable = true;
   jellyfin.enable = "public";
@@ -57,6 +58,11 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # Install packages
+  environment.systemPackages = with pkgs; [
+    openssl
+  ];
 
   # TODO: UDP GRO forwarding warning from Tailscale on enp2s0
   # Known NixOS issue, fix is unreliable - revisit later
