@@ -1,4 +1,8 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 
 {
   options.jellyfin = {
@@ -15,74 +19,74 @@
     mediaPath = lib.mkOption {
       type = lib.types.path;
       default = "/data/media";
-      description = "Host path to mount as the media library inside the container";
+      description = "Host path to the media library";
     };
   };
 
   config = lib.mkIf (config.jellyfin.enable != null) {
 
-    # Dedicated user for rootless Podman
-    users.users.jellyfin = {
-      isSystemUser = true;
-      group = "jellyfin";
-      home = "/var/lib/jellyfin";
-      createHome = true;
-      # subUidRanges/subGidRanges provide the UID space needed for
-      # container user namespace mapping
-      subUidRanges = [
-        {
-          startUid = 100000;
-          count = 65536;
-        }
-      ];
-      subGidRanges = [
-        {
-          startGid = 100000;
-          count = 65536;
-        }
-      ];
-      # Persist session after logout
-      linger = true;
+    # ---------------------------------------------------------------------------
+    # Native NixOS service
+    #
+    # The jellyfin module creates the jellyfin user and group automatically.
+    # dataDir points at the same /var/lib/jellyfin path the container was
+    # already writing to, so existing config, metadata, and the database all
+    # carry over with no data migration needed.
+    # ---------------------------------------------------------------------------
+    services.jellyfin = {
+      enable = true;
+      configDir = "/var/lib/jellyfin/config";
+      dataDir = "/var/lib/jellyfin/data";
+      cacheDir = "/var/lib/jellyfin/cache";
     };
-    users.groups.jellyfin = { };
 
-    # Ensure media path exists on the host and is owned by the jellyfin user
+    # ---------------------------------------------------------------------------
+    # Hardware transcoding (Intel iGPU via VAAPI)
+    #
+    # renderD128 is present on this host. Adding jellyfin to the render and
+    # video groups gives it access to /dev/dri/renderD128 and /dev/dri/card0
+    # for hardware-accelerated transcoding via Intel Quick Sync / VAAPI.
+    # Enable in Jellyfin: Dashboard → Playback → Transcoding → VA-API.
+    # ---------------------------------------------------------------------------
+    hardware.graphics.enable = true;
+
+    # Allow access to the same directories as the arrstack group
+    users.users.jellyfin.extraGroups = [
+      "render"
+      "video"
+      "arrstack"
+    ];
+
+    # ---------------------------------------------------------------------------
+    # Media path — ensure it exists (mediaDir option handles Jellyfin's access,
+    # but the directory itself still needs to be present on the host)
+    # ---------------------------------------------------------------------------
     systemd.tmpfiles.rules = [
       "d ${config.jellyfin.mediaPath} 1777 root root -"
     ];
 
-    virtualisation.podman = {
-      enable = true;
-      # Clean up unused images/containers periodically
-      autoPrune.enable = true;
-    };
-
-    virtualisation.oci-containers.backend = "podman";
-    virtualisation.oci-containers.containers.jellyfin = {
-      image = "docker.io/jellyfin/jellyfin:latest";
-      ports = [ "127.0.0.1:8096:8096" ];
-      volumes = [
-        "/var/lib/jellyfin:/config"
-        "${config.jellyfin.mediaPath}:/media:ro"
-      ];
-      extraOptions = [ "--pull=newer" ];
-      # Have a non-root user run podman
-      podman.user = "jellyfin";
-    };
-
-    # Expose jellyfin via caddy
+    # ---------------------------------------------------------------------------
+    # Caddy — expose Jellyfin web UI
+    # ---------------------------------------------------------------------------
     caddy.services.jellyfin = {
       port = 8096;
       public = config.jellyfin.enable == "public";
     };
 
-    # Monitor jellyfin availability via uptime-kuma
+    # ---------------------------------------------------------------------------
+    # Uptime Kuma — monitor Jellyfin availability
+    # ---------------------------------------------------------------------------
     uptime-kuma.monitors.jellyfin.port = 8096;
 
-    # Allow crowdsec to monitor jellyfin's logs for threats
+    # ---------------------------------------------------------------------------
+    # Crowdsec — monitor Jellyfin logs for threats
+    #
+    # Native service logs to journald under jellyfin.service rather than
+    # podman-jellyfin.service, so the journalmatch is updated accordingly.
+    # ---------------------------------------------------------------------------
     crowdsec.collections = [ "LePresidente/jellyfin" ];
     crowdsec.acquisitions.jellyfin = {
-      journalmatch = "_SYSTEMD_UNIT=podman-jellyfin.service";
+      journalmatch = "_SYSTEMD_UNIT=jellyfin.service";
       type = "jellyfin";
     };
   };
