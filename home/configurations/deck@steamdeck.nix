@@ -41,15 +41,11 @@
     packages = with pkgs; [
 
       # Programs
-      ani-cli
       bat
-      bottles
       chatterino2
       gnome-sound-recorder
-      libresprite
       magic-wormhole-rs
       nicotine-plus
-      qbittorrent
       scanmem
       streamlink
       streamlink-twitch-gui-bin
