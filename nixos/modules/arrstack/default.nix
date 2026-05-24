@@ -40,9 +40,16 @@
 
   config = lib.mkIf config.arrstack.enable {
 
-    # Define a shared user and group for modules that access the same filesystem
+    # Define a shared user and group for modules that access the same filesystem.
+    # arrstack (UID/GID 990) owns all media and runs Sonarr/Radarr natively.
+    # qBittorrent runs as a rootless Podman container under arrstack. Due to
+    # subuid remapping, the container's internal UID 990 (abc) maps to UID 232061
+    # on the host. Sonarr/Radarr import from qBittorrent's download dirs by
+    # copying (not hardlinking — fs.protected_hardlinks prevents hardlinking
+    # files owned by a different UID).
     users.users.arrstack = {
       isSystemUser = true;
+      uid = 990;
       group = "arrstack";
       home = "/var/lib/arrstack";
       createHome = true;
@@ -60,9 +67,19 @@
       ];
       linger = true;
     };
-    users.groups.arrstack = { };
+    users.groups.arrstack = {
+      gid = 990;
+    };
 
-    # Setup data directories
+    # Setup data directories.
+    # /data/media: owned by arrstack, Sonarr/Radarr write imported files here.
+    # /data/torrents: owned by 232061 (qBittorrent's host UID), group arrstack
+    #   so Sonarr/Radarr can read completed downloads for import.
+    #   0750 = qBittorrent rwx, arrstack r-x, others nothing.
+    # Note: tmpfiles will not chown existing directories. After first applying
+    # this config, fix live dirs manually:
+    #   sudo chown -R 232061:arrstack /data/torrents
+    #   sudo chmod -R 750 /data/torrents
     systemd.tmpfiles.rules = [
       "d /data/media 0755 arrstack arrstack -"
       "d /data/media/movies 0755 arrstack arrstack -"
@@ -84,14 +101,18 @@
       "d /var/lib/arrstack/configarr/repos 0755 arrstack arrstack -"
     ]
     ++ lib.optionals config.arrstack.qbittorrent [
-      "d /data/torrents 0755 arrstack arrstack -"
-      "d /data/torrents/complete 0755 arrstack arrstack -"
-      "d /data/torrents/incomplete 0755 arrstack arrstack -"
-      "d /var/lib/arrstack/qbittorrent 0700 arrstack arrstack -"
+      # 232061 is the host UID that qBittorrent's container user (abc/990) maps
+      # to via arrstack's subuid range (startUid=231072, so 231072+990-1=232061).
+      # Group arrstack lets Sonarr/Radarr read completed downloads for import.
+      "d /data/torrents 0750 232061 arrstack -"
+      "d /data/torrents/complete 0750 232061 arrstack -"
+      "d /data/torrents/incomplete 0750 232061 arrstack -"
+      "d /var/lib/arrstack/qbittorrent 0750 arrstack arrstack -"
       "d /var/lib/arrstack/qbittorrent/config 0700 arrstack arrstack -"
-      # Inner dirs owned by the mapped container UID (232062) for atomic writes
-      "d /var/lib/arrstack/qbittorrent/config/qBittorrent 0755 232062 232062 -"
-      "d /var/lib/arrstack/qbittorrent/config/qBittorrent/BT_backup 0755 232062 232062 -"
+      # Inner config dirs owned by 232061 so qBittorrent can write its config,
+      # logs, lockfile, and torrent state files.
+      "d /var/lib/arrstack/qbittorrent/config/qBittorrent 0755 232061 232061 -"
+      "d /var/lib/arrstack/qbittorrent/config/qBittorrent/BT_backup 0755 232061 232061 -"
     ];
 
     # Ensure configarr and qbittorrent secrets are world-readable
@@ -137,10 +158,11 @@
 
     systemd.services = lib.mkMerge [
 
-      # Disable PrivateUsers for sonarr and radarr
-      # PrivateUsers breaks hardlinks with qbittorrent container files (UID 991)
-      # because from inside the namespace, those files appear to be owned by an
-      # unmapped foreign UID. All other hardening options remain intact.
+      # Disable PrivateUsers for Sonarr and Radarr.
+      # With PrivateUsers enabled, files owned by 232061 (qBittorrent's host UID)
+      # appear as an unmapped foreign UID inside the service's user namespace,
+      # making them unreadable. Disabling it lets Sonarr/Radarr see and copy
+      # those files normally. All other systemd hardening remains intact.
       (lib.mkIf config.arrstack.sonarr {
         sonarr.serviceConfig.PrivateUsers = lib.mkForce false;
       })
@@ -170,7 +192,7 @@
         podman-flaresolverr.requires = [ "arrstack-network.service" ];
       })
 
-      # Seed qBittorrent.conf on first start only — runtime changes are preserved
+      # Seed qBittorrent.conf on first start only — runtime changes are preserved.
       # To re-seed after updating qBittorrent.conf:
       #   sudo rm /var/lib/arrstack/qbittorrent/config/qBittorrent/qBittorrent.conf
       #   sudo systemctl restart podman-qbittorrent
@@ -209,12 +231,12 @@
               if [ ! -f ${cfg} ]; then
                 cp ${./qBittorrent.conf} ${cfg}
                 cat ${secretPath} >> ${cfg}
-                chown 232062:232062 ${cfg}
+                chown 232061:232061 ${cfg}
                 chmod 600 ${cfg}
               elif ! grep -q "WebUI\\\\Password_PBKDF2" ${cfg}; then
                 echo "" >> ${cfg}
                 cat ${secretPath} >> ${cfg}
-                chown 232062:232062 ${cfg}
+                chown 232061:232061 ${cfg}
               fi
             '';
         };
@@ -331,8 +353,8 @@
             "--network=container:gluetun"
           ];
           environment = {
-            PUID = "991";
-            PGID = "991";
+            PUID = "990";
+            PGID = "990";
             WEBUI_PORT = "8090";
           };
           volumes = [
