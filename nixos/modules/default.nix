@@ -17,4 +17,5 @@
   steam = import ./steam;
   tailscale = import ./tailscale;
   uptime-kuma = import ./uptime-kuma;
+  wireguard = import ./wireguard;
 }

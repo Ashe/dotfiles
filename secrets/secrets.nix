@@ -26,5 +26,6 @@ foldl (
     "${dir}/qbittorrent-key.age".publicKeys = [ (readKey dir) ];
     "${dir}/configarr-secrets.age".publicKeys = [ (readKey dir) ];
     "${dir}/uptime-kuma-credentials.age".publicKeys = [ (readKey dir) ];
+    "${dir}/wireguard-conf.age".publicKeys = [ (readKey dir) ];
   }
 ) { } dirs

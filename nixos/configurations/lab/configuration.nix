@@ -32,6 +32,7 @@
   jellyfin.enable = "public";
   tailscale.enable = true;
   uptime-kuma.enable = true;
+  wireguard.enable = true;
 
   ##################
   # Configurations #
