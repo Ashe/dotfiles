@@ -14,6 +14,7 @@
   homepage = import ./homepage;
   jellyfin = import ./jellyfin;
   mullvad = import ./mullvad;
+  qbittorrent = import ./qbittorrent;
   steam = import ./steam;
   tailscale = import ./tailscale;
   uptime-kuma = import ./uptime-kuma;

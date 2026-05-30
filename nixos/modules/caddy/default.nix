@@ -12,6 +12,11 @@
       type = lib.types.attrsOf (
         lib.types.submodule {
           options = {
+            host = lib.mkOption {
+              type = lib.types.str;
+              default = "127.0.0.1";
+              description = "Host/IP the backend service listens on. Defaults to localhost.";
+            };
             port = lib.mkOption {
               type = lib.types.port;
               description = "Port the service listens on";
@@ -58,7 +63,7 @@
                 output stdout
                 format json
               }
-              reverse_proxy ${svc.backendProtocol}://127.0.0.1:${toString svc.port} {
+              reverse_proxy ${svc.backendProtocol}://${svc.host}:${toString svc.port} {
                 ${lib.optionalString (svc.backendProtocol == "https") ''
                   transport http {
                     tls_insecure_skip_verify

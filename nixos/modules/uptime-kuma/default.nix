@@ -18,10 +18,10 @@ let
           name = monitor.name;
         }
         // lib.optionalAttrs (monitor.type == "http") {
-          url = "http://${monitor.hostname}:${toString monitor.port}${monitor.path}";
+          url = "http://${monitor.host}:${toString monitor.port}${monitor.path}";
         }
         // lib.optionalAttrs (monitor.type == "port") {
-          inherit (monitor) hostname port;
+          inherit (monitor) host port;
         };
       in
       {
@@ -58,7 +58,7 @@ in
                 type = lib.types.port;
                 description = "Port to monitor on the local host";
               };
-              hostname = lib.mkOption {
+              host = lib.mkOption {
                 type = lib.types.str;
                 default = "127.0.0.1";
               };

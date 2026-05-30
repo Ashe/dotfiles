@@ -30,6 +30,7 @@
   freshrss.enable = true;
   homepage.enable = true;
   jellyfin.enable = "public";
+  qbittorrent.enable = true;
   tailscale.enable = true;
   uptime-kuma.enable = true;
   wireguard.enable = true;
