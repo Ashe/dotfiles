@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
 
@@ -63,6 +68,24 @@
   environment.systemPackages = with pkgs; [
     openssl
   ];
+
+  # Enable Intel QSV
+  hardware = {
+    enableAllFirmware = true;
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        intel-media-driver
+        vpl-gpu-rt
+      ];
+    };
+  };
+
+  # Tell jellyfin to use intel drivers
+  systemd.services.jellyfin.environment.LIBVA_DRIVER_NAME = "iHD";
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
   # TODO: UDP GRO forwarding warning from Tailscale on enp2s0
   # Known NixOS issue, fix is unreliable - revisit later
