@@ -269,6 +269,13 @@
                   siteMonitor = "http://${config.wireguard.namespaceIP}:9999";
                 };
               })
+              (lib.optional config.arrstack.byparr {
+                Byparr = {
+                  icon = "byparr.png";
+                  description = "Indexer proxy";
+                  ping = "http://127.0.0.1:8191";
+                };
+              })
             ];
           }
         ];

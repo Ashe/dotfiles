@@ -17,7 +17,7 @@
     prowlarr = lib.mkEnableOption "prowlarr (indexer manager)" // {
       default = true;
     };
-    flaresolverr = lib.mkEnableOption "flaresolverr (Cloudflare bypass)" // {
+    byparr = lib.mkEnableOption "byparr (Cloudflare bypass)" // {
       default = true;
     };
     configarr = lib.mkEnableOption "configarr (TRaSH Guide sync)" // {
@@ -66,8 +66,8 @@
     ++ lib.optionals config.arrstack.radarr [
       "d /var/lib/arrstack/radarr 0750 arrstack arrstack -"
     ]
-    ++ lib.optionals config.arrstack.flaresolverr [
-      "d /var/lib/arrstack/flaresolverr 0777 arrstack arrstack -"
+    ++ lib.optionals config.arrstack.byparr [
+      "d /var/lib/arrstack/byparr 0777 arrstack arrstack -"
     ]
     ++ lib.optionals config.arrstack.configarr [
       "d /var/lib/arrstack/configarr 0755 arrstack arrstack -"
@@ -119,9 +119,9 @@
         };
       }
 
-      (lib.mkIf config.arrstack.flaresolverr {
-        podman-flaresolverr.after = [ "arrstack-network.service" ];
-        podman-flaresolverr.requires = [ "arrstack-network.service" ];
+      (lib.mkIf config.arrstack.byparr {
+        podman-byparr.after = [ "arrstack-network.service" ];
+        podman-byparr.requires = [ "arrstack-network.service" ];
       })
 
       (lib.mkIf
@@ -177,14 +177,13 @@
           };
         };
 
-    virtualisation.oci-containers.containers = lib.mkIf config.arrstack.flaresolverr {
-      flaresolverr = {
-        image = "ghcr.io/flaresolverr/flaresolverr:latest";
+    virtualisation.oci-containers.containers = lib.mkIf config.arrstack.byparr {
+      byparr = {
+        image = "ghcr.io/thephaseless/byparr:latest";
         ports = [ "127.0.0.1:8191:8191" ];
         extraOptions = [
           "--pull=newer"
           "--network=arrstack"
-          "--user=0:0"
         ];
         podman.user = "arrstack";
       };
@@ -200,6 +199,7 @@
       (lib.mkIf config.arrstack.prowlarr { prowlarr.port = 9696; })
       (lib.mkIf config.arrstack.sonarr { sonarr.port = 8989; })
       (lib.mkIf config.arrstack.radarr { radarr.port = 7878; })
+      (lib.mkIf config.arrstack.byparr { byparr.port = 8191; })
     ];
 
   };
