@@ -29,6 +29,7 @@
   forgejo.enable = "local";
   freshrss.enable = true;
   homepage.enable = true;
+  mealie.enable = "local";
   jellyfin.enable = "public";
   qbittorrent.enable = true;
   tailscale.enable = true;

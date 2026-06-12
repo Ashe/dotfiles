@@ -13,6 +13,7 @@
   freshrss = import ./freshrss;
   homepage = import ./homepage;
   jellyfin = import ./jellyfin;
+  mealie = import ./mealie;
   mullvad = import ./mullvad;
   qbittorrent = import ./qbittorrent;
   steam = import ./steam;

@@ -257,9 +257,31 @@
               (lib.optional (config.forgejo.enable != null) {
                 Forgejo = {
                   icon = "forgejo.png";
-                  href = "https://${config.forgejo.subdomain}.${config.server.domain}";
                   description = "Software forge";
+                  href =
+                    if config.forgejo.enable == "public" then
+                      "https://${config.forgejo.subdomain}.${config.server.publicDomain}"
+                    else
+                      "https://${config.forgejo.subdomain}.${config.server.domain}";
                   ping = fromCaddy config.forgejo.subdomain;
+                };
+              })
+              (lib.optional (config.mealie.enable != null) {
+                Mealie = {
+                  icon = "mealie.png";
+                  description = "Recipe management";
+                  href =
+                    if config.mealie.enable == "public" then
+                      "https://${config.mealie.subdomain}.${config.server.publicDomain}"
+                    else
+                      "https://${config.mealie.subdomain}.${config.server.domain}";
+                  ping = fromCaddy config.mealie.subdomain;
+                  widget = {
+                    type = "mealie";
+                    url = (fromCaddy "mealie");
+                    key = "{{HOMEPAGE_VAR_MEALIE_API_KEY}}";
+                    version = 3;
+                  };
                 };
               })
               (lib.optional config.wireguard.enable {
