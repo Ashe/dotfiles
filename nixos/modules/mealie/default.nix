@@ -57,6 +57,14 @@
       };
     };
 
+    # CrowdSec — parse Mealie's systemd journal for threats.
+    # No official Mealie collection exists; the journald acquisition
+    # combined with the Caddy collection covers HTTP-layer attacks.
+    crowdsec.acquisitions.mealie = {
+      journalmatch = "_SYSTEMD_UNIT=mealie.service";
+      type = "syslog";
+    };
+
     # Expose Mealie via Caddy
     caddy.services."${config.mealie.subdomain}" = {
       port = config.services.mealie.port;
@@ -66,12 +74,22 @@
     # Monitor Mealie via uptime-kuma
     uptime-kuma.monitors.mealie.port = config.services.mealie.port;
 
-    # CrowdSec — parse Mealie's systemd journal for threats.
-    # No official Mealie collection exists; the journald acquisition
-    # combined with the Caddy collection covers HTTP-layer attacks.
-    crowdsec.acquisitions.mealie = {
-      journalmatch = "_SYSTEMD_UNIT=mealie.service";
-      type = "syslog";
+    # Create mealie entry for homepage
+    homepage.services.Mealie = {
+      icon = "mealie.png";
+      description = "Recipe management";
+      href =
+        if config.mealie.enable == "public" then
+          "https://${config.mealie.subdomain}.${config.server.publicDomain}"
+        else
+          "https://${config.mealie.subdomain}.${config.server.domain}";
+      ping = "http://127.0.0.1:${toString config.services.mealie.port}";
+      widget = {
+        type = "mealie";
+        url = "http://127.0.0.1:${toString config.services.mealie.port}";
+        key = "{{HOMEPAGE_VAR_MEALIE_API_KEY}}";
+        version = 3;
+      };
     };
   };
 }
