@@ -42,5 +42,13 @@
       backendProtocol = "https";
       port = 9090;
     };
+
+    # Create cockpit entry for homepage
+    homepage.services.Cockpit = {
+      icon = "cockpit.png";
+      href = "https://cockpit.${config.server.domain}";
+      description = "Server management";
+      ping = "https://127.0.0.1:9090";
+    };
   };
 }
