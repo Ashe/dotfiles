@@ -2,7 +2,76 @@
 
 {
   options.homepage = {
+
     enable = lib.mkEnableOption "homepage dashboard";
+
+    services = lib.mkOption {
+      type = with lib.types; attrsOf (lazyAttrsOf anything);
+      default = { };
+      description = ''
+        Per-service homepage widget definitions, keyed by the display
+        name used in the dashboard layout. Other modules contribute
+        to this attrset; this module decides ordering/grouping.
+      '';
+    };
+
+    layout = lib.mkOption {
+      type = with lib.types; listOf (lazyAttrsOf anything);
+      description = ''
+        Dashboard layout, as an ordered list of groups (and
+        optionally nested sub-groups via `groups`). Each leaf group
+        describes its services via a `widgets` list of names, which
+        is matched against `homepage.services` to produce the
+        dashboard's services list. List order here determines render
+        order. Everything other than `name`/`widgets`/`groups` is
+        passed through to homepage's `settings.layout`.
+      '';
+      default = [
+        {
+          name = "Media";
+          style = "row";
+          columns = 2;
+          groups = [
+            {
+              name = "Jellyfin";
+              header = false;
+              style = "column";
+              columns = 1;
+              widgets = [ "Jellyfin" ];
+            }
+            {
+              name = "Arrstack";
+              header = false;
+              style = "row";
+              columns = 2;
+              widgets = [
+                "Sonarr"
+                "Radarr"
+                "Prowlarr"
+                "qBittorrent"
+              ];
+            }
+          ];
+        }
+        {
+          name = "System";
+          style = "row";
+          columns = 3;
+          widgets = [
+            "AdGuard"
+            "Uptime Kuma"
+            "Caddy"
+            "FreshRSS"
+            "Mealie"
+            "CrowdSec"
+            "Cockpit"
+            "Forgejo"
+            "Wireguard"
+            "Byparr"
+          ];
+        }
+      ];
+    };
   };
 
   config = lib.mkIf config.homepage.enable {
@@ -23,32 +92,39 @@
         statusStyle = "dot";
         disableIndexing = true;
         useEqualHeights = true;
-        layout = {
-          "Media" = {
-            style = "row";
-            columns = 2;
-            "Jellyfin" = {
-              header = false;
-              style = "column";
-              columns = 1;
-            };
-            "Arr" = {
-              header = false;
-              style = "row";
-              columns = 2;
-            };
-          };
-          "System" = {
-            style = "row";
-            columns = 3;
-          };
-        };
+
+        # Allow for searching of services and the web
         quicklaunch = {
           showSearchSuggestions = true;
           hideVisitURL = true;
           provider = "duckduckgo";
           mobileButtonPosition = "bottom-right";
         };
+
+        # Define layout of page
+        layout =
+          let
+            toLayoutAttrs =
+              list:
+              lib.listToAttrs (
+                map (
+                  item:
+                  let
+                    cleaned = removeAttrs item [
+                      "name"
+                      "widgets"
+                      "groups"
+                    ];
+                    nested = if item ? groups then toLayoutAttrs item.groups else { };
+                  in
+                  {
+                    name = item.name;
+                    value = cleaned // nested;
+                  }
+                ) list
+              );
+          in
+          toLayoutAttrs config.homepage.layout;
       };
 
       # Information widgets at top of page
@@ -81,226 +157,25 @@
         }
       ];
 
-      # Show status of running services
+      # Show service widgets
       services =
         let
-          fromCaddy =
+          # Get service by display name, if it exists
+          svc =
             name:
-            let
-              svc = config.caddy.services.${name};
-            in
-            "${svc.backendProtocol}://${svc.host}:${toString svc.port}";
+            lib.optional (config.homepage.services ? ${name}) {
+              ${name} = config.homepage.services.${name};
+            };
+
+          # Create nested widget groups from layout
+          buildGroup =
+            group:
+            if group ? groups then
+              map (sub: { ${sub.name} = buildGroup sub; }) group.groups
+            else
+              lib.flatten (map svc (group.widgets or [ ]));
         in
-        [
-          {
-            "Media" = [
-              {
-                "Jellyfin" = lib.optional (config.jellyfin.enable != null) {
-                  Jellyfin = {
-                    icon = "jellyfin.png";
-                    href =
-                      if config.jellyfin.enable == "public" then
-                        "https://jellyfin.${config.server.publicDomain}"
-                      else
-                        "https://jellyfin.${config.server.domain}";
-                    description = "Media server";
-                    ping = fromCaddy "jellyfin";
-                    widget = {
-                      type = "jellyfin";
-                      url = fromCaddy "jellyfin";
-                      key = "{{HOMEPAGE_VAR_JELLYFIN_KEY}}";
-                      version = 1;
-                      enableBlocks = true;
-                      enableNowPlaying = true;
-                      enableUser = true;
-                      enableMediaControl = true;
-                      showEpisodeNumber = true;
-                      expandOneStreamToTwoRows = false;
-                    };
-                  };
-                };
-              }
-              {
-                "Arr" =
-                  if config.arrstack.enable then
-                    (lib.flatten [
-                      (lib.optional config.arrstack.sonarr {
-                        Sonarr = {
-                          icon = "sonarr.png";
-                          href = "https://sonarr.${config.server.domain}";
-                          description = "TV show management";
-                          ping = fromCaddy "sonarr";
-                          widget = {
-                            type = "sonarr";
-                            url = fromCaddy "sonarr";
-                            key = "{{HOMEPAGE_VAR_SONARR_KEY}}";
-                            enableQueue = true;
-                          };
-                        };
-                      })
-                      (lib.optional config.arrstack.radarr {
-                        Radarr = {
-                          icon = "radarr.png";
-                          href = "https://radarr.${config.server.domain}";
-                          description = "Movie management";
-                          ping = fromCaddy "radarr";
-                          widget = {
-                            type = "radarr";
-                            url = fromCaddy "radarr";
-                            key = "{{HOMEPAGE_VAR_RADARR_KEY}}";
-                          };
-                        };
-                      })
-                      (lib.optional config.arrstack.prowlarr {
-                        Prowlarr = {
-                          icon = "prowlarr.png";
-                          href = "https://prowlarr.${config.server.domain}";
-                          description = "Indexer management";
-                          ping = fromCaddy "prowlarr";
-                          widget = {
-                            type = "prowlarr";
-                            url = fromCaddy "prowlarr";
-                            key = "{{HOMEPAGE_VAR_PROWLARR_KEY}}";
-                          };
-                        };
-                      })
-                      (lib.optional config.qbittorrent.enable {
-                        qBittorrent = {
-                          icon = "qbittorrent.png";
-                          href = "https://qbittorrent.${config.server.domain}";
-                          description = "Torrent client (VPN)";
-                          ping = fromCaddy "qbittorrent";
-                          widget = {
-                            type = "qbittorrent";
-                            url = fromCaddy "qbittorrent";
-                            username = "{{HOMEPAGE_VAR_QBITTORRENT_USER}}";
-                            password = "{{HOMEPAGE_VAR_QBITTORRENT_PASS}}";
-                          };
-                        };
-                      })
-                    ])
-                  else
-                    [ ];
-              }
-            ];
-          }
-          {
-            "System" = lib.flatten [
-              (lib.optional config.adguard.enable {
-                AdGuard = {
-                  icon = "adguard-home.png";
-                  href = "https://adguard.${config.server.domain}";
-                  description = "DNS & ad blocking";
-                  ping = fromCaddy "adguard";
-                  widget = {
-                    type = "adguard";
-                    url = fromCaddy "adguard";
-                    username = "{{HOMEPAGE_VAR_ADGUARD_USER}}";
-                    password = "{{HOMEPAGE_VAR_ADGUARD_PASS}}";
-                  };
-                };
-              })
-              (lib.optional config.uptime-kuma.enable {
-                "Uptime Kuma" = {
-                  icon = "uptime-kuma.png";
-                  href = "https://uptime-kuma.${config.server.domain}";
-                  description = "Service monitoring";
-                  ping = fromCaddy "uptime-kuma";
-                  widget = {
-                    type = "uptimekuma";
-                    url = fromCaddy "uptime-kuma";
-                    slug = "home";
-                  };
-                };
-              })
-              (lib.optional config.caddy.enable {
-                Caddy = {
-                  icon = "caddy.png";
-                  description = "Reverse proxy";
-                  ping = "http://127.0.0.1:2019";
-                  widget = {
-                    type = "caddy";
-                    url = "http://127.0.0.1:2019";
-                  };
-                };
-              })
-              (lib.optional config.freshrss.enable {
-                FreshRSS = {
-                  icon = "freshrss.png";
-                  href = "https://freshrss.${config.server.domain}";
-                  description = "RSS aggregator";
-                  ping = fromCaddy "freshrss";
-                  widget = {
-                    type = "freshrss";
-                    url = (fromCaddy "freshrss") + "/api/greader.php";
-                    username = "{{HOMEPAGE_VAR_FRESHRSS_USER}}";
-                    password = "{{HOMEPAGE_VAR_FRESHRSS_API_PASS}}";
-                  };
-                };
-              })
-              (lib.optional config.crowdsec.enable {
-                CrowdSec = {
-                  icon = "crowdsec.png";
-                  href = "https://app.crowdsec.net";
-                  description = "Intrusion detection";
-                  ping = "http://127.0.0.1:8080";
-                };
-              })
-              (lib.optional config.cockpit.enable {
-                Cockpit = {
-                  icon = "cockpit.png";
-                  href = "https://cockpit.${config.server.domain}";
-                  description = "Server management";
-                  ping = fromCaddy "cockpit";
-                };
-              })
-              (lib.optional (config.forgejo.enable != null) {
-                Forgejo = {
-                  icon = "forgejo.png";
-                  description = "Software forge";
-                  href =
-                    if config.forgejo.enable == "public" then
-                      "https://${config.forgejo.subdomain}.${config.server.publicDomain}"
-                    else
-                      "https://${config.forgejo.subdomain}.${config.server.domain}";
-                  ping = fromCaddy config.forgejo.subdomain;
-                };
-              })
-              (lib.optional (config.mealie.enable != null) {
-                Mealie = {
-                  icon = "mealie.png";
-                  description = "Recipe management";
-                  href =
-                    if config.mealie.enable == "public" then
-                      "https://${config.mealie.subdomain}.${config.server.publicDomain}"
-                    else
-                      "https://${config.mealie.subdomain}.${config.server.domain}";
-                  ping = fromCaddy config.mealie.subdomain;
-                  widget = {
-                    type = "mealie";
-                    url = (fromCaddy "mealie");
-                    key = "{{HOMEPAGE_VAR_MEALIE_API_KEY}}";
-                    version = 3;
-                  };
-                };
-              })
-              (lib.optional config.wireguard.enable {
-                Wireguard = {
-                  icon = "wireguard.png";
-                  description = "VPN tunnel";
-                  siteMonitor = "http://${config.wireguard.namespaceIP}:9999";
-                };
-              })
-              (lib.optional config.arrstack.byparr {
-                Byparr = {
-                  icon = "byparr.png";
-                  description = "Indexer proxy";
-                  ping = "http://127.0.0.1:8191";
-                };
-              })
-            ];
-          }
-        ];
+        map (group: { ${group.name} = buildGroup group; }) config.homepage.layout;
     };
 
     # Allow access to secrets
