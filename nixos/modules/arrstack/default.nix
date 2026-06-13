@@ -189,12 +189,14 @@
       };
     };
 
+    # Expose services via caddy
     caddy.services = lib.mkMerge [
       (lib.mkIf config.arrstack.prowlarr { prowlarr.port = 9696; })
       (lib.mkIf config.arrstack.sonarr { sonarr.port = 8989; })
       (lib.mkIf config.arrstack.radarr { radarr.port = 7878; })
     ];
 
+    # Monitor services via uptime-kuma
     uptime-kuma.monitors = lib.mkMerge [
       (lib.mkIf config.arrstack.prowlarr { prowlarr.port = 9696; })
       (lib.mkIf config.arrstack.sonarr { sonarr.port = 8989; })
@@ -202,5 +204,55 @@
       (lib.mkIf config.arrstack.byparr { byparr.port = 8191; })
     ];
 
+    # Create arrstack entries for homepage
+    homepage.services = lib.mkMerge [
+      (lib.mkIf config.arrstack.prowlarr {
+        Prowlarr = {
+          icon = "prowlarr.png";
+          href = "https://prowlarr.${config.server.domain}";
+          description = "Indexer management";
+          ping = "http://127.0.0.1:9696";
+          widget = {
+            type = "prowlarr";
+            url = "http://127.0.0.1:9696";
+            key = "{{HOMEPAGE_VAR_PROWLARR_KEY}}";
+          };
+        };
+      })
+      (lib.mkIf config.arrstack.sonarr {
+        Sonarr = {
+          icon = "sonarr.png";
+          href = "https://sonarr.${config.server.domain}";
+          description = "TV show management";
+          ping = "http://127.0.0.1:8989";
+          widget = {
+            type = "sonarr";
+            url = "http://127.0.0.1:8989";
+            key = "{{HOMEPAGE_VAR_SONARR_KEY}}";
+            enableQueue = true;
+          };
+        };
+      })
+      (lib.mkIf config.arrstack.radarr {
+        Radarr = {
+          icon = "radarr.png";
+          href = "https://radarr.${config.server.domain}";
+          description = "Movie management";
+          ping = "http://127.0.0.1:7878";
+          widget = {
+            type = "radarr";
+            url = "http://127.0.0.1:7878";
+            key = "{{HOMEPAGE_VAR_RADARR_KEY}}";
+          };
+        };
+      })
+      (lib.mkIf config.arrstack.byparr {
+        Byparr = {
+          icon = "byparr.png";
+          description = "Indexer proxy";
+          ping = "http://127.0.0.1:8191";
+        };
+      })
+    ];
   };
 }
