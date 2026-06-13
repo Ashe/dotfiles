@@ -117,6 +117,20 @@
       port = 8090;
     };
 
+    # Create qbittorrent entry for homepage
+    homepage.services.qBittorrent = {
+      icon = "qbittorrent.png";
+      href = "https://qbittorrent.${config.server.domain}";
+      description = "Torrent client (VPN)";
+      ping = "http://${config.wireguard.namespaceIP}:8090";
+      widget = {
+        type = "qbittorrent";
+        url = "http://${config.wireguard.namespaceIP}:8090";
+        username = "{{HOMEPAGE_VAR_QBITTORRENT_USER}}";
+        password = "{{HOMEPAGE_VAR_QBITTORRENT_PASS}}";
+      };
+    };
+
     # Ensure that wireguard is enabled for this module to function
     assertions = [
       {
