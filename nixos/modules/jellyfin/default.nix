@@ -25,30 +25,13 @@
 
   config = lib.mkIf (config.jellyfin.enable != null) {
 
-    # ---------------------------------------------------------------------------
-    # Native NixOS service
-    #
-    # The jellyfin module creates the jellyfin user and group automatically.
-    # dataDir points at the same /var/lib/jellyfin path the container was
-    # already writing to, so existing config, metadata, and the database all
-    # carry over with no data migration needed.
-    # ---------------------------------------------------------------------------
+    # Enable jellyfin service
     services.jellyfin = {
       enable = true;
       configDir = "/var/lib/jellyfin/config";
       dataDir = "/var/lib/jellyfin/data";
       cacheDir = "/var/lib/jellyfin/cache";
     };
-
-    # ---------------------------------------------------------------------------
-    # Hardware transcoding (Intel iGPU via VAAPI)
-    #
-    # renderD128 is present on this host. Adding jellyfin to the render and
-    # video groups gives it access to /dev/dri/renderD128 and /dev/dri/card0
-    # for hardware-accelerated transcoding via Intel Quick Sync / VAAPI.
-    # Enable in Jellyfin: Dashboard → Playback → Transcoding → VA-API.
-    # ---------------------------------------------------------------------------
-    hardware.graphics.enable = true;
 
     # Allow access to the same directories as the arrstack group
     users.users.jellyfin.extraGroups = [
@@ -57,37 +40,50 @@
       "arrstack"
     ];
 
-    # ---------------------------------------------------------------------------
     # Media path — ensure it exists (mediaDir option handles Jellyfin's access,
     # but the directory itself still needs to be present on the host)
-    # ---------------------------------------------------------------------------
     systemd.tmpfiles.rules = [
       "d ${config.jellyfin.mediaPath} 1777 root root -"
     ];
 
-    # ---------------------------------------------------------------------------
-    # Caddy — expose Jellyfin web UI
-    # ---------------------------------------------------------------------------
+    # Expose jellyfin via caddy
     caddy.services.jellyfin = {
       port = 8096;
       public = config.jellyfin.enable == "public";
     };
 
-    # ---------------------------------------------------------------------------
-    # Uptime Kuma — monitor Jellyfin availability
-    # ---------------------------------------------------------------------------
+    # Monitor jellyfin via uptime-kuma
     uptime-kuma.monitors.jellyfin.port = 8096;
 
-    # ---------------------------------------------------------------------------
-    # Crowdsec — monitor Jellyfin logs for threats
-    #
-    # Native service logs to journald under jellyfin.service rather than
-    # podman-jellyfin.service, so the journalmatch is updated accordingly.
-    # ---------------------------------------------------------------------------
+    # Monitor jellyfin via crowdsec
     crowdsec.collections = [ "LePresidente/jellyfin" ];
     crowdsec.acquisitions.jellyfin = {
       journalmatch = "_SYSTEMD_UNIT=jellyfin.service";
       type = "jellyfin";
+    };
+
+    # Create jellyfin entry for homepage
+    homepage.services.Jellyfin = {
+      icon = "jellyfin.png";
+      href =
+        if config.jellyfin.enable == "public" then
+          "https://jellyfin.${config.server.publicDomain}"
+        else
+          "https://jellyfin.${config.server.domain}";
+      description = "Media server";
+      ping = "http://127.0.0.1:8096";
+      widget = {
+        type = "jellyfin";
+        url = "http://127.0.0.1:8096";
+        key = "{{HOMEPAGE_VAR_JELLYFIN_KEY}}";
+        version = 1;
+        enableBlocks = true;
+        enableNowPlaying = true;
+        enableUser = true;
+        enableMediaControl = true;
+        showEpisodeNumber = true;
+        expandOneStreamToTwoRows = false;
+      };
     };
   };
 }
