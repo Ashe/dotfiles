@@ -118,6 +118,10 @@
           )
         );
 
+    # Open the SSH port so git+ssh:// clone URLs work.
+    # HTTP does not need opening — Caddy handles it on 443.
+    networking.firewall.allowedTCPPorts = [ config.forgejo.sshPort ];
+
     # Expose Forgejo via Caddy
     caddy.services."${config.forgejo.subdomain}" = {
       port = 3030;
@@ -135,8 +139,16 @@
       type = "syslog";
     };
 
-    # Open the SSH port so git+ssh:// clone URLs work.
-    # HTTP does not need opening — Caddy handles it on 443.
-    networking.firewall.allowedTCPPorts = [ config.forgejo.sshPort ];
+    # Create Forgejo entry for homepage
+    homepage.services.Forgejo = {
+      icon = "forgejo.png";
+      description = "Software forge";
+      href =
+        if config.forgejo.enable == "public" then
+          "https://${config.forgejo.subdomain}.${config.server.publicDomain}"
+        else
+          "https://${config.forgejo.subdomain}.${config.server.domain}";
+      ping = "https://127.0.0.1:3030";
+    };
   };
 }
