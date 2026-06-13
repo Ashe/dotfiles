@@ -96,11 +96,23 @@
     };
 
     # Monitor AdGuard availability via uptime-kuma
-    uptime-kuma.monitors.adguard = {
-      port = 3000;
-    };
+    uptime-kuma.monitors.adguard.port = 3000;
 
     # Expose AdGuard's web ui via caddy
     caddy.services.adguard.port = 3000;
+
+    # Create AdGuard entry for homepage
+    homepage.services.AdGuard = {
+      icon = "adguard-home.png";
+      href = "https://adguard.${config.server.domain}";
+      description = "DNS & ad blocking";
+      ping = "http://127.0.0.1:3000";
+      widget = {
+        type = "adguard";
+        url = "http://127.0.0.1:3000";
+        username = "{{HOMEPAGE_VAR_ADGUARD_USER}}";
+        password = "{{HOMEPAGE_VAR_ADGUARD_PASS}}";
+      };
+    };
   };
 }
