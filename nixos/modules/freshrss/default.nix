@@ -185,5 +185,19 @@
 
     # Monitor freshRSS availability via uptime-kuma
     uptime-kuma.monitors.freshrss.port = 8088;
+
+    # Create homepage entry for freshRSS
+    homepage.services.FreshRSS = {
+      icon = "freshrss.png";
+      href = "https://freshrss.${config.server.domain}";
+      description = "RSS aggregator";
+      ping = "https://127.0.0.1:8088";
+      widget = {
+        type = "freshrss";
+        url = "https://127.0.0.1:8088/api/greader.php";
+        username = "{{HOMEPAGE_VAR_FRESHRSS_USER}}";
+        password = "{{HOMEPAGE_VAR_FRESHRSS_API_PASS}}";
+      };
+    };
   };
 }
