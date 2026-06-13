@@ -164,6 +164,17 @@
       type = "syslog";
     };
 
+    # Create homepage entry for caddy
+    homepage.services.Caddy = {
+      icon = "caddy.png";
+      description = "Reverse proxy";
+      ping = "http://127.0.0.1:2019";
+      widget = {
+        type = "caddy";
+        url = "http://127.0.0.1:2019";
+      };
+    };
+
     assertions = lib.flatten [
       (lib.mapAttrsToList (name: svc: [
         # Public service but no publicDomain set
