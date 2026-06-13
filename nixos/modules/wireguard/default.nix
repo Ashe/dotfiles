@@ -225,6 +225,13 @@
       port = 9999;
     };
 
+    # Create wireguard entry for homepage
+    homepage.services.Wireguard = {
+      icon = "wireguard.png";
+      description = "VPN tunnel";
+      siteMonitor = "http://${config.wireguard.namespaceIP}:9999";
+    };
+
     # Assert that a wireguard config file is provided
     assertions = [
       {
