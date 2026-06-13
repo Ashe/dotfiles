@@ -133,8 +133,19 @@ in
     caddy.services.uptime-kuma.port = 3001;
 
     # Monitor uptime-kuma itself
-    uptime-kuma.monitors.uptime-kuma = {
-      port = 3001;
+    uptime-kuma.monitors.uptime-kuma.port = 3001;
+
+    # Create uptime-kuma entry for homepage
+    homepage.services."Uptime Kuma" = {
+      icon = "uptime-kuma.png";
+      href = "https://uptime-kuma.${config.server.domain}";
+      description = "Service monitoring";
+      ping = "http://127.0.0.1:3001";
+      widget = {
+        type = "uptimekuma";
+        url = "http://127.0.0.1:3001";
+        slug = "home";
+      };
     };
   };
 }
