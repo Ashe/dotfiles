@@ -66,6 +66,7 @@
 
             # Allow ssh connections
             SSH_PORT = config.forgejo.sshPort;
+            START_SSH_SERVER = true;
           };
 
         # Disable public registration entirely.
