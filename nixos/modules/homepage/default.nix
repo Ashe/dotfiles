@@ -61,13 +61,16 @@
             "AdGuard"
             "Uptime Kuma"
             "Caddy"
+            "Grafana"
             "FreshRSS"
             "Mealie"
             "CrowdSec"
             "Cockpit"
             "Forgejo"
+            "Alloy"
             "Wireguard"
             "Byparr"
+            "Loki"
           ];
         }
       ];

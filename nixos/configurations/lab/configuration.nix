@@ -28,6 +28,7 @@
   ddclient.porkbun.enable = true;
   forgejo.enable = "local";
   freshrss.enable = true;
+  grafana.enable = true;
   homepage.enable = true;
   mealie.enable = "local";
   jellyfin.enable = "public";

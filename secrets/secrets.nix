@@ -19,6 +19,7 @@ foldl (
     "${dir}/ddclient-porkbun.age".publicKeys = [ (readKey dir) ];
     "${dir}/forgejo-credentials.age".publicKeys = [ (readKey dir) ];
     "${dir}/freshrss-secrets.age".publicKeys = [ (readKey dir) ];
+    "${dir}/grafana-key.age".publicKeys = [ (readKey dir) ];
     "${dir}/homepage-secrets.age".publicKeys = [ (readKey dir) ];
     "${dir}/qbittorrent-credentials.age".publicKeys = [ (readKey dir) ];
     "${dir}/configarr-secrets.age".publicKeys = [ (readKey dir) ];

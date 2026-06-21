@@ -11,6 +11,7 @@
   dropbox = import ./dropbox;
   forgejo = import ./forgejo;
   freshrss = import ./freshrss;
+  grafana = import ./grafana;
   homepage = import ./homepage;
   jellyfin = import ./jellyfin;
   mealie = import ./mealie;
