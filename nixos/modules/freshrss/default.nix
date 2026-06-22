@@ -1,12 +1,19 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 
 {
   options.freshrss = {
     enable = lib.mkEnableOption "freshrss";
+
+    subdomain = lib.mkOption {
+      type = lib.types.str;
+      default = "rss";
+      description = "Subdomain to access FreshRSS at.";
+    };
 
     feeds = lib.mkOption {
       type = lib.types.attrsOf (
@@ -37,66 +44,117 @@
     };
   };
 
-  config = lib.mkIf config.freshrss.enable {
+  config = lib.mkIf config.freshrss.enable (
+    let
+      vhost = "${config.freshrss.subdomain}.${config.server.domain}";
+      credentialsPresent =
+        config.agenix.secrets != null
+        && builtins.pathExists "${config.agenix.secrets}/freshrss-secrets.age";
+    in
+    {
 
-    services.freshrss = {
-      enable = true;
-      defaultUser = "admin";
-      language = "en";
-      authType = "form";
-      baseUrl = "https://${config.server.domain}";
-      webserver = "caddy";
-      # Required non-null string; the generated vhost is neutralised below.
-      virtualHost = "_freshrss-unused";
-
-      passwordFile = lib.mkIf (
-        config.agenix.secrets != null && builtins.pathExists "${config.agenix.secrets}/freshrss-secrets.age"
-      ) config.age.secrets.freshrss-secrets.path;
-    };
-
-    # Ensure credentials are accessible
-    age.secrets.freshrss-secrets =
-      lib.mkIf
-        (
-          config.agenix.secrets != null && builtins.pathExists "${config.agenix.secrets}/freshrss-secrets.age"
-        )
-        {
-          mode = "0444";
-          owner = "freshrss";
-          group = "freshrss";
-        };
-
-    # The module creates a Caddy vhost at virtualHost and sets listen.owner = caddy.user.
-    # We override the pool to listen on TCP so our caddy abstraction can reach it by port,
-    # and we nullify the generated vhost so it doesn't serve anything.
-    services.phpfpm.pools.freshrss.settings = {
-      "listen" = lib.mkForce "127.0.0.1:8088";
-      "listen.owner" = lib.mkForce "";
-      "listen.group" = lib.mkForce "";
-      "listen.mode" = lib.mkForce "";
-    };
-
-    # Neutralise the vhost the module generated — we use caddy.services below instead.
-    services.caddy.virtualHosts."_freshrss-unused" = lib.mkForce { };
-
-    # Expose FreshRSS via caddy
-    caddy.services.freshrss.port = 8088;
-
-    # Monitor FreshRSS availability via uptime-kuma
-    uptime-kuma.monitors.freshrss.port = 8088;
-
-    # Create homepage entry for freshRSS
-    homepage.services.FreshRSS = {
-      icon = "freshrss.png";
-      href = "https://freshrss.${config.server.domain}";
-      description = "RSS aggregator";
-      ping = "https://127.0.0.1:8088";
-      widget = {
-        type = "freshrss";
-        url = "https://127.0.0.1:8088/api/greader.php";
-        username = "{{HOMEPAGE_VAR_FRESHRSS_USER}}";
-        password = "{{HOMEPAGE_VAR_FRESHRSS_API_PASS}}";
+      services.freshrss = {
+        enable = true;
+        defaultUser = "admin";
+        language = "en";
+        authType = "form";
+        baseUrl = "https://${vhost}";
+        webserver = "caddy";
+        virtualHost = vhost;
+        passwordFile = lib.mkIf credentialsPresent config.age.secrets.freshrss-secrets.path;
       };
-    };
-  };
+
+      # Ensure credentials are accessible
+      age.secrets.freshrss-secrets = lib.mkIf credentialsPresent {
+        mode = "0444";
+        owner = "freshrss";
+        group = "freshrss";
+      };
+
+      # Generate OPML from the feeds option
+      systemd.services.freshrss-seed-feeds = lib.mkIf (config.freshrss.feeds != { }) {
+        description = "Seed declarative FreshRSS feeds via OPML (once)";
+        after = [
+          "network.target"
+          "freshrss-config.service"
+        ];
+        requires = [
+          "freshrss-config.service"
+        ];
+        wantedBy = [ "multi-user.target" ];
+        script =
+          let
+            php = "${pkgs.php}/bin/php";
+            freshrssCli = "${pkgs.freshrss}/cli";
+            opmlFile = pkgs.writeText "freshrss-seed.opml" ''
+              <?xml version="1.0" encoding="UTF-8"?>
+              <opml version="2.0">
+                <head><title>Declarative seed feeds</title></head>
+                <body>
+              ${lib.concatStringsSep "\n" (
+                lib.mapAttrsToList (category: feeds: ''
+                      <outline text="${category}" title="${category}">
+                  ${lib.concatStringsSep "\n" (
+                    map (feed: ''
+                      <outline type="rss" text="${feed.name}" title="${feed.name}" xmlUrl="${feed.url}" />
+                    '') feeds
+                  )}
+                      </outline>
+                '') config.freshrss.feeds
+              )}
+                </body>
+              </opml>
+            '';
+          in
+          ''
+            SENTINEL=/var/lib/freshrss/.feeds-seeded
+            if [ -f "$SENTINEL" ]; then
+              echo "Feeds already seeded, skipping."
+              exit 0
+            fi
+
+            echo "Importing feeds..."
+            ${php} ${freshrssCli}/import-for-user.php --user admin --filename ${opmlFile}
+
+            echo "Updating feed contents..."
+            ${php} ${freshrssCli}/actualize-user.php --user admin
+
+            touch "$SENTINEL"
+            echo "Feeds seeded successfully!"
+          '';
+        serviceConfig = {
+          Type = "oneshot";
+          User = "freshrss";
+          Group = "freshrss";
+          RemainAfterExit = true;
+          Environment = "DATA_PATH=/var/lib/freshrss";
+          ReadWritePaths = "/var/lib/freshrss";
+          StateDirectory = "freshrss";
+        };
+      };
+
+      # Ensure sentinel directory is writable
+      systemd.tmpfiles.rules = [
+        "d /var/lib/freshrss/data 0750 freshrss freshrss -"
+      ];
+
+      # Register freshrss with caddy, but since it uses caddy internally,
+      # do not create a reverse proxy here
+      caddy.services."${config.freshrss.subdomain}".createReverseProxy = false;
+
+      # Create homepage entry for freshRSS
+      homepage.services.FreshRSS = {
+        icon = "freshrss.png";
+        href = "https://${vhost}";
+        description = "RSS aggregator";
+        ping = "https://${vhost}";
+        widget = {
+          type = "freshrss";
+          url = "https://${vhost}/api/greader.php";
+          username = "{{HOMEPAGE_VAR_FRESHRSS_USER}}";
+          password = "{{HOMEPAGE_VAR_FRESHRSS_API_PASS}}";
+        };
+      };
+    }
+  );
 }

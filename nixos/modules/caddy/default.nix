@@ -12,14 +12,28 @@
       type = lib.types.attrsOf (
         lib.types.submodule {
           options = {
+            createReverseProxy = lib.mkOption {
+              type = lib.types.bool;
+              default = true;
+              description = ''
+                Whether the caddy module should automatically create a
+                reverse-proxy for this service. Defaults to true.
+                If set to false, it is expected that caddy is handled manually.
+              '';
+            };
             host = lib.mkOption {
               type = lib.types.str;
               default = "127.0.0.1";
-              description = "Host/IP the backend service listens on. Defaults to localhost.";
+              description = ''
+                Host/IP the backend service listens on. Defaults to localhost.
+              '';
             };
             port = lib.mkOption {
               type = lib.types.port;
-              description = "Port the service listens on";
+              description = ''
+                Port the service listens on. If null, you must create the
+                matching vhost name yourself.
+              '';
             };
             backendProtocol = lib.mkOption {
               type = lib.types.enum [
@@ -27,12 +41,18 @@
                 "https"
               ];
               default = "http";
-              description = "Protocol the backend service speaks. Most services use http. Use https for services like Cockpit that only accept HTTPS connections.";
+              description = ''
+                Protocol the backend service speaks. Most services use http.
+                Use https for services like Cockpit that only accept HTTPS
+                connections.
+              '';
             };
             public = lib.mkOption {
               type = lib.types.bool;
               default = false;
-              description = "Whether this service is exposed publicly via the external domain";
+              description = ''
+                Whether this service is exposed publicly via the external domain
+              '';
             };
           };
         }
@@ -63,6 +83,8 @@
                 output stdout
                 format json
               }
+            ''
+            + lib.optionalString svc.createReverseProxy ''
               reverse_proxy ${svc.backendProtocol}://${svc.host}:${toString svc.port} {
                 ${lib.optionalString (svc.backendProtocol == "https") ''
                   transport http {
@@ -117,7 +139,6 @@
             tls = false;
           }
         ) (lib.filterAttrs (_: svc: svc.public) config.caddy.services);
-
       in
       {
         enable = true;
