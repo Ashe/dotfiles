@@ -62,7 +62,6 @@
           config.agenix.secrets != null && builtins.pathExists "${config.agenix.secrets}/grafana-key.age"
         ) "$__file{${config.age.secrets.grafana-key.path}}";
       };
-
       provision = {
         enable = true;
         datasources.settings.datasources = lib.optionals config.grafana.loki [
@@ -82,12 +81,10 @@
       enable = true;
       configuration = {
         auth_enabled = false;
-
         server = {
           http_listen_port = config.grafana.lokiPort;
           grpc_listen_port = 9096;
         };
-
         common = {
           path_prefix = "/var/lib/loki";
           storage.filesystem = {
@@ -97,7 +94,6 @@
           replication_factor = 1;
           ring.kvstore.store = "inmemory";
         };
-
         schema_config.configs = [
           {
             from = "2024-01-01";
@@ -117,7 +113,6 @@
           reject_old_samples = true;
           reject_old_samples_max_age = "168h";
         };
-
         compactor = {
           working_directory = "/var/lib/loki/compactor";
           delete_request_store = "filesystem";
@@ -128,6 +123,7 @@
     # Set up alloy
     services.alloy = lib.mkIf config.grafana.alloy {
       enable = true;
+      extraFlags = [ "--server.http.listen-addr=127.0.0.1:${toString config.grafana.alloyPort}" ];
     };
 
     # Alloy doesn't take Nix-attrset config - it uses its own ".alloy"
@@ -135,25 +131,8 @@
     # services.alloy at the directory containing it (the default).
     environment.etc."alloy/config.alloy" = lib.mkIf config.grafana.alloy {
       text = ''
-        // Port for alloy to listen on
-        http {
-          listen_port = ${toString config.grafana.alloyPort}
-        }
-        // Read every unit's journald logs
-        loki.source.journal "read" {
-          forward_to    = [loki.relabel.journal.receiver]
-          relabel_rules = loki.relabel.journal.rules
-          labels = {
-            job  = "systemd-journal",
-            host = "${config.networking.hostName}",
-          }
-        }
-
-        // Pull out useful labels: systemd unit name, and podman container
-        // name (set by podman when its log driver is journald, which is
-        // the default under systemd) so container logs are filterable.
-        loki.relabel "journal" {
-          forward_to = [loki.write.default.receiver]
+        discovery.relabel "journal" {
+          targets = []
 
           rule {
             source_labels = ["__journal__systemd_unit"]
@@ -163,6 +142,15 @@
           rule {
             source_labels = ["__journal_container_name"]
             target_label  = "container"
+          }
+        }
+
+        loki.source.journal "read" {
+          forward_to    = [loki.write.default.receiver]
+          relabel_rules = discovery.relabel.journal.rules
+          labels = {
+            job  = "systemd-journal",
+            host = "${config.networking.hostName}",
           }
         }
 
