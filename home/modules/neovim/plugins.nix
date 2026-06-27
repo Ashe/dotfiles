@@ -143,6 +143,7 @@ with pkgs.vimPlugins;
     package = telescope-nvim;
     extraPlugins = [
       nvim-web-devicons # Icons
+      telescope-ui-select-nvim # Select ui
     ];
     dependsOn = [
       "trouble" # Used as its display window

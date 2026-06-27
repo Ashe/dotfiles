@@ -1,12 +1,13 @@
 local open_with_trouble = require('trouble.sources.telescope').open
 require('telescope').setup({
-
-    -- Change default mappings when in window
+    pickers = {
+        lsp_references        = { theme = 'dropdown' },
+        lsp_document_symbols  = { theme = 'dropdown' },
+        lsp_type_definitions  = { theme = 'cursor' },
+    },
     defaults = {
         mappings = {
-
             i = {
-
                 -- Send results to trouble
                 ['<C-t>'] = open_with_trouble,
 
@@ -33,9 +34,16 @@ require('telescope').setup({
                 ["<C-l>"] = "preview_scrolling_right",
             }
         }
-    }
+    },
+    extensions = {
+        ['ui-select'] = {
+          require('telescope.themes').get_cursor(),
+        },
+    },
 })
 
+-- Use telescope as picker
+require('telescope').load_extension('ui-select')
 
 -- Keybindings
 local builtin = require('telescope.builtin')
