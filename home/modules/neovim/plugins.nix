@@ -34,9 +34,6 @@ with pkgs.vimPlugins;
   # Language servers
   lspconfig = {
     package = nvim-lspconfig;
-    dependsOn = [
-      "inc-rename" # Visual renaming
-    ];
     extraPackages = with pkgs; [
       nixd # Nix language server
     ];

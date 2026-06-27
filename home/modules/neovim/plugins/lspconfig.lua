@@ -1,8 +1,3 @@
--- Setup visual renaming
-require('inc_rename').setup({})
-
--- Keybindings
-
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -11,59 +6,146 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- Enable completion triggered by <c-x><c-o>
         vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-        -- Buffer local mappings.
-        -- See `:help vim.lsp.*` for documentation on any of the below functions
+        local inc_rename = try_require('inc_rename')
+        local telescope = try_require('telescope.builtin')
+        local has_trouble = vim.fn.exists(':Trouble') == 2
+
+        ---------------
+        -- Functions --
+        ---------------
+
+        local function map(mode, lhs, rhs, desc)
+            vim.keymap.set(mode, lhs, rhs, { buffer = ev.buf, desc = desc })
+        end
+
+        local function map_rename(lhs)
+            if inc_rename then
+                vim.keymap.set('n', lhs, function()
+                    return ':IncRename ' .. vim.fn.expand('<cword>')
+                end, { expr = true, buffer = ev.buf, desc = 'Rename symbol' })
+            else
+                vim.keymap.set('n', lhs, vim.lsp.buf.rename,
+                    { buffer = ev.buf, desc = 'Rename symbol' })
+            end
+        end
+
+        local function code_action_kind(kind)
+            return function()
+                vim.lsp.buf.code_action({ context = { only = { kind } } })
+            end
+        end
+
+        -- 'Lists' mappings
+        local function references_list()
+            if has_trouble then vim.cmd('Trouble lsp_references toggle focus=true')
+            else vim.lsp.buf.references() end
+        end
+
+        local function lsp_list()
+            if has_trouble then vim.cmd('Trouble lsp toggle focus=false win.position=right')
+            else references_list() end
+        end
+
+        local function document_symbols_list()
+            if has_trouble then vim.cmd('Trouble symbols toggle focus=false')
+            else vim.lsp.buf.document_symbol() end
+        end
+
+        local function incoming_calls_list()
+            if has_trouble then vim.cmd('Trouble lsp_incoming_calls toggle focus=true')
+            else vim.lsp.buf.incoming_calls() end
+        end
+
+        local function outgoing_calls_list()
+            if has_trouble then vim.cmd('Trouble lsp_outgoing_calls toggle focus=true')
+            else vim.lsp.buf.outgoing_calls() end
+        end
+
+        local function diagnostics_list_buf()
+            if has_trouble then vim.cmd('Trouble diagnostics toggle filter.buf=0')
+            else vim.diagnostic.setloclist({ open = true }) end
+        end
+
+        local function diagnostics_list_all()
+            if has_trouble then vim.cmd('Trouble diagnostics toggle')
+            else vim.diagnostic.setqflist({ open = true }) end
+        end
+
+        -----------------
+        -- Keybindings --
+        -----------------
+
+        -- Keybinding groups
+        which_key_add({
+            { '<leader>c',  group = 'Code..', mode = { 'n', 'x' } },
+            { '<leader>cR', group = 'Refactor..', mode = { 'n', 'x' } },
+            { '<leader>cl', group = 'Lists..' },
+            { '<leader>cw', group = 'Workspaces..' },
+            { '<leader>f',  group = 'Find..' },
+        })
 
         -- General shortcuts
-        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = ev.buf, desc = "Goto declaration" })
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = ev.buf, desc = "Goto definition" })
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = ev.buf, desc = "Hover documentation" })
-        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = ev.buf, desc = "Goto implementation" })
-        vim.keymap.set('n', '<C-n>', require('telescope.builtin').lsp_dynamic_workspace_symbols,
-            { buffer = ev.buf, desc = 'All symbols' })
-        vim.keymap.set('n', '<leader>D', require('telescope.builtin').lsp_type_definitions,
-            { buffer = ev.buf, desc = 'Type definitions' })
+        map('n', 'gD', vim.lsp.buf.declaration, 'Goto declaration')
+        map('n', 'gd', vim.lsp.buf.definition, 'Goto definition')
+        map('n', 'gi', vim.lsp.buf.implementation, 'Goto implementation')
+        map('n', 'K', vim.lsp.buf.hover, 'Hover documentation')
+        map('n', '<C-n>', telescope and telescope.lsp_dynamic_workspace_symbols
+            or vim.lsp.buf.workspace_symbol, 'All symbols')
+        map('n', '<leader>D', telescope and telescope.lsp_type_definitions
+            or vim.lsp.buf.type_definition, 'Type definitions')
 
         -- 'Code' mappings
-        require('which-key').add({ { "<leader>c", group = "Code.." } })
-        vim.keymap.set('n', '<leader>cs', vim.lsp.buf.signature_help,
-            { buffer = ev.buf, desc = 'Signature documentation' })
-        vim.keymap.set('n', '<leader>cr', function()
-            return ":IncRename " .. vim.fn.expand("<cword>")
-        end, { expr = true, buffer = ev.buf, desc = 'Rename symbol' })
-        vim.keymap.set('n', '<leader>cd', require('telescope.builtin').lsp_type_definitions,
-            { buffer = ev.buf, desc = 'Type definitions' })
-        vim.keymap.set('n', '<leader>cf', function() vim.lsp.buf.format { async = true } end,
-            { buffer = ev.buf, desc = 'Format code' })
-        vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = ev.buf, desc = 'Code action' })
-        vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, { buffer = ev.buf, desc = 'Code action' })
+        map({ 'n', 'x' }, '<leader>ca', vim.lsp.buf.code_action, 'Code action')
+        map({ 'n', 'x' }, '<leader>a', vim.lsp.buf.code_action, 'Code action')
+        map('n', '<leader>cs', vim.lsp.buf.signature_help, 'Signature documentation')
+        map('n', '<leader>cf', function() vim.lsp.buf.format { async = true } end, 'Format code')
+        map('n', '<leader>cd', telescope and telescope.lsp_type_definitions
+            or vim.lsp.buf.type_definition, 'Type definitions')
+        map_rename('<leader>cr')
+
+        -- 'Refactor' mappings
+        map({ 'n', 'x' }, '<leader>cRe', code_action_kind('refactor.extract'), 'Extract')
+        map({ 'n', 'x' }, '<leader>cRi', code_action_kind('refactor.inline'), 'Inline')
+        map({ 'n', 'x' }, '<leader>cRw', code_action_kind('refactor.rewrite'), 'Rewrite')
+        map_rename('<leader>cRr')
+
+        map('n', '<leader>cll', lsp_list, 'LSP (defs/refs/… live)')
+        map('n', '<leader>clr', references_list, 'References')
+        map('n', '<leader>cls', document_symbols_list, 'Document symbols')
+        map('n', '<leader>cli', incoming_calls_list, 'Incoming calls')
+        map('n', '<leader>clo', outgoing_calls_list, 'Outgoing calls')
+        map('n', '<leader>cld', diagnostics_list_buf, 'Diagnostics (buffer)')
+        map('n', '<leader>clD', diagnostics_list_all, 'Diagnostics (workspace)')
 
         -- 'Code-workspace' mappings
-        require('which-key').add({ { "<leader>cw", group = "Workspaces.." } })
-        vim.keymap.set('n', '<leader>cwa', vim.lsp.buf.add_workspace_folder,
-            { buffer = ev.buf, desc = "Add workspace folder" })
-        vim.keymap.set('n', '<leader>cwr', vim.lsp.buf.remove_workspace_folder,
-            { buffer = ev.buf, desc = "Remove workspace folder" })
-        vim.keymap.set('n', '<leader>cwl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
-            { buffer = ev.buf, desc = "List workspace folders" })
+        map('n', '<leader>cwa', vim.lsp.buf.add_workspace_folder, 'Add workspace folder')
+        map('n', '<leader>cwr', vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder')
+        map('n', '<leader>cwl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
+            'List workspace folders')
 
         -- 'Find' mappings
-        vim.keymap.set('n', '<leader>fr', require('telescope.builtin').lsp_references,
-            { buffer = ev.buf, desc = 'References' })
-        vim.keymap.set('n', '<leader>fs', require('telescope.builtin').lsp_document_symbols,
-            { buffer = ev.buf, desc = 'Document symbols' })
-        vim.keymap.set('n', '<leader>fS', require('telescope.builtin').lsp_dynamic_workspace_symbols,
-            { buffer = ev.buf, desc = 'All symbols' })
-        vim.keymap.set('n', '<leader>ft', require('telescope.builtin').lsp_type_definitions,
-            { buffer = ev.buf, desc = 'Type definitions' })
+        map('n', '<leader>fr', telescope and telescope.lsp_references
+            or vim.lsp.buf.references, 'References')
+        map('n', '<leader>fs', telescope and telescope.lsp_document_symbols
+            or vim.lsp.buf.document_symbol, 'Document symbols')
+        map('n', '<leader>fS', telescope and telescope.lsp_dynamic_workspace_symbols
+            or vim.lsp.buf.workspace_symbol, 'All symbols')
+        map('n', '<leader>ft', telescope and telescope.lsp_type_definitions
+            or vim.lsp.buf.type_definition, 'Type definitions')
+        map('n', '<leader>fi', telescope and telescope.lsp_incoming_calls
+            or vim.lsp.buf.incoming_calls, 'Incoming calls')
+        map('n', '<leader>fo', telescope and telescope.lsp_outgoing_calls
+            or vim.lsp.buf.outgoing_calls, 'Outgoing calls')
     end,
 })
 
 -- Servers
 
 -- Set default capabilities for all LSP servers
+local cmp_nvim_lsp = try_require('cmp_nvim_lsp')
 vim.lsp.config('*', {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(),
+    capabilities = cmp_nvim_lsp and cmp_nvim_lsp.default_capabilities()
+        or vim.lsp.protocol.make_client_capabilities(),
     flags = {
         debounce_text_changes = 150,
     },

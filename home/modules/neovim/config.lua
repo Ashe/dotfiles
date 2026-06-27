@@ -64,6 +64,23 @@ vim.opt.fillchars = {
 }
 
 ----------------------------------
+-- Utility functions
+----------------------------------
+
+-- Optionally load a module
+local function try_require(name)
+    local ok, mod = pcall(require, name)
+    if ok then return mod end
+    return nil
+end
+
+-- Invoke which-key safely
+local which_key = try_require('which-key')
+local function which_key_add(spec)
+    if which_key then which_key.add(spec) end
+end
+
+----------------------------------
 -- Keybindings
 ----------------------------------
 
@@ -114,7 +131,7 @@ vim.keymap.set({ "n", "t" }, "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Move focus 
 vim.keymap.set("t", "<C-w>w", "<C-\\><C-n>", { desc = "Unfocus terminal" })
 
 -- Tab navigation
-require('which-key').add({ { "<leader><Tab>", group = "Tabs.." } })
+which_key_add({ { "<leader><Tab>", group = "Tabs.." } })
 vim.keymap.set("n", "<Tab>", "<Cmd>tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "<S-Tab>", "<Cmd>tabprevious<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "<C-Backspace>", "<Cmd>tabclose<CR>", { desc = "Close tab" })

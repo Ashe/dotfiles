@@ -113,7 +113,7 @@ in
 
                   # Finalise plugin config content
                 in
-                comment + body;
+                comment + "do\n" + body + "\nend\n";
             }
           ];
         }
