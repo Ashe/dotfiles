@@ -78,6 +78,7 @@ with pkgs.vimPlugins;
     package = trouble-nvim;
     extraConfig = ''
       require("trouble").setup({})
+      vim.keymap.set("n", "<leader>q", "<Cmd>Trouble diagnostics toggle<CR>", { desc = "Open diagnostics" })
     '';
   };
 
