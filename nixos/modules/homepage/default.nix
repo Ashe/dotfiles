@@ -70,6 +70,7 @@
             "Alloy"
             "Wireguard"
             "Byparr"
+            "Prometheus"
             "Loki"
           ];
         }
