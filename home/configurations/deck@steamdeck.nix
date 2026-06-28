@@ -26,10 +26,7 @@
 
   # NixGL wrapped packages
   nixgl.packages = with pkgs; [
-    (discord.override {
-      withOpenASAR = true;
-      withVencord = true;
-    })
+    discord
     godot_4
     vlc
   ];
