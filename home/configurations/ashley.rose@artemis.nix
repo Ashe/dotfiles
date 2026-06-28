@@ -28,6 +28,7 @@
       awscli2
       bat
       gnupg
+      tree
     ];
   };
 
