@@ -17,12 +17,6 @@
       default = null;
     };
 
-    sshPort = lib.mkOption {
-      type = lib.types.port;
-      default = 2222;
-      description = "Port for Forgejo's SSH git access. Avoid 22 to not conflict with the host's own SSH daemon.";
-    };
-
     appName = lib.mkOption {
       type = lib.types.str;
       default = "Forgejo";
@@ -34,14 +28,35 @@
       default = "forge";
       description = "Subdomain to access forgejo at.";
     };
+
+    user = lib.mkOption {
+      type = lib.types.str;
+      default = "git";
+      description = ''
+        User/Group to own the service.
+        Doubles as ssh user user@forgejo.domain.
+      '';
+    };
   };
 
   config = lib.mkIf (config.forgejo.enable != null) {
 
-    # Native NixOS Forgejo service. Handles its own user, group, state
-    # directory, and systemd unit with appropriate sandboxing built in.
+    # Create forgejo user
+    users.users.${config.forgejo.user} = {
+      isSystemUser = true;
+      group = config.forgejo.user;
+      home = "/var/lib/forgejo";
+      shell = pkgs.bash; # needs a real shell — the forced SSH command runs via `shell -c ...`
+    };
+    users.groups.${config.forgejo.user} = { };
+
+    # Set up forgejo
     services.forgejo = {
       enable = true;
+
+      # Allow for git@forge.domain ssh
+      user = config.forgejo.user;
+      group = config.forgejo.user;
 
       # Use SQLite for simplicity; swap to "postgres" if you need scale.
       database.type = "sqlite3";
@@ -64,9 +79,11 @@
             HTTP_ADDR = "127.0.0.1";
             HTTP_PORT = 3030;
 
-            # Allow ssh connections
-            SSH_PORT = config.forgejo.sshPort;
-            START_SSH_SERVER = true;
+            # Allow ssh connections using regular ssh port
+            START_SSH_SERVER = false;
+            SSH_CREATE_AUTHORIZED_KEYS_FILE = false;
+            SSH_PORT = config.ssh.local.port;
+            SSH_USER = config.forgejo.user;
           };
 
         # Disable public registration entirely.
@@ -119,12 +136,18 @@
           )
         );
 
-    # Open the SSH port so git+ssh:// clone URLs work.
-    # HTTP does not need opening — Caddy handles it on 443.
-    networking.firewall.allowedTCPPorts = [ config.forgejo.sshPort ];
+    # Register forgejo with ssh module
+    ssh.local.services.${config.forgejo.user} = {
+      authorizedKeysCommand =
+        let
+          exe = lib.getExe config.services.forgejo.package;
+          user = config.forgejo.user;
+        in
+        "${exe} keys -c /var/lib/forgejo/custom/conf/app.ini -e ${user} -u %u -t %t -k %k";
+    };
 
     # Expose Forgejo via Caddy
-    caddy.services."${config.forgejo.subdomain}" = {
+    caddy.services.${config.forgejo.subdomain} = {
       port = 3030;
       public = config.forgejo.enable == "public";
     };
