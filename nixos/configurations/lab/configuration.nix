@@ -19,7 +19,6 @@
   agenix.secrets = "${inputs.self}/secrets/lab";
 
   ssh.enable = true;
-  nix.config.enable = true;
   adguard.enable = true;
   arrstack.enable = true;
   caddy.enable = true;
@@ -71,6 +70,7 @@
   # Install packages
   environment.systemPackages = with pkgs; [
     openssl
+    jujutsu
   ];
 
   # Enable Intel QSV

@@ -2,12 +2,12 @@
 name:
 
 let
+  lib = inputs.nixpkgs.lib;
   config-folder = "${self}/nixos/configurations/${name}";
   config-file = import "${config-folder}/configuration.nix";
   hardware-file = "${config-folder}/hardware-configuration.nix";
-
 in
-inputs.nixpkgs.lib.nixosSystem {
+lib.nixosSystem {
   system = "x86_64-linux";
   specialArgs = {
     inherit inputs;
@@ -19,16 +19,10 @@ inputs.nixpkgs.lib.nixosSystem {
     {
       networking.hostName = name;
       system.configurationRevision = self.rev or "dirty";
-      environment.systemPackages = with inputs.nixpkgs.legacyPackages."x86_64-linux"; [
-        jujutsu
-      ];
-      nix.settings.experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
+      nix.config.enable = lib.mkDefault true;
       programs = {
-        git.enable = inputs.nixpkgs.lib.mkDefault true;
-        nh.enable = inputs.nixpkgs.lib.mkDefault true;
+        git.enable = lib.mkDefault true;
+        nh.enable = lib.mkDefault true;
       };
     }
   ];
