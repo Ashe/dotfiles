@@ -18,6 +18,7 @@
 
   agenix.secrets = "${inputs.self}/secrets/lab";
 
+  ssh.enable = true;
   nix.config.enable = true;
   adguard.enable = true;
   arrstack.enable = true;
@@ -62,10 +63,10 @@
   users.users.ashe = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII3VhqBFpEMxrVA5eq8w/q8lnV/IYutBXcZN5Voxnb0w steamdeck"
+    ];
   };
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   # Install packages
   environment.systemPackages = with pkgs; [

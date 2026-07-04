@@ -1,6 +1,7 @@
 {
   inputs,
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -10,6 +11,9 @@
 
   config = lib.mkIf config.nix.config.enable {
     nix = {
+
+      # Use Lix
+      package = pkgs.lixPackageSets.stable.lix;
 
       # Configure nix
       settings = {

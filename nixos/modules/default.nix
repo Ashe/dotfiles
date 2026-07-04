@@ -17,6 +17,7 @@
   mealie = import ./mealie;
   mullvad = import ./mullvad;
   qbittorrent = import ./qbittorrent;
+  ssh = import ./ssh;
   steam = import ./steam;
   tailscale = import ./tailscale;
   uptime-kuma = import ./uptime-kuma;
