@@ -67,6 +67,7 @@
             "CrowdSec"
             "Cockpit"
             "Forgejo"
+            "Cleanuparr"
             "Alloy"
             "Wireguard"
             "Byparr"

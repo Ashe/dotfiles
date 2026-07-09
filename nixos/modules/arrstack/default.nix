@@ -17,6 +17,9 @@
     prowlarr = lib.mkEnableOption "prowlarr (indexer manager)" // {
       default = true;
     };
+    cleanuparr = lib.mkEnableOption "cleanuparr (stalled/failed download cleanup)" // {
+      default = true;
+    };
     byparr = lib.mkEnableOption "byparr (Cloudflare bypass)" // {
       default = true;
     };
@@ -65,6 +68,9 @@
     ]
     ++ lib.optionals config.arrstack.radarr [
       "d /var/lib/arrstack/radarr 0750 arrstack arrstack -"
+    ]
+    ++ lib.optionals config.arrstack.cleanuparr [
+      "Z /var/lib/arrstack/cleanuparr 0750 arrstack arrstack -"
     ]
     ++ lib.optionals config.arrstack.byparr [
       "d /var/lib/arrstack/byparr 0777 arrstack arrstack -"
@@ -118,6 +124,11 @@
           };
         };
       }
+
+      (lib.mkIf config.arrstack.cleanuparr {
+        podman-cleanuparr.after = [ "arrstack-network.service" ];
+        podman-cleanuparr.requires = [ "arrstack-network.service" ];
+      })
 
       (lib.mkIf config.arrstack.byparr {
         podman-byparr.after = [ "arrstack-network.service" ];
@@ -177,8 +188,30 @@
           };
         };
 
-    virtualisation.oci-containers.containers = lib.mkIf config.arrstack.byparr {
-      byparr = {
+    virtualisation.oci-containers.containers = {
+
+      cleanuparr = lib.mkIf config.arrstack.cleanuparr {
+        image = "ghcr.io/cleanuparr/cleanuparr:latest";
+        ports = [ "127.0.0.1:11011:11011" ];
+        volumes = [
+          "/var/lib/arrstack/cleanuparr:/config"
+          "/data/media:/data/media"
+          "/data/torrents:/data/torrents"
+        ];
+        environment = {
+          UMASK = "022";
+        };
+        extraOptions = [
+          "--pull=newer"
+          "--network=arrstack"
+          "--add-host=host.containers.internal:host-gateway"
+          "--userns=keep-id"
+          "--group-add=keep-groups"
+        ];
+        podman.user = "arrstack";
+      };
+
+      byparr = lib.mkIf config.arrstack.byparr {
         image = "ghcr.io/thephaseless/byparr:latest";
         ports = [ "127.0.0.1:8191:8191" ];
         extraOptions = [
@@ -194,6 +227,7 @@
       (lib.mkIf config.arrstack.prowlarr { prowlarr.port = 9696; })
       (lib.mkIf config.arrstack.sonarr { sonarr.port = 8989; })
       (lib.mkIf config.arrstack.radarr { radarr.port = 7878; })
+      (lib.mkIf config.arrstack.cleanuparr { cleanuparr.port = 11011; })
     ];
 
     # Monitor services via uptime-kuma
@@ -201,6 +235,7 @@
       (lib.mkIf config.arrstack.prowlarr { prowlarr.port = 9696; })
       (lib.mkIf config.arrstack.sonarr { sonarr.port = 8989; })
       (lib.mkIf config.arrstack.radarr { radarr.port = 7878; })
+      (lib.mkIf config.arrstack.cleanuparr { cleanuparr.port = 11011; })
       (lib.mkIf config.arrstack.byparr { byparr.port = 8191; })
     ];
 
@@ -244,6 +279,14 @@
             url = "http://127.0.0.1:7878";
             key = "{{HOMEPAGE_VAR_RADARR_KEY}}";
           };
+        };
+      })
+      (lib.mkIf config.arrstack.cleanuparr {
+        Cleanuparr = {
+          icon = "cleanuparr.png";
+          href = "https://cleanuparr.${config.server.domain}";
+          description = "Torrent manager";
+          ping = "http://127.0.0.1:11011";
         };
       })
       (lib.mkIf config.arrstack.byparr {
