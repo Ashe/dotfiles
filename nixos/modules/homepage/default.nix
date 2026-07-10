@@ -69,7 +69,7 @@
             "Forgejo"
             "Cleanuparr"
             "Alloy"
-            "Prometheus"
+            "Victoria Metrics"
             "Wireguard"
             "Byparr"
             "Loki"

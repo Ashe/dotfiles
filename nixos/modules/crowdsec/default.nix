@@ -175,7 +175,7 @@
     ];
 
     # Allow prometheus to scrape crowdsec
-    grafana.prometheus.extraScrapeTargets.crowdsec.port = 6060;
+    grafana.victoriametrics.extraScrapeTargets.crowdsec.port = 6060;
 
     # Monitor crowdsec availability via uptime-kuma
     uptime-kuma.monitors.crowdsec = {

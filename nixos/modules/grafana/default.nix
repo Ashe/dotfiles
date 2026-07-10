@@ -6,7 +6,7 @@
 
 {
   options.grafana = {
-    enable = lib.mkEnableOption "grafana stack (grafana + loki + alloy + prometheus)";
+    enable = lib.mkEnableOption "grafana stack (grafana + loki + alloy + victoriametrics)";
 
     port = lib.mkOption {
       type = lib.types.port;
@@ -36,14 +36,19 @@
       };
     };
 
-    prometheus = {
-      enable = lib.mkEnableOption "prometheus (metrics storage)" // {
+    victoriametrics = {
+      enable = lib.mkEnableOption "victoriametrics (metrics storage)" // {
         default = true;
       };
       port = lib.mkOption {
         type = lib.types.port;
         default = 3260;
-        description = "Port Prometheus listens on.";
+        description = "Port VictoriaMetrics listens on.";
+      };
+      retentionPeriod = lib.mkOption {
+        type = lib.types.str;
+        default = "30d";
+        description = "How long to retain metric samples.";
       };
       extraScrapeTargets = lib.mkOption {
         type = lib.types.attrsOf (
@@ -57,27 +62,9 @@
           }
         );
         default = { };
-        description = "Extra static Prometheus scrape targets registered by service modules.";
+        description = "Extra static scrape targets registered by service modules.";
       };
       exporter = {
-        node = {
-          enable = lib.mkEnableOption "node exporter (system metrics)" // {
-            default = true;
-          };
-          port = lib.mkOption {
-            type = lib.types.port;
-            default = 3261;
-          };
-        };
-        systemd = {
-          enable = lib.mkEnableOption "systemd exporter (unit health)" // {
-            default = true;
-          };
-          port = lib.mkOption {
-            type = lib.types.port;
-            default = 3262;
-          };
-        };
         smartctl = {
           enable = lib.mkEnableOption "smartctl exporter (disk health)" // {
             default = true;
@@ -130,12 +117,14 @@
               isDefault = true;
             }
           ]
-          ++ lib.optionals config.grafana.prometheus.enable [
+          ++ lib.optionals config.grafana.victoriametrics.enable [
             {
+              # VictoriaMetrics speaks the Prometheus HTTP API, so Grafana's
+              # "prometheus" datasource type talks to it unmodified.
               name = "Prometheus";
               type = "prometheus";
               access = "proxy";
-              url = "http://127.0.0.1:${toString config.grafana.prometheus.port}";
+              url = "http://127.0.0.1:${toString config.grafana.victoriametrics.port}";
             }
           ];
       };
@@ -203,9 +192,9 @@
       extraFlags = [ "--server.http.listen-addr=127.0.0.1:${toString config.grafana.alloy.port}" ];
     };
 
-    # Alloy doesn't take Nix-attrset config - it uses its own ".alloy"
-    # config language. We write that file via environment.etc and point
-    # services.alloy at the directory containing it (the default).
+    # Configure alloy
+    # Note that smartctl stays a standalone exporter - Alloy has no
+    # built-in SMART collector.
     environment.etc."alloy/config.alloy" = lib.mkIf config.grafana.alloy.enable {
       text = ''
         ${lib.optionalString config.grafana.loki.enable ''
@@ -239,18 +228,55 @@
             }
           }
         ''}
+
+        ${lib.optionalString config.grafana.victoriametrics.enable ''
+          // Metrics: host + systemd unit health, natively via Alloy's
+          // embedded node_exporter (prometheus.exporter.unix), instead of
+          // running separate node_exporter/systemd_exporter binaries.
+          // The "systemd" collector is off by default upstream - enabled
+          // explicitly below since unit health was the main ask.
+          prometheus.exporter.unix "host" {
+            enable_collectors = ["systemd"]
+          }
+
+          discovery.relabel "host_metrics" {
+            targets = prometheus.exporter.unix.host.targets
+
+            rule {
+              target_label = "instance"
+              replacement  = "${config.networking.hostName}"
+            }
+
+            rule {
+              target_label = "job"
+              replacement  = "node"
+            }
+          }
+
+          prometheus.scrape "host" {
+            targets    = discovery.relabel.host_metrics.output
+            forward_to = [prometheus.remote_write.victoriametrics.receiver]
+          }
+
+          prometheus.remote_write "victoriametrics" {
+            endpoint {
+              url = "http://127.0.0.1:${toString config.grafana.victoriametrics.port}/api/v1/write"
+            }
+          }
+        ''}
       '';
     };
 
     # -------------------------------------------------------------------------
-    # Prometheus
+    # VictoriaMetrics
     # -------------------------------------------------------------------------
-    services.prometheus = lib.mkIf config.grafana.prometheus.enable {
+    services.victoriametrics = lib.mkIf config.grafana.victoriametrics.enable {
       enable = true;
-      port = config.grafana.prometheus.port;
+      listenAddress = "127.0.0.1:${toString config.grafana.victoriametrics.port}";
+      retentionPeriod = config.grafana.victoriametrics.retentionPeriod;
 
       # Register scrape targets from options
-      scrapeConfigs =
+      prometheusConfig.scrape_configs =
         let
           mkScrapeConfig = name: port: {
             job_name = name;
@@ -259,22 +285,24 @@
           };
         in
         (lib.mapAttrsToList (name: cfg: mkScrapeConfig name cfg.port) (
-          lib.filterAttrs (name: cfg: cfg.enable) config.grafana.prometheus.exporter
+          lib.filterAttrs (name: cfg: cfg.enable) config.grafana.victoriametrics.exporter
         ))
 
         ++ (lib.mapAttrsToList (name: cfg: mkScrapeConfig name cfg.port) (
-          lib.filterAttrs (name: cfg: cfg.enable) config.grafana.prometheus.extraScrapeTargets
+          lib.filterAttrs (name: cfg: cfg.enable) config.grafana.victoriametrics.extraScrapeTargets
         ));
+    };
 
-      # Register exporters from options
-      exporters = lib.mapAttrs (
+    # Register exporters from options
+    services.prometheus.exporters = lib.mkIf config.grafana.victoriametrics.enable (
+      lib.mapAttrs (
         name: cfg:
         lib.mkIf cfg.enable {
           enable = true;
           port = cfg.port;
         }
-      ) config.grafana.prometheus.exporter;
-    };
+      ) config.grafana.victoriametrics.exporter
+    );
 
     # Expose grafana web-ui via caddy
     caddy.services = lib.mkMerge [
@@ -286,8 +314,8 @@
         alloy.port = config.grafana.alloy.port;
       })
 
-      (lib.mkIf config.grafana.prometheus.enable {
-        prometheus.port = config.grafana.prometheus.port;
+      (lib.mkIf config.grafana.victoriametrics.enable {
+        victoriametrics.port = config.grafana.victoriametrics.port;
       })
     ];
 
@@ -311,16 +339,16 @@
             path = "/-/ready";
           };
         })
-        (lib.mkIf config.grafana.prometheus.enable {
-          prometheus = {
+        (lib.mkIf config.grafana.victoriametrics.enable {
+          victoriametrics = {
             type = "http";
-            port = config.grafana.prometheus.port;
-            path = "/-/ready";
+            port = config.grafana.victoriametrics.port;
+            path = "/health";
           };
         })
       ]
-      # Monitor each prometheus exporter with uptime-kuma
-      ++ lib.optionals config.grafana.prometheus.enable (
+      # Monitor each exporter with uptime-kuma
+      ++ lib.optionals config.grafana.victoriametrics.enable (
         lib.mapAttrsToList (
           name: cfg:
           lib.mkIf cfg.enable {
@@ -330,7 +358,7 @@
               path = "/metrics";
             };
           }
-        ) config.grafana.prometheus.exporter
+        ) config.grafana.victoriametrics.exporter
       )
     );
 
@@ -365,12 +393,12 @@
           ping = "http://127.0.0.1:${toString config.grafana.alloy.port}/-/ready";
         };
       })
-      (lib.mkIf config.grafana.prometheus.enable {
-        Prometheus = {
-          icon = "prometheus.png";
+      (lib.mkIf config.grafana.victoriametrics.enable {
+        "Victoria Metrics" = {
+          icon = "victoriametrics.png";
           description = "Metrics storage";
-          href = "https://prometheus.${config.server.domain}";
-          ping = "http://127.0.0.1:${toString config.grafana.prometheus.port}/-/ready";
+          href = "https://victoriametrics.${config.server.domain}";
+          ping = "http://127.0.0.1:${toString config.grafana.victoriametrics.port}/health";
         };
       })
     ];
