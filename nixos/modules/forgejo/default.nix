@@ -136,14 +136,21 @@
           )
         );
 
+    # Create a wrapper around the forgejo package to allow for ssh
+    security.wrappers.forgejo-keys = {
+      source = "${lib.getExe config.services.forgejo.package}";
+      owner = "root";
+      group = "root";
+      permissions = "u+rx,g+rx,o+rx";
+    };
+
     # Register forgejo with ssh module
     ssh.local.services.${config.forgejo.user} = {
       authorizedKeysCommand =
         let
-          exe = lib.getExe config.services.forgejo.package;
           user = config.forgejo.user;
         in
-        "${exe} keys -c /var/lib/forgejo/custom/conf/app.ini -e ${user} -u %u -t %t -k %k";
+        "/run/wrappers/bin/forgejo-keys keys -c /var/lib/forgejo/custom/conf/app.ini -e ${user} -u %u -t %t -k %k";
     };
 
     # Expose Forgejo via Caddy
