@@ -45,7 +45,20 @@
         default = 3260;
         description = "Port Prometheus listens on.";
       };
-
+      extraScrapeTargets = lib.mkOption {
+        type = lib.types.attrsOf (
+          lib.types.submodule {
+            options = {
+              enable = lib.mkEnableOption "Enable scrape target" // {
+                default = true;
+              };
+              port = lib.mkOption { type = lib.types.port; };
+            };
+          }
+        );
+        default = { };
+        description = "Extra static Prometheus scrape targets registered by service modules.";
+      };
       exporter = {
         node = {
           enable = lib.mkEnableOption "node exporter (system metrics)" // {
@@ -236,12 +249,22 @@
       enable = true;
       port = config.grafana.prometheus.port;
 
-      # Scrape for metrics
-      scrapeConfigs = lib.mapAttrsToList (name: cfg: {
-        job_name = name;
-        scrape_interval = "1m";
-        static_configs = [ { targets = [ "localhost:${toString cfg.port}" ]; } ];
-      }) (lib.filterAttrs (name: cfg: cfg.enable) config.grafana.prometheus.exporter);
+      # Register scrape targets from options
+      scrapeConfigs =
+        let
+          mkScrapeConfig = name: port: {
+            job_name = name;
+            scrape_interval = "1m";
+            static_configs = [ { targets = [ "localhost:${toString port}" ]; } ];
+          };
+        in
+        (lib.mapAttrsToList (name: cfg: mkScrapeConfig name cfg.port) (
+          lib.filterAttrs (name: cfg: cfg.enable) config.grafana.prometheus.exporter
+        ))
+
+        ++ (lib.mapAttrsToList (name: cfg: mkScrapeConfig name cfg.port) (
+          lib.filterAttrs (name: cfg: cfg.enable) config.grafana.prometheus.extraScrapeTargets
+        ));
 
       # Register exporters from options
       exporters = lib.mapAttrs (
@@ -261,6 +284,10 @@
 
       (lib.mkIf config.grafana.alloy.enable {
         alloy.port = config.grafana.alloy.port;
+      })
+
+      (lib.mkIf config.grafana.prometheus.enable {
+        prometheus.port = config.grafana.prometheus.port;
       })
     ];
 
@@ -342,6 +369,7 @@
         Prometheus = {
           icon = "prometheus.png";
           description = "Metrics storage";
+          href = "https://prometheus.${config.server.domain}";
           ping = "http://127.0.0.1:${toString config.grafana.prometheus.port}/-/ready";
         };
       })

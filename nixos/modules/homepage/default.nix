@@ -69,9 +69,9 @@
             "Forgejo"
             "Cleanuparr"
             "Alloy"
+            "Prometheus"
             "Wireguard"
             "Byparr"
-            "Prometheus"
             "Loki"
           ];
         }

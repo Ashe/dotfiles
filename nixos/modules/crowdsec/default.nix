@@ -99,6 +99,14 @@
       settings = {
         # Enable the local API for the crowdsec bouncer
         general.api.server.enable = true;
+
+        # Allow prometheus to access logs
+        general.prometheus = {
+          enabled = true;
+          listen_addr = "127.0.0.1";
+          listen_port = 6060;
+        };
+
         lapi.credentialsFile = "/var/lib/crowdsec/local_api_credentials.yaml";
         capi.credentialsFile = "/var/lib/crowdsec/online_api_credentials.yaml";
         console = {
@@ -165,6 +173,9 @@
       "d /var/lib/crowdsec 0750 crowdsec crowdsec - -"
       "f /var/lib/crowdsec/online_api_credentials.yaml 0600 crowdsec crowdsec - -"
     ];
+
+    # Allow prometheus to scrape crowdsec
+    grafana.prometheus.extraScrapeTargets.crowdsec.port = 6060;
 
     # Monitor crowdsec availability via uptime-kuma
     uptime-kuma.monitors.crowdsec = {
