@@ -47,7 +47,22 @@ in
               ) pluginDefs
             );
           };
+
+          # Validate that any hard dependency listed via dependsOn is enabled
+          assertions = lib.concatLists (
+            lib.mapAttrsToList (
+              name: def:
+              map (dep: {
+                assertion = !config.neovim.plugins.${name}.enable || config.neovim.plugins.${dep}.enable;
+                message = ''
+                  neovim.plugins.${name} depends on disabled plugin ${dep}.
+                  Either enable ${dep} or disable ${name}.
+                '';
+              }) (def.dependsOn or [ ])
+            ) pluginDefs
+          );
         }
+
       ]
       ++ lib.mapAttrsToList (
         name: def:

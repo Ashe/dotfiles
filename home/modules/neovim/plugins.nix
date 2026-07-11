@@ -23,11 +23,19 @@ with pkgs.vimPlugins;
   # Terminal
   toggleterm.package = toggleterm-nvim;
 
+  # Visual renaming (used by lspconfig)
+  inc-rename = {
+    package = inc-rename-nvim;
+    extraConfig = ''
+      require('inc_rename').setup({})
+    '';
+  };
+
   # Language servers
   lspconfig = {
     package = nvim-lspconfig;
-    extraPlugins = [
-      inc-rename-nvim # Visual renaming
+    dependsOn = [
+      "inc-rename" # Visual renaming
     ];
     extraPackages = with pkgs; [
       nixd # Nix language server
@@ -103,7 +111,9 @@ with pkgs.vimPlugins;
     package = telescope-nvim;
     extraPlugins = [
       nvim-web-devicons # Icons
-      trouble-nvim # Multipurpose display window
+    ];
+    dependsOn = [
+      "trouble" # Used as its display window
     ];
     extraPackages = with pkgs; [
       ripgrep # Live grepping
@@ -140,8 +150,10 @@ with pkgs.vimPlugins;
     package = noice-nvim;
     extraPlugins = [
       nui-nvim # Dependency
-      nvim-notify # Notifications
-      nvim-cmp # Documentation
+    ];
+    dependsOn = [
+      "notify" # Used for notification backend
+      "cmp" # Used for cmdline/documentation rendering
     ];
   };
 
@@ -156,8 +168,8 @@ with pkgs.vimPlugins;
   # Notifications
   notify = {
     package = nvim-notify;
-    extraPlugins = [
-      nvim-treesitter # Error styling
+    dependsOn = [
+      "treesitter" # Used for error message styling
     ];
   };
 
