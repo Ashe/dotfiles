@@ -48,6 +48,18 @@ in
             );
           };
 
+          # Allowlist licenses for enabled plugins with specific requirements
+          nixpkgs.config.allowlistedLicenses = lib.unique (
+            lib.concatMap (
+              name:
+              let
+                def = pluginDefs.${name};
+                license = def.package.meta.license or null;
+              in
+              lib.optional (config.neovim.plugins.${name}.enable && license != null) license
+            ) (lib.attrNames pluginDefs)
+          );
+
           # Validate that any hard dependency listed via dependsOn is enabled
           assertions = lib.concatLists (
             lib.mapAttrsToList (
