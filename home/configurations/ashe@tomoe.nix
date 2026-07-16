@@ -8,6 +8,7 @@
   btop.enable = true;
   fastfetch.enable = true;
   flameshot.enable = true;
+  mangohud.enable = true;
   neovim.enable = true;
   obs-studio.enable = true;
   obsidian.enable = true;

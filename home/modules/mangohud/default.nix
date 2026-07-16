@@ -5,39 +5,29 @@
 
   config = lib.mkIf config.mangohud.enable {
 
-    # Enable mangohud
     programs.mangohud = {
+      # Enable mangohud everywhere
       enable = true;
       enableSessionWide = true;
 
       # Configure general mangohud settings
       settings = {
 
-        # Logging output folder
-        output_folder = "~/.mangologs";
+        # Order of preset-cycling (via toggle_preset)
+        # 0 = Nothing, 1 = FPS, 2 = Horizontal, 3 = Extended, 4 = Detailed
+        preset = "0,1,2,3,4";
 
         # Keybindings
-        toggle_hud = "Super_L+Shift_L+M";
-        toggle_logging = "Super_L+Control_L+M";
-        reload_cfg = "Super_L+Alt_L+M";
-
-        # Stats to show
-        cpu_stats = 1;
-        cpu_temp = 1;
-        gpu_stats = 1;
-        gpu_temp = 1;
-        ram = 1;
-        frametime = 0;
-        show_fps_limit = 1;
+        toggle_preset = "Super_L+Alt_L+M";
+        toggle_hud_position = "Super_L+Alt_L+P";
       };
 
       # Configure mangohud settings per application
       settingsPerApplication = {
 
-        # Disable mangohud for mpv
-        mpv = {
-          no_display = true;
-        };
+        # Disable mangohud for media players
+        mpv.no_display = true;
+        vlc.no_display = true;
       };
     };
   };
