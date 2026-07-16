@@ -6,6 +6,7 @@
   arrstack = import ./arrstack;
   caddy = import ./caddy;
   cockpit = import ./cockpit;
+  cosmic = import ./cosmic;
   crowdsec = import ./crowdsec;
   ddclient = import ./ddclient;
   dropbox = import ./dropbox;

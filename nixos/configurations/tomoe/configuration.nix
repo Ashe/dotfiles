@@ -9,6 +9,7 @@
   # Custom modules #
   ##################
 
+  cosmic.enable = true;
   dropbox.enable = true;
   steam.enable = true;
 
@@ -50,18 +51,6 @@
       ];
     };
   };
-
-  # Enable the COSMIC desktop environment
-  services.desktopManager.cosmic.enable = true;
-
-  # Enable the COSMIC login manager
-  services.displayManager.cosmic-greeter.enable = true;
-
-  # Optimise COSMIC
-  services.system76-scheduler.enable = true;
-
-  # Fix clipboard on COSMIC
-  environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
