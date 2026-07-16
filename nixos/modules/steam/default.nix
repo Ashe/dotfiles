@@ -24,30 +24,41 @@
 
       # Open firewall for Source Dedicated Server
       dedicatedServer.openFirewall = true;
+      
+      # Fix visual cursor when using Steam Controller
+      extest.enable = true;
+      
+      # Extra proton versions
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
+      
+      # Provide missing dependencies for steam
+      package = pkgs.steam.override {
+        extraPkgs = pkgs': with pkgs'; [
+        
+          # Xorg libraries for gamescope when used within Steam
+          libXcursor
+          libXi
+          libXinerama
+          libXScrnSaver
+          libpng
+          libpulseaudio
+          libvorbis
+          stdenv.cc.cc.lib
+          libkrb5
+          keyutils
+        ];
+      };
     };
 
     # Enable Gamemode optimisation
     programs.gamemode.enable = true;
 
-    # Override Steam package to provide extra libraries for games
-    nixpkgs.config.packageOverrides = pkgs: {
-      steam = pkgs.steam.override {
-        extraPkgs =
-          pkgs: with pkgs; [
-            libgdiplus
-            libpng
-            libpulseaudio
-            libvorbis
-            xorg.libXcursor
-            xorg.libXi
-            xorg.libXinerama
-            xorg.libXScrnSaver
-          ];
-      };
-    };
-
-    # Install tool for optimising games
+    # Install additional packages
     environment.systemPackages = [
+    
+      # Install tool for optimising games
       pkgs.steam-run
     ];
   };
