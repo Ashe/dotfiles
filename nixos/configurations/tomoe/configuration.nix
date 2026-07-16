@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   ...
 }:
@@ -10,6 +9,7 @@
   # Custom modules #
   ##################
 
+  dropbox.enable = true;
   steam.enable = true;
 
   ##################
