@@ -16,7 +16,6 @@ inputs.home-manager.lib.homeManagerConfiguration {
   modules = self.homeModules ++ [
     config-file
     inputs.nur.modules.homeManager.default
-    inputs.zen-browser.homeModules.default
     {
       home = {
         username = user;

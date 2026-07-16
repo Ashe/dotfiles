@@ -2,6 +2,7 @@
   inputs,
   config,
   lib,
+  pkgs,
   ...
 }:
 
@@ -10,10 +11,8 @@
 
   config = lib.mkIf config.zen-browser.enable {
 
-    # Configure zen-browser
-    programs.zen-browser = {
-      enable = true;
-      package = (config.lib.nixGL.wrap inputs.zen-browser.packages.x86_64-linux.default);
-    };
+    home.packages = [
+      (config.lib.nixGL.wrap inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default)
+    ];
   };
 }
