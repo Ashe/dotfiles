@@ -7,6 +7,7 @@
 
   btop.enable = true;
   fastfetch.enable = true;
+  flameshot.enable = true;
   neovim.enable = true;
   obs-studio.enable = true;
   obsidian.enable = true;
@@ -92,15 +93,8 @@
     fd.enable = true;
   };
 
-  # Configure services
-  services = {
-
-    # Enable blanket for soothing noises
-    blanket.enable = true;
-
-    # Enable flameshot screenshot program
-    flameshot.enable = true;
-  };
+  # Enable blanket for soothing noises
+  services.blanket.enable = true;
 
   # Enable discovery of fonts
   fonts.fontconfig.enable = true;

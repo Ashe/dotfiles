@@ -3,6 +3,7 @@
   (import ./daw-plugins)
   (import ./fastfetch)
   (import ./firefox)
+  (import ./flameshot)
   (import ./ghostty)
   (import ./mangohud)
   (import ./mpv)
