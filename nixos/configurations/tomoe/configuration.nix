@@ -1,0 +1,106 @@
+{
+  inputs,
+  pkgs,
+  ...
+}:
+
+{
+
+  ##################
+  # Custom modules #
+  ##################
+
+  steam.enable = true;
+
+  ##################
+  # Configurations #
+  ##################
+
+  # Bootloader
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
+
+  # Configure networking
+  networking = {
+    hostName = "tomoe";
+    networkmanager = {
+      enable = true;
+
+      # Allow connection to homelab
+      insertNameservers = [ "192.168.1.198" ];
+    };
+  };
+
+  # Enable GPU
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users = {
+    defaultUserShell = pkgs.zsh;
+    users.ashe = {
+      isNormalUser = true;
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
+    };
+  };
+
+  # Enable the COSMIC desktop environment
+  services.desktopManager.cosmic.enable = true;
+
+  # Enable the COSMIC login manager
+  services.displayManager.cosmic-greeter.enable = true;
+
+  # Optimise COSMIC
+  services.system76-scheduler.enable = true;
+
+  # Fix clipboard on COSMIC
+  environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  # Install system-wide packages
+  environment.systemPackages = with pkgs; [
+    jujutsu
+  ];
+
+  # Ensure zsh is available to users
+  programs.zsh.enable = true;
+
+  # Enable flatpak package manager
+  services.flatpak.enable = true;
+
+  # Set time zone
+  time.timeZone = "Europe/London";
+
+  # Configure internationalisation properties
+  i18n = {
+    defaultLocale = "en_GB.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_GB.UTF-8";
+      LC_IDENTIFICATION = "en_GB.UTF-8";
+      LC_MEASUREMENT = "en_GB.UTF-8";
+      LC_MONETARY = "en_GB.UTF-8";
+      LC_NAME = "en_GB.UTF-8";
+      LC_NUMERIC = "en_GB.UTF-8";
+      LC_PAPER = "en_GB.UTF-8";
+      LC_TELEPHONE = "en_GB.UTF-8";
+      LC_TIME = "en_GB.UTF-8";
+    };
+  };
+
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
+
+  system.stateVersion = "26.05";
+}
