@@ -50,7 +50,7 @@
     # Environment variables
     sessionVariables = {
       EDITOR = "nvim";
-      VISUAL = "zed";
+      VISUAL = "nvim";
     };
   };
 
