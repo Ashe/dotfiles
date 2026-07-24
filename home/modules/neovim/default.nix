@@ -54,9 +54,11 @@ in
               name:
               let
                 def = pluginDefs.${name};
-                license = def.package.meta.license or null;
+                enabled = config.neovim.plugins.${name}.enable;
+                packages = [ def.package ] ++ (def.extraPlugins or [ ]);
+                licenses = lib.concatMap (pkg: lib.toList (pkg.meta.license or [ ])) packages;
               in
-              lib.optional (config.neovim.plugins.${name}.enable && license != null) license
+              lib.optionals enabled licenses
             ) (lib.attrNames pluginDefs)
           );
 
