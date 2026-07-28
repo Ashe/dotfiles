@@ -35,6 +35,7 @@
       discord
       gnome-sound-recorder
       magic-wormhole-rs
+      mission-center
       nicotine-plus
       scanmem
       sshfs
