@@ -23,6 +23,10 @@
           "Session\\TempPath" = "/data/torrents/incomplete";
           "Session\\TempPathEnabled" = true;
           "Session\\DisableAutoTMMByDefault" = false;
+          "Session\\QueueingSystemEnabled" = true;
+          "Session\\MaxActiveDownloads" = 5;
+          "Session\\MaxActiveUploads" = -1;
+          "Session\\MaxActiveTorrents" = -1;
         };
         Preferences = {
           "WebUI\\Address" = "0.0.0.0";
