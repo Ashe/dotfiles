@@ -14,6 +14,7 @@ foldl (
   acc
   // {
     "${dir}/adguard-key.age".publicKeys = [ (readKey dir) ];
+    "${dir}/configarr-secrets.age".publicKeys = [ (readKey dir) ];
     "${dir}/crowdsec-bouncer-key.age".publicKeys = [ (readKey dir) ];
     "${dir}/crowdsec-enrollment-key.age".publicKeys = [ (readKey dir) ];
     "${dir}/ddclient-porkbun.age".publicKeys = [ (readKey dir) ];
@@ -22,7 +23,7 @@ foldl (
     "${dir}/grafana-key.age".publicKeys = [ (readKey dir) ];
     "${dir}/homepage-secrets.age".publicKeys = [ (readKey dir) ];
     "${dir}/qbittorrent-credentials.age".publicKeys = [ (readKey dir) ];
-    "${dir}/configarr-secrets.age".publicKeys = [ (readKey dir) ];
+    "${dir}/tangled-secrets.age".publicKeys = [ (readKey dir) ];
     "${dir}/uptime-kuma-credentials.age".publicKeys = [ (readKey dir) ];
     "${dir}/wireguard-conf.age".publicKeys = [ (readKey dir) ];
   }

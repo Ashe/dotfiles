@@ -16,6 +16,7 @@ lib.nixosSystem {
   modules = (builtins.attrValues self.nixosModules) ++ [
     config-file
     hardware-file
+    inputs.tangled.nixosModules.knot-rs
     {
       networking.hostName = name;
       system.configurationRevision = self.rev or "dirty";

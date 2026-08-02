@@ -21,6 +21,7 @@
   ssh = import ./ssh;
   steam = import ./steam;
   tailscale = import ./tailscale;
+  tangled = import ./tangled;
   uptime-kuma = import ./uptime-kuma;
   wireguard = import ./wireguard;
 }
