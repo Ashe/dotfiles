@@ -18,8 +18,8 @@
         preset = "0,1,2,3,4";
 
         # Keybindings
-        toggle_preset = "Super_L+Alt_L+M";
-        toggle_hud_position = "Super_L+Alt_L+P";
+        toggle_preset = "Control_L+Alt_L+M";
+        toggle_hud_position = "Control_L+Alt_L+P";
       };
 
       # Configure mangohud settings per application
