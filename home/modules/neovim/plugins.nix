@@ -78,8 +78,11 @@ with pkgs.vimPlugins;
     ];
   };
 
-  # Diagnostics
+  # Diagnostic viewer
   trouble.package = trouble-nvim;
+
+  # Inline diagnostics
+  tiny-inline-diagnostic.package = tiny-inline-diagnostic-nvim;
 
   # lightbulb
   lightbulb.package = nvim-lightbulb;
