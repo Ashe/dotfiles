@@ -81,6 +81,9 @@ with pkgs.vimPlugins;
   # Diagnostics
   trouble.package = trouble-nvim;
 
+  # lightbulb
+  lightbulb.package = nvim-lightbulb;
+
   # Motion
   leap = {
     package = leap-nvim;

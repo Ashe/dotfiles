@@ -33,9 +33,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end, { expr = true, buffer = ev.buf, desc = 'Rename symbol' })
         vim.keymap.set('n', '<leader>cd', require('telescope.builtin').lsp_type_definitions,
             { buffer = ev.buf, desc = 'Type definitions' })
-        vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = ev.buf, desc = 'Code action' })
         vim.keymap.set('n', '<leader>cf', function() vim.lsp.buf.format { async = true } end,
             { buffer = ev.buf, desc = 'Format code' })
+        vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = ev.buf, desc = 'Code action' })
+        vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, { buffer = ev.buf, desc = 'Code action' })
 
         -- 'Code-workspace' mappings
         require('which-key').add({ { "<leader>cw", group = "Workspaces.." } })
