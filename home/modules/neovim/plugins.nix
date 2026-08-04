@@ -87,12 +87,29 @@ with pkgs.vimPlugins;
   # lightbulb
   lightbulb.package = nvim-lightbulb;
 
-  # Motion
+  # Leap motions
   leap = {
     package = leap-nvim;
     extraPlugins = [
       vim-repeat
     ];
+  };
+
+  # Jumping
+  jumppack = {
+    package = pkgs.vimUtils.buildVimPlugin {
+      pname = "Jumppack.nvim";
+      version = "unstable";
+      src = pkgs.fetchFromGitHub {
+        owner = "suliatis";
+        repo = "Jumppack.nvim";
+        rev = "c1bc410ef011afbd405e945a08ce200d59a0e537";
+        hash = "sha256-7QR/9dRWnnOhrR6150LuIuc4HTb2Yi8qziFu/aCHJ0E=";
+      };
+    };
+    extraConfig = ''
+      require('Jumppack').setup()
+    '';
   };
 
   # Commenting
