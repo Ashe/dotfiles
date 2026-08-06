@@ -4,10 +4,6 @@
       name = "BBC News";
       url = "https://feeds.bbci.co.uk/news/uk/rss.xml";
     }
-    {
-      name = "Sky News";
-      url = "http://feeds.skynews.com/feeds/rss/home.xml";
-    }
   ];
   "Tech" = [
     {
@@ -39,10 +35,6 @@
     {
       name = "Science News";
       url = "https://sciencenews.org/feed";
-    }
-    {
-      name = "Nature";
-      url = "https://www.nature.com/nature.rss";
     }
   ];
   "Gaming" = [
@@ -92,10 +84,6 @@
     }
   ];
   "Lifestyle" = [
-    {
-      name = "Self";
-      url = "https://www.self.com/feed/rss";
-    }
     {
       name = "Allure";
       url = "https://allure.com/feed/rss";
