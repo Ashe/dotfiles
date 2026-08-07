@@ -117,12 +117,25 @@ with pkgs.vimPlugins;
   # Whitespace trimming
   trim.package = trim-nvim;
 
-  # File browsing
+  # File tree
   tree = {
     package = nvim-tree-lua;
     extraPlugins = [
       nvim-web-devicons # Icons
     ];
+  };
+
+  # File management
+  oil = {
+    package = oil-nvim;
+    extraPlugins = [
+      oil-git-nvim
+      oil-git-status-nvim
+      oil-lsp-diagnostics-nvim
+    ];
+    extraConfig = ''
+      require('oil').setup()
+    '';
   };
 
   # File search and navigation modal
@@ -196,7 +209,7 @@ with pkgs.vimPlugins;
   tokyo-night = {
     package = tokyonight-nvim;
     extraConfig = ''
-      vim.cmd('colorscheme tokyonight-night')
+      vim.cmd.colorscheme('tokyonight-night')
     '';
   };
 }
