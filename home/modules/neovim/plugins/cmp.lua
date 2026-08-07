@@ -5,7 +5,7 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'treesitter' },
-        { name = 'fuzzy_path' },
+        { name = 'path' },
         { name = 'buffer' },
     }),
     window = {
@@ -22,6 +22,7 @@ cmp.setup({
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
+        ['<C-l>'] = cmp.mapping.confirm({ select = true }),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
     }),
 })
@@ -39,6 +40,6 @@ cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
         { name = 'cmdline' },
-        { name = 'fuzzy_path' },
+        { name = 'path' },
     })
 })

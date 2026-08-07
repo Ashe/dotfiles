@@ -68,13 +68,9 @@ with pkgs.vimPlugins;
       cmp-nvim-lsp # LSP integration
       cmp-treesitter # Treesitter integration
       cmp-cmdline # Commands
-      cmp-fuzzy-path # Filepaths
+      cmp-path # Filepaths
       cmp-buffer # Buffers
       lspkind-nvim # Icons
-      fuzzy-nvim # Dependency of cmp-fuzzy-path
-    ];
-    extraPackages = with pkgs; [
-      fzf # Fuzzy file finding for fuzzy-nvim
     ];
   };
 
