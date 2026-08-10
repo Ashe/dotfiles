@@ -34,9 +34,9 @@
       chatterino2
       discord
       gnome-sound-recorder
+      halloy
       magic-wormhole-rs
       mission-center
-      nicotine-plus
       scanmem
       sshfs
       streamlink
