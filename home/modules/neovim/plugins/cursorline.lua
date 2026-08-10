@@ -8,5 +8,18 @@ require('nvim-cursorline').setup({
         enable = true,
         min_length = 3,
         hl = { underline = true },
-    }
+    },
+    disable_filetypes = {
+        'oil',
+        'harpoon',
+        'NvimTree',
+        'neo-tree',
+        'TelescopePrompt',
+    },
+    disable_buftypes = {
+        'nofile',
+        'terminal',
+        'prompt',
+        'acwrite',
+    },
 })
