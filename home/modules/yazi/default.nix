@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 
@@ -12,6 +13,12 @@
     # Configure yazi terminal file manager
     programs.yazi = {
       enable = true;
+      keymap = fromTOML (builtins.readFile ./keymap.toml);
+      extraPackages = with pkgs; [
+        fzf
+        zoxide
+        ripgrep
+      ];
     };
   };
 }

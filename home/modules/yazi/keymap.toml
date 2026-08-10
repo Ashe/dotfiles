@@ -1,0 +1,138 @@
+# ============================================================================
+#   - Cut/trash/delete grouped under `d` / `D`, vim-`dd`-style, instead of `x`
+#   - Yank grouped under `y`, absorbing the old `c` (copy-path) bindings
+#   - `f` repurposed as a "find/search files" group (fd, ripgrep, fzf, zoxide)
+#   - `?` repurposed as a "help" group
+#   - `s` repurposed as the sort group (was `,`)
+#   - `z` repurposed as a "view/visibility" group (hidden files, filter)
+#   - `t` tab group simplified, plus <A-l>/<A-h> for next/prev tab
+# ============================================================================
+
+[mgr]
+
+prepend_keymap = [
+	# ------------------------------------------------------------------
+	# Disable defaults we're relocating or replacing
+	# ------------------------------------------------------------------
+	{ on = "y",           run = "noop" }, # was: yank (copy)      -> now "y y"
+	{ on = "x",           run = "noop" }, # was: yank --cut       -> now "d d"
+	{ on = "Y",           run = "noop" }, # was: unyank            -> now "y <Escape>"
+	{ on = "X",           run = "noop" }, # was: unyank (alt)      -> now "d <Backspace>"
+	{ on = "d",           run = "noop" }, # was: trash             -> now "d D"
+	{ on = "D",           run = "noop" }, # was: delete permanently -> now "D D"
+	{ on = "-",           run = "noop" }, # was: symlink absolute  -> now "y -"
+	{ on = "_",           run = "noop" }, # was: symlink relative  -> now "y _"
+	{ on = "<C-->",       run = "noop" }, # was: hardlink          -> now "y" + <C-->
+	{ on = ["c", "c"],    run = "noop" }, # was: copy path         -> now "y c"
+	{ on = ["c", "d"],    run = "noop" }, # was: copy dirname      -> now "y d"
+	{ on = ["c", "f"],    run = "noop" }, # was: copy filename     -> now "y f"
+	{ on = ["c", "n"],    run = "noop" }, # was: copy name-no-ext  -> now "y n"
+	{ on = "f",           run = "noop" }, # was: filter            -> now "z f"
+	{ on = "s",           run = "noop" }, # was: search via fd     -> now "f f"
+	{ on = "S",           run = "noop" }, # was: search via rg     -> now "f g"
+	{ on = "z",           run = "noop" }, # was: fzf jump          -> now "f z"
+	{ on = "Z",           run = "noop" }, # was: zoxide jump       -> now "f Z"
+	{ on = "?",           run = "noop" }, # was: find previous     -> now "?" is the help group
+	{ on = ".",           run = "noop" }, # was: toggle hidden     -> now "z ."
+	{ on = [",", "m"],    run = "noop" },
+	{ on = [",", "M"],    run = "noop" },
+	{ on = [",", "b"],    run = "noop" },
+	{ on = [",", "B"],    run = "noop" },
+	{ on = [",", "e"],    run = "noop" },
+	{ on = [",", "E"],    run = "noop" },
+	{ on = [",", "a"],    run = "noop" },
+	{ on = [",", "A"],    run = "noop" },
+	{ on = [",", "n"],    run = "noop" },
+	{ on = [",", "N"],    run = "noop" },
+	{ on = [",", "s"],    run = "noop" },
+	{ on = [",", "S"],    run = "noop" },
+	{ on = [",", "r"],    run = "noop" },
+
+	# ------------------------------------------------------------------
+	# Cutting / trashing / deleting  ->  grouped under d / D
+	# ------------------------------------------------------------------
+	{ on = ["d", "d"],            run = "yank --cut",           desc = "Cut selected" },
+	{ on = ["d", "<Backspace>"],  run = "unyank",               desc = "Cancel cut" },
+	{ on = ["d", "D"],            run = "remove",               desc = "Trash selected" },
+	{ on = ["D", "D"],            run = "remove --permanently", desc = "Delete permanently" },
+
+	# ------------------------------------------------------------------
+	# Yanking / copying  ->  grouped under y, absorbs old `c` copy-path group
+	# ------------------------------------------------------------------
+	{ on = ["y", "y"],            run = "yank",           desc = "Copy selected" },
+	{ on = ["y", "<Backspace>"],  run = "unyank",         desc = "Cancel copy" },
+	{ on = "p",                   run = "paste",          desc = "Paste yanked" },
+	{ on = "P",                   run = "paste --force",  desc = "Overwrite with yanked" },
+
+	{ on = ["y", "-"],      run = "link",             desc = "Symlink yanked (absolute)" },
+	{ on = ["y", "_"],      run = "link --relative",  desc = "Symlink yanked (relative)" },
+	{ on = ["y", "<C-->"],  run = "hardlink",         desc = "Hardlink yanked" },
+
+	{ on = ["y", "c"],  run = "copy path",              desc = "Copy filepath" },
+	{ on = ["y", "d"],  run = "copy dirname",           desc = "Copy directory path" },
+	{ on = ["y", "f"],  run = "copy filename",          desc = "Copy filename" },
+	{ on = ["y", "n"],  run = "copy name_without_ext",  desc = "Copy filename (no ext)" },
+
+	# ------------------------------------------------------------------
+	# Find / search  ->  grouped under f  (/, n, N stay as-is for find-next/prev)
+	# ------------------------------------------------------------------
+	{ on = ["f", "f"],  run = "search --via=fd",  desc = "Search by name (fd)" },
+	{ on = ["f", "g"],  run = "search --via=rg",  desc = "Search by ripgrep" },
+	{ on = ["f", "z"],  run = "plugin fzf",       desc = "Jump via fzf" },
+	{ on = ["f", "Z"],  run = "plugin zoxide",    desc = "Jump via zoxide" },
+	{ on = "<C-s>",     run = "escape --search",  desc = "Cancel the ongoing search" },
+
+	# ------------------------------------------------------------------
+	# Help  ->  grouped under ?
+	# ------------------------------------------------------------------
+	{ on = ["?", "h"],  run = "help",   desc = "Open help screen" },
+	{ on = "<F1>",      run = "help",   desc = "Open help screen" },
+
+	# ------------------------------------------------------------------
+	# Sorting  ->  grouped under s (was `,`)
+	# ------------------------------------------------------------------
+	{ on = ["s", "m"], run = [ "sort mtime --reverse=no",  "linemode mtime" ], desc = "Sort by modified time" },
+	{ on = ["s", "M"], run = [ "sort mtime --reverse=yes", "linemode mtime" ], desc = "Sort by modified time (rev)" },
+	{ on = ["s", "b"], run = [ "sort btime --reverse=no",  "linemode btime" ], desc = "Sort by birth time" },
+	{ on = ["s", "B"], run = [ "sort btime --reverse=yes", "linemode btime" ], desc = "Sort by birth time (rev)" },
+	{ on = ["s", "e"], run = "sort extension --reverse=no",  desc = "Sort by extension" },
+	{ on = ["s", "E"], run = "sort extension --reverse=yes", desc = "Sort by extension (rev)" },
+	{ on = ["s", "s"], run = [ "sort size --reverse=no",  "linemode size" ], desc = "Sort by size" },
+	{ on = ["s", "S"], run = [ "sort size --reverse=yes", "linemode size" ], desc = "Sort by size (rev)" },
+	{ on = ["s", "a"], run = "sort alphabetical --reverse=no",  desc = "Sort alphabetically" },
+	{ on = ["s", "A"], run = "sort alphabetical --reverse=yes", desc = "Sort alphabetically (rev)" },
+	{ on = ["s", "n"], run = "sort natural --reverse=no",  desc = "Sort naturally" },
+	{ on = ["s", "N"], run = "sort natural --reverse=yes", desc = "Sort naturally (rev)" },
+	{ on = ["s", "r"], run = "sort random --reverse=no", desc = "Sort randomly" },
+
+	# ------------------------------------------------------------------
+	# View / visibility  ->  grouped under z
+	# ------------------------------------------------------------------
+	{ on = ["z", "."], run = "hidden toggle",   desc = "Toggle visibility of hidden files" },
+	{ on = ["z", "f"], run = "filter --smart",  desc = "Filter files" },
+
+	# ------------------------------------------------------------------
+	# Tabs  ->  grouped under t, plus Alt+l / Alt+h
+	# ------------------------------------------------------------------
+	{ on = ["t", "t"],      run = "tab_create --current",     desc = "Create a new tab in CWD" },
+	{ on = ["t", "d"],      run = "close",                    desc = "Close current tab" },
+	{ on = ["t", "n"],      run = "tab_switch 1 --relative",  desc = "Next tab" },
+	{ on = ["t", "p"],      run = "tab_switch -1 --relative", desc = "Previous tab" },
+	{ on = ["t", "r"],      run = "tab_rename --interactive", desc = "Rename current tab" },
+	{ on = "<A-l>",         run = "tab_switch 1 --relative",  desc = "Next tab" },
+	{ on = "<A-h>",         run = "tab_switch -1 --relative", desc = "Previous tab" },
+	{ on = "<A-Backspace>", run = "close",                    desc = "Close current tab" },
+]
+
+[tasks]
+# `x` (cancel task) is unrelated to the file-cut `x`, so it's left as default.
+
+[input]
+# input-layer `d`/`D`/`x`/`y`/`p` are single-character text editing (cut/copy/paste
+# a character), a completely separate context from mgr-layer file operations.
+# Left untouched intentionally.
+
+[help]
+prepend_keymap = [
+	{ on = "/", run = "filter", desc = "Filter help items" },
+]
