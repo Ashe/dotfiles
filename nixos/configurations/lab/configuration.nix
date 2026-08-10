@@ -33,7 +33,6 @@
   jellyfin.enable = "public";
   qbittorrent.enable = true;
   tailscale.enable = true;
-  tangled.enable = "local";
   uptime-kuma.enable = true;
   wireguard.enable = true;
 
