@@ -74,7 +74,12 @@ with pkgs.vimPlugins;
   };
 
   # Diagnostic viewer
-  trouble.package = trouble-nvim;
+  trouble = {
+    package = trouble-nvim;
+    extraConfig = ''
+      require("trouble").setup({})
+    '';
+  };
 
   # Inline diagnostics
   tiny-inline-diagnostic.package = tiny-inline-diagnostic-nvim;
