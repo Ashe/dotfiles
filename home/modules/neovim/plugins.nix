@@ -113,7 +113,7 @@ with pkgs.vimPlugins;
   };
 
   # Commenting
-  comment.package = nvim-comment;
+  comment.package = comment-nvim;
 
   # Surrounding
   surround.package = nvim-surround;
