@@ -1,5 +1,3 @@
-require("which-key").add({ { "gc", group = "Comment.." } })
-
 require("nvim_comment").setup({
 
 	-- Linters prefer comment and line to have a space in between markers
@@ -26,3 +24,5 @@ require("nvim_comment").setup({
 	-- Hook function to call before commenting takes place
 	hook = nil,
 })
+
+which_key_add({ { "gc", group = "Comment..", mode = { "n", "x" } } })
