@@ -149,6 +149,9 @@ with pkgs.vimPlugins;
       nvim-web-devicons # Icons
       telescope-ui-select-nvim # Select ui
     ];
+    dependsOn = [
+      "plenary" # Used internally
+    ];
     extraPackages = with pkgs; [
       ripgrep # Live grepping
       fd # File finding
