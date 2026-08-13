@@ -1,55 +1,39 @@
--- Disable all default keymaps
-vim.g.nvim_surround_no_mappings = true
-
 require("nvim-surround").setup()
 
--- Insert mode
-vim.keymap.set("i", "<C-a>s", "<Plug>(nvim-surround-insert)", { desc = "Add a surrounding pair (insert mode)" })
-vim.keymap.set(
-	"i",
-	"<C-a>S",
-	"<Plug>(nvim-surround-insert-line)",
-	{ desc = "Add a surrounding pair around line (insert mode)" }
-)
+-- Disable all default surround keymaps
+vim.g.nvim_surround_no_mappings = true
 
--- Normal mode
-vim.keymap.set("n", "<C-a>s", "<Plug>(nvim-surround-normal)", { desc = "Add a surrounding pair around a motion" })
-vim.keymap.set(
-	"n",
-	"<C-a>ss",
-	"<Plug>(nvim-surround-normal-cur)",
-	{ desc = "Add a surrounding pair around current line" }
-)
-vim.keymap.set(
-	"n",
-	"<C-a>S",
-	"<Plug>(nvim-surround-normal-line)",
-	{ desc = "Add a surrounding pair around a motion (line)" }
-)
-vim.keymap.set(
-	"n",
-	"<C-a>SS",
-	"<Plug>(nvim-surround-normal-cur-line)",
-	{ desc = "Add a surrounding pair around current line (line)" }
-)
-vim.keymap.set("n", "<C-a>d", "<Plug>(nvim-surround-delete)", { desc = "Delete a surrounding pair" })
-vim.keymap.set("n", "<C-a>c", "<Plug>(nvim-surround-change)", { desc = "Change a surrounding pair" })
-vim.keymap.set("n", "<C-a>C", "<Plug>(nvim-surround-change-line)", { desc = "Change a surrounding pair (line)" })
+-- General bindings
+local surround_maps = {
+	-- Insert mode
+	{ "i", "s", "<Plug>(nvim-surround-insert)", "Surround motion" },
+	{ "i", "S", "<Plug>(nvim-surround-insert-line)", "Surround motion on newlines" },
 
--- Visual mode
-vim.keymap.set(
-	"x",
-	"<C-a>s",
-	"<Plug>(nvim-surround-visual)",
-	{ desc = "Add a surrounding pair around a visual selection" }
-)
-vim.keymap.set(
-	"x",
-	"<C-a>S",
-	"<Plug>(nvim-surround-visual-line)",
-	{ desc = "Add a surrounding pair around a visual selection (line)" }
-)
+	-- Normal mode
+	{ "n", "s", "<Plug>(nvim-surround-normal)", "Surround motion" },
+	{ "n", "S", "<Plug>(nvim-surround-normal-line)", "Surround motion on newlines" },
+	{ "n", "d", "<Plug>(nvim-surround-delete)", "Delete chosen surround" },
+	{ "n", "c", "<Plug>(nvim-surround-change)", "Change chosen surround" },
+	{ "n", "C", "<Plug>(nvim-surround-change-line)", "Change and newline chosen surround" },
 
-require("which-key").add({ { "<C-a>", group = "Surround.." } })
-require("which-key").add({ { "<C-a>s", group = "Surround inline.." } })
-require("which-key").add({ { "<C-a>S", group = "Surround around line.." } })
+	-- Visual mode
+	{ "x", "s", "<Plug>(nvim-surround-visual)", "Surround selection" },
+	{ "x", "S", "<Plug>(nvim-surround-visual-line)", "Surround selection on newlines" },
+}
+
+-- Expose all above bindings under both <C-a> and <leader>s
+local prefixes = { "<C-a>", "<leader>s" }
+
+-- Implement bindings
+for _, map in ipairs(surround_maps) do
+	local mode, suffix, rhs, desc = map[1], map[2], map[3], map[4]
+	for _, prefix in ipairs(prefixes) do
+		vim.keymap.set(mode, prefix .. suffix, rhs, { desc = desc })
+	end
+end
+
+-- Keybinding groups
+which_key_add({
+	{ "<C-a>", group = "Surround.." },
+	{ "<leader>s", group = "Surround.." },
+})
