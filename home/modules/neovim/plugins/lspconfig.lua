@@ -1,3 +1,10 @@
+-- Disable default bindings
+vim.g.lsp_no_default_keymaps = true
+for _, lhs in ipairs({ "grn", "gra", "grr", "gri", "gro", "grt", "grx" }) do
+	pcall(vim.keymap.del, "n", lhs)
+end
+pcall(vim.keymap.del, { "n", "x" }, "gO")
+
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -7,7 +14,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
 		local inc_rename = try_require("inc_rename")
-		local telescope = try_require("telescope.builtin")
+		local ts = try_require("telescope.builtin")
 		local has_trouble = vim.fn.exists(":Trouble") == 2
 
 		---------------
@@ -101,7 +108,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			{ "<leader>cR", group = "Refactor..", mode = { "n", "x" } },
 			{ "<leader>cl", group = "Lists.." },
 			{ "<leader>cw", group = "Workspaces.." },
-			{ "<leader>f", group = "Find.." },
 		})
 
 		-- General shortcuts
@@ -109,37 +115,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("n", "gd", vim.lsp.buf.definition, "Goto definition")
 		map("n", "gi", vim.lsp.buf.implementation, "Goto implementation")
 		map("n", "K", vim.lsp.buf.hover, "Hover documentation")
-		map(
-			"n",
-			"<C-n>",
-			telescope and telescope.lsp_dynamic_workspace_symbols or vim.lsp.buf.workspace_symbol,
-			"All symbols"
-		)
-		map(
-			"n",
-			"<leader>D",
-			telescope and telescope.lsp_type_definitions or vim.lsp.buf.type_definition,
-			"Type definitions"
-		)
+		map("n", "<C-n>", ts and ts.lsp_dynamic_workspace_symbols or vim.lsp.buf.workspace_symbol, "All symbols")
+		map("n", "<leader>D", ts and ts.lsp_type_definitions or vim.lsp.buf.type_definition, "Type definitions")
 
-		-- 'Code' mappings
+		-- Code mappings
 		map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code action")
 		map({ "n", "x" }, "<leader>a", vim.lsp.buf.code_action, "Code action")
 		map("n", "<leader>cs", vim.lsp.buf.signature_help, "Signature documentation")
-		map(
-			"n",
-			"<leader>cd",
-			telescope and telescope.lsp_type_definitions or vim.lsp.buf.type_definition,
-			"Type definitions"
-		)
+		map("n", "<leader>cd", ts and ts.lsp_type_definitions or vim.lsp.buf.type_definition, "Type definitions")
 		map_rename("<leader>cr")
 
-		-- 'Refactor' mappings
+		-- Refactor mappings
 		map({ "n", "x" }, "<leader>cRe", code_action_kind("refactor.extract"), "Extract")
 		map({ "n", "x" }, "<leader>cRi", code_action_kind("refactor.inline"), "Inline")
 		map({ "n", "x" }, "<leader>cRw", code_action_kind("refactor.rewrite"), "Rewrite")
 		map_rename("<leader>cRr")
 
+		-- List mappings
 		map("n", "<leader>cll", lsp_list, "LSP (defs/refs/… live)")
 		map("n", "<leader>clr", references_list, "References")
 		map("n", "<leader>cls", document_symbols_list, "Document symbols")
@@ -148,45 +140,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("n", "<leader>cld", diagnostics_list_buf, "Diagnostics (buffer)")
 		map("n", "<leader>clD", diagnostics_list_all, "Diagnostics (workspace)")
 
-		-- 'Code-workspace' mappings
+		-- Code-workspace mappings
 		map("n", "<leader>cwa", vim.lsp.buf.add_workspace_folder, "Add workspace folder")
 		map("n", "<leader>cwr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder")
 		map("n", "<leader>cwl", function()
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 		end, "List workspace folders")
 
-		-- 'Find' mappings
-		map("n", "<leader>fr", telescope and telescope.lsp_references or vim.lsp.buf.references, "References")
-		map(
-			"n",
-			"<leader>fs",
-			telescope and telescope.lsp_document_symbols or vim.lsp.buf.document_symbol,
-			"Document symbols"
-		)
-		map(
-			"n",
-			"<leader>fS",
-			telescope and telescope.lsp_dynamic_workspace_symbols or vim.lsp.buf.workspace_symbol,
-			"All symbols"
-		)
-		map(
-			"n",
-			"<leader>ft",
-			telescope and telescope.lsp_type_definitions or vim.lsp.buf.type_definition,
-			"Type definitions"
-		)
-		map(
-			"n",
-			"<leader>fi",
-			telescope and telescope.lsp_incoming_calls or vim.lsp.buf.incoming_calls,
-			"Incoming calls"
-		)
-		map(
-			"n",
-			"<leader>fo",
-			telescope and telescope.lsp_outgoing_calls or vim.lsp.buf.outgoing_calls,
-			"Outgoing calls"
-		)
+		-- Find mappings
+		map("n", "<leader>fr", ts and ts.lsp_references or vim.lsp.buf.references, "References")
+		map("n", "<leader>fs", ts and ts.lsp_document_symbols or vim.lsp.buf.document_symbol, "Document symbols")
+		map("n", "<leader>fS", ts and ts.lsp_dynamic_workspace_symbols or vim.lsp.buf.workspace_symbol, "All symbols")
+		map("n", "<leader>ft", ts and ts.lsp_type_definitions or vim.lsp.buf.type_definition, "Type definitions")
+		map("n", "<leader>fi", ts and ts.lsp_incoming_calls or vim.lsp.buf.incoming_calls, "Incoming calls")
+		map("n", "<leader>fo", ts and ts.lsp_outgoing_calls or vim.lsp.buf.outgoing_calls, "Outgoing calls")
 	end,
 })
 
