@@ -1,13 +1,13 @@
-require('trim').setup({
-    patterns = {
+require("trim").setup({
+	patterns = {
 
-        -- Remove unwanted spaces
-        [[%s/\s\+$//e]],
+		-- Remove unwanted spaces
+		[[%s/\s\+$//e]],
 
-        -- Trim last line
-        [[%s/\($\n\s*\)\+\%$//]],
+		-- Trim last line
+		[[%s/\($\n\s*\)\+\%$//]],
 
-        -- Trim first line
-        [[%s/\%^\n\+//]],
-    },
+		-- Trim first line
+		[[%s/\%^\n\+//]],
+	},
 })

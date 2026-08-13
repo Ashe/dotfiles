@@ -1,5 +1,5 @@
 require("tiny-inline-diagnostic").setup({
-  preset = "modern",
+	preset = "modern",
 })
 
 -- Disable vim's virtual diagnostics
