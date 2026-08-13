@@ -55,6 +55,8 @@ with pkgs.vimPlugins;
       clang-tools # Clang-format
       rustfmt # Rust
       fourmolu # Haskell
+      stylua # Lua
+      yq-go # yaml, json, toml, xml
     ];
   };
 

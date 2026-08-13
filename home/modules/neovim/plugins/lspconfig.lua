@@ -98,7 +98,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map({ 'n', 'x' }, '<leader>ca', vim.lsp.buf.code_action, 'Code action')
         map({ 'n', 'x' }, '<leader>a', vim.lsp.buf.code_action, 'Code action')
         map('n', '<leader>cs', vim.lsp.buf.signature_help, 'Signature documentation')
-        map('n', '<leader>cf', function() vim.lsp.buf.format { async = true } end, 'Format code')
         map('n', '<leader>cd', telescope and telescope.lsp_type_definitions
             or vim.lsp.buf.type_definition, 'Type definitions')
         map_rename('<leader>cr')

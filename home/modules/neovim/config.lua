@@ -51,16 +51,16 @@ vim.opt.signcolumn = "yes"
 -- Change decorative characters
 -- Also prevent '~' from showing on blank lines
 vim.opt.fillchars = {
-    horiz     = '━',
-    horizup   = '┻',
-    horizdown = '┳',
-    vert      = '┃',
-    vertleft  = '┫',
-    vertright = '┣',
-    verthoriz = '╋',
-    fold      = ' ',
-    eob       = ' ',
-    msgsep    = '‾'
+	horiz = "━",
+	horizup = "┻",
+	horizdown = "┳",
+	vert = "┃",
+	vertleft = "┫",
+	vertright = "┣",
+	verthoriz = "╋",
+	fold = " ",
+	eob = " ",
+	msgsep = "‾",
 }
 
 ----------------------------------
@@ -69,15 +69,19 @@ vim.opt.fillchars = {
 
 -- Optionally load a module
 local function try_require(name)
-    local ok, mod = pcall(require, name)
-    if ok then return mod end
-    return nil
+	local ok, mod = pcall(require, name)
+	if ok then
+		return mod
+	end
+	return nil
 end
 
 -- Invoke which-key safely
-local which_key = try_require('which-key')
+local which_key = try_require("which-key")
 local function which_key_add(spec)
-    if which_key then which_key.add(spec) end
+	if which_key then
+		which_key.add(spec)
+	end
 end
 
 ----------------------------------
@@ -94,23 +98,23 @@ vim.keymap.set("n", "<leader><S-BS>", "<Cmd>so ~/.config/nvim/init.lua<CR>", { d
 vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "Save file" })
 
 -- Copy to clipboard
-vim.opt.clipboard:append { "unnamed", "unnamedplus" }
-vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y", { desc = "Copy" })
-vim.keymap.set("n", "<leader>Y", "\"+yg_", { desc = "Copy rest" })
+vim.opt.clipboard:append({ "unnamed", "unnamedplus" })
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy" })
+vim.keymap.set("n", "<leader>Y", '"+yg_', { desc = "Copy rest" })
 
 -- Paste from clipboard
-vim.keymap.set({ "n", "v" }, "<leader>P", "\"+P", { desc = "Paste before" })
-vim.keymap.set({ "n", "v" }, "<leader>p", "\"+p", { desc = "Paste after" })
+vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', { desc = "Paste before" })
+vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste after" })
 
 -- Jump between marks
-vim.api.nvim_set_keymap('n', "<C-i>", "<C-i>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', "<C-o>", "<C-o>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', "<C-I>", "<C-i>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', "<C-O>", "<C-o>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-i>", "<C-i>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-o>", "<C-o>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-I>", "<C-i>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-O>", "<C-o>", { noremap = true, silent = true })
 
 -- Delete into the void
-vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d", { desc = "Void delete" })
-vim.keymap.set("n", "<leader>D", "\"_dd", { desc = "Void line to void" })
+vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "Void delete" })
+vim.keymap.set("n", "<leader>D", '"_dd', { desc = "Void line to void" })
 
 -- Keep cursor in middle of screen when half-page-jumping
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half-page up" })
@@ -143,9 +147,9 @@ vim.keymap.set({ "n", "t" }, "<C-Tab><Backspace>", "<Cmd>tabclose<CR>", { desc =
 vim.keymap.set({ "n", "t" }, "<C-Tab>o", "<Cmd>tabonly<CR>", { desc = "Close other tabs" })
 
 -- Diagnostics
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Show diagnostic" })
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic" })
 
 ----------------------------------
 -- Plugin-preparation
