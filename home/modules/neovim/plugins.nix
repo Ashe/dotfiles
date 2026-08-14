@@ -180,9 +180,6 @@ with pkgs.vimPlugins;
   # Cursor line
   cursorline.package = nvim-cursorline;
 
-  # Zen mode
-  true-zen.package = true-zen-nvim;
-
   # UI overhall
   noice = {
     package = noice-nvim;
