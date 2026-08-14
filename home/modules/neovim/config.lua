@@ -5,6 +5,9 @@
 -- Enable mouse control
 vim.opt.mouse = "a"
 
+-- Allow trusted per-project config files
+vim.opt.exrc = true
+
 -- Make sure swap and backup files are created
 vim.opt.backup = true
 vim.opt.swapfile = true
