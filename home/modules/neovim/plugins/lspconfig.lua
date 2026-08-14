@@ -120,6 +120,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- Code mappings
 		map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code action")
 		map({ "n", "x" }, "<leader>a", vim.lsp.buf.code_action, "Code action")
+		map("n", "<leader>cc", "<Cmd>LspCheck<CR>", "Check file")
 		map("n", "<leader>cs", vim.lsp.buf.signature_help, "Signature documentation")
 		map("n", "<leader>cd", ts and ts.lsp_type_definitions or vim.lsp.buf.type_definition, "Type definitions")
 		map_rename("<leader>cr")
@@ -181,4 +182,145 @@ vim.lsp.enable({
 	"taplo",
 	"lua_ls",
 	"marksman",
+})
+
+-- Enavle specific language servers to run on the fly for specific files
+local lsp_check = {
+	rust_analyzer = function(client, bufnr)
+		client:notify("rust-analyzer/runFlycheck", {
+			textDocument = vim.lsp.util.make_text_document_params(bufnr),
+		})
+	end,
+}
+
+-- Command for triggering on-demand analysis if supported by the server
+vim.api.nvim_create_user_command("LspCheck", function()
+	local bufnr = vim.api.nvim_get_current_buf()
+	local clients = vim.lsp.get_clients({ bufnr = bufnr })
+	local checked = {}
+	for _, client in ipairs(clients) do
+		if lsp_check[client.name] then
+			lsp_check[client.name](client, bufnr)
+			table.insert(checked, client.name)
+		end
+	end
+	if #checked > 0 then
+		vim.notify("Re-checking via " .. table.concat(checked, ", "))
+	elseif #clients == 0 then
+		vim.notify("No language server attached", vim.log.levels.WARN)
+	else
+		vim.notify("Attached servers already re-check continuously")
+	end
+end, { desc = "Re-check the current file" })
+
+-- Enable specific servers to get, select, and list compilation targets
+local lsp_targets = {
+	rust_analyzer = {
+		get = function()
+			return vim.tbl_get(vim.lsp.config["rust_analyzer"] or {}, "settings", "rust-analyzer", "cargo", "target")
+		end,
+		set = function(target)
+			vim.lsp.config("rust_analyzer", {
+				settings = { ["rust-analyzer"] = { cargo = { target = target } } },
+			})
+		end,
+		list = function()
+			local targets = vim.fn.systemlist("rustc --print target-list")
+			return vim.v.shell_error == 0 and targets or {}
+		end,
+	},
+}
+
+-- Remember startup target per server so it can be restored by :LspTarget default
+local lsp_target_defaults = {}
+
+-- Change current target
+local function lsp_target_set(name, target)
+	local spec = lsp_targets[name]
+	if lsp_target_defaults[name] == nil then
+		lsp_target_defaults[name] = { spec.get() }
+	end
+	if target == "default" then
+		target = lsp_target_defaults[name][1] or vim.NIL
+	end
+	spec.set(target)
+
+	-- Re-enable LSP with the new target (restarting would revert target changes)
+	vim.lsp.enable(name, false)
+	vim.defer_fn(function()
+		vim.lsp.enable(name)
+	end, 500)
+
+	local label = target == vim.NIL and "default" or target
+	vim.notify(name .. " target: " .. label .. " (restarting)")
+end
+
+-- Command for changing target architecture on the fly
+vim.api.nvim_create_user_command("LspTarget", function(cmd)
+	-- Aim for the first attached server that supports target switching
+	local name
+	for candidate in pairs(lsp_targets) do
+		if #vim.lsp.get_clients({ name = candidate }) > 0 then
+			name = candidate
+			break
+		end
+	end
+	if not name then
+		vim.notify("No attached server supports target switching", vim.log.levels.WARN)
+		return
+	end
+	if cmd.args ~= "" then
+		lsp_target_set(name, cmd.args)
+		return
+	end
+
+	-- Without an argument, pick from the server's known targets
+	local choices = { "default" }
+	vim.list_extend(choices, lsp_targets[name].list())
+
+	-- If no telescope, use default UI
+	local pickers = try_require("telescope.pickers")
+	if not pickers then
+		vim.ui.select(choices, { prompt = "Target for " .. name }, function(choice)
+			if choice then
+				lsp_target_set(name, choice)
+			end
+		end)
+		return
+	end
+
+	-- Otherwise, use the dropdown theme from telescope
+	local finders = require("telescope.finders")
+	local tele_config = require("telescope.config").values
+	local actions = require("telescope.actions")
+	local action_state = require("telescope.actions.state")
+	pickers
+		.new(require("telescope.themes").get_dropdown(), {
+			prompt_title = "Target for " .. name,
+			finder = finders.new_table({ results = choices }),
+			sorter = tele_config.generic_sorter({}),
+			attach_mappings = function(prompt_bufnr)
+				actions.select_default:replace(function()
+					local entry = action_state.get_selected_entry()
+					actions.close(prompt_bufnr)
+					if entry then
+						lsp_target_set(name, entry.value)
+					end
+				end)
+				return true
+			end,
+		})
+		:find()
+end, {
+	desc = "Switch language server compilation target",
+	nargs = "?",
+	complete = function(arglead)
+		local items = { "default" }
+		for _, spec in pairs(lsp_targets) do
+			vim.list_extend(items, spec.list())
+		end
+		return vim.tbl_filter(function(item)
+			return vim.startswith(item, arglead)
+		end, items)
+	end,
 })
