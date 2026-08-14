@@ -68,7 +68,9 @@ vim.opt.fillchars = {
 ----------------------------------
 
 -- Optionally load a module
-local function try_require(name)
+-- Defined on _G so plugin config blocks keep working even if they are no
+-- longer flattened into the same Lua chunk as this file
+function _G.try_require(name)
 	local ok, mod = pcall(require, name)
 	if ok then
 		return mod
@@ -78,7 +80,7 @@ end
 
 -- Invoke which-key safely
 local which_key = try_require("which-key")
-local function which_key_add(spec)
+function _G.which_key_add(spec)
 	if which_key then
 		which_key.add(spec)
 	end
@@ -91,8 +93,14 @@ end
 -- Set leader key to space
 vim.g.mapleader = " "
 
--- Reload neovim config
-vim.keymap.set("n", "<leader><S-BS>", "<Cmd>so ~/.config/nvim/init.lua<CR>", { desc = "Reload config" })
+-- Restart neovim in-place, restoring buffers, tabs and window layout.
+-- Re-sourcing init.lua cannot reset plugin state; a fresh server can.
+-- Refuses to restart if a buffer has unsaved changes.
+vim.keymap.set("n", "<leader><S-BS>", function()
+	local session = vim.fn.stdpath("state") .. "/restart-session.vim"
+	vim.cmd("mksession! " .. session)
+	vim.cmd("restart source " .. session)
+end, { desc = "Restart and reload config" })
 
 -- Save file with leader-w
 vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "Save file" })
@@ -147,8 +155,12 @@ vim.keymap.set({ "n", "t" }, "<C-Tab><Backspace>", "<Cmd>tabclose<CR>", { desc =
 vim.keymap.set({ "n", "t" }, "<C-Tab>o", "<Cmd>tabonly<CR>", { desc = "Close other tabs" })
 
 -- Diagnostics
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
+vim.keymap.set("n", "[d", function()
+	vim.diagnostic.jump({ count = -1, float = true })
+end, { desc = "Previous diagnostic" })
+vim.keymap.set("n", "]d", function()
+	vim.diagnostic.jump({ count = 1, float = true })
+end, { desc = "Next diagnostic" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic" })
 
 ----------------------------------
@@ -156,7 +168,7 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagn
 ----------------------------------
 
 -- nvim-tree: Disable netrw at the very start of your init.lua (strongly advised)
-vim.g.loaded = 1
+vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- End of config.lua
