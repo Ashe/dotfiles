@@ -5,10 +5,6 @@ vim.g.nvim_surround_no_mappings = true
 
 -- General bindings
 local surround_maps = {
-	-- Insert mode
-	{ "i", "s", "<Plug>(nvim-surround-insert)", "Surround motion" },
-	{ "i", "S", "<Plug>(nvim-surround-insert-line)", "Surround motion on newlines" },
-
 	-- Normal mode
 	{ "n", "s", "<Plug>(nvim-surround-normal)", "Surround motion" },
 	{ "n", "S", "<Plug>(nvim-surround-normal-line)", "Surround motion on newlines" },
@@ -21,15 +17,27 @@ local surround_maps = {
 	{ "x", "S", "<Plug>(nvim-surround-visual-line)", "Surround selection on newlines" },
 }
 
+-- Insert-only bindings
+local surround_insert_maps = {
+	{ "i", "s", "<Plug>(nvim-surround-insert)", "Surround motion" },
+	{ "i", "S", "<Plug>(nvim-surround-insert-line)", "Surround motion on newlines" },
+}
+
 -- Expose all above bindings under both <C-a> and <leader>s
 local prefixes = { "<C-a>", "<leader>s" }
 
--- Implement bindings
+-- Implement general bindings
 for _, map in ipairs(surround_maps) do
 	local mode, suffix, rhs, desc = map[1], map[2], map[3], map[4]
 	for _, prefix in ipairs(prefixes) do
 		vim.keymap.set(mode, prefix .. suffix, rhs, { desc = desc })
 	end
+end
+
+-- Implement insert mode bindings
+for _, map in ipairs(surround_insert_maps) do
+	local mode, suffix, rhs, desc = map[1], map[2], map[3], map[4]
+	vim.keymap.set(mode, "<C-a>" .. suffix, rhs, { desc = desc })
 end
 
 -- Keybinding groups
