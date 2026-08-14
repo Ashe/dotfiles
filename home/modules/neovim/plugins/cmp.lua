@@ -2,10 +2,12 @@ local cmp = require("cmp")
 local lspkind = require("lspkind")
 
 cmp.setup({
+	-- Buffer words are a fallback group, only queried when the sources
+	-- above return no matches
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
-		{ name = "treesitter" },
 		{ name = "path" },
+	}, {
 		{ name = "buffer" },
 	}),
 	window = {
@@ -23,7 +25,7 @@ cmp.setup({
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.abort(),
 		["<C-l>"] = cmp.mapping.confirm({ select = true }),
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<CR>"] = cmp.mapping.confirm({ select = false }),
 	}),
 })
 

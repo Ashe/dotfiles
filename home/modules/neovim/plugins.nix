@@ -65,7 +65,6 @@ with pkgs.vimPlugins;
     package = nvim-cmp;
     extraPlugins = [
       cmp-nvim-lsp # LSP integration
-      cmp-treesitter # Treesitter integration
       cmp-cmdline # Commands
       cmp-path # Filepaths
       cmp-buffer # Buffers
