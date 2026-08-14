@@ -1,9 +1,9 @@
 -- Disable default bindings
-vim.g.lsp_no_default_keymaps = true
-for _, lhs in ipairs({ "grn", "gra", "grr", "gri", "gro", "grt", "grx" }) do
+for _, lhs in ipairs({ "grn", "gra", "grr", "gri", "grt" }) do
 	pcall(vim.keymap.del, "n", lhs)
 end
 pcall(vim.keymap.del, { "n", "x" }, "gO")
+pcall(vim.keymap.del, "i", "<C-s>")
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -116,7 +116,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("n", "gi", vim.lsp.buf.implementation, "Goto implementation")
 		map("n", "K", vim.lsp.buf.hover, "Hover documentation")
 		map("n", "<C-n>", ts and ts.lsp_dynamic_workspace_symbols or vim.lsp.buf.workspace_symbol, "All symbols")
-		map("n", "<leader>D", ts and ts.lsp_type_definitions or vim.lsp.buf.type_definition, "Type definitions")
 
 		-- Code mappings
 		map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code action")
@@ -132,7 +131,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map_rename("<leader>cRr")
 
 		-- List mappings
-		map("n", "<leader>cll", lsp_list, "LSP (defs/refs/… live)")
+		map("n", "<leader>cll", lsp_list, "Combined")
 		map("n", "<leader>clr", references_list, "References")
 		map("n", "<leader>cls", document_symbols_list, "Document symbols")
 		map("n", "<leader>cli", incoming_calls_list, "Incoming calls")

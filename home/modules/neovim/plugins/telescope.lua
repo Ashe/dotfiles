@@ -52,7 +52,7 @@ require("telescope").load_extension("ui-select")
 local builtin = require("telescope.builtin")
 
 -- git_files, but falls back to find_files if not in a git repo
-project_files = function()
+local project_files = function()
 	local opts = {}
 	vim.fn.system("git rev-parse --is-inside-work-tree")
 	if vim.v.shell_error == 0 then

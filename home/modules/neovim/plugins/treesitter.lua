@@ -1,16 +1,7 @@
-require("nvim-treesitter").setup({
-
-	-- Enable syntax highlighting
-	highlight = { enable = true },
-
-	-- Intelligently select code incrementally
-	incremental_selection = {
-		enable = true,
-		keymaps = {
-			init_selection = "<c-space>",
-			node_incremental = "<c-space>",
-			scope_incremental = "<c-s>",
-			node_decremental = "<c-backspace>",
-		},
-	},
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("UserTreesitterHighlight", {}),
+	callback = function(ev)
+		-- Fails quietly for filetypes without a parser
+		pcall(vim.treesitter.start, ev.buf)
+	end,
 })

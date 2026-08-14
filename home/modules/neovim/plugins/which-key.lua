@@ -1,13 +1,10 @@
 require("which-key").setup({
 
-	-- Configure which-key options
-	opts = {
-
-		-- Configure when to show which-key
-		triggers = {
-			{ "<auto>", mode = "nixsotc" },
-			{ "<leader>", mode = { "n", "v" } },
-		},
+	-- Configure when to show which-key
+	-- Insert/cmdline modes are left out on purpose
+	triggers = {
+		{ "<auto>", mode = "nxso" },
+		{ "<leader>", mode = { "n", "x" } },
 	},
 
 	plugins = {
