@@ -42,6 +42,7 @@
       streamlink
       streamlink-twitch-gui-bin
       tray-tui
+      tree
       vlc
 
       # Utilities
