@@ -40,7 +40,16 @@ require("telescope").setup({
 	},
 	extensions = {
 		["ui-select"] = {
-			require("telescope.themes").get_cursor(),
+			require("telescope.themes").get_cursor({
+				layout_config = {
+					-- Semi-expanding box depending on number of results
+					height = function(picker, _, max_lines)
+						local results = picker.finder and picker.finder.results
+						local rows = (results and #results or 0) > 5 and 10 or 5
+						return math.min(rows + 4, max_lines)
+					end,
+				},
+			}),
 		},
 	},
 })
