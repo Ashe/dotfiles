@@ -157,7 +157,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- Servers
+-------------
+-- Servers --
+-------------
 
 -- Set default capabilities for all LSP servers
 local cmp_nvim_lsp = try_require("cmp_nvim_lsp")
@@ -168,7 +170,7 @@ vim.lsp.config("*", {
 	},
 })
 
--- Potential servers to look for
+-- Look for potential language servers on the path
 vim.lsp.enable({
 	"ccls",
 	"cmake",
@@ -183,6 +185,11 @@ vim.lsp.enable({
 	"lua_ls",
 	"marksman",
 })
+
+-- Fall back to basic java support if jdtls plugin is disabled
+if not try_require("jdtls") then
+	vim.lsp.enable("jdtls")
+end
 
 -- Enavle specific language servers to run on the fly for specific files
 local lsp_check = {

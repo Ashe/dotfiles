@@ -112,6 +112,9 @@ with pkgs.vimPlugins;
     '';
   };
 
+  # Java
+  jdtls.package = nvim-jdtls;
+
   # Commenting
   comment.package = comment-nvim;
 
