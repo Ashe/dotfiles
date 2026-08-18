@@ -136,9 +136,20 @@ with pkgs.vimPlugins;
   oil = {
     package = oil-nvim;
     extraPlugins = [
-      oil-git-nvim
-      oil-git-status-nvim
-      oil-lsp-diagnostics-nvim
+
+      # Git status and colouring
+      (pkgs.vimUtils.buildVimPlugin {
+        pname = "oil-git.nvim";
+        version = "unstable";
+        src = pkgs.fetchFromGitHub {
+          owner = "malewicz1337";
+          repo = "oil-git.nvim";
+          rev = "bc25e507061f3e1b4e05f0fcda8c0ac81811d8bc";
+          hash = "sha256-/QIqYqQQYvZvOn8vV+JSjUjDrsQd5d5I+QKlziz0Lvo=";
+        };
+      })
+
+      oil-lsp-diagnostics-nvim # Diagnostics per entry
     ];
     extraConfig = ''
       require('oil').setup()
