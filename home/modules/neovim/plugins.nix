@@ -9,7 +9,9 @@ with pkgs.vimPlugins;
   # Lua utilities
   plenary = {
     package = plenary-nvim;
-    require = true;
+    extraConfig = ''
+      require('plenary')
+    '';
   };
 
   # Tabs
@@ -26,9 +28,7 @@ with pkgs.vimPlugins;
   # Visual renaming (used by lspconfig)
   inc-rename = {
     package = inc-rename-nvim;
-    extraConfig = ''
-      require('inc_rename').setup({})
-    '';
+    setup = "inc_rename";
   };
 
   # Language servers
@@ -84,7 +84,7 @@ with pkgs.vimPlugins;
   # Inline diagnostics
   tiny-inline-diagnostic.package = tiny-inline-diagnostic-nvim;
 
-  # lightbulb
+  # Lightbulb icon
   lightbulb.package = nvim-lightbulb;
 
   # Indentation lines
@@ -110,9 +110,7 @@ with pkgs.vimPlugins;
         hash = "sha256-7QR/9dRWnnOhrR6150LuIuc4HTb2Yi8qziFu/aCHJ0E=";
       };
     };
-    extraConfig = ''
-      require('Jumppack').setup()
-    '';
+    setup = "Jumppack";
   };
 
   # Java
@@ -154,9 +152,6 @@ with pkgs.vimPlugins;
 
       oil-lsp-diagnostics-nvim # Diagnostics per entry
     ];
-    extraConfig = ''
-      require('oil').setup()
-    '';
   };
 
   # File search and navigation modal

@@ -100,14 +100,15 @@ in
                   '';
 
                   # Build the body from either:
-                  #   A: Enabling `require`
-                  #   B: Providing `extraConfig`
+                  #   A: Providing `extraConfig`
+                  #   B: Enabling `setup`, either `true` when the lua module
+                  #      shares the plugin's name, or the module name itself
                   #   C: Nothing, defaults to reading a file at ./plugins/PLUGIN.lua
                   body =
                     if def ? extraConfig then
                       def.extraConfig
-                    else if def ? require && def.require then
-                      "require('${name}')"
+                    else if def ? setup then
+                      "require('${if builtins.isString def.setup then def.setup else name}').setup({})"
                     else
                       builtins.readFile ./plugins/${name}.lua;
 
