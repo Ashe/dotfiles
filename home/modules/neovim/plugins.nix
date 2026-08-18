@@ -87,6 +87,9 @@ with pkgs.vimPlugins;
   # lightbulb
   lightbulb.package = nvim-lightbulb;
 
+  # Indentation lines
+  indent-blankline.package = indent-blankline-nvim;
+
   # Leap motions
   leap = {
     package = leap-nvim;
