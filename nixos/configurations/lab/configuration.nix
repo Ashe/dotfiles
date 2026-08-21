@@ -11,7 +11,7 @@
   ##################
 
   server = {
-    ip = "192.168.1.198";
+    ip = "192.168.1.83";
     domain = "lab";
     publicDomain = "aas.sh";
   };

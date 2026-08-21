@@ -30,7 +30,7 @@
       enable = true;
 
       # Allow connection to homelab
-      insertNameservers = [ "192.168.1.198" ];
+      insertNameservers = [ "192.168.1.83" ];
     };
   };
 
