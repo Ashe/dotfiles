@@ -11,6 +11,7 @@
   (import ./nixgl)
   (import ./obs-studio)
   (import ./obsidian)
+  (import ./opencode)
   (import ./starship)
   (import ./vs-code)
   (import ./wallpaper-engine)

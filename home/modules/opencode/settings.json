@@ -1,0 +1,28 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "@dietrichgebert/ponytail",
+    "@tarquinen/opencode-dcp"
+  ],
+  "autoupdate": false,
+  "snapshot": true,
+  "permission": {
+    "bash": {
+      "*": "ask",
+      "grep*": "allow",
+      "rg*": "allow",
+      "git status*": "allow",
+      "git log*": "allow",
+      "git diff*": "allow",
+      "git show*": "allow",
+      "git grep*": "allow",
+      "git blame*": "allow",
+      "jj status*": "allow",
+      "jj st*": "allow",
+      "jj log*": "allow",
+      "jj diff*": "allow",
+      "jj show*": "allow",
+      "jj file*": "allow"
+    }
+  }
+}

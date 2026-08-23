@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   ##################
@@ -12,6 +12,7 @@
   neovim.enable = true;
   obs-studio.enable = true;
   obsidian.enable = true;
+  opencode.enable = true;
   starship.enable = true;
   wezterm.enable = true;
   yazi.enable = true;
@@ -94,10 +95,6 @@
 
     # Alternative to find
     fd.enable = true;
-
-    # AI agent harnesses
-    opencode.enable = true;
-    opencode.package = inputs.llm-agents.packages.x86_64-linux.opencode;
   };
 
   # Enable blanket for soothing noises
