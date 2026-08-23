@@ -66,6 +66,9 @@
   # Enable flatpak package manager
   services.flatpak.enable = true;
 
+  # Enable control over power usage
+  services.power-profiles-daemon.enable = true;
+
   # Set time zone
   time.timeZone = "Europe/London";
 
