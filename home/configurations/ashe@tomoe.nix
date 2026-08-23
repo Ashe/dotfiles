@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   ##################
@@ -92,8 +92,12 @@
     # Fuzzy file finding
     fzf.enable = true;
 
-    # Enable fd, an alternative to find
+    # Alternative to find
     fd.enable = true;
+
+    # AI agent harnesses
+    opencode.enable = true;
+    opencode.package = inputs.llm-agents.packages.x86_64-linux.opencode;
   };
 
   # Enable blanket for soothing noises
