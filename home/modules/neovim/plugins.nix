@@ -56,7 +56,10 @@ with pkgs.vimPlugins;
       rustfmt # Rust
       fourmolu # Haskell
       stylua # Lua
-      yq-go # yaml, json, toml, xml
+      yq-go # yaml, kyaml
+      taplo # toml (Cargo.lock etc.)
+      jq # json
+      libxml2 # xml
     ];
   };
 

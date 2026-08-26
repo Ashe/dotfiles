@@ -11,13 +11,11 @@ require("conform").setup({
 		haskell = { "fourmolu" },
 		cuda = { "clang_format" },
 		lua = { "stylua" },
-		toml = { "yq" },
+		toml = { "taplo" },
 		yaml = { "yq" },
 		kyaml = { "yq" },
-		json = { "yq" },
-		xml = { "yq" },
-		csv = { "yq" },
-		tsv = { "yq" },
+		json = { "jq" },
+		xml = { "xmllint" },
 	},
 	format_on_save = function(bufnr)
 		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
