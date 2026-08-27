@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   ##################
@@ -29,6 +29,9 @@
 
     # Packages to install
     packages = with pkgs; [
+
+      # Packages from inputs
+      inputs.hytale-launcher.packages.${pkgs.stdenv.hostPlatform.system}.default
 
       # Programs
       bat

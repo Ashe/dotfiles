@@ -20,6 +20,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     llm-agents.url = "github:numtide/llm-agents.nix";
+    hytale-launcher.url = "github:JPyke3/hytale-launcher-nix";
   };
   outputs = inputs: {
 
