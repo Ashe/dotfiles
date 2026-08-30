@@ -17,11 +17,7 @@
       settings = {
         General = {
 
-          # Enable on wayland
-          useGrimAdapter = true;
-
           # Messaging
-          disabledGrimWarning = true;
           showStartupLaunchMessage = false;
           showAbortNotification = false;
         };
