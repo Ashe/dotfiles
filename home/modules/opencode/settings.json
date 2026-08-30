@@ -6,23 +6,203 @@
   ],
   "autoupdate": false,
   "snapshot": true,
+  "formatter": {
+    "clang-format": {
+      "command": [
+        "clang-format",
+        "-i",
+        "$FILE"
+      ],
+      "extensions": [
+        ".c",
+        ".cc",
+        ".cpp",
+        ".cxx",
+        ".h",
+        ".hpp"
+      ]
+    },
+    "fourmolu": {
+      "command": [
+        "fourmolu",
+        "-i",
+        "$FILE"
+      ],
+      "extensions": [
+        ".hs"
+      ]
+    },
+    "stylua": {
+      "command": [
+        "stylua",
+        "$FILE"
+      ],
+      "extensions": [
+        ".lua"
+      ]
+    },
+    "taplo": {
+      "command": [
+        "taplo",
+        "format",
+        "$FILE"
+      ],
+      "extensions": [
+        ".toml"
+      ]
+    },
+    "yq": {
+      "command": [
+        "yq",
+        "-i",
+        ".",
+        "$FILE"
+      ],
+      "extensions": [
+        ".yaml",
+        ".yml"
+      ]
+    },
+    "jq": {
+      "command": [
+        "sh",
+        "-c",
+        "jq . \"$1\" > \"$1\".tmp && mv \"$1\".tmp \"$1\"",
+        "jq",
+        "$FILE"
+      ],
+      "extensions": [
+        ".json"
+      ]
+    },
+    "xmllint": {
+      "command": [
+        "xmllint",
+        "--format",
+        "--output",
+        "$FILE",
+        "$FILE"
+      ],
+      "extensions": [
+        ".xml",
+        ".xsd"
+      ]
+    },
+    "google-java-format": {
+      "command": [
+        "google-java-format",
+        "--replace",
+        "$FILE"
+      ],
+      "extensions": [
+        ".java"
+      ]
+    }
+  },
   "permission": {
     "bash": {
       "*": "ask",
-      "grep*": "allow",
-      "rg*": "allow",
-      "git status*": "allow",
-      "git log*": "allow",
-      "git diff*": "allow",
-      "git show*": "allow",
-      "git grep*": "allow",
-      "git blame*": "allow",
-      "jj status*": "allow",
-      "jj st*": "allow",
-      "jj log*": "allow",
-      "jj diff*": "allow",
-      "jj show*": "allow",
-      "jj file*": "allow"
+      "basename *": "allow",
+      "cat *": "allow",
+      "cut *": "allow",
+      "dirname *": "allow",
+      "du *": "allow",
+      "file *": "allow",
+      "git blame *": "allow",
+      "git blame": "allow",
+      "git diff *": "allow",
+      "git diff": "allow",
+      "git grep *": "allow",
+      "git grep": "allow",
+      "git log *": "allow",
+      "git log": "allow",
+      "git show *": "allow",
+      "git show": "allow",
+      "git status *": "allow",
+      "git status": "allow",
+      "grep *": "allow",
+      "grep": "allow",
+      "head *": "allow",
+      "find *": "allow",
+      "find": "allow",
+      "jj diff *": "allow",
+      "jj diff": "allow",
+      "jj file list *": "allow",
+      "jj file list": "allow",
+      "jj file show *": "allow",
+      "jj file show": "allow",
+      "jj log *": "allow",
+      "jj log": "allow",
+      "jj show *": "allow",
+      "jj show": "allow",
+      "jj st *": "allow",
+      "jj st": "allow",
+      "jj status *": "allow",
+      "jj status": "allow",
+      "ls *": "allow",
+      "ls": "allow",
+      "nix config show": "allow",
+      "nix derivation show *": "allow",
+      "nix eval *": "allow",
+      "nix flake check *": "allow",
+      "nix flake check": "allow",
+      "nix flake metadata *": "allow",
+      "nix flake metadata": "allow",
+      "nix flake show *": "allow",
+      "nix flake show": "allow",
+      "nix path-info *": "allow",
+      "nix profile list": "allow",
+      "nix registry list": "allow",
+      "nix search *": "allow",
+      "nix store verify *": "allow",
+      "pwd": "allow",
+      "readlink *": "allow",
+      "realpath *": "allow",
+      "rg *": "allow",
+      "sed *": "allow",
+      "sort *": "allow",
+      "stat *": "allow",
+      "tail *": "allow",
+      "type *": "allow",
+      "uniq *": "allow",
+      "wc *": "allow",
+      "which *": "allow",
+      "cargo clippy": "allow",
+      "cargo clippy *": "allow",
+      "cargo check": "allow",
+      "cargo check *": "allow",
+      "cargo build": "allow",
+      "cargo build *": "allow",
+      "cargo run": "allow",
+      "cargo run *": "allow",
+      "cargo test": "allow",
+      "cargo test *": "allow",
+      "nix develop -c cargo clippy": "allow",
+      "nix develop -c cargo clippy *": "allow",
+      "nix develop -c cargo check": "allow",
+      "nix develop -c cargo check *": "allow",
+      "nix develop -c cargo build": "allow",
+      "nix develop -c cargo build *": "allow",
+      "nix develop -c cargo run": "allow",
+      "nix develop -c cargo run *": "allow",
+      "nix develop -c cargo test": "allow",
+      "nix develop -c cargo test *": "allow",
+      "*&&*": "ask",
+      "*||*": "ask",
+      "*;*": "ask",
+      "*\n*": "ask",
+      "*|*": "ask",
+      "*>*": "ask",
+      "*<*": "ask",
+      "*$(*": "ask",
+      "*`*": "ask",
+      "* -delete*": "ask",
+      "* -exec *": "ask",
+      "* -execdir *": "ask",
+      "* -ok *": "ask",
+      "* -okdir *": "ask",
+      "sed -i*": "ask",
+      "sed --in-place*": "ask"
     }
   }
 }
