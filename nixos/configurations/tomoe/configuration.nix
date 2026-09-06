@@ -66,8 +66,11 @@
   # Enable flatpak package manager
   services.flatpak.enable = true;
 
-  # Enable control over power usage
-  services.power-profiles-daemon.enable = true;
+  # CPU frequency scaling (closest to ondemand that amd_pstate can do)
+  powerManagement.cpuFreqGovernor = "powersave";
+  systemd.tmpfiles.rules = [
+    "w /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference - - - - balance_power"
+  ];
 
   # Set time zone
   time.timeZone = "Europe/London";
