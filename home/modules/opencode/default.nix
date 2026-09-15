@@ -14,7 +14,7 @@
     # Configure opencode - an opensource AI agent harness
     programs.opencode = {
       enable = true;
-      package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
+      package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode2;
       settings = builtins.fromJSON (builtins.readFile ./settings.json);
       context = builtins.readFile ./context.md;
 
@@ -31,6 +31,11 @@
         taplo # Toml
         libxml2 # Xml (xmllint)
       ];
+    };
+
+    xdg.configFile."opencode/cli.json" = {
+      source = ./cli.json;
+      force = true;
     };
   };
 }

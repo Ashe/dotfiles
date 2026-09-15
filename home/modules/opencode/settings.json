@@ -1,11 +1,7 @@
 {
-  "$schema": "https://opencode.ai/config.json",
-  "plugin": [
-    "@dietrichgebert/ponytail",
-    "@tarquinen/opencode-dcp"
-  ],
-  "autoupdate": false,
-  "snapshot": true,
+  "$schema": "https://opencode.ai/v2/config.json",
+  "update": "disable",
+  "snapshots": true,
   "formatter": {
     "nixfmt": {
       "command": [
@@ -19,8 +15,6 @@
     "rustfmt": {
       "command": [
         "rustfmt",
-        "--edition",
-        "2021",
         "$FILE"
       ],
       "extensions": [
@@ -119,118 +113,211 @@
       ]
     }
   },
-  "permission": {
-    "bash": {
-      "*": "ask",
-      "basename *": "allow",
-      "cat *": "allow",
-      "cut *": "allow",
-      "dirname *": "allow",
-      "du *": "allow",
-      "file *": "allow",
-      "git blame *": "allow",
-      "git blame": "allow",
-      "git diff *": "allow",
-      "git diff": "allow",
-      "git grep *": "allow",
-      "git grep": "allow",
-      "git log *": "allow",
-      "git log": "allow",
-      "git show *": "allow",
-      "git show": "allow",
-      "git status *": "allow",
-      "git status": "allow",
-      "grep *": "allow",
-      "grep": "allow",
-      "head *": "allow",
-      "find *": "allow",
-      "find": "allow",
-      "jj diff *": "allow",
-      "jj diff": "allow",
-      "jj file list *": "allow",
-      "jj file list": "allow",
-      "jj file show *": "allow",
-      "jj file show": "allow",
-      "jj log *": "allow",
-      "jj log": "allow",
-      "jj show *": "allow",
-      "jj show": "allow",
-      "jj st *": "allow",
-      "jj st": "allow",
-      "jj status *": "allow",
-      "jj status": "allow",
-      "ls *": "allow",
-      "ls": "allow",
-      "nix config show": "allow",
-      "nix derivation show *": "allow",
-      "nix eval *": "allow",
-      "nix flake check *": "allow",
-      "nix flake check": "allow",
-      "nix flake metadata *": "allow",
-      "nix flake metadata": "allow",
-      "nix flake show *": "allow",
-      "nix flake show": "allow",
-      "nix path-info *": "allow",
-      "nix profile list": "allow",
-      "nix registry list": "allow",
-      "nix search *": "allow",
-      "nix store verify *": "allow",
-      "pwd": "allow",
-      "readlink *": "allow",
-      "realpath *": "allow",
-      "rg *": "allow",
-      "sed *": "allow",
-      "sort *": "allow",
-      "stat *": "allow",
-      "tail *": "allow",
-      "type *": "allow",
-      "uniq *": "allow",
-      "wc *": "allow",
-      "which *": "allow",
-      "cargo clippy": "allow",
-      "cargo clippy *": "allow",
-      "cargo check": "allow",
-      "cargo check *": "allow",
-      "cargo build": "allow",
-      "cargo build *": "allow",
-      "cargo run": "allow",
-      "cargo run *": "allow",
-      "cargo test": "allow",
-      "cargo test *": "allow",
-      "cargo-mutants": "allow",
-      "cargo-mutants *": "allow",
-      "cargo mutants": "allow",
-      "cargo mutants *": "allow",
-      "nix develop -c cargo clippy": "allow",
-      "nix develop -c cargo clippy *": "allow",
-      "nix develop -c cargo check": "allow",
-      "nix develop -c cargo check *": "allow",
-      "nix develop -c cargo build": "allow",
-      "nix develop -c cargo build *": "allow",
-      "nix develop -c cargo run": "allow",
-      "nix develop -c cargo run *": "allow",
-      "nix develop -c cargo test": "allow",
-      "nix develop -c cargo test *": "allow",
-      "nix develop -c cargo-mutants": "allow",
-      "nix develop -c cargo-mutants *": "allow",
-      "nix develop -c cargo mutants": "allow",
-      "nix develop -c cargo mutants *": "allow",
-      "*&&*": "ask",
-      "*||*": "ask",
-      "*;*": "ask",
-      "*\n*": "ask",
-      "*|*": "ask",
-      "*>*": "ask",
-      "*<*": "ask",
-      "*$(*": "ask",
-      "*`*": "ask",
-      "* -delete*": "ask",
-      "* -exec *": "ask",
-      "* -execdir *": "ask",
-      "* -ok *": "ask",
-      "* -okdir *": "ask",
-      "sed -i*": "ask",
-      "sed --in-place*": "ask"
+  "permissions": [
+    {
+      "action": "shell",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "basename *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "cat *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "cut *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "dirname *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "du *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "file *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "git blame *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "git diff *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "git grep *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "git log *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "git show *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "git status *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "grep *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "head *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "jj diff *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "jj file list *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "jj file show *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "jj log *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "jj show *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "jj st *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "jj status *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "ls *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "pwd *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "readlink *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "realpath *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "rg *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "sort *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "stat *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "tail *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "type *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "uniq *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "wc *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "which *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "cargo clippy *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "cargo check *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "cargo build *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "cargo run *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "cargo test *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "cargo-mutants *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "cargo mutants *",
+      "effect": "allow"
     }
-  }
+  ]
 }
