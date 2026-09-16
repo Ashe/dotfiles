@@ -65,6 +65,9 @@
       # Ensure downloaded files are owned by torrents group and writeable
       UMask = "0002";
 
+      # Allow graceful shutdown, then force-kill qBittorrent if it hangs.
+      TimeoutStopSec = lib.mkForce "1min";
+
       # Inject credentials after the NixOS module writes its store config, but before qbittorrent starts
       ExecStartPre = [
         (pkgs.writeShellScript "qbittorrent-inject-credentials" ''
