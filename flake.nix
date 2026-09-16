@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    multiverse.url = "github:fzakaria/nixpkgs-multiverse";
     nur.url = "github:nix-community/NUR";
     nixgl.url = "github:nix-community/nixGL";
     agenix = {

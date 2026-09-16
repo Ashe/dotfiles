@@ -15,6 +15,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
   };
   modules = self.homeModules ++ [
     config-file
+    inputs.multiverse.homeManagerModules.default
     inputs.nur.modules.homeManager.default
     {
       home = {

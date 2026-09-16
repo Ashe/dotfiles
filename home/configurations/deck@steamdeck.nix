@@ -45,12 +45,20 @@
       nicotine-plus
       scanmem
       streamlink
-      streamlink-twitch-gui-bin
       tray-tui
 
       # Utilities
       xclip
     ];
+  };
+
+  # Install the last streamlink-twitch-gui release from nixpkgs history
+  multiverse = {
+    enable = true;
+    config.permittedInsecurePackages = [ "electron-25.9.0" ];
+
+    # Streamlink has been removed from nixpkgs so install the last version
+    pins.streamlink-twitch-gui-bin = "2.5.3";
   };
 
   # Configure nixpkgs
@@ -59,10 +67,6 @@
     # Allow proprietary software
     allowUnfreePredicate = _: true;
 
-    # Permit specific insecure packages
-    permittedInsecurePackages = [
-      "electron-25.9.0"
-    ];
   };
 
   # Configure programs
