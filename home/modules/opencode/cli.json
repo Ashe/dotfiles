@@ -8,15 +8,14 @@
     "wrap": "word"
   },
   "attention": {
-    "enabled": true,
     "notifications": true,
     "sound": true,
     "volume": 0.4
   },
   "session": {
     "permissions": "prompt",
-    "sidebar": "show",
-    "scrollbar": false,
+    "sidebar": "auto",
+    "scrollbar": true,
     "thinking": "show"
   },
   "animations": true,
