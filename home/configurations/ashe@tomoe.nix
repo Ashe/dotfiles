@@ -5,6 +5,7 @@
   # Custom modules #
   ##################
 
+  bash.enable = true;
   btop.enable = true;
   fastfetch.enable = true;
   flameshot.enable = true;
@@ -18,7 +19,6 @@
   yazi.enable = true;
   zed.enable = true;
   zen-browser.enable = true;
-  zsh.enable = true;
 
   ##################
   # Configurations #

@@ -1,4 +1,5 @@
 [
+  (import ./bash)
   (import ./btop)
   (import ./daw-plugins)
   (import ./fastfetch)

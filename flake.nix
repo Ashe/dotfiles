@@ -12,6 +12,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flyline = {
+      url = "github:HalFrgrd/flyline";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     tangled = {
       url = "git+https://tangled.org/tangled.org/core";
       inputs.nixpkgs.follows = "nixpkgs";

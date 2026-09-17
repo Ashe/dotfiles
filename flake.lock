@@ -230,6 +230,26 @@
         "type": "github"
       }
     },
+    "flyline": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1789023855,
+        "narHash": "sha256-+dTiefKzXZE6jZTqs58kc4LBY+i+1kuz1cCvTiTJX0c=",
+        "owner": "HalFrgrd",
+        "repo": "flyline",
+        "rev": "6c196ec94942d95c21f00a6a96ab8bd600ceb2a8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "HalFrgrd",
+        "repo": "flyline",
+        "type": "github"
+      }
+    },
     "gomod2nix": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -605,6 +625,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "flyline": "flyline",
         "home-manager": "home-manager_2",
         "hytale-launcher": "hytale-launcher",
         "llm-agents": "llm-agents",
