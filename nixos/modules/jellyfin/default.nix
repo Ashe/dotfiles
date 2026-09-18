@@ -76,7 +76,7 @@
         type = "jellyfin";
         url = "http://127.0.0.1:8096";
         key = "{{HOMEPAGE_VAR_JELLYFIN_KEY}}";
-        version = 1;
+        version = 2;
         enableBlocks = true;
         enableNowPlaying = true;
         enableUser = true;
