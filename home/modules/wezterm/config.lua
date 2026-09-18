@@ -29,5 +29,18 @@ return {
 		-- Copy / paste
 		{ key = "c", mods = "CTRL|SHIFT", action = wezterm.action.CopyTo("Clipboard") },
 		{ key = "v", mods = "CTRL|SHIFT", action = wezterm.action.PasteFrom("Clipboard") },
+
+		-- Scrollback
+		{ key = "u", mods = "CTRL|SHIFT", action = wezterm.action.ScrollByPage(-1) },
+		{ key = "d", mods = "CTRL|SHIFT", action = wezterm.action.ScrollByPage(1) },
+		{ key = "t", mods = "CTRL|SHIFT", action = wezterm.action.ScrollToTop },
+		{ key = "g", mods = "CTRL|SHIFT", action = wezterm.action.ScrollToBottom },
+
+		-- Emoji / character picker
+		{
+			key = "e",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action.CharSelect({ copy_on_select = true, copy_to = "ClipboardAndPrimarySelection" }),
+		},
 	},
 }
