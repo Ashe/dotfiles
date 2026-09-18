@@ -5,13 +5,14 @@
   # Custom modules #
   ##################
 
+  bash.enable = true;
+  bash.flylineAgentCommand = "claude --effort low --print";
   btop.enable = true;
   fastfetch.enable = true;
   neovim.enable = true;
   starship.enable = true;
   wezterm.enable = true;
   yazi.enable = true;
-  zsh.enable = true;
 
   ##################
   # Configurations #
@@ -26,6 +27,7 @@
     };
 
     sessionPath = [
+      "$HOME/.local/bin"
       "$HOME/.cargo/bin"
     ];
 
