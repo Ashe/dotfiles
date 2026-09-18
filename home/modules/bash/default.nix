@@ -16,6 +16,15 @@
       defaultText = lib.literalExpression "inputs.flyline.packages.\${pkgs.stdenv.hostPlatform.system}.default";
       description = "Flyline plugin for bash";
     };
+
+    flylineAgentCommand = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = if lib.attrByPath [ "opencode" "enable" ] false config then "opencode2 run" else null;
+      defaultText = lib.literalExpression ''
+        if config.opencode.enable then "opencode2 run" else null
+      '';
+      description = "Command Flyline uses for agent mode, or null to leave agent mode unconfigured";
+    };
   };
 
   config = lib.mkIf config.bash.enable {
@@ -112,12 +121,12 @@
             fi
           ''}
 
-          ${lib.optionalString config.opencode.enable ''
-            # Use OpenCode to turn natural-language requests prefixed with ": " into commands
+          ${lib.optionalString (config.bash.flylineAgentCommand != null) ''
+            # Turn natural-language requests prefixed with ": " into commands
             flyline set-agent-mode \
               --trigger-prefix ": " \
               --system-prompt "Be concise. Answer with a JSON array of at most 3 items with objects containing: command and description. Command will be a Bash command. " \
-              --command "opencode2 run"
+              --command ${lib.escapeShellArg config.bash.flylineAgentCommand}
           ''}
         '';
 
