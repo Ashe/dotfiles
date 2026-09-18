@@ -97,6 +97,9 @@
           # Keep flycomp completion synthesis explicitly enabled
           flyline suggestions flycomp --enabled true
 
+          # Distinguish popup box/inline suggestions from text and background
+          flyline set-style secondary-text="dim blue" inline-suggestion="dim blue"
+
           # Use a steady, terminal-coloured block cursor
           flyline set-cursor --backend flyline --style reverse --effect none --interpolate none
 
