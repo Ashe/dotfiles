@@ -66,6 +66,9 @@
         "open *"
         "edit"
         "edit *"
+        "git commit -m*"
+        "jj commit -m*"
+        "jj describe -m*"
       ];
 
       # Configure shell aliases for bash
