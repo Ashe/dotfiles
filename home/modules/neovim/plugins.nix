@@ -184,6 +184,14 @@ with pkgs.vimPlugins;
     ];
   };
 
+  # Jujutsu integration
+  jj = {
+    package = jj-nvim;
+    dependsOn = [
+      "diffview"
+    ];
+  };
+
   # Status line
   lualine = {
     package = lualine-nvim;
