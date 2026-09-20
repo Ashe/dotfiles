@@ -1,5 +1,5 @@
--- Binding for opening oil and opening oil submenu while inside
-local oil_binding = "<leader>o"
+-- Prefix for opening full-view plugins and Oil actions
+local open_prefix = "<leader>o"
 
 -- Configure oil
 require("oil").setup({
@@ -34,36 +34,11 @@ require("oil").setup({
 require("oil-lsp-diagnostics").setup()
 
 -- Keybinding groups
-which_key_add({ { oil_binding, group = "Oil.." } })
 
 local oil_group = vim.api.nvim_create_augroup("UserOil", {})
 
 -- Browse files without giving up the current window
-local function set_browser_key()
-	vim.keymap.set("n", oil_binding, function()
-		if vim.bo.filetype == "oil" then
-			return
-		end
-		require("oil").toggle_float()
-	end, { desc = "Toggle file browser" })
-end
-set_browser_key()
-
--- Allow rebinding of oil keybinding while inside an oil buffer
-vim.api.nvim_create_autocmd("BufEnter", {
-	group = oil_group,
-	pattern = "oil://*",
-	callback = function()
-		pcall(vim.keymap.del, "n", oil_binding)
-	end,
-})
-
--- Re-enable the keybinding to open oil after closing oil
-vim.api.nvim_create_autocmd("BufLeave", {
-	group = oil_group,
-	pattern = "oil://*",
-	callback = set_browser_key,
-})
+vim.keymap.set("n", open_prefix .. "o", require("oil").toggle_float, { desc = "Oil" })
 
 -- Oil-buffer specific keybindings
 vim.api.nvim_create_autocmd("FileType", {
@@ -73,9 +48,12 @@ vim.api.nvim_create_autocmd("FileType", {
 		local oil = require("oil")
 		local actions = require("oil.actions")
 
-		-- Prefix bindings with the oil_binding
+		-- Highlight that this Open menu also contains Oil-local actions
+		which_key_add({ { open_prefix, group = "Oil + Open..", buffer = ev.buf } })
+
+		-- Prefix bindings with the open group
 		local function map(suffix, rhs, desc)
-			vim.keymap.set("n", oil_binding .. suffix, rhs, { buffer = ev.buf, desc = desc })
+			vim.keymap.set("n", open_prefix .. suffix, rhs, { buffer = ev.buf, desc = desc })
 		end
 
 		map("x", actions.open_external.callback, "Open externally")

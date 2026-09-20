@@ -64,6 +64,7 @@ vim.opt.fillchars = {
 	fold = " ",
 	eob = " ",
 	msgsep = "‾",
+	diff = "╱",
 }
 
 ----------------------------------
@@ -165,6 +166,9 @@ vim.keymap.set("n", "]d", function()
 	vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Next diagnostic" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic" })
+
+-- General 'open' group for plugins to put themselves in
+which_key_add({ { "<leader>o", group = "Open.." } })
 
 ----------------------------------
 -- Plugin-preparation

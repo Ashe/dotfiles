@@ -176,6 +176,14 @@ with pkgs.vimPlugins;
   # Git integration
   gitsigns.package = gitsigns-nvim;
 
+  # Side-by-side diff viewer
+  diffview = {
+    package = diffview-nvim;
+    dependsOn = [
+      "plenary"
+    ];
+  };
+
   # Status line
   lualine = {
     package = lualine-nvim;
