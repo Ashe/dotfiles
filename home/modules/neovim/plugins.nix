@@ -195,13 +195,6 @@ with pkgs.vimPlugins;
   # Status line
   lualine = {
     package = lualine-nvim;
-    extraConfig = ''
-      require('lualine').setup({
-        options = {
-          theme = 'palenight'
-        }
-      })
-    '';
     extraPlugins = [
       nvim-web-devicons # Icons
     ];
