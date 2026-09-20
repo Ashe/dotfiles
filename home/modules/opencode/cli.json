@@ -7,6 +7,9 @@
   "diffs": {
     "wrap": "word"
   },
+  "prompt": {
+    "image_preview": true
+  },
   "attention": {
     "notifications": true,
     "sound": true,
@@ -14,9 +17,10 @@
   },
   "session": {
     "permissions": "prompt",
-    "sidebar": "auto",
+    "sidebar": "hide",
     "scrollbar": true,
-    "thinking": "show"
+    "thinking": "show",
+    "image_preview": true
   },
   "animations": true,
   "terminal": {
