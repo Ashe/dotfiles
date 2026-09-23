@@ -36,6 +36,18 @@ in
   options.uptime-kuma = {
     enable = lib.mkEnableOption "uptime-kuma";
 
+    port = lib.mkOption {
+      type = lib.types.port;
+      default = config.server.defaultPorts.uptimeKuma;
+      description = "Port for the Uptime Kuma web UI.";
+    };
+
+    subdomain = lib.mkOption {
+      type = lib.types.str;
+      default = "uptime-kuma";
+      description = "Subdomain for the Uptime Kuma web UI.";
+    };
+
     monitors = lib.mkOption {
       type = lib.types.attrsOf (
         lib.types.submodule (
@@ -87,7 +99,7 @@ in
       enable = true;
       settings = {
         HOST = "127.0.0.1";
-        PORT = "3001";
+        PORT = toString config.uptime-kuma.port;
       };
     };
 
@@ -110,7 +122,7 @@ in
           requires = [ "uptime-kuma.service" ];
           wantedBy = [ "multi-user.target" ];
           environment = {
-            AUTOKUMA__KUMA__URL = "http://127.0.0.1:3001";
+            AUTOKUMA__KUMA__URL = "http://127.0.0.1:${toString config.uptime-kuma.port}";
             AUTOKUMA__STATIC_MONITORS = "${monitorsDir}";
             AUTOKUMA__DOCKER__ENABLED = "false";
             AUTOKUMA__FILES__FOLLOW_SYMLINKS = "true";
@@ -130,20 +142,20 @@ in
         };
 
     # Expose uptime-kuma via caddy
-    caddy.services.uptime-kuma.port = 3001;
+    caddy.services.${config.uptime-kuma.subdomain}.port = config.uptime-kuma.port;
 
     # Monitor uptime-kuma itself
-    uptime-kuma.monitors.uptime-kuma.port = 3001;
+    uptime-kuma.monitors.uptime-kuma.port = config.uptime-kuma.port;
 
     # Create uptime-kuma entry for homepage
     homepage.services."Uptime Kuma" = {
       icon = "uptime-kuma.png";
-      href = "https://uptime-kuma.${config.server.domain}";
+      href = "https://${config.uptime-kuma.subdomain}.${config.server.domain}";
       description = "Service monitoring";
-      ping = "http://127.0.0.1:3001";
+      ping = "http://127.0.0.1:${toString config.uptime-kuma.port}";
       widget = {
         type = "uptimekuma";
-        url = "http://127.0.0.1:3001";
+        url = "http://127.0.0.1:${toString config.uptime-kuma.port}";
         slug = "home";
       };
     };

@@ -5,6 +5,18 @@
 
     enable = lib.mkEnableOption "homepage dashboard";
 
+    port = lib.mkOption {
+      type = lib.types.port;
+      default = config.server.defaultPorts.homepage;
+      description = "Port for the Homepage dashboard.";
+    };
+
+    subdomain = lib.mkOption {
+      type = lib.types.str;
+      default = "homepage";
+      description = "Subdomain for the Homepage dashboard.";
+    };
+
     services = lib.mkOption {
       type = with lib.types; attrsOf (lazyAttrsOf anything);
       default = { };
@@ -84,10 +96,10 @@
     # Enable homepage, a fancy monitoring dashboard
     services.homepage-dashboard = {
       enable = true;
-      listenPort = 3020;
+      listenPort = config.homepage.port;
 
       # Only allow access to dashboard via this domain
-      allowedHosts = "homepage.${config.server.domain}";
+      allowedHosts = "${config.homepage.subdomain}.${config.server.domain}";
 
       # Configure appearance of dashboard
       settings = {
@@ -204,9 +216,9 @@
         };
 
     # Expose homepage via caddy
-    caddy.services.homepage.port = 3020;
+    caddy.services.${config.homepage.subdomain}.port = config.homepage.port;
 
     # Monitor status of homepage via uptime-kuma
-    uptime-kuma.monitors.homepage.port = 3020;
+    uptime-kuma.monitors.homepage.port = config.homepage.port;
   };
 }

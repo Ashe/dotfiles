@@ -18,13 +18,13 @@
 
     port = lib.mkOption {
       type = lib.types.port;
-      default = 7820;
+      default = config.server.defaultPorts.tangled.web;
       description = "Port for the tangled web UI.";
     };
 
     sshPort = lib.mkOption {
       type = lib.types.port;
-      default = 2222;
+      default = config.server.defaultPorts.tangled.ssh;
       description = ''
         Port knot-rs's own embedded SSH server listens on. knot-rs presents
         its own SSH host key and terminates the SSH protocol itself — it

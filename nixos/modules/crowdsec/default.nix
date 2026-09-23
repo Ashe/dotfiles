@@ -9,6 +9,18 @@
   options.crowdsec = {
     enable = lib.mkEnableOption "crowdsec";
 
+    apiPort = lib.mkOption {
+      type = lib.types.port;
+      default = config.server.defaultPorts.crowdsec.api;
+      description = "Port for CrowdSec's local API.";
+    };
+
+    metricsPort = lib.mkOption {
+      type = lib.types.port;
+      default = config.server.defaultPorts.crowdsec.metrics;
+      description = "Port for CrowdSec's Prometheus metrics listener.";
+    };
+
     collections = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ ];
@@ -98,13 +110,16 @@
 
       settings = {
         # Enable the local API for the crowdsec bouncer
-        general.api.server.enable = true;
+        general.api.server = {
+          enable = true;
+          listen_uri = "127.0.0.1:${toString config.crowdsec.apiPort}";
+        };
 
         # Allow prometheus to access logs
         general.prometheus = {
           enabled = true;
           listen_addr = "127.0.0.1";
-          listen_port = 6060;
+          listen_port = config.crowdsec.metricsPort;
         };
 
         lapi.credentialsFile = "/var/lib/crowdsec/local_api_credentials.yaml";
@@ -175,12 +190,12 @@
     ];
 
     # Allow prometheus to scrape crowdsec
-    grafana.victoriametrics.extraScrapeTargets.crowdsec.port = 6060;
+    grafana.victoriametrics.extraScrapeTargets.crowdsec.port = config.crowdsec.metricsPort;
 
     # Monitor crowdsec availability via uptime-kuma
     uptime-kuma.monitors.crowdsec = {
       type = "port";
-      port = 8080;
+      port = config.crowdsec.apiPort;
     };
 
     # Create homepage entry for crowdsec
@@ -188,7 +203,7 @@
       icon = "crowdsec.png";
       href = "https://app.crowdsec.net";
       description = "Intrusion detection";
-      ping = "http://127.0.0.1:8080";
+      ping = "http://127.0.0.1:${toString config.crowdsec.apiPort}";
     };
 
     # Ensure acquisitions are setup correctly

@@ -10,8 +10,14 @@
 
     port = lib.mkOption {
       type = lib.types.port;
-      default = 3240;
+      default = config.server.defaultPorts.grafana.web;
       description = "Port for the Grafana web UI.";
+    };
+
+    subdomain = lib.mkOption {
+      type = lib.types.str;
+      default = "grafana";
+      description = "Subdomain for the Grafana web UI.";
     };
 
     loki = {
@@ -20,8 +26,13 @@
       };
       port = lib.mkOption {
         type = lib.types.port;
-        default = 3241;
+        default = config.server.defaultPorts.grafana.loki;
         description = "Port Loki listens on for push/query API.";
+      };
+      grpcPort = lib.mkOption {
+        type = lib.types.port;
+        default = config.server.defaultPorts.grafana.lokiGrpc;
+        description = "Port for Loki's gRPC listener.";
       };
     };
 
@@ -31,8 +42,13 @@
       };
       port = lib.mkOption {
         type = lib.types.port;
-        default = 12345;
+        default = config.server.defaultPorts.grafana.alloy;
         description = "Port Alloy listens on.";
+      };
+      subdomain = lib.mkOption {
+        type = lib.types.str;
+        default = "alloy";
+        description = "Subdomain for the Alloy web UI.";
       };
     };
 
@@ -42,8 +58,13 @@
       };
       port = lib.mkOption {
         type = lib.types.port;
-        default = 3260;
+        default = config.server.defaultPorts.grafana.victoriametrics;
         description = "Port VictoriaMetrics listens on.";
+      };
+      subdomain = lib.mkOption {
+        type = lib.types.str;
+        default = "victoriametrics";
+        description = "Subdomain for the VictoriaMetrics web UI.";
       };
       retentionPeriod = lib.mkOption {
         type = lib.types.str;
@@ -71,7 +92,7 @@
           };
           port = lib.mkOption {
             type = lib.types.port;
-            default = 3263;
+            default = config.server.defaultPorts.grafana.smartctlExporter;
           };
         };
       };
@@ -98,8 +119,8 @@
         server = {
           http_addr = "127.0.0.1";
           http_port = config.grafana.port;
-          domain = "grafana.${config.server.domain}";
-          root_url = "https://grafana.${config.server.domain}/";
+          domain = "${config.grafana.subdomain}.${config.server.domain}";
+          root_url = "https://${config.grafana.subdomain}.${config.server.domain}/";
         };
         security.secret_key = lib.mkIf (
           config.agenix.secrets != null && builtins.pathExists "${config.agenix.secrets}/grafana-key.age"
@@ -148,7 +169,7 @@
         auth_enabled = false;
         server = {
           http_listen_port = config.grafana.loki.port;
-          grpc_listen_port = 9096;
+          grpc_listen_port = config.grafana.loki.grpcPort;
         };
         common = {
           path_prefix = "/var/lib/loki";
@@ -307,15 +328,15 @@
     # Expose grafana web-ui via caddy
     caddy.services = lib.mkMerge [
       {
-        grafana.port = config.grafana.port;
+        ${config.grafana.subdomain}.port = config.grafana.port;
       }
 
       (lib.mkIf config.grafana.alloy.enable {
-        alloy.port = config.grafana.alloy.port;
+        ${config.grafana.alloy.subdomain}.port = config.grafana.alloy.port;
       })
 
       (lib.mkIf config.grafana.victoriametrics.enable {
-        victoriametrics.port = config.grafana.victoriametrics.port;
+        ${config.grafana.victoriametrics.subdomain}.port = config.grafana.victoriametrics.port;
       })
     ];
 
@@ -368,7 +389,7 @@
         Grafana = {
           icon = "grafana.png";
           description = "Dashboards & logs";
-          href = "https://grafana.${config.server.domain}";
+          href = "https://${config.grafana.subdomain}.${config.server.domain}";
           ping = "http://127.0.0.1:${toString config.grafana.port}";
           widget = {
             type = "grafana";
@@ -389,7 +410,7 @@
         Alloy = {
           icon = "alloy.png";
           description = "Log/metric shipper";
-          href = "https://alloy.${config.server.domain}";
+          href = "https://${config.grafana.alloy.subdomain}.${config.server.domain}";
           ping = "http://127.0.0.1:${toString config.grafana.alloy.port}/-/ready";
         };
       })
@@ -397,7 +418,7 @@
         "Victoria Metrics" = {
           icon = "victoriametrics.png";
           description = "Metrics storage";
-          href = "https://victoriametrics.${config.server.domain}";
+          href = "https://${config.grafana.victoriametrics.subdomain}.${config.server.domain}";
           ping = "http://127.0.0.1:${toString config.grafana.victoriametrics.port}/health";
         };
       })

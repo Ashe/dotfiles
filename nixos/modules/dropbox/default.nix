@@ -6,7 +6,14 @@
 }:
 
 {
-  options.dropbox.enable = lib.mkEnableOption "dropbox";
+  options.dropbox = {
+    enable = lib.mkEnableOption "dropbox";
+    port = lib.mkOption {
+      type = lib.types.port;
+      default = config.server.defaultPorts.dropbox;
+      description = "Firewall port for Dropbox LAN sync.";
+    };
+  };
 
   config = lib.mkIf config.dropbox.enable {
 
@@ -17,8 +24,8 @@
 
     # Allow dropbox in firewall
     networking.firewall = {
-      allowedTCPPorts = [ 17500 ];
-      allowedUDPPorts = [ 17500 ];
+      allowedTCPPorts = [ config.dropbox.port ];
+      allowedUDPPorts = [ config.dropbox.port ];
     };
 
     # Create a service tasked with hosting the dropbox application

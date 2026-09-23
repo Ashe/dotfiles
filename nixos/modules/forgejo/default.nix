@@ -29,6 +29,12 @@
       description = "Subdomain to access forgejo at.";
     };
 
+    port = lib.mkOption {
+      type = lib.types.port;
+      default = config.server.defaultPorts.forgejo;
+      description = "Port for the Forgejo web UI.";
+    };
+
     user = lib.mkOption {
       type = lib.types.str;
       default = "git";
@@ -77,7 +83,7 @@
 
             # Bind HTTP to loopback only
             HTTP_ADDR = "127.0.0.1";
-            HTTP_PORT = 3030;
+            HTTP_PORT = config.forgejo.port;
 
             # Allow ssh connections using regular ssh port
             START_SSH_SERVER = false;
@@ -155,12 +161,12 @@
 
     # Expose Forgejo via Caddy
     caddy.services.${config.forgejo.subdomain} = {
-      port = 3030;
+      port = config.forgejo.port;
       public = config.forgejo.enable == "public";
     };
 
     # Monitor Forgejo HTTP availability via uptime-kuma
-    uptime-kuma.monitors.forgejo.port = 3030;
+    uptime-kuma.monitors.forgejo.port = config.forgejo.port;
 
     # CrowdSec — parse Forgejo's systemd journal for threats.
     # No official Forgejo collection exists; the journald acquisition
@@ -179,7 +185,7 @@
           "https://${config.forgejo.subdomain}.${config.server.publicDomain}"
         else
           "https://${config.forgejo.subdomain}.${config.server.domain}";
-      ping = "https://127.0.0.1:3030";
+      ping = "https://127.0.0.1:${toString config.forgejo.port}";
     };
   };
 }

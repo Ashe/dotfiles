@@ -8,6 +8,21 @@
 {
   options.caddy = {
     enable = lib.mkEnableOption "caddy";
+    httpPort = lib.mkOption {
+      type = lib.types.port;
+      default = config.server.defaultPorts.caddy.http;
+      description = "Port for Caddy's HTTP listener.";
+    };
+    httpsPort = lib.mkOption {
+      type = lib.types.port;
+      default = config.server.defaultPorts.caddy.https;
+      description = "Port for Caddy's HTTPS listener.";
+    };
+    adminPort = lib.mkOption {
+      type = lib.types.port;
+      default = config.server.defaultPorts.caddy.admin;
+      description = "Port for Caddy's loopback admin API.";
+    };
     services = lib.mkOption {
       type = lib.types.attrsOf (
         lib.types.submodule {
@@ -142,6 +157,10 @@
       in
       {
         enable = true;
+        httpPort = config.caddy.httpPort;
+        httpsPort = config.caddy.httpsPort;
+        # Make Caddy's otherwise implicit admin listener explicit and configurable.
+        globalConfig = "admin localhost:${toString config.caddy.adminPort}";
         virtualHosts = lib.mkMerge [
           defaultHosts
           localVirtualHosts
@@ -152,13 +171,13 @@
     # Monitor caddy availability via uptime-kuma
     uptime-kuma.monitors.caddy = {
       type = "port";
-      port = 2019;
+      port = config.caddy.adminPort;
     };
 
     # Allow HTTP and HTTPS traffic through the firewall
     networking.firewall.allowedTCPPorts = [
-      80
-      443
+      config.caddy.httpPort
+      config.caddy.httpsPort
     ];
 
     systemd.services.caddy =
@@ -189,10 +208,10 @@
     homepage.services.Caddy = {
       icon = "caddy.png";
       description = "Reverse proxy";
-      ping = "http://127.0.0.1:2019";
+      ping = "http://127.0.0.1:${toString config.caddy.adminPort}";
       widget = {
         type = "caddy";
-        url = "http://127.0.0.1:2019";
+        url = "http://127.0.0.1:${toString config.caddy.adminPort}";
       };
     };
 

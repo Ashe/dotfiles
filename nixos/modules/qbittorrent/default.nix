@@ -8,6 +8,16 @@
 {
   options.qbittorrent = {
     enable = lib.mkEnableOption "qBittorrent torrent client";
+    port = lib.mkOption {
+      type = lib.types.port;
+      default = config.server.defaultPorts.qbittorrent;
+      description = "Port for the qBittorrent web UI inside the WireGuard namespace.";
+    };
+    subdomain = lib.mkOption {
+      type = lib.types.str;
+      default = "qbittorrent";
+      description = "Subdomain for the qBittorrent web UI.";
+    };
   };
 
   config = lib.mkIf config.qbittorrent.enable {
@@ -15,7 +25,7 @@
     # Configure qbittorrent torrent client
     services.qbittorrent = {
       enable = true;
-      webuiPort = 8090;
+      webuiPort = config.qbittorrent.port;
       openFirewall = false;
       serverConfig = {
         BitTorrent = {
@@ -30,7 +40,7 @@
         };
         Preferences = {
           "WebUI\\Address" = "0.0.0.0";
-          "WebUI\\Port" = 8090;
+          "WebUI\\Port" = config.qbittorrent.port;
         };
       };
     };
@@ -113,26 +123,26 @@
     wireguard.services = [ "qbittorrent" ];
 
     # Expose qbittorrent web-ui via caddy
-    caddy.services.qbittorrent = {
+    caddy.services.${config.qbittorrent.subdomain} = {
       host = config.wireguard.namespaceIP;
-      port = 8090;
+      port = config.qbittorrent.port;
     };
 
     # Monitor qbittorrent with uptime-kuma
     uptime-kuma.monitors.qbittorrent = {
       host = config.wireguard.namespaceIP;
-      port = 8090;
+      port = config.qbittorrent.port;
     };
 
     # Create qbittorrent entry for homepage
     homepage.services.qBittorrent = {
       icon = "qbittorrent.png";
-      href = "https://qbittorrent.${config.server.domain}";
+      href = "https://${config.qbittorrent.subdomain}.${config.server.domain}";
       description = "Torrent client (VPN)";
-      ping = "http://${config.wireguard.namespaceIP}:8090";
+      ping = "http://${config.wireguard.namespaceIP}:${toString config.qbittorrent.port}";
       widget = {
         type = "qbittorrent";
-        url = "http://${config.wireguard.namespaceIP}:8090";
+        url = "http://${config.wireguard.namespaceIP}:${toString config.qbittorrent.port}";
         username = "{{HOMEPAGE_VAR_QBITTORRENT_USER}}";
         password = "{{HOMEPAGE_VAR_QBITTORRENT_PASS}}";
       };

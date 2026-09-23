@@ -207,7 +207,7 @@
                 def log_message(self, *args):
                   pass
 
-              http.server.HTTPServer(('${config.wireguard.namespaceIP}', 9999), Handler).serve_forever()
+              http.server.HTTPServer(('${config.wireguard.namespaceIP}', ${toString config.server.defaultPorts.wireguard.health}), Handler).serve_forever()
               "
             '';
           };
@@ -222,14 +222,14 @@
     # Monitor wireguard with uptime-kuma
     uptime-kuma.monitors.wireguard = {
       host = config.wireguard.namespaceIP;
-      port = 9999;
+      port = config.server.defaultPorts.wireguard.health;
     };
 
     # Create wireguard entry for homepage
     homepage.services.Wireguard = {
       icon = "wireguard.png";
       description = "VPN tunnel";
-      siteMonitor = "http://${config.wireguard.namespaceIP}:9999";
+      siteMonitor = "http://${config.wireguard.namespaceIP}:${toString config.server.defaultPorts.wireguard.health}";
     };
 
     # Assert that a wireguard config file is provided

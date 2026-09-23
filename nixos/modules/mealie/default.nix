@@ -22,6 +22,12 @@
       description = "Subdomain to access Mealie at.";
     };
 
+    port = lib.mkOption {
+      type = lib.types.port;
+      default = config.server.defaultPorts.mealie;
+      description = "Port for the Mealie web UI.";
+    };
+
     allowSignup = lib.mkOption {
       type = lib.types.bool;
       default = false;
@@ -37,7 +43,7 @@
       enable = true;
 
       listenAddress = "127.0.0.1";
-      port = 9925;
+      port = config.mealie.port;
 
       settings = {
         BASE_URL =
@@ -66,12 +72,12 @@
 
     # Expose Mealie via Caddy
     caddy.services."${config.mealie.subdomain}" = {
-      port = config.services.mealie.port;
+      port = config.mealie.port;
       public = config.mealie.enable == "public";
     };
 
     # Monitor Mealie via uptime-kuma
-    uptime-kuma.monitors.mealie.port = config.services.mealie.port;
+    uptime-kuma.monitors.mealie.port = config.mealie.port;
 
     # Create mealie entry for homepage
     homepage.services.Mealie = {
@@ -82,10 +88,10 @@
           "https://${config.mealie.subdomain}.${config.server.publicDomain}"
         else
           "https://${config.mealie.subdomain}.${config.server.domain}";
-      ping = "http://127.0.0.1:${toString config.services.mealie.port}";
+      ping = "http://127.0.0.1:${toString config.mealie.port}";
       widget = {
         type = "mealie";
-        url = "http://127.0.0.1:${toString config.services.mealie.port}";
+        url = "http://127.0.0.1:${toString config.mealie.port}";
         key = "{{HOMEPAGE_VAR_MEALIE_API_KEY}}";
         version = 3;
       };

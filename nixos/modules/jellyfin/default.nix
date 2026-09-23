@@ -21,6 +21,11 @@
       default = "/data/media";
       description = "Host path to the media library";
     };
+    subdomain = lib.mkOption {
+      type = lib.types.str;
+      default = "jellyfin";
+      description = "Subdomain for the Jellyfin web UI.";
+    };
   };
 
   config = lib.mkIf (config.jellyfin.enable != null) {
@@ -47,13 +52,13 @@
     ];
 
     # Expose jellyfin via caddy
-    caddy.services.jellyfin = {
-      port = 8096;
+    caddy.services.${config.jellyfin.subdomain} = {
+      port = config.server.defaultPorts.jellyfin;
       public = config.jellyfin.enable == "public";
     };
 
     # Monitor jellyfin via uptime-kuma
-    uptime-kuma.monitors.jellyfin.port = 8096;
+    uptime-kuma.monitors.jellyfin.port = config.server.defaultPorts.jellyfin;
 
     # Monitor jellyfin via crowdsec
     crowdsec.collections = [ "LePresidente/jellyfin" ];
@@ -67,14 +72,14 @@
       icon = "jellyfin.png";
       href =
         if config.jellyfin.enable == "public" then
-          "https://jellyfin.${config.server.publicDomain}"
+          "https://${config.jellyfin.subdomain}.${config.server.publicDomain}"
         else
-          "https://jellyfin.${config.server.domain}";
+          "https://${config.jellyfin.subdomain}.${config.server.domain}";
       description = "Media server";
-      ping = "http://127.0.0.1:8096";
+      ping = "http://127.0.0.1:${toString config.server.defaultPorts.jellyfin}";
       widget = {
         type = "jellyfin";
-        url = "http://127.0.0.1:8096";
+        url = "http://127.0.0.1:${toString config.server.defaultPorts.jellyfin}";
         key = "{{HOMEPAGE_VAR_JELLYFIN_KEY}}";
         version = 2;
         enableBlocks = true;

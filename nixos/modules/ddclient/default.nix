@@ -5,38 +5,47 @@
   ...
 }:
 
+let
+  providerType = lib.types.submodule (
+    { name, ... }:
+    {
+      options = {
+        enable = lib.mkEnableOption "${name} dynamic DNS via ddclient";
+
+        protocol = lib.mkOption {
+          type = lib.types.str;
+          default = name;
+          description = "ddclient protocol name. Defaults to the service name.";
+        };
+
+        domain = lib.mkOption {
+          type = lib.types.nullOr lib.types.str;
+          default = null;
+          description = "Root domain to update. Defaults to server.publicDomain.";
+        };
+
+        subdomains = lib.mkOption {
+          type = lib.types.nullOr (lib.types.listOf lib.types.str);
+          default = null;
+          description = "Subdomains to update. Defaults to publicly-exposed caddy services.";
+        };
+      };
+    }
+  );
+in
+
 {
   options.ddclient = lib.mkOption {
     default = { };
     description = "Dynamic DNS providers, keyed by service name (e.g. \"porkbun\").";
-    type = lib.types.attrsOf (
-      lib.types.submodule (
-        { name, ... }:
-        {
-          options = {
-            enable = lib.mkEnableOption "${name} dynamic DNS via ddclient";
-
-            protocol = lib.mkOption {
-              type = lib.types.str;
-              default = name;
-              description = "ddclient protocol name. Defaults to the service name.";
-            };
-
-            domain = lib.mkOption {
-              type = lib.types.nullOr lib.types.str;
-              default = null;
-              description = "Root domain to update. Defaults to server.publicDomain.";
-            };
-
-            subdomains = lib.mkOption {
-              type = lib.types.nullOr (lib.types.listOf lib.types.str);
-              default = null;
-              description = "Subdomains to update. Defaults to publicly-exposed caddy services.";
-            };
-          };
-        }
-      )
-    );
+    type = lib.types.submodule {
+      freeformType = lib.types.attrsOf providerType;
+      options.checkPort = lib.mkOption {
+        type = lib.types.port;
+        default = config.server.defaultPorts.ddclient.check;
+        description = "Port for the local DNS health-check service.";
+      };
+    };
   };
 
   config =
@@ -65,7 +74,7 @@
               svc.enable
               && config.agenix.secrets != null
               && builtins.pathExists "${config.agenix.secrets}/ddclient-${name}.age"
-            ) config.ddclient
+            ) (removeAttrs config.ddclient [ "checkPort" ])
           );
 
     in
@@ -141,7 +150,7 @@
         };
       };
 
-      # Tiny HTTP service on localhost:9099 — path is the FQDN to check (e.g. /jellyfin.aas.sh)
+      # Tiny HTTP service on localhost — path is the FQDN to check (e.g. /jellyfin.aas.sh)
       # Returns 200 if the DNS record matches the current public IP, 503 if stale, 404 if unknown.
       systemd.services.ddclient-dns-check = {
         description = "ddclient DNS health check";
@@ -175,7 +184,7 @@
                 esac
               '';
             in
-            "${pkgs.socat}/bin/socat TCP4-LISTEN:9099,bind=127.0.0.1,reuseaddr,fork EXEC:${script}";
+            "${pkgs.socat}/bin/socat TCP4-LISTEN:${toString config.ddclient.checkPort},bind=127.0.0.1,reuseaddr,fork EXEC:${script}";
           DynamicUser = true;
           Restart = "always";
           RestartSec = "5s";
@@ -219,7 +228,7 @@
               sub:
               lib.nameValuePair "dns-${providerName}-${sub}.${svc.domain}" {
                 name = "dns: ${sub}.${svc.domain} (${providerName})";
-                port = 9099;
+                port = config.ddclient.checkPort;
                 path = "/${sub}.${svc.domain}";
               }
             ) svc.subdomains

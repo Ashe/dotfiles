@@ -31,7 +31,7 @@
 
         port = lib.mkOption {
           type = lib.types.port;
-          default = 22;
+          default = config.server.defaultPorts.ssh.local;
           description = "Port for local SSH. Not meant to be forwarded through your router.";
         };
 
@@ -71,7 +71,7 @@
 
         port = lib.mkOption {
           type = lib.types.port;
-          default = 2222;
+          default = config.server.defaultPorts.ssh.public;
           description = "Port for public SSH. The only SSH port you should ever forward through your router.";
         };
 

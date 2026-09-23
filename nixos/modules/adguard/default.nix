@@ -6,7 +6,24 @@
 }:
 
 {
-  options.adguard.enable = lib.mkEnableOption "adguard";
+  options.adguard = {
+    enable = lib.mkEnableOption "adguard";
+    port = lib.mkOption {
+      type = lib.types.port;
+      default = config.server.defaultPorts.adguard.web;
+      description = "Port for the AdGuard Home web UI.";
+    };
+    dnsPort = lib.mkOption {
+      type = lib.types.port;
+      default = config.server.defaultPorts.adguard.dns;
+      description = "Port for the AdGuard DNS listener.";
+    };
+    subdomain = lib.mkOption {
+      type = lib.types.str;
+      default = "adguard";
+      description = "Subdomain for the AdGuard Home web UI.";
+    };
+  };
 
   config = lib.mkIf config.adguard.enable {
 
@@ -15,13 +32,13 @@
       enable = true;
       openFirewall = false;
       host = "127.0.0.1";
-      port = 3000;
+      port = config.adguard.port;
       mutableSettings = true;
       settings = {
 
         dns = {
           bind_hosts = [ "0.0.0.0" ];
-          port = 53;
+          port = config.adguard.dnsPort;
 
           # Bootstrap DNS is used to resolve upstream DNS hostnames themselves
           # Needed because AdGuard can't use Cloudflare/Google as upstream until
@@ -83,33 +100,33 @@
 
     # Allow LAN devices to query AdGuard DNS
     networking.firewall = {
-      allowedTCPPorts = [ 53 ];
-      allowedUDPPorts = [ 53 ];
+      allowedTCPPorts = [ config.adguard.dnsPort ];
+      allowedUDPPorts = [ config.adguard.dnsPort ];
       extraCommands =
         let
           subnet = "${lib.concatStringsSep "." (lib.take 3 (lib.splitString "." config.server.ip))}.0/24";
         in
         ''
-          iptables -A nixos-fw -p udp -s ${subnet} --dport 53 -j nixos-fw-accept
-          iptables -A nixos-fw -p tcp -s ${subnet} --dport 53 -j nixos-fw-accept
+          iptables -A nixos-fw -p udp -s ${subnet} --dport ${toString config.adguard.dnsPort} -j nixos-fw-accept
+          iptables -A nixos-fw -p tcp -s ${subnet} --dport ${toString config.adguard.dnsPort} -j nixos-fw-accept
         '';
     };
 
     # Monitor AdGuard availability via uptime-kuma
-    uptime-kuma.monitors.adguard.port = 3000;
+    uptime-kuma.monitors.adguard.port = config.adguard.port;
 
     # Expose AdGuard's web ui via caddy
-    caddy.services.adguard.port = 3000;
+    caddy.services.${config.adguard.subdomain}.port = config.adguard.port;
 
     # Create AdGuard entry for homepage
     homepage.services.AdGuard = {
       icon = "adguard-home.png";
-      href = "https://adguard.${config.server.domain}";
+      href = "https://${config.adguard.subdomain}.${config.server.domain}";
       description = "DNS & ad blocking";
-      ping = "http://127.0.0.1:3000";
+      ping = "http://127.0.0.1:${toString config.adguard.port}";
       widget = {
         type = "adguard";
-        url = "http://127.0.0.1:3000";
+        url = "http://127.0.0.1:${toString config.adguard.port}";
         username = "{{HOMEPAGE_VAR_ADGUARD_USER}}";
         password = "{{HOMEPAGE_VAR_ADGUARD_PASS}}";
       };
