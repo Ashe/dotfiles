@@ -59,6 +59,7 @@
               widgets = [
                 "Sonarr"
                 "Radarr"
+                "Shelfmark"
                 "Prowlarr"
                 "qBittorrent"
               ];

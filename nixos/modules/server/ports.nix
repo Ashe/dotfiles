@@ -34,6 +34,7 @@
     prowlarr = 9696;
     sonarr = 8989;
     radarr = 7878;
+    shelfmark = 8084;
     cleanuparr = 11011;
     byparr = 8191;
   };

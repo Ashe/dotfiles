@@ -40,6 +40,7 @@
 
       sonarr = arrOption "Sonarr" config.server.defaultPorts.arrstack.sonarr "sonarr";
       radarr = arrOption "Radarr" config.server.defaultPorts.arrstack.radarr "radarr";
+      shelfmark = arrOption "Shelfmark" config.server.defaultPorts.arrstack.shelfmark "shelfmark";
       prowlarr = arrOption "Prowlarr" config.server.defaultPorts.arrstack.prowlarr "prowlarr";
       cleanuparr = arrOption "Cleanuparr" config.server.defaultPorts.arrstack.cleanuparr "cleanuparr";
       byparr = arrOption "Byparr" config.server.defaultPorts.arrstack.byparr null;
@@ -82,6 +83,11 @@
       "d /data/media/shows 0755 arrstack arrstack -"
       "d /data/media/anime 0755 arrstack arrstack -"
       "d /data/media/music 0755 arrstack arrstack -"
+    ]
+    ++ lib.optionals config.arrstack.shelfmark.enable [
+      "d /data/media/books 0755 arrstack arrstack -"
+      "d /data/media/audiobooks 0755 arrstack arrstack -"
+      "d /var/lib/arrstack/shelfmark 0750 arrstack arrstack -"
     ]
     ++ lib.optionals config.arrstack.sonarr.enable [
       "d /var/lib/arrstack/sonarr 0750 arrstack arrstack -"
@@ -127,6 +133,38 @@
       settings.server.port = config.arrstack.radarr.port;
     };
 
+    services.shelfmark = lib.mkIf config.arrstack.shelfmark.enable {
+      enable = true;
+      environment = {
+        FLASK_PORT = config.arrstack.shelfmark.port;
+        CONFIG_DIR = "/var/lib/arrstack/shelfmark";
+        # arrstack's home is read-only in the sandbox, so gunicorn needs a writable HOME
+        HOME = "/var/lib/arrstack/shelfmark";
+
+        # Lay files out the way Jellyfin expects: one folder per book, grouped by author
+        INGEST_DIR = "/data/media/books";
+        FILE_ORGANIZATION = "organize";
+        TEMPLATE_ORGANIZE = "{Author}/{Title} ({Year})/{Title}";
+        DESTINATION_AUDIOBOOK = "/data/media/audiobooks";
+        FILE_ORGANIZATION_AUDIOBOOK = "organize";
+
+        # ReadWritePaths are separate bind mounts, so hardlinks out of /data/torrents fail with EXDEV
+        HARDLINK_TORRENTS = "false";
+        HARDLINK_TORRENTS_AUDIOBOOK = "false";
+      }
+      # The nixpkgs package always uses an external bypasser, so point it at byparr
+      // lib.optionalAttrs config.arrstack.byparr.enable {
+        EXT_BYPASSER_URL = "http://127.0.0.1:${toString config.arrstack.byparr.port}";
+      }
+      // lib.optionalAttrs config.arrstack.prowlarr.enable {
+        PROWLARR_URL = "http://127.0.0.1:${toString config.arrstack.prowlarr.port}";
+      }
+      // lib.optionalAttrs config.qbittorrent.enable {
+        QBITTORRENT_URL = "http://${config.wireguard.namespaceIP}:${toString config.qbittorrent.port}";
+        QBITTORRENT_CATEGORY = "books";
+      };
+    };
+
     services.prowlarr = lib.mkIf config.arrstack.prowlarr.enable {
       enable = true;
       settings.server.port = config.arrstack.prowlarr.port;
@@ -147,6 +185,24 @@
           };
         };
       }
+
+      (lib.mkIf config.arrstack.shelfmark.enable {
+        shelfmark.serviceConfig = {
+          DynamicUser = lib.mkForce false;
+          User = "arrstack";
+          Group = "arrstack";
+          StateDirectory = lib.mkForce "";
+          UMask = lib.mkForce "0022";
+          ReadWritePaths = [
+            "/var/lib/arrstack/shelfmark"
+            "/data/media/books"
+            "/data/media/audiobooks"
+          ];
+
+          # API keys and passwords, e.g. PROWLARR_API_KEY, QBITTORRENT_PASSWORD, HARDCOVER_API_KEY
+          EnvironmentFile = lib.mkIf (builtins.hasAttr "shelfmark-secrets" config.age.secrets) config.age.secrets.shelfmark-secrets.path;
+        };
+      })
 
       (lib.mkIf config.arrstack.cleanuparr.enable {
         podman-cleanuparr.after = [ "arrstack-network.service" ];
@@ -256,6 +312,9 @@
       (lib.mkIf config.arrstack.radarr.enable {
         ${config.arrstack.radarr.subdomain}.port = config.arrstack.radarr.port;
       })
+      (lib.mkIf config.arrstack.shelfmark.enable {
+        ${config.arrstack.shelfmark.subdomain}.port = config.arrstack.shelfmark.port;
+      })
       (lib.mkIf config.arrstack.cleanuparr.enable {
         ${config.arrstack.cleanuparr.subdomain}.port = config.arrstack.cleanuparr.port;
       })
@@ -268,6 +327,7 @@
       })
       (lib.mkIf config.arrstack.sonarr.enable { sonarr.port = config.arrstack.sonarr.port; })
       (lib.mkIf config.arrstack.radarr.enable { radarr.port = config.arrstack.radarr.port; })
+      (lib.mkIf config.arrstack.shelfmark.enable { shelfmark.port = config.arrstack.shelfmark.port; })
       (lib.mkIf config.arrstack.cleanuparr.enable {
         cleanuparr.port = config.arrstack.cleanuparr.port;
       })
@@ -314,6 +374,14 @@
             url = "http://127.0.0.1:${toString config.arrstack.radarr.port}";
             key = "{{HOMEPAGE_VAR_RADARR_KEY}}";
           };
+        };
+      })
+      (lib.mkIf config.arrstack.shelfmark.enable {
+        Shelfmark = {
+          icon = "shelfmark.png";
+          href = "https://${config.arrstack.shelfmark.subdomain}.${config.server.domain}";
+          description = "Book search and downloads";
+          ping = "http://127.0.0.1:${toString config.arrstack.shelfmark.port}";
         };
       })
       (lib.mkIf config.arrstack.cleanuparr.enable {

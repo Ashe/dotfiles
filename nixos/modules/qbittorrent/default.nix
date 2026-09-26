@@ -51,9 +51,11 @@
       "d /data/torrents/complete 0750 qbittorrent qbittorrent -"
       "d /data/torrents/complete/tv-sonarr 0770 qbittorrent qbittorrent -"
       "d /data/torrents/complete/radarr 0770 qbittorrent qbittorrent -"
+      "d /data/torrents/complete/books 0770 qbittorrent qbittorrent -"
       "d /data/torrents/incomplete 0750 qbittorrent qbittorrent -"
       "d /data/torrents/incomplete/tv-sonarr 0770 qbittorrent qbittorrent -"
       "d /data/torrents/incomplete/radarr 0770 qbittorrent qbittorrent -"
+      "d /data/torrents/incomplete/books 0770 qbittorrent qbittorrent -"
     ];
 
     # Register agenix secret for qbittorrent credentials
