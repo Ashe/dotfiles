@@ -37,6 +37,7 @@
       bat
       chatterino2
       discord
+      glow
       gnome-sound-recorder
       halloy
       magic-wormhole-rs
