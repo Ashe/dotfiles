@@ -34,6 +34,7 @@
     packages = with pkgs; [
       awscli2
       bat
+      glow
       gnupg
       rust-analyzer
       tree
