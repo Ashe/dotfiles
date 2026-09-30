@@ -84,9 +84,9 @@
           libraryName = "libflyline${pkgs.stdenv.hostPlatform.extensions.sharedLibrary}";
         in
         ''
-          ############################
-          # Additional configuration #
-          ############################
+          #########################
+          # Flyline configuration #
+          #########################
 
           # Replace readline with flyline
           enable -f "${config.bash.flylinePackage}/lib/${libraryName}" flyline
@@ -117,16 +117,6 @@
             flyline key bind Ctrl+t 'always=runBashCommand(fzf-file-widget)'
           ''}
 
-          ${lib.optionalString (lib.hasAttr "jujutsu" pkgs) ''
-            # Dynamic Jujutsu completions include revisions, bookmarks and aliases
-            if command -v jj >/dev/null 2>&1; then
-              source <(COMPLETE=bash jj)
-
-              # Allow completion within revsets such as main..feature and foo::bar
-              COMP_WORDBREAKS="''${COMP_WORDBREAKS//:}"
-            fi
-          ''}
-
           ${lib.optionalString (config.bash.flylineAgentCommand != null) ''
             # Turn natural-language requests prefixed with ": " into commands
             flyline set-agent-mode \
@@ -134,6 +124,18 @@
               --system-prompt "Be concise. Answer with a JSON array of at most 3 items with objects containing: command and description. Command will be a Bash command. " \
               --command ${lib.escapeShellArg config.bash.flylineAgentCommand}
           ''}
+
+          ############################
+          # Additional configuration #
+          ############################
+
+          # Dynamic Jujutsu completions include revisions, bookmarks and aliases
+          if command -v jj >/dev/null 2>&1; then
+            source <(COMPLETE=bash jj)
+
+            # Allow completion within revsets such as main..feature and foo::bar
+            COMP_WORDBREAKS="''${COMP_WORDBREAKS//:}"
+          fi
         '';
 
       # Additional configuration for .bash_profile
