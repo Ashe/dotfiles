@@ -60,6 +60,14 @@
     jujutsu
   ];
 
+  # Kill processes when running out of RAM
+  services.earlyoom = {
+    enable = true;
+    freeMemThreshold = 5;
+    freeSwapThreshold = 10;
+    enableNotifications = true;
+  };
+
   # Ensure zsh is available to users
   programs.zsh.enable = true;
 
