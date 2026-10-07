@@ -144,6 +144,11 @@
         # Additional configuration #
         ############################
 
+        # Load the Nix environment on non-NixOS hosts
+        if [ ! -e /etc/NIXOS ] && [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+          . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+        fi
+
         # Activate homebrew if installed
         if [[ -x /opt/homebrew/bin/brew ]]; then
           eval "$(/opt/homebrew/bin/brew shellenv bash)"
