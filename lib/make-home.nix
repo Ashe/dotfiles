@@ -22,13 +22,13 @@ inputs.home-manager.lib.homeManagerConfiguration {
         username = user;
         homeDirectory = home-directory;
         stateVersion = "26.05";
-        packages = with inputs.nixpkgs.legacyPackages.${system}; [
-          magic-wormhole-rs
-          netcat
-        ];
       };
       nix = {
-        package = inputs.nixpkgs.legacyPackages.${system}.lixPackageSets.stable.lix;
+        package =
+          if self.nixosConfigurations ? ${host} then
+            inputs.nixpkgs.legacyPackages.${system}.lixPackageSets.stable.lix
+          else
+            inputs.nixpkgs.legacyPackages.${system}.nix;
         settings.experimental-features = [
           "nix-command"
           "flakes"
