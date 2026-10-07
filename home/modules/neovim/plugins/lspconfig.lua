@@ -5,6 +5,117 @@ end
 pcall(vim.keymap.del, { "n", "x" }, "gO")
 pcall(vim.keymap.del, "i", "<C-s>")
 
+-----------------------------
+-- Diagnostic presentation --
+-----------------------------
+
+-- Keep the original presentation by default. Other modes remove only the
+-- dimming tag when rendering, preserving push and pull diagnostics.
+local lsp_dim = "on"
+local underline_show = vim.diagnostic.handlers.underline.show
+vim.diagnostic.handlers.underline.show = function(namespace, bufnr, diagnostics, opts)
+	if lsp_dim == "on" then
+		return underline_show(namespace, bufnr, diagnostics, opts)
+	end
+	local highlights = vim.tbl_map(function(diagnostic)
+		local code = diagnostic.code or vim.tbl_get(diagnostic, "user_data", "lsp", "code")
+		if type(code) == "string" then
+			code = code:lower():gsub("_", "-")
+		end
+		local inactive = code == "inactive-code" or code == "inactive-region"
+		if (lsp_dim == "off" or inactive) and diagnostic._tags then
+			diagnostic = vim.deepcopy(diagnostic)
+			diagnostic._tags.unnecessary = nil
+		end
+		return diagnostic
+	end, diagnostics)
+	underline_show(namespace, bufnr, highlights, opts)
+end
+
+local lsp_dim_modes = {
+	{ mode = "on", description = "Dim all code tagged unnecessary, including inactive and dead/unused code (default)" },
+	{ mode = "off", description = "Do not dim code tagged unnecessary; keep diagnostic messages and underlines" },
+	{ mode = "inactive", description = "Dim dead/unused code, but not code identified as inactive" },
+	{ mode = "toggle", description = "Switch all dimming off, or restore all dimming if currently off" },
+}
+
+local function lsp_dim_set(mode)
+	if mode == "toggle" then
+		mode = lsp_dim == "off" and "on" or "off"
+	end
+	if mode ~= "on" and mode ~= "off" and mode ~= "inactive" then
+		vim.notify("Usage: LspCodeDimming [on|off|inactive|toggle]", vim.log.levels.ERROR)
+		return
+	end
+	lsp_dim = mode
+	-- Redraw cached diagnostics in every buffer; no LSP restart or re-check.
+	vim.diagnostic.show()
+	for _, choice in ipairs(lsp_dim_modes) do
+		if choice.mode == mode then
+			vim.notify(choice.description .. ". Diagnostics remain enabled.")
+			break
+		end
+	end
+end
+
+vim.api.nvim_create_user_command("LspCodeDimming", function(cmd)
+	if cmd.args ~= "" then
+		lsp_dim_set(cmd.args)
+		return
+	end
+	local title = "LSP code dimming (current: " .. lsp_dim .. ")"
+	local function format_choice(choice)
+		local current = choice.mode == lsp_dim and " [current]" or ""
+		return choice.mode .. current .. " — " .. choice.description
+	end
+	local pickers = try_require("telescope.pickers")
+	if not pickers then
+		vim.ui.select(lsp_dim_modes, { prompt = title, format_item = format_choice }, function(choice)
+			if choice then
+				lsp_dim_set(choice.mode)
+			end
+		end)
+		return
+	end
+
+	-- Match LspTarget's Telescope dropdown rather than the cursor-local UI.
+	local finders = require("telescope.finders")
+	local tele_config = require("telescope.config").values
+	local actions = require("telescope.actions")
+	local action_state = require("telescope.actions.state")
+	pickers
+		.new(require("telescope.themes").get_dropdown(), {
+			prompt_title = title,
+			finder = finders.new_table({
+				results = lsp_dim_modes,
+				entry_maker = function(choice)
+					local label = format_choice(choice)
+					return { value = choice, display = label, ordinal = label }
+				end,
+			}),
+			sorter = tele_config.generic_sorter({}),
+			attach_mappings = function(prompt_bufnr)
+				actions.select_default:replace(function()
+					local entry = action_state.get_selected_entry()
+					actions.close(prompt_bufnr)
+					if entry then
+						lsp_dim_set(entry.value.mode)
+					end
+				end)
+				return true
+			end,
+		})
+		:find()
+end, {
+	desc = "Choose how inactive and dead/unused code is dimmed; keep diagnostics enabled",
+	nargs = "?",
+	complete = function(arglead)
+		return vim.tbl_filter(function(mode)
+			return vim.startswith(mode, arglead)
+		end, { "on", "off", "inactive", "toggle" })
+	end,
+})
+
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd("LspAttach", {
