@@ -8,6 +8,7 @@
   homepage = 3020;
   mealie = 9925;
   qbittorrent = 8090;
+  suwayomi = 4567;
   uptimeKuma = 3001;
 
   grafana = {

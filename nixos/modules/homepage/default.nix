@@ -60,6 +60,7 @@
                 "Sonarr"
                 "Radarr"
                 "Shelfmark"
+                "Suwayomi"
                 "Prowlarr"
                 "qBittorrent"
               ];

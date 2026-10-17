@@ -32,6 +32,7 @@
   mealie.enable = "local";
   jellyfin.enable = "public";
   qbittorrent.enable = true;
+  suwayomi.enable = "local";
   tailscale.enable = true;
   uptime-kuma.enable = true;
   wireguard.enable = true;

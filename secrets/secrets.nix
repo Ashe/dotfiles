@@ -23,6 +23,7 @@ foldl (
     "${dir}/grafana-key.age".publicKeys = [ (readKey dir) ];
     "${dir}/homepage-secrets.age".publicKeys = [ (readKey dir) ];
     "${dir}/qbittorrent-credentials.age".publicKeys = [ (readKey dir) ];
+    "${dir}/suwayomi-secrets.age".publicKeys = [ (readKey dir) ];
     "${dir}/tangled-secrets.age".publicKeys = [ (readKey dir) ];
     "${dir}/uptime-kuma-credentials.age".publicKeys = [ (readKey dir) ];
     "${dir}/wireguard-conf.age".publicKeys = [ (readKey dir) ];

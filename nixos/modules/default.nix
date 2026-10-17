@@ -20,6 +20,7 @@
   qbittorrent = import ./qbittorrent;
   ssh = import ./ssh;
   steam = import ./steam;
+  suwayomi = import ./suwayomi;
   tailscale = import ./tailscale;
   tangled = import ./tangled;
   uptime-kuma = import ./uptime-kuma;
