@@ -16,6 +16,10 @@
       url = "github:HalFrgrd/flyline";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hytale-launcher = {
+      url = "github:JPyke3/hytale-launcher-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     tangled = {
       url = "git+https://tangled.org/tangled.org/core";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,7 +30,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     llm-agents.url = "github:numtide/llm-agents.nix";
-    hytale-launcher.url = "github:JPyke3/hytale-launcher-nix";
   };
   outputs = inputs: {
 
