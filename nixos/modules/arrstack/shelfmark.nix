@@ -7,6 +7,10 @@
 let
   cfg = config.arrstack.shelfmark;
   arrOption = import ./arr-option.nix { inherit lib; };
+
+  # Run inside the WireGuard namespace when there is one, like qBittorrent
+  vpn = config.wireguard.enable;
+  host = if vpn then config.wireguard.namespaceIP else "127.0.0.1";
 in
 {
   options.arrstack.shelfmark =
@@ -24,6 +28,7 @@ in
     services.shelfmark = {
       enable = true;
       environment = {
+        FLASK_HOST = host;
         FLASK_PORT = cfg.port;
         CONFIG_DIR = "/var/lib/arrstack/shelfmark";
         # arrstack's home is read-only in the sandbox, so gunicorn needs a writable HOME
@@ -40,12 +45,17 @@ in
         HARDLINK_TORRENTS = "false";
         HARDLINK_TORRENTS_AUDIOBOOK = "false";
       }
-      # The nixpkgs package always uses an external bypasser, so point it at byparr
+      # The nixpkgs package always uses an external bypasser, so point it at byparr,
+      # using the instance inside the VPN when Shelfmark runs there
       // lib.optionalAttrs config.arrstack.byparr.enable {
-        EXT_BYPASSER_URL = "http://127.0.0.1:${toString config.arrstack.byparr.port}";
+        EXT_BYPASSER_URL =
+          if vpn then "http://127.0.0.1:8191" else "http://127.0.0.1:${toString config.arrstack.byparr.port}";
       }
+      # Prowlarr runs on the host, which the namespace reaches over the veth link
       // lib.optionalAttrs config.arrstack.prowlarr.enable {
-        PROWLARR_URL = "http://127.0.0.1:${toString config.arrstack.prowlarr.port}";
+        PROWLARR_URL = "http://${
+          if vpn then config.wireguard.hostIP else "127.0.0.1"
+        }:${toString config.arrstack.prowlarr.port}";
       }
       // lib.optionalAttrs config.qbittorrent.enable {
         QBITTORRENT_URL = "http://${config.wireguard.namespaceIP}:${toString config.qbittorrent.port}";
@@ -71,18 +81,32 @@ in
       EnvironmentFile = lib.mkIf (builtins.hasAttr "shelfmark-secrets" config.age.secrets) config.age.secrets.shelfmark-secrets.path;
     };
 
+    # Register shelfmark with the wireguard module so it runs inside the namespace
+    wireguard.services = lib.mkIf vpn [ "shelfmark" ];
+
+    # Let shelfmark reach prowlarr on the host from inside the namespace
+    networking.firewall.interfaces.veth-vpn.allowedTCPPorts = lib.mkIf (
+      vpn && config.arrstack.prowlarr.enable
+    ) [ config.arrstack.prowlarr.port ];
+
     # Expose shelfmark via caddy
-    caddy.services.${cfg.subdomain}.port = cfg.port;
+    caddy.services.${cfg.subdomain} = {
+      inherit host;
+      port = cfg.port;
+    };
 
     # Monitor shelfmark via uptime-kuma
-    uptime-kuma.monitors.shelfmark.port = cfg.port;
+    uptime-kuma.monitors.shelfmark = {
+      inherit host;
+      port = cfg.port;
+    };
 
     # Create shelfmark entry for homepage
     homepage.services.Shelfmark = {
       icon = "shelfmark.png";
       href = "https://${cfg.subdomain}.${config.server.domain}";
-      description = "Book search and downloads";
-      ping = "http://127.0.0.1:${toString cfg.port}";
+      description = "Book search and downloads${lib.optionalString vpn " (VPN)"}";
+      ping = "http://${host}:${toString cfg.port}";
     };
   };
 }

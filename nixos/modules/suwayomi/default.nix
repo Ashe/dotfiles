@@ -12,6 +12,10 @@ let
     config.agenix.secrets != null
     && builtins.pathExists "${config.agenix.secrets}/suwayomi-secrets.age";
   byparr = config.arrstack.enable && config.arrstack.byparr.enable;
+
+  # Run inside the WireGuard namespace when there is one, like qBittorrent
+  vpn = config.wireguard.enable;
+  host = if vpn then config.wireguard.namespaceIP else "127.0.0.1";
 in
 {
   options.suwayomi = {
@@ -57,7 +61,7 @@ in
     services.suwayomi-server = {
       enable = true;
       settings.server = {
-        ip = "127.0.0.1";
+        ip = host;
         port = cfg.port;
 
         # Save chapters as .cbz so Jellyfin and other readers can open them
@@ -91,7 +95,9 @@ in
       # Let sources behind Cloudflare go through byparr
       // lib.optionalAttrs byparr {
         flareSolverrEnabled = true;
-        flareSolverrUrl = "http://127.0.0.1:${toString config.arrstack.byparr.port}";
+        # The instance inside the VPN listens on byparr's own port
+        flareSolverrUrl =
+          if vpn then "http://127.0.0.1:8191" else "http://127.0.0.1:${toString config.arrstack.byparr.port}";
       };
     };
 
@@ -171,14 +177,19 @@ in
       type = "syslog";
     };
 
+    # Register Suwayomi with the wireguard module so it runs inside the namespace
+    wireguard.services = lib.mkIf vpn [ "suwayomi-server" ];
+
     # Expose Suwayomi via Caddy
     caddy.services.${cfg.subdomain} = {
+      inherit host;
       port = cfg.port;
       public = cfg.enable == "public";
     };
 
     # Monitor Suwayomi via uptime-kuma, checking the port as HTTP returns 401 with basic auth
     uptime-kuma.monitors.suwayomi = {
+      inherit host;
       type = "port";
       port = cfg.port;
     };
@@ -186,16 +197,16 @@ in
     # Create Suwayomi entry for homepage
     homepage.services.Suwayomi = {
       icon = "suwayomi.png";
-      description = "Manga downloads";
+      description = "Manga downloads${lib.optionalString vpn " (VPN)"}";
       href =
         if cfg.enable == "public" then
           "https://${cfg.subdomain}.${config.server.publicDomain}"
         else
           "https://${cfg.subdomain}.${config.server.domain}";
-      ping = "http://127.0.0.1:${toString cfg.port}";
+      ping = "http://${host}:${toString cfg.port}";
       widget = {
         type = "suwayomi";
-        url = "http://127.0.0.1:${toString cfg.port}";
+        url = "http://${host}:${toString cfg.port}";
       }
       // lib.optionalAttrs hasSecrets {
         username = "{{HOMEPAGE_VAR_SUWAYOMI_USERNAME}}";
