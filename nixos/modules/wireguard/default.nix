@@ -21,6 +21,12 @@
       description = "IP that services inside the VPN namespace bind to, reachable from the host.";
     };
 
+    hostIP = lib.mkOption {
+      type = lib.types.str;
+      default = "192.168.50.1";
+      description = "The host's end of the veth link, which services inside the VPN namespace use to reach the host.";
+    };
+
     allowedIPs = lib.mkOption {
       type = lib.types.str;
       default = "0.0.0.0/0";
@@ -91,6 +97,9 @@
                     ${ip} netns exec vpnns ${ip} link del wg0 2>/dev/null || true
                     ${ip} link del veth-vpn 2>/dev/null || true
 
+                    # New namespaces start with loopback down, which breaks anything using 127.0.0.1
+                    ${ip} netns exec vpnns ${ip} link set lo up
+
                     ${ip} netns exec vpnns ${ip} link add wg0 type wireguard
 
                     PRIVATE_KEY=$(${parseConf "PrivateKey"})
@@ -129,14 +138,14 @@
                     # Veth pair for host<->namespace communication
                     ${ip} link add veth-vpn type veth peer name veth-ns
                     ${ip} link set veth-ns netns vpnns
-                    ${ip} addr add 192.168.50.1/30 dev veth-vpn
+                    ${ip} addr add ${config.wireguard.hostIP}/30 dev veth-vpn
                     ${ip} netns exec vpnns ${ip} addr add ${config.wireguard.namespaceIP}/30 dev veth-ns
                     ${ip} link set veth-vpn up
                     ${ip} netns exec vpnns ${ip} link set veth-ns up
 
                     # Route WireGuard endpoint via host so handshake can complete
                     ENDPOINT_IP=$(echo "$ENDPOINT" | ${pkgs.coreutils}/bin/cut -d: -f1)
-                    ${ip} netns exec vpnns ${ip} route add "$ENDPOINT_IP/32" via 192.168.50.1
+                    ${ip} netns exec vpnns ${ip} route add "$ENDPOINT_IP/32" via ${config.wireguard.hostIP}
 
                     echo 1 > /proc/sys/net/ipv4/ip_forward
                     ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 192.168.50.0/30 -j MASQUERADE
@@ -165,6 +174,11 @@
             requires = [ "vpn-wireguard.service" ];
             serviceConfig = {
               NetworkNamespacePath = "/run/netns/vpnns";
+
+              # Unlike `ip netns exec`, systemd doesn't swap in /etc/netns/vpnns/resolv.conf, and
+              # glibc would otherwise resolve through the host's nscd, outside the tunnel
+              BindReadOnlyPaths = [ "/etc/netns/vpnns/resolv.conf:/etc/resolv.conf" ];
+              InaccessiblePaths = [ "-/run/nscd" ];
             };
           };
         }) config.wireguard.services
