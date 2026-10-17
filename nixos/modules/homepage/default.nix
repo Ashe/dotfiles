@@ -86,6 +86,7 @@
             "Victoria Metrics"
             "Wireguard"
             "Byparr"
+            "Byparr VPN"
             "Loki"
           ];
         }
