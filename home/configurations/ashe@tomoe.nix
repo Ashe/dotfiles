@@ -7,6 +7,7 @@
 
   bash.enable = true;
   btop.enable = true;
+  claude.enable = true;
   fastfetch.enable = true;
   flameshot.enable = true;
   mangohud.enable = true;

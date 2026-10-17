@@ -1,6 +1,7 @@
 [
   (import ./bash)
   (import ./btop)
+  (import ./claude)
   (import ./daw-plugins)
   (import ./fastfetch)
   (import ./firefox)

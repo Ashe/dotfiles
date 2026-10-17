@@ -19,9 +19,20 @@
 
     flylineAgentCommand = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
-      default = if lib.attrByPath [ "opencode" "enable" ] false config then "opencode2 run" else null;
+      default =
+        if config.programs.claude-code.enable then
+          "claude --effort low --print"
+        else if config.programs.opencode.enable then
+          "opencode2 run"
+        else
+          null;
       defaultText = lib.literalExpression ''
-        if config.opencode.enable then "opencode2 run" else null
+        if config.programs.claude-code.enable then
+          "claude --effort low --print"
+        else if config.programs.opencode.enable then
+          "opencode2 run"
+        else
+          null
       '';
       description = "Command Flyline uses for agent mode, or null to leave agent mode unconfigured";
     };
