@@ -216,6 +216,9 @@
         )
         {
           serviceConfig.EnvironmentFile = config.age.secrets.homepage-secrets.path;
+
+          # The decrypted path never changes, so restart on the secret's contents instead
+          restartTriggers = [ (builtins.hashFile "sha256" config.age.secrets.homepage-secrets.file) ];
         };
 
     # Expose homepage via caddy
