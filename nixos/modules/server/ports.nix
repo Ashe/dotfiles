@@ -6,6 +6,7 @@
   cockpit = 9090;
   forgejo = 3030;
   homepage = 3020;
+  kavita = 5000;
   mealie = 9925;
   qbittorrent = 8090;
   suwayomi = 4567;

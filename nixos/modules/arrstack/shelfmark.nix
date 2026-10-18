@@ -34,10 +34,12 @@ in
         # arrstack's home is read-only in the sandbox, so gunicorn needs a writable HOME
         HOME = "/var/lib/arrstack/shelfmark";
 
-        # Lay files out the way Jellyfin expects: one folder per book, grouped by author
+        # Standalone books sit in their author's folder and books in a
+        # series get a subfolder, numbered so they sort in order.
+        # An empty {Series/} adds no folder level.
         INGEST_DIR = "/data/media/books";
         FILE_ORGANIZATION = "organize";
-        TEMPLATE_ORGANIZE = "{Author}/{Title} ({Year})/{Title}";
+        TEMPLATE_ORGANIZE = "{Author}/{Series/}{SeriesPosition - }{Title}";
         DESTINATION_AUDIOBOOK = "/data/media/audiobooks";
         FILE_ORGANIZATION_AUDIOBOOK = "organize";
 

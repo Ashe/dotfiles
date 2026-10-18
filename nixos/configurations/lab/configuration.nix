@@ -31,6 +31,7 @@
   homepage.enable = true;
   mealie.enable = "local";
   jellyfin.enable = "public";
+  kavita.enable = "public";
   qbittorrent.enable = true;
   suwayomi.enable = "local";
   tailscale.enable = true;

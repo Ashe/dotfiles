@@ -15,6 +15,7 @@
   grafana = import ./grafana;
   homepage = import ./homepage;
   jellyfin = import ./jellyfin;
+  kavita = import ./kavita;
   mealie = import ./mealie;
   mullvad = import ./mullvad;
   qbittorrent = import ./qbittorrent;

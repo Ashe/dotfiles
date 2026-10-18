@@ -45,21 +45,23 @@
           columns = 2;
           groups = [
             {
-              name = "Jellyfin";
+              name = "Servers";
               header = false;
               style = "column";
               columns = 1;
-              widgets = [ "Jellyfin" ];
+              widgets = [
+                "Jellyfin"
+                "Kavita"
+              ];
             }
             {
-              name = "Arrstack";
+              name = "Providers";
               header = false;
               style = "row";
               columns = 2;
               widgets = [
                 "Sonarr"
                 "Radarr"
-                "Shelfmark"
                 "Suwayomi"
                 "Prowlarr"
                 "qBittorrent"
@@ -79,6 +81,7 @@
             "FreshRSS"
             "Mealie"
             "CrowdSec"
+            "Shelfmark"
             "Cockpit"
             "Forgejo"
             "Cleanuparr"
