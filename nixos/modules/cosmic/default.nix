@@ -26,5 +26,14 @@
     # Note: All windows have access to clipboard with this
     environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
 
+    # Community panel applets
+    environment.systemPackages = with pkgs; [
+      cosmic-ext-applet-caffeine
+      cosmic-ext-applet-minimon
+      cosmic-ext-applet-privacy-indicator
+      cosmic-ext-applet-weather
+      cosmic-ext-applet-workspace-icons
+    ];
+
   };
 }
