@@ -143,8 +143,10 @@
         );
 
     # Create a wrapper around the forgejo package to allow for ssh
+    # bin/forgejo is a makeWrapper script and wrappers must target an ELF, so use the
+    # unwrapped binary; `forgejo keys` doesn't need the PATH entries the script adds
     security.wrappers.forgejo-keys = {
-      source = "${lib.getExe config.services.forgejo.package}";
+      source = "${config.services.forgejo.package}/bin/.forgejo-wrapped";
       owner = "root";
       group = "root";
       permissions = "u+rx,g+rx,o+rx";

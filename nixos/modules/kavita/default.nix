@@ -132,7 +132,7 @@ in
     # so the hub's http-generic-bf misses them. Count failed logins, plus OPDS and KOReader
     # requests with an unknown key, which sits in the path. Other 401s are left out as the web
     # UI gets a burst of them whenever its session token expires.
-    services.crowdsec.localConfig.scenarios = lib.mkIf (cfg.enable == "public") [
+    services.crowdsec.settings.scenarios = lib.mkIf (cfg.enable == "public") [
       {
         type = "leaky";
         name = "local/kavita-bf";

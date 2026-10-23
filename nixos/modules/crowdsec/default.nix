@@ -70,7 +70,7 @@
       description = ''
         Log acquisition sources, registered by each service module.
         Keyed by service name for convenience — merged into a flat list
-        and passed to localConfig.acquisitions internally.
+        and passed to services.crowdsec.settings.acquisitions internally.
 
         Example:
           crowdsec.acquisitions.jellyfin = {
@@ -93,7 +93,7 @@
       ];
 
       # Collect acquisitions registered by other modules
-      localConfig.acquisitions = lib.mapAttrsToList (
+      settings.acquisitions = lib.mapAttrsToList (
         name: acq:
         lib.optionalAttrs (acq.journalmatch != null) {
           source = "journalctl";
@@ -110,22 +110,23 @@
 
       settings = {
         # Enable the local API for the crowdsec bouncer
-        general.api.server = {
+        config.api.server = {
           enable = true;
           listen_uri = "127.0.0.1:${toString config.crowdsec.apiPort}";
         };
 
         # Allow prometheus to access logs
-        general.prometheus = {
+        config.prometheus = {
           enabled = true;
           listen_addr = "127.0.0.1";
           listen_port = config.crowdsec.metricsPort;
         };
 
-        lapi.credentialsFile = "/var/lib/crowdsec/local_api_credentials.yaml";
-        capi.credentialsFile = "/var/lib/crowdsec/online_api_credentials.yaml";
+        config.api.client.credentials_path ="/var/lib/crowdsec/local_api_credentials.yaml";
+        config.api.server.online_client.credentials_path = "/var/lib/crowdsec/online_api_credentials.yaml";
+
+        # Enrollment is handled by crowdsec-console-enroll below
         console = {
-          tokenFile = lib.mkIf (builtins.hasAttr "crowdsec-enrollment-key" config.age.secrets) config.age.secrets.crowdsec-enrollment-key.path;
           configuration = {
             share_manual_decisions = true;
             share_tainted = true;

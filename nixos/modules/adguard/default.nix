@@ -31,10 +31,9 @@
     services.adguardhome = {
       enable = true;
       openFirewall = false;
-      host = "127.0.0.1";
-      port = config.adguard.port;
       mutableSettings = true;
       settings = {
+        http.address = "127.0.0.1:${toString config.adguard.port}";
 
         dns = {
           bind_hosts = [ "0.0.0.0" ];
