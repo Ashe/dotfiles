@@ -18,6 +18,7 @@
   kavita = import ./kavita;
   mealie = import ./mealie;
   mullvad = import ./mullvad;
+  noctalia = import ./noctalia;
   qbittorrent = import ./qbittorrent;
   ssh = import ./ssh;
   steam = import ./steam;

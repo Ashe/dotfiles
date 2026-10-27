@@ -8,14 +8,17 @@
   bash.enable = true;
   btop.enable = true;
   claude.enable = true;
+  dolphin.enable = true;
   fastfetch.enable = true;
   flameshot.enable = true;
   mangohud.enable = true;
   neovim.enable = true;
+  noctalia.enable = true;
   obs-studio.enable = true;
   obsidian.enable = true;
   opencode.enable = true;
   starship.enable = true;
+  umbriel.enable = true;
   wezterm.enable = true;
   yazi.enable = true;
   zed.enable = true;
@@ -101,6 +104,16 @@
 
     # Alternative to find
     fd.enable = true;
+  };
+
+  programs.umbriel.settings.output."AOC 24G4 12VQ2HA007104" = {
+    mode = "1920x1080@180";
+
+    # FreeSync while a fullscreen window is focused, so games don't stutter below 180fps
+    vrr = "fullscreen";
+
+    # Let fullscreen games that ask for it present immediately for lower input latency
+    tearing = true;
   };
 
   # Enable blanket for soothing noises

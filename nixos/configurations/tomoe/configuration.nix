@@ -9,8 +9,8 @@
   # Custom modules #
   ##################
 
-  cosmic.enable = true;
   dropbox.enable = true;
+  noctalia.enable = true;
   steam.enable = true;
 
   ##################

@@ -30,6 +30,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     llm-agents.url = "github:numtide/llm-agents.nix";
+
+    # Noctalia desktop: no nixpkgs follows so store paths match the binary caches,
+    # and the shell and compositor track the 'cachix' branch, which only points at cached commits
+    noctalia.url = "github:noctalia-dev/noctalia/cachix";
+    umbriel.url = "github:noctalia-dev/umbriel/cachix";
+    noctalia-greeter.url = "github:noctalia-dev/noctalia-greeter";
   };
   outputs = inputs: {
 
