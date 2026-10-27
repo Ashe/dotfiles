@@ -3,6 +3,7 @@
   (import ./btop)
   (import ./claude)
   (import ./daw-plugins)
+  (import ./dolphin)
   (import ./fastfetch)
   (import ./firefox)
   (import ./flameshot)
