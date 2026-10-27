@@ -46,6 +46,7 @@
     users.ashe = {
       isNormalUser = true;
       extraGroups = [
+        "gamemode"
         "networkmanager"
         "wheel"
       ];

@@ -53,7 +53,15 @@
     };
 
     # Enable Gamemode optimisation
-    programs.gamemode.enable = true;
+    programs.gamemode = {
+      enable = true;
+
+      # Raise the priority of games run with gamemoderun (requires the gamemode group)
+      settings.general.renice = 10;
+    };
+
+    # Don't throttle processes that cause split locks, Steam and many games trigger them constantly
+    boot.kernel.sysctl."kernel.split_lock_mitigate" = 0;
 
     # Install additional packages
     environment.systemPackages = [
