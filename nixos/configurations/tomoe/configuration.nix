@@ -40,6 +40,25 @@
     enable32Bit = true;
   };
 
+  # Let PipeWire run audio threads with realtime priority
+  security.rtkit.enable = true;
+
+  # The Scarlett sits on a shared USB hub and drives the whole audio graph
+  # Pro Audio only advances on the device's interrupts, so one lost interrupt freezes every audio client
+  # Use PipeWire's own timer and a safety buffer so a hub hiccup glitches instead of hanging
+  services.pipewire.wireplumber.extraConfig."51-scarlett" = {
+    "monitor.alsa.rules" = [
+      {
+        matches = [ { "node.name" = "~alsa_(input|output)\\.usb-Focusrite_Scarlett_.*"; } ];
+        actions.update-props = {
+          "api.alsa.disable-tsched" = false;
+          "api.alsa.headroom" = 1024;
+          "session.suspend-timeout-seconds" = 0;
+        };
+      }
+    ];
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
     defaultUserShell = pkgs.bash;
