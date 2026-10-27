@@ -16,7 +16,7 @@
       desktopManager.cosmic.enable = true;
 
       # Enable the cosmic login manager
-      displayManager.cosmic-greeter.enable = true;
+      displayManager.cosmic-greeter.enable = lib.mkDefault true;
 
       # Optimise
       system76-scheduler.enable = true;
