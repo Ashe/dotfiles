@@ -28,7 +28,7 @@
 
   tangled = {
     web = 7820;
-    ssh = 2222;
+    ssh = 2223;
   };
 
   # Defaults without a non-breaking custom override interface.

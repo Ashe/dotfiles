@@ -84,6 +84,7 @@
             "Shelfmark"
             "Cockpit"
             "Forgejo"
+            "Tangled"
             "Cleanuparr"
             "Alloy"
             "Victoria Metrics"
