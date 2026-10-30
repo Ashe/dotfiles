@@ -60,7 +60,8 @@ in
 
     services.kavita = {
       enable = true;
-      tokenKeyFile = config.age.secrets.kavita-token-key.path;
+      # Fills the default "@token_key@" placeholder in appsettings.json at startup
+      credentials.token_key = config.age.secrets.kavita-token-key.path;
       settings = {
         Port = cfg.port;
         IpAddresses = "127.0.0.1";
