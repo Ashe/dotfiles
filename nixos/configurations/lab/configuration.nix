@@ -36,8 +36,6 @@
   qbittorrent.enable = true;
   suwayomi.enable = "local";
   tailscale.enable = true;
-  tangled.enable = "public";
-  tangled.admins = [ "did:plc:32rk7oupzbytz337l5jyxphx" ];
   uptime-kuma.enable = true;
   wireguard.enable = true;
 
