@@ -18,7 +18,6 @@
     "xhci_pci"
     "ahci"
     "usb_storage"
-    "usbhid"
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
@@ -37,6 +36,11 @@
       "fmask=0022"
       "dmask=0022"
     ];
+  };
+
+  fileSystems."/data" = {
+    device = "/dev/disk/by-uuid/df3ea5be-d547-4814-82b6-e9c8bef40c94";
+    fsType = "ext4";
   };
 
   swapDevices = [ ];

@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -85,8 +86,31 @@
     };
   };
 
-  # Tell jellyfin to use intel drivers
-  systemd.services.jellyfin.environment.LIBVA_DRIVER_NAME = "iHD";
+  # Allow booting when /data isn't mounted
+  fileSystems."/data".options = [ "nofail" ];
+
+  systemd.services = lib.mkMerge [
+
+    # Tell jellyfin to use intel drivers
+    { jellyfin.environment.LIBVA_DRIVER_NAME = "iHD"; }
+
+    # Only start these services when /data is mounted
+    (lib.genAttrs
+      [
+        "jellyfin"
+        "kavita"
+        "suwayomi-server"
+        "qbittorrent"
+        "sonarr"
+        "radarr"
+        "shelfmark"
+        "podman-cleanuparr"
+      ]
+      (_: {
+        unitConfig.RequiresMountsFor = [ "/data" ];
+      })
+    )
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
