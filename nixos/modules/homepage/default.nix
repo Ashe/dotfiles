@@ -17,6 +17,12 @@
       description = "Subdomain for the Homepage dashboard.";
     };
 
+    disks = lib.mkOption {
+      type = with lib.types; listOf str;
+      default = [ "/" ] ++ lib.optional (config.fileSystems ? "/data") "/data";
+      description = "Mount points whose usage is shown in the resources widget.";
+    };
+
     services = lib.mkOption {
       type = with lib.types; attrsOf (lazyAttrsOf anything);
       default = { };
@@ -80,11 +86,11 @@
             "Grafana"
             "FreshRSS"
             "Mealie"
+            "Tangled"
             "CrowdSec"
             "Shelfmark"
             "Cockpit"
             "Forgejo"
-            "Tangled"
             "Cleanuparr"
             "Alloy"
             "Victoria Metrics"
@@ -176,7 +182,7 @@
             cputemp = true;
             uptime = true;
             units = "metric";
-            disk = "/";
+            disk = config.homepage.disks;
           };
         }
       ];
