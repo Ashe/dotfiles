@@ -10,9 +10,10 @@
 
   config = lib.mkIf config.dolphin.enable {
 
-    # Install the KDE file manager
+    # Install the KDE file manager plus Ark for file compression/extraction
     home.packages = with pkgs; [
       kdePackages.dolphin
+      kdePackages.ark
     ];
 
     # KDE apps build 'Open With' from the XDG application menu, which only Plasma ships
