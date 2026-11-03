@@ -33,10 +33,54 @@
 
               # Typing in Umbriel's overview searches the launcher
               umbriel_overview_type_to_launch_enabled = true;
+
+              # Order Alt+Tab by most recently used rather than workspace layout
+              window_switcher.mru = true;
             };
 
             # Official Umbriel integration: layout and submap widget, layout picker panel
             plugins.enabled = [ "noctalia/umbriel-companion" ];
+
+            # Full-width bar with square corners
+            bar.default = {
+              radius = 0;
+              margin_ends = 0;
+              widget_spacing = 9;
+              start = [
+                "launcher"
+                "workspaces"
+                "bar"
+              ];
+              center = [ "clock" ];
+              end = [
+                "media"
+                "weather"
+                "tray"
+                "notifications"
+                "clipboard"
+                "caffeine"
+                "nightlight"
+                "network"
+                "bluetooth"
+                "volume"
+                "brightness"
+                "battery"
+                "control-center"
+                "session"
+              ];
+            };
+
+            # Umbriel companion widget
+            widget.bar = {
+              type = "noctalia/umbriel-companion:bar";
+              anchor = true;
+              enable_scroll = false;
+              scroll_cycles_layout = false;
+              show_layout_name = true;
+              show_workspace_name = true;
+            };
+
+            control_center.width = 1000;
           };
         };
       }
