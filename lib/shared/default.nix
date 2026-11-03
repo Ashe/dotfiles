@@ -25,4 +25,12 @@
       cleanContent = builtins.concatStringsSep "\n" (builtins.filter builtins.isString filteredLines);
     in
     builtins.fromJSON cleanContent;
+
+  # Script that runs its arguments once a system tray is up, giving up waiting after 30 seconds
+  waitForTray =
+    pkgs:
+    pkgs.writeShellScript "wait-for-tray" ''
+      ${pkgs.lib.getExe' pkgs.glib "gdbus"} wait --session --timeout 30 org.kde.StatusNotifierWatcher
+      exec "$@"
+    '';
 }

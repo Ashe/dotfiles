@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  shared-lib,
   ...
 }:
 
@@ -37,7 +38,7 @@
         QML2_IMPORT_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtQmlPrefix;
       };
       serviceConfig = {
-        ExecStart = "${lib.getBin pkgs.dropbox}/bin/dropbox";
+        ExecStart = "${shared-lib.waitForTray pkgs} ${lib.getBin pkgs.dropbox}/bin/dropbox";
         ExecReload = "${lib.getBin pkgs.coreutils}/bin/kill -HUP $MAINPID";
         KillMode = "control-group"; # upstream recommends process
         Restart = "on-failure";
