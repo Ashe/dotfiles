@@ -106,8 +106,31 @@
     fd.enable = true;
   };
 
+  # Workspaces by position, with the programs that open on them at login
+  umbriel.workspaces = [
+    {
+      layout = "scrolling";
+      programs = [ "zen-beta" ];
+    }
+    {
+      layout = "scrolling";
+      programs = [ "discord" ];
+    }
+    {
+      layout = "scrolling";
+      programs = [ "steam" ];
+    }
+    { layout = "master"; }
+  ];
+
+  # Started at login without a workspace
+  umbriel.autostart = [ "streamlink-twitch-gui --tray" ];
+
   programs.umbriel.settings.output."AOC 24G4 12VQ2HA007104" = {
     mode = "1920x1080@180";
+
+    # Keep all of umbriel.workspaces around from login, so startup programs have somewhere to land
+    min_workspaces = 4;
 
     # FreeSync while a fullscreen window is focused, so games don't stutter below 180fps
     vrr = "fullscreen";
