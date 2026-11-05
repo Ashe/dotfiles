@@ -48,6 +48,10 @@
       };
     };
 
+    # NOTE: Required as of noctalia-dev/noctalia#5318 due to bug upstream.
+    # Noctalia won't start otherwise.
+    systemd.user.services.noctalia.before = lib.mkForce [ ];
+
     # Enable the Noctalia login manager
     services.displayManager.noctalia-greeter = {
       enable = true;

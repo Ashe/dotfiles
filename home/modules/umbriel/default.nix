@@ -166,8 +166,8 @@ in
         workspace = lib.mkIf (layoutRules != [ ]) layoutRules;
         window_rule = lib.mkIf (placementRules != [ ]) placementRules;
 
-        # Colors written by Noctalia's Umbriel template; it can't add this itself as the config is read-only
-        include.optional.files = [ "${config.xdg.configHome}/umbriel/noctalia.toml" ];
+        # Colors written by Noctalia's Umbriel template
+        include.optional.files = [ "noctalia.toml" ];
 
         # Don't wrap-around when navigating between tabs
         layout.tabs.wrap_focus = false;
