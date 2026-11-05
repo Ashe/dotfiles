@@ -29,6 +29,11 @@ let
             defaultText = lib.literalMD "the command's executable name";
             description = "Application ID its window opens with, as listed by `umbriel windows`.";
           };
+          maximize = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+            description = "Open the program's tiled windows maximized at login, as `window-toggle-maximize` would; windows that float by themselves, such as splash screens, are left alone.";
+          };
         };
       }
     )
@@ -39,13 +44,28 @@ let
   placementRules = lib.concatLists (
     lib.imap1 (
       index: workspace:
-      map (program: {
-        match = {
-          app_id = "^${lib.escapeRegex program.appId}$";
-          at_startup = true;
-        };
-        default_workspace = index;
-      }) workspace.programs
+      lib.concatMap (
+        program:
+        let
+          match = {
+            app_id = "^${lib.escapeRegex program.appId}$";
+            at_startup = true;
+          };
+        in
+        [
+          {
+            inherit match;
+            default_workspace = index;
+          }
+        ]
+        # Kept apart so splash and sign-in windows, which float by themselves, still land on the workspace without being stretched
+        ++ lib.optional program.maximize {
+          match = match // {
+            is_floating = false;
+          };
+          default_maximize = true;
+        }
+      ) workspace.programs
     ) cfg.workspaces
   );
 
@@ -68,24 +88,26 @@ let
 
   # Step through the focused tab group first, then on to the neighbouring column
   # Relies on layout.tabs.wrap_focus being off, so the last tab leaves focus unchanged
-  focusOrTab =
-    direction: tab:
-    let
-      script = pkgs.writeShellScript "umbriel-focus-${direction}" ''
-        focused() {
-          ${lib.getExe umbriel} focused-window --json 2>/dev/null \
-            | ${lib.getExe pkgs.jq} -r '"\(.id) \(.tabbed)"'
-        }
-        read -r before tabbed <<< "$(focused)"
-        if [ "$tabbed" = true ]; then
-          ${lib.getExe umbriel} msg column-focus-tab-${tab}
-          read -r after _ <<< "$(focused)"
-          [ "$after" != "$before" ] && exit 0
-        fi
-        exec ${lib.getExe umbriel} msg window-focus-${direction}
-      '';
-    in
-    "spawn:${script}";
+  # The cheatsheet labels spawns by executable name, so this one script lists as "Focus-or-tab: left/right"
+  focusOrTabScript = pkgs.writeShellScriptBin "focus-or-tab" ''
+    case "$1" in
+      left) tab=previous ;;
+      right) tab=next ;;
+      *) echo "usage: focus-or-tab left|right" >&2; exit 2 ;;
+    esac
+    focused() {
+      ${lib.getExe umbriel} focused-window --json 2>/dev/null \
+        | ${lib.getExe pkgs.jq} -r '"\(.id) \(.tabbed)"'
+    }
+    read -r before tabbed <<< "$(focused)"
+    if [ "$tabbed" = true ]; then
+      ${lib.getExe umbriel} msg column-focus-tab-$tab
+      read -r after _ <<< "$(focused)"
+      [ "$after" != "$before" ] && exit 0
+    fi
+    exec ${lib.getExe umbriel} msg window-focus-$1
+  '';
+  focusOrTab = direction: "spawn ${lib.getExe focusOrTabScript} ${direction}";
 in
 {
   imports = [ inputs.umbriel.homeModules.default ];
@@ -104,7 +126,7 @@ in
                   "scrolling"
                   "dwindle"
                   "master"
-                  "floating"
+                  "stacking"
                 ]);
               default = null;
               description = "Layout mode for this workspace, or null to use the global default.";
@@ -172,6 +194,16 @@ in
         # Don't wrap-around when navigating between tabs
         layout.tabs.wrap_focus = false;
 
+        # Finer steps for Mod+R / Mod+Shift+R, up to the full width
+        layout.extent_presets = [
+          0.25
+          0.333
+          0.5
+          0.667
+          0.75
+          1.0
+        ];
+
         # Disable mouse acceleration, matching the old COSMIC setting
         input.mouse.accel_profile = "flat";
 
@@ -180,19 +212,19 @@ in
 
           # General
           "Mod+Slash" = once "cheatsheet-toggle";
-          "Alt+Tab" = once "spawn:noctalia msg window-switcher hold";
-          "Mod+Tab" = once "spawn:noctalia msg window-switcher hold";
+          "Alt+Tab" = once "spawn noctalia msg window-switcher hold";
+          "Mod+Tab" = once "spawn noctalia msg window-switcher hold";
           "Mod+W" = once "overview-toggle";
-          "Mod+Shift+Escape" = once "session-quit";
-          "Mod+Shift+S" = once "spawn:flameshot gui";
-          "Print" = once "spawn:flameshot gui";
+          "Mod+Shift+Escape" = once "spawn noctalia msg panel-toggle session";
+          "Mod+Shift+S" = once "spawn flameshot gui";
+          "Print" = once "spawn flameshot gui";
           "Mod+Q" = once "cursor-show";
 
           # Application shortcuts
-          "Mod+Return" = once "spawn:wezterm start --cwd .";
-          "Mod+E" = once "spawn:dolphin";
-          "Mod+B" = once "spawn:zen-beta";
-          "Mod+Escape" = once "spawn:missioncenter";
+          "Mod+Return" = once "spawn wezterm start --cwd .";
+          "Mod+E" = once "spawn dolphin";
+          "Mod+B" = once "spawn zen-beta";
+          "Mod+Escape" = once "spawn missioncenter";
 
           # Window state
           "Mod+Shift+W" = once "window-close";
@@ -208,26 +240,26 @@ in
           "Mod+X" = "window-swap-next";
 
           # Workspace/layout state
-          "Mod+Y" = once "workspace-set-layout:toggle";
+          "Mod+Y" = once "workspace-set-layout toggle";
           "Mod+V" = once "layout-toggle-split";
 
           # Window focus navigation
-          "Mod+H" = focusOrTab "left" "previous";
-          "Mod+Left" = focusOrTab "left" "previous";
+          "Mod+H" = focusOrTab "left";
+          "Mod+Left" = focusOrTab "left";
           "Mod+J" = "window-focus-or-workspace-down";
           "Mod+Down" = "window-focus-or-workspace-down";
           "Mod+K" = "window-focus-or-workspace-up";
           "Mod+Up" = "window-focus-or-workspace-up";
-          "Mod+L" = focusOrTab "right" "next";
-          "Mod+Right" = focusOrTab "right" "next";
+          "Mod+L" = focusOrTab "right";
+          "Mod+Right" = focusOrTab "right";
 
           # Move windows
           "Mod+Shift+H" = "window-move-left";
           "Mod+Shift+Left" = "window-move-left";
-          "Mod+Shift+J" = "window-move-down";
-          "Mod+Shift+Down" = "window-move-down";
-          "Mod+Shift+K" = "window-move-up";
-          "Mod+Shift+Up" = "window-move-up";
+          "Mod+Shift+J" = "window-move-or-workspace-down";
+          "Mod+Shift+Down" = "window-move-or-workspace-down";
+          "Mod+Shift+K" = "window-move-or-workspace-up";
+          "Mod+Shift+Up" = "window-move-or-workspace-up";
           "Mod+Shift+L" = "window-move-right";
           "Mod+Shift+Right" = "window-move-right";
 
@@ -240,21 +272,15 @@ in
           # Focus workspaces
           "Mod+0" = "workspace-focus-last";
           "Mod+I" = "workspace-previous";
-          "Mod+Ctrl+Up" = "workspace-previous";
-          "Mod+Ctrl+K" = "workspace-previous";
-          "Mod+Ctrl+H" = "workspace-previous";
-          "Mod+Ctrl+Left" = "workspace-previous";
           "Mod+O" = "workspace-next";
-          "Mod+Ctrl+Down" = "workspace-next";
-          "Mod+Ctrl+J" = "workspace-next";
-          "Mod+Ctrl+Right" = "workspace-next";
-          "Mod+Ctrl+L" = "workspace-next";
 
           # Moving between workspaces
           "Mod+Shift+Ctrl+Up" = "window-move-to-workspace-previous";
           "Mod+Shift+Ctrl+K" = "window-move-to-workspace-previous";
+          "Mod+Shift+I" = "window-move-to-workspace-previous";
           "Mod+Shift+Ctrl+Down" = "window-move-to-workspace-next";
           "Mod+Shift+Ctrl+J" = "window-move-to-workspace-next";
+          "Mod+Shift+O" = "window-move-to-workspace-next";
 
           # Toggle key passthrough to the focused window (e.g. a VM)
           "Mod+Shift+Q" = {

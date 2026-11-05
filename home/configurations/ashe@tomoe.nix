@@ -110,15 +110,30 @@
   umbriel.workspaces = [
     {
       layout = "scrolling";
-      programs = [ "zen-beta" ];
+      programs = [
+        {
+          command = "zen-beta";
+          maximize = true;
+        }
+      ];
     }
     {
       layout = "scrolling";
-      programs = [ "discord" ];
+      programs = [
+        {
+          command = "discord";
+          maximize = true;
+        }
+      ];
     }
     {
       layout = "scrolling";
-      programs = [ "steam" ];
+      programs = [
+        {
+          command = "steam";
+          maximize = true;
+        }
+      ];
     }
     { layout = "master"; }
   ];
