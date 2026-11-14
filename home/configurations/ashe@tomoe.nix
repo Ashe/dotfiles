@@ -18,6 +18,7 @@
   obsidian.enable = true;
   opencode.enable = true;
   starship.enable = true;
+  t3code.enable = true;
   umbriel.enable = true;
   wezterm.enable = true;
   yazi.enable = true;

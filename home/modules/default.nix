@@ -17,6 +17,7 @@
   (import ./obsidian)
   (import ./opencode)
   (import ./starship)
+  (import ./t3code)
   (import ./umbriel)
   (import ./vs-code)
   (import ./wallpaper-engine)
